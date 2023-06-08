@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "khotsocbookstore.admin.primefaces.v1": {
+    "orion.admin.primefaces.v1": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/khotsocbookstore.admin.primefaces.v1",
+            "outputPath": "dist/orion.admin.primefaces.v1",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -30,6 +30,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -65,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "khotsocbookstore.admin.primefaces.v1:build:production"
+              "browserTarget": "orion.admin.primefaces.v1:build:production"
             },
             "development": {
-              "browserTarget": "khotsocbookstore.admin.primefaces.v1:build:development"
+              "browserTarget": "orion.admin.primefaces.v1:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "khotsocbookstore.admin.primefaces.v1:build"
+            "browserTarget": "orion.admin.primefaces.v1:build"
           }
         },
         "test": {
