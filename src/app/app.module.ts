@@ -11,6 +11,7 @@ import {ProductService} from "./orion/service/product.service";
 import {NodeService} from "./orion/service/node.service";
 import {IconService} from "./orion/service/icon.service";
 import {EventService} from "./orion/service/event.service";
+import {AuthenticationService} from "./orion/service/authentication.service";
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import {EventService} from "./orion/service/event.service";
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService
+        PhotoService, ProductService, AuthenticationService
     ],
     bootstrap: [AppComponent]
 })

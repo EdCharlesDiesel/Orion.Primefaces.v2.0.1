@@ -5,6 +5,7 @@ import { SubscriptionService } from './subscription.service';
 import {User} from "../pages/user-login/user";
 import {Product} from "../api/product";
 import {environment} from "../../../environments/environment";
+import {LoginDto} from "../pages/authentication/login/loginDto";
 
 export interface ApplicationUser {
   accessToken: string;
@@ -25,7 +26,9 @@ export class AuthenticationService {
     this.oldUserId = JSON.parse(localStorage.getItem('userId') || '{}');
   }
 
-  public login(user: User) : any{
+  public login(user: LoginDto) {
+    let emailAddress = user.email;
+    let password = user.password;
     return this.http.post<any>(this.baseURL + 'Authentication/login', user)
       .pipe(map(response => {
         if (response && response.token) {

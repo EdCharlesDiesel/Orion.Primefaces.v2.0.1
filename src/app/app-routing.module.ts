@@ -17,7 +17,8 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                     { path: 'pages', loadChildren: () => import('./orion/components/pages/pages.module').then(m => m.PagesModule) }
                 ]
             },
-            { path: 'auth', loadChildren: () => import('./orion/components/auth/auth.module').then(m => m.AuthModule) },
+
+            { path: 'authentication', loadChildren: () => import('./orion/pages/authentication/auth.module').then(m => m.AuthModule) },
             { path: 'landing', loadChildren: () => import('./orion/pages/landing/landing.module').then(m => m.LandingModule) },
             { path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },
