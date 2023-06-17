@@ -17,23 +17,22 @@ import {AuthenticationService} from "../../../service/authentication.service";
   `]
 })
 export class LoginComponent {
-  form: FormGroup;
-  valCheck: string[] = ['remember'];
-
+  loginForm: FormGroup;
   constructor(private formBuilder: FormBuilder,
               public layoutService: LayoutService,
               private authService: AuthenticationService,
               private router: Router) {
 
-    this.form = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       emailAddress: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+
     });
   }
 
   public login() {
     debugger;
-    const val: any = this.form.value;
+    const val: any = this.loginForm.value;
     if (val.emailAddress && val.password) {
       this.authService.login(val)
         .subscribe(

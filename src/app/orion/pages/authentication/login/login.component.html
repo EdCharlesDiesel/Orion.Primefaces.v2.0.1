@@ -1,28 +1,31 @@
 <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
     <div class="flex flex-column align-items-center justify-content-center">
             <div class="w-full surface-card py-8 px-5 sm:px-8" >
+              <div [formGroup]="loginForm">
+
                 <div class="text-center mb-5">
                     <img src="assets/demo/images/login/avatar.png" alt="Image" height="50" class="mb-3">
-                    <div class="text-900 text-3xl font-medium mb-3">Welcome, Isabel!</div>
+                    <div class="text-900 text-3xl font-medium mb-3">Welcome, Naledi!</div>
                     <span class="text-600 font-medium">Sign in to continue</span>
                 </div>
 
                 <div>
-                    <label for="emailAddress" class="block text-900 text-xl font-medium mb-2">Email</label>
-                    <input id="emailAddress"   type="text" placeholder="Email address" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+                    <label  class="block text-900 text-xl font-medium mb-2">Email</label>
+                    <input id="emailAddress"   formControlName="emailAddress" type="email" placeholder="Email address" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
 
-                    <label for="password" class="block text-900 font-medium text-xl mb-2">Password</label>
-                    <p-password id="password"  placeholder="Password" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+                    <label  class="block text-900 font-medium text-xl mb-2">Password</label>
+                    <p-password id="password"   formControlName="password"  placeholder="Password" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
 
                     <div class="flex align-items-center justify-content-between mb-5 gap-5">
                         <div class="flex align-items-center">
-                            <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
-                            <label for="rememberme1">Remember me</label>
+                            <p-checkbox id="rememberme" [binary]="true" styleClass="mr-2"></p-checkbox>
+                            <label >Remember me</label>
                         </div>
                         <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
                     </div>
                     <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" (click)="login()"></button>
                 </div>
+              </div>
             </div>
     </div>
 </div>
