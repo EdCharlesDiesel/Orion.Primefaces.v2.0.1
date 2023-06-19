@@ -1,20 +1,20 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 //
-// import { CheckoutComponent } from './checkout.component';
+// import { ShipmentComponent } from './checkout.component';
 //
-// describe('CheckoutComponent', () => {
-//   let component: CheckoutComponent;
-//   let fixture: ComponentFixture<CheckoutComponent>;
+// describe('ShipmentComponent', () => {
+//   let component: ShipmentComponent;
+//   let fixture: ComponentFixture<ShipmentComponent>;
 //
 //   beforeEach(waitForAsync(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ CheckoutComponent ]
+//       declarations: [ ShipmentComponent ]
 //     })
 //     .compileComponents();
 //   }));
 //
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(CheckoutComponent);
+//     fixture = TestBed.createComponent(ShipmentComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

@@ -35,20 +35,21 @@ export class AppMenuComponent implements OnInit {
       {
         label: 'E-Commerce',
         items: [
-          {label: 'Product Overview', icon: 'pi pi-fw pi-image', routerLink: ['/uikit/media']},
-          {label: 'Product List', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list']},
-          {label: 'New Product', icon: 'pi pi-fw pi-plus', routerLink: ['/uikit/list']},
-          {label: 'Shopping Cart', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/uikit/list']},
-          {label: 'Checkout', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/list']},
-          {label: 'Order History', icon: 'pi pi-fw pi-history', routerLink: ['/uikit/list']},
-          {label: 'Order Summary', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/list']},
+          {label: 'Product Overview', icon: 'pi pi-fw pi-image', routerLink: ['/e-commerce/product-overview']},
+          {label: 'Product List', icon: 'pi pi-fw pi-list', routerLink: ['/e-commerce/product-list']},
+          {label: 'New Product', icon: 'pi pi-fw pi-plus', routerLink: ['/e-commerce/new-product']},
+          {label: 'Shopping Cart', icon: 'pi pi-fw pi-shopping-cart', routerLink: ['/e-commerce/shopping-cart']},
+          {label: 'Checkout', icon: 'pi pi-fw pi-check-square', routerLink: ['/e-commerce/checkout']},
+          {label: 'Shipment', icon: 'pi pi-fw pi-car', routerLink: ['/e-commerce/shipment']},
+          {label: 'Order History', icon: 'pi pi-fw pi-history', routerLink: ['/e-commerce/order-history']},
+          {label: 'Order Summary', icon: 'pi pi-fw pi-file', routerLink: ['/e-commerce/order-summary']},
         ]
       },
       {
         label: 'User Management',
         items: [
-          {label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/formlayout']},
-          {label: 'Create', icon: 'pi pi-fw pi-plus', routerLink: ['/uikit/input']},
+          {label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/user-management/list-users']},
+          {label: 'Create', icon: 'pi pi-fw pi-plus', routerLink: ['/user-management/add-users']},
         ]
       },
       {

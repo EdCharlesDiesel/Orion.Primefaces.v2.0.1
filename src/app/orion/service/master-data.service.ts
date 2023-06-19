@@ -36,7 +36,7 @@
 //      */
 //     bookDelete(id: number): Observable<void>;
 //     /**
-//      * Checkout from shopping cart
+//      * checkout from shopping cart
 //      * @param body (optional)
 //      */
 //     checkOut(userId: number, body: OrdersDto | undefined): Observable<void>;
@@ -209,7 +209,7 @@
 //     }
 //
 //     /**
-//      * Checkout from shopping cart
+//      * checkout from shopping cart
 //      * @param body (optional)
 //      */
 //     checkOut(userId: number, body: OrdersDto | undefined): Observable<void> {

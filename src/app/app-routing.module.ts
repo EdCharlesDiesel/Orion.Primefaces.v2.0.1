@@ -26,18 +26,23 @@ import {AppLayoutComponent} from "./layout/app.layout.component";
             path: 'blocks',
             loadChildren: () => import('./orion/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule)
           },
-          {path: 'pages', loadChildren: () => import('./orion/components/pages/pages.module').then(m => m.PagesModule)}
+          {path: 'pages', loadChildren: () => import('./orion/components/pages/pages.module').then(m => m.PagesModule)},
+          {
+            path: 'user-management',
+            loadChildren: () => import('./orion/pages/user-management/user-management-routing.module').then(m => m.UserManagementRoutingModule)
+          },
+          {
+            path: 'e-commerce',
+            loadChildren: () => import('./orion/pages/e-commerce/e-commerce-routing.module').then(m => m.ECommerceRoutingModule)
+          },
+
         ]
       },
-
       {
         path: 'authentication',
         loadChildren: () => import('./orion/pages/authentication/auth.module').then(m => m.AuthModule)
       },
-      {
-        path: 'user-management',
-        loadChildren: () => import('./orion/pages/user-management/user-management-routing.module').then(m => m.UserManagementRoutingModule)
-      },
+
       {path: 'landing', loadChildren: () => import('./orion/pages/landing/landing.module').then(m => m.LandingModule)},
       {path: 'notfound', component: NotfoundComponent},
       {path: '**', redirectTo: '/notfound'},
