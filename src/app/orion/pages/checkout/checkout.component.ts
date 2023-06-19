@@ -17,10 +17,10 @@
 //
 // @Component({
 //   selector: 'app-checkout',
-//   templateUrl: './checkout.component.html',
+//   templateUrl: './shipment.component.html',
 //   styleUrls: ['./checkout.component.scss']
 // })
-// export class CheckoutComponent implements OnInit, OnDestroy {
+// export class ShipmentComponent implements OnInit, OnDestroy {
 //
 //   userId;
 //   subCount: number= 0;

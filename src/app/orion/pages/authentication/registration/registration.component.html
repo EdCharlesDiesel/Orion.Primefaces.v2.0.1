@@ -1,27 +1,63 @@
-<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
-  <div class="flex flex-column align-items-center justify-content-center">
-    <div class="w-full surface-card py-8 px-5 sm:px-8" >
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden"
+     style="background-image: url(assets/layout/images/LoginBackGroundImage.jpg)">
+  <div class="flex flex-column align-items-center justify-content-center"
+       style="padding-top: 30px;padding-bottom: 30px">
+    <div class="w-full surface-card py-8 px-5 sm:px-8">
       <div class="text-center mb-5">
-        <img src="assets/demo/images/login/avatar.png" alt="Image" height="50" class="mb-3">
-        <div class="text-900 text-3xl font-medium mb-3">Welcome, Isabel!</div>
-        <span class="text-600 font-medium">Sign in to continue</span>
-      </div>
+        <div class="text-900 text-3xl font-medium mb-3">Welcome!</div>
+        <span class="text-600 font-medium">Register. Let's get started </span>
+        <span class="text-300 font-medium"></span>
+        <div [formGroup]="registrationForm" style="margin-top: 20px;" (ngSubmit)="register()">
+          <div>
+            <input id="username" type="text" formControlName="username" placeholder="Username" pInputText class="w-full md:w-30rem mb-5"
+                   style="padding:1rem">
+            <br>
 
-      <div>
-        <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-        <input id="email1" type="text" placeholder="Email address" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+            <input id="emailAddress" type="email" formControlName="emailAddress" placeholder="Email address" pInputText class="w-full md:w-30rem mb-5"
+                   style="padding:1rem">
+            <br>
+            <input id="firstName" type="text" formControlName="firstName" placeholder="First Name" pInputText class="w-full md:w-30rem mb-5"
+                   style="padding:1rem">
+            <br>
+            <input id="lastName" type="text" formControlName="lastName" placeholder="Last Name" pInputText class="w-full md:w-30rem mb-5"
+                   style="padding:1rem">
+            <br>
+            <input id="idNumber" type="text" formControlName="idNumber" placeholder="ID Number" pInputText class="w-full md:w-30rem mb-5"
+                   style="padding:1rem">
+            <br>
+            <p-password id="password" placeholder="Password" formControlName="password" [toggleMask]="true" class="w-full md:w-30rem mb-5" styleClass="mb-5"
+                        inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+            <br>
 
-<!--        <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>-->
-<!--        <p-password id="password1" [(ngModel)]="password" placeholder="Password" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>-->
+            <p-password id="confirmPassword" placeholder="Confirm Password" [toggleMask]="true" styleClass="mb-6"
+                        inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+            <br>
+            <div class="flex flex-row flex-wrap">
+            <p-calendar id="dateofBirth" formControlName="dateOfBirth" placeholder="Date of Birth" >
+            </p-calendar>
+            </div>
 
-        <div class="flex align-items-center justify-content-between mb-5 gap-5">
-          <div class="flex align-items-center">
-<!--            <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>-->
-<!--            <label for="rememberme1">Remember me</label>-->
+            <br>
+            <div class="flex align-items-center justify-content-between mb-5 gap-5">
+              <div class="flex align-items-center">
+                <p-checkbox id="termsConditions" [binary]="true" styleClass="mr-2"></p-checkbox>
+                <label>I have read the <a class="font-medium no-underline ml-2 text-right cursor-pointer"
+                                          style="color: var(--primary-color)">
+                  Terms and Conditions</a></label>
+              </div>
+            </div>
+            <div class="flex flex-column md:flex-row">
+            </div>
+            <div class="flex">
+              <button pButton pRipple label="Cancel"
+                      class="flex-1 h-4rem primary font-bold text-center p-4 border-round  m-2"
+                      [routerLink]="['/landing']"></button>
+              <button pButton pRipple label="Create Account"
+                      class="flex-1 h-4rem  font-bold text-center p-4 border-round  m-2 p-button-success"
+                      (click)="register()"></button>
+            </div>
           </div>
-          <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
         </div>
-<!--        <button pButton pRipple label="Sign In" class="w-full p-3 text-xl" [routerLink]="['/']"></button>-->
       </div>
     </div>
   </div>

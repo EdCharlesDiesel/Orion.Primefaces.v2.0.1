@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { SubscriptionService } from './subscription.service';
-import {User} from "../pages/user-login/user";
 import {Product} from "../api/product";
+import {User} from "../api/user";
+import {LoginDto} from "../api/loginDto";
 import {environment} from "../../../environments/environment";
-import {LoginDto} from "../pages/authentication/login/loginDto";
 
 export interface ApplicationUser {
   accessToken: string;
@@ -27,9 +27,7 @@ export class AuthenticationService {
   }
 
   public login(user: LoginDto) {
-    let emailAddress = user.email;
-    let password = user.password;
-    return this.http.post<any>(this.baseURL + 'Authentication/login', user)
+    return this.http.post<any>(this.baseURL + 'authentication/login', user)
       .pipe(map(response => {
         if (response && response.token) {
           this.oldUserId = JSON.parse(localStorage.getItem('userId') || '{}');
@@ -38,9 +36,21 @@ export class AuthenticationService {
           localStorage.setItem('userId', response.userDetails.userId);
           this.subscriptionService.cartItemcount$.next(response.carItemCount);
         }
-
         return response;
+      }));
+  }
 
+  public register(user: any) {
+    return this.http.post<any>(this.baseURL + 'authentication/register', user)
+      .pipe(map(response => {
+        if (response && response.token) {
+          this.oldUserId = JSON.parse(localStorage.getItem('userId') || '{}');
+          localStorage.setItem('authToken', response.token);
+          this.setUserDetails();
+          localStorage.setItem('userId', response.userDetails.id);
+          this.subscriptionService.cartItemcount$.next(response.carItemCount);
+        }
+        return response;
       }));
   }
 
@@ -48,13 +58,10 @@ export class AuthenticationService {
     if (localStorage.getItem('authToken')) {
       const userDetails = new User() ;
       const decodeUserDetails = JSON.parse(atob(localStorage.getItem('authToken')!.split('.')[1]));
-
-      userDetails.userId = decodeUserDetails.userid;
+      userDetails.id = decodeUserDetails.userid;
       userDetails.username = decodeUserDetails.sub;
       userDetails.userTypeId = Number(decodeUserDetails.userTypeId);
       userDetails.isLoggedIn = true;
-
-    //  this.subscriptionService.userData.next(userDetails);
     }
   }
 
@@ -82,4 +89,6 @@ export class AuthenticationService {
     this.subscriptionService.wishlistItemcount$.next(0);
     this.subscriptionService.cartItemcount$.next(0);
   }
+
+
 }
