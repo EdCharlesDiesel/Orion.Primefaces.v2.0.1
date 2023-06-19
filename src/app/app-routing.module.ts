@@ -13,28 +13,23 @@ import {AppLayoutComponent} from "./layout/app.layout.component";
             path: '',
             loadChildren: () => import('./orion/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
           },
-          {path: 'uikit', loadChildren: () => import('./orion/components/uikit/uikit.module').then(m => m.UIkitModule)},
           {
-            path: 'utilities',
-            loadChildren: () => import('./orion/components/utilities/utilities.module').then(m => m.UtilitiesModule)
-          },
-          {
-            path: 'documentation',
-            loadChildren: () => import('./orion/components/documentation/documentation.module').then(m => m.DocumentationModule)
-          },
-          {
-            path: 'blocks',
-            loadChildren: () => import('./orion/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule)
-          },
-          {path: 'pages', loadChildren: () => import('./orion/components/pages/pages.module').then(m => m.PagesModule)},
-          {
-            path: 'user-management',
-            loadChildren: () => import('./orion/pages/user-management/user-management-routing.module').then(m => m.UserManagementRoutingModule)
+            path: 'apps',
+            loadChildren: () => import('./orion/pages/apps/apps.module').then(m => m.AppsModule)
           },
           {
             path: 'e-commerce',
             loadChildren: () => import('./orion/pages/e-commerce/e-commerce-routing.module').then(m => m.ECommerceRoutingModule)
           },
+          {
+            path: 'user-management',
+            loadChildren: () => import('./orion/pages/user-management/user-management-routing.module').then(m => m.UserManagementRoutingModule)
+          },
+          {
+            path: 'documentation',
+            loadChildren: () => import('./orion/components/documentation/documentation.module').then(m => m.DocumentationModule)
+          },
+          {path: 'pages', loadChildren: () => import('./orion/components/pages/pages.module').then(m => m.PagesModule)},
 
         ]
       },

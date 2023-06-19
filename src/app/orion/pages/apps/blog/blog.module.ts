@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 
-import { AccessRoutingModule } from './access-routing.module';
-import { AccessComponent } from './access.component';
+import { BlogRoutingModule } from './blog-routing.module';
+import { BlogComponent } from './blog.component';
 
 @NgModule({
     imports: [
         CommonModule,
-        AccessRoutingModule,
+        BlogRoutingModule,
         ButtonModule
     ],
-    declarations: [AccessComponent]
+    declarations: [BlogComponent]
 })
-export class AccessModule { }
+export class BlogModule { }
