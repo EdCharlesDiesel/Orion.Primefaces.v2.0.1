@@ -36,8 +36,9 @@ export class LoginComponent {
     if (val.emailAddress && val.password) {
       this.authService.login(val)
         .subscribe(
-          () => {
+          (user: any) => {
             console.log("User is logged in");
+            console.log("User details: ",user);
             this.router.navigateByUrl('/');
           }
         );
