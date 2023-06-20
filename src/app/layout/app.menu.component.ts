@@ -24,12 +24,12 @@ export class AppMenuComponent implements OnInit {
       {
         label: 'Apps',
         items: [
-          {label: 'Blog', icon: 'pi pi-fw pi-comment', routerLink: ['/uikit/message']},
-          {label: 'Calendar', icon: 'pi pi-fw pi-calendar', routerLink: ['//uikit/charts']},
-          {label: 'Chart', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/uikit/charts']},
-          {label: 'File', icon: 'pi pi-fw pi-file', routerLink: ['/uikit/file']},
-          {label: 'Mail', icon: 'pi pi-fw pi-inbox', routerLink: ['/uikit/charts']},
-          {label: 'Task List', icon: 'pi pi-fw pi-check-square', routerLink: ['/uikit/input']},
+          {label: 'Blog', icon: 'pi pi-fw pi-comment', routerLink: ['/apps/blog']},
+          {label: 'Calendar', icon: 'pi pi-fw pi-calendar', routerLink: ['/apps/calendar']},
+          {label: 'Reports', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/apps/reports']},
+          {label: 'Files', icon: 'pi pi-fw pi-file', routerLink: ['/apps/files']},
+          {label: 'Mail', icon: 'pi pi-fw pi-inbox', routerLink: ['/apps/mail']},
+          {label: 'Task List', icon: 'pi pi-fw pi-check-square', routerLink: ['/apps/task-list']},
         ]
       },
       {
