@@ -15,6 +15,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DividerModule } from 'primeng/divider';
 import { SplitterModule } from 'primeng/splitter';
 import { PanelModule } from 'primeng/panel';
+import {CheckboxModule} from "primeng/checkbox";
+import {InputNumberModule} from "primeng/inputnumber";
+import {OverlayModule} from "primeng/overlay";
+import { DropdownModule} from "primeng/dropdown";
 
 @NgModule({
 	imports: [
@@ -32,8 +36,13 @@ import { PanelModule } from 'primeng/panel';
 		InputTextModule,
 		DividerModule,
 		SplitterModule,
-		PanelModule
-	],
+    CheckboxModule,
+    InputNumberModule,
+    PanelModule,
+    OverlayModule,
+    DropdownModule,
+
+  ],
 	declarations: [CheckoutComponent]
 })
 export class CheckoutModule { }
