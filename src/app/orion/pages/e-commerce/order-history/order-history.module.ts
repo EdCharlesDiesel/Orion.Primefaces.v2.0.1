@@ -30,8 +30,8 @@ import { PanelModule } from 'primeng/panel';
 		FieldsetModule,
 		MenuModule,
 		InputTextModule,
-		DividerModule,
 		SplitterModule,
+
 		PanelModule
 	],
 	declarations: [OrderHistoryComponent]
