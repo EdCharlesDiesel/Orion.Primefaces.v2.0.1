@@ -12,6 +12,13 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { ButtonModule } from 'primeng/button';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import {InputSwitchModule} from "primeng/inputswitch";
+import {EditorModule} from "primeng/editor";
+import {FileUploadModule} from "primeng/fileupload";
+import {MessagesModule} from "primeng/messages";
+import {ChipsModule} from "primeng/chips";
+import {DropdownModule} from "primeng/dropdown";
+import {OverlayPanelModule} from "primeng/overlaypanel";
 
 @NgModule({
 	imports: [
@@ -26,8 +33,15 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 		ButtonModule,
 		SkeletonModule,
 		AvatarGroupModule,
-		ScrollTopModule
-	],
+		ScrollTopModule,
+    InputSwitchModule,
+    EditorModule,
+    FileUploadModule,
+    MessagesModule,
+    ChipsModule,
+    DropdownModule,
+    OverlayPanelModule
+  ],
 	declarations: [MiscDemoComponent]
 })
 export class NewProductModule { }

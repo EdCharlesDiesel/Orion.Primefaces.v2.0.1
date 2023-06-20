@@ -1,181 +1,108 @@
 <div class="grid">
-    <div class="col-12">
-        <div class="card">
-            <h5>ProgressBar</h5>
-        </div>
-    </div>
-</div>
-<!--            <div class="grid">-->
-<!--                <div class="col">-->
-<!--                    <p-progressBar [value]="value" [showValue]="true"></p-progressBar>-->
-<!--                </div>-->
-<!--                <div class="col">-->
-<!--                    <p-progressBar [value]="50" [showValue]="false"></p-progressBar>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="col-12 lg:col-6">-->
-<!--        <div class="card">-->
-<!--            <h4>Badge</h4>-->
-<!--            <h5>Numbers</h5>-->
-<!--            <div class="flex flex-wrap gap-2">-->
-<!--                <p-badge value="2"></p-badge>-->
-<!--                <p-badge value="8" severity="success"></p-badge>-->
-<!--                <p-badge value="4" severity="info"></p-badge>-->
-<!--                <p-badge value="12" severity="warning"></p-badge>-->
-<!--                <p-badge value="3" severity="danger"></p-badge>-->
-<!--            </div>-->
-
-<!--            <h5>Positioned Badge</h5>-->
-<!--            <div class="flex flex-wrap gap-2">-->
-<!--                <i class="pi pi-bell mr-4 p-text-secondary" pBadge style="font-size: 2rem" value="2"></i>-->
-<!--                <i class="pi pi-calendar mr-4 p-text-secondary" pBadge style="font-size: 2rem" [value]="'10+'" severity="danger"></i>-->
-<!--                <i class="pi pi-envelope p-text-secondary" pBadge style="font-size: 2rem" severity="danger"></i>-->
-<!--            </div>-->
-
-
-<!--            <h5>Inline Button Badge</h5>-->
-<!--            <div class="flex flex-wrap gap-2">-->
-<!--                <p-button label="Emails" badge="8"></p-button>-->
-<!--                <p-button label="Messages" icon="pi pi-users" styleClass="p-button-warning" badge="8" badgeClass="p-badge-danger"></p-button>-->
-<!--            </div>-->
-
-
-<!--            <h5>Sizes</h5>-->
-<!--            <div class="flex flex-wrap gap-2 align-items-end">-->
-<!--                <p-badge value="2"></p-badge>-->
-<!--                <p-badge value="4" size="large" severity="warning"></p-badge>-->
-<!--                <p-badge value="6" size="xlarge" severity="success"></p-badge>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="card">-->
-<!--            <h4>Avatar</h4>-->
-<!--            <h5>Avatar Group</h5>-->
-<!--            <p-avatarGroup styleClass="mb-3">-->
-<!--                <p-avatar image="assets/demo/images/avatar/amyelsner.png" size="large" shape="circle"></p-avatar>-->
-<!--                <p-avatar image="assets/demo/images/avatar/asiyajavayant.png" size="large" shape="circle"></p-avatar>-->
-<!--                <p-avatar image="assets/demo/images/avatar/onyamalimba.png" size="large" shape="circle"></p-avatar>-->
-<!--                <p-avatar image="assets/demo/images/avatar/ionibowcher.png" size="large" shape="circle"></p-avatar>-->
-<!--                <p-avatar image="assets/demo/images/avatar/xuxuefeng.png" size="large"shape="circle"></p-avatar>-->
-<!--                <p-avatar label="+2" shape="circle" size="large" [style]="{'background-color':'#9c27b0', 'color': '#ffffff'}"></p-avatar>-->
-<!--            </p-avatarGroup>-->
-
-<!--            <h5>Label - Circle</h5>-->
-<!--            <div class="flex flex-wrap gap-2 align-items-end">-->
-<!--                <p-avatar label="P" size="xlarge" shape="circle"></p-avatar>-->
-<!--                <p-avatar label="V" size="large" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}" shape="circle"></p-avatar>-->
-<!--                <p-avatar label="U" [style]="{'background-color': '#9c27b0', 'color': '#ffffff'}" shape="circle"></p-avatar>-->
-<!--            </div>-->
-
-<!--            <h5>Icon - Badge</h5>-->
-<!--            <p-avatar icon="pi pi-user" pBadge value="4" severity="success" size="xlarge"></p-avatar>-->
-<!--        </div>-->
-
-<!--        <div class="card">-->
-<!--            <h4>ScrollTop</h4>-->
-<!--            <p-scrollPanel [style]="{width: '250px', height: '200px'}">-->
-<!--                <p>-->
-<!--                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.-->
-<!--                    Vitae et leo duis ut diam.-->
-<!--                    Ultricies mi quis hendrerit dolor magna eget est lorem. Amet consectetur adipiscing elit ut.-->
-<!--                    Nam libero justo laoreet sit amet. Pharetra massa massa ultricies mi quis hendrerit dolor magna.-->
-<!--                    Est ultricies integer quis auctor elit sed vulputate. Consequat ac felis donec et. Tellus orci ac auctor augue mauris.-->
-<!--                    Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus a. Tincidunt arcu non sodales neque sodales.-->
-<!--                    Metus aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Sodales ut etiam sit amet nisl purus.-->
-<!--                    Cursus sit amet dictum sit amet. Tristique senectus et netus et malesuada fames ac turpis egestas.-->
-<!--                    Et tortor consequat id porta nibh venenatis cras sed. Diam maecenas ultricies mi eget mauris.-->
-<!--                    Eget egestas purus viverra accumsan in nisl nisi. Suscipit adipiscing bibendum est ultricies integer.-->
-<!--                    Mattis aliquam faucibus purus in massa tempor nec.-->
-<!--                </p>-->
-<!--                <p-scrollTop target="parent" styleClass="custom-scrolltop" [threshold]="100" icon="pi pi-arrow-up"></p-scrollTop>-->
-<!--            </p-scrollPanel>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="col-12 lg:col-6">-->
-<!--        <div class="card">-->
-<!--            <h4>Tag</h4>-->
-<!--            <h5>Tags</h5>-->
-<!--            <div class="flex flex-wrap gap-2">-->
-<!--                <p-tag value="Primary"></p-tag>-->
-<!--                <p-tag severity="success" value="Success"></p-tag>-->
-<!--                <p-tag severity="info" value="Info"></p-tag>-->
-<!--                <p-tag severity="warning" value="Warning"></p-tag>-->
-<!--                <p-tag severity="danger" value="Danger"></p-tag>-->
-<!--            </div>-->
-
-<!--            <h5>Pills</h5>-->
-<!--            <div class="flex flex-wrap gap-2">-->
-<!--                <p-tag value="Primary" [rounded]="true"></p-tag>-->
-<!--                <p-tag severity="success" value="Success" [rounded]="true"></p-tag>-->
-<!--                <p-tag severity="info" value="Info" [rounded]="true"></p-tag>-->
-<!--                <p-tag severity="warning" value="Warning" [rounded]="true"></p-tag>-->
-<!--                <p-tag severity="danger" value="Danger" [rounded]="true"></p-tag>-->
-<!--            </div>-->
-
-<!--            <h5>Icons</h5>-->
-<!--            <div class="flex flex-wrap gap-2">-->
-<!--                <p-tag icon="pi pi-user" value="Primary"></p-tag>-->
-<!--                <p-tag icon="pi pi-check" severity="success" value="Success"></p-tag>-->
-<!--                <p-tag icon="pi pi-info-circle" severity="info" value="Info"></p-tag>-->
-<!--                <p-tag con="pi pi-exclamation-triangle" severity="warning" value="Warning"></p-tag>-->
-<!--                <p-tag icon="pi pi-times" severity="danger" value="Danger"></p-tag>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="card">-->
-<!--            <h4>Chip</h4>-->
-<!--            <h5>Basic</h5>-->
-<!--            <div class="flex flex-wrap align-items-center">-->
-<!--                <p-chip label="Action" styleClass="m-1"></p-chip>-->
-<!--                <p-chip label="Comedy" styleClass="m-1"></p-chip>-->
-<!--                <p-chip label="Mystery" styleClass="m-1"></p-chip>-->
-<!--                <p-chip label="Thriller" styleClass="m-1" [removable]="true"></p-chip>-->
-<!--            </div>-->
-
-<!--            <h5>Icon</h5>-->
-<!--            <div class="flex flex-wrap align-items-center">-->
-<!--                <p-chip label="Apple" icon="pi pi-apple" styleClass="m-1"></p-chip>-->
-<!--                <p-chip label="Facebook" icon="pi pi-facebook" styleClass="m-1"></p-chip>-->
-<!--                <p-chip label="Google" icon="pi pi-google" styleClass="m-1"></p-chip>-->
-<!--                <p-chip label="Microsoft" icon="pi pi-microsoft" styleClass="m-1" [removable]="true"></p-chip>-->
-<!--            </div>-->
-
-<!--            <h5>Image</h5>-->
-<!--            <div class="flex flex-wrap align-items-center">-->
-<!--                <p-chip label="Amy Elsner" image="assets/demo/images/avatar/amyelsner.png" styleClass="m-1"></p-chip>-->
-<!--                <p-chip label="Asiya Javayant" image="assets/demo/images/avatar/asiyajavayant.png" styleClass="m-1"></p-chip>-->
-<!--                <p-chip label="Onyama Limba" image="assets/demo/images/avatar/onyamalimba.png" styleClass="m-1"></p-chip>-->
-<!--                <p-chip label="Xuxue Feng" image="assets/demo/images/avatar/xuxuefeng.png" styleClass="m-1" [removable]="true"></p-chip>-->
-<!--            </div>-->
-
-<!--            <h5>Styling</h5>-->
-<!--            <div class="flex flex-wrap align-items-center">-->
-<!--                <p-chip label="Action" styleClass="m-1 custom-chip"></p-chip>-->
-<!--                <p-chip label="Comedy" styleClass="m-1 custom-chip"></p-chip>-->
-<!--                <p-chip label="Onyama Limba" image="assets/demo/images/avatar/onyamalimba.png" styleClass="m-1 custom-chip"></p-chip>-->
-<!--                <p-chip label="Xuxue Feng" image="assets/demo/images/avatar/xuxuefeng.png" [removable]="true" styleClass="m-1 custom-chip"></p-chip>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="card">-->
-<!--            <h4>Skeleton</h4>-->
-<!--            <div class="border-round border-1 surface-border p-4">-->
-<!--                <div class="flex mb-3">-->
-<!--                    <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>-->
-<!--                    <div>-->
-<!--                        <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>-->
-<!--                        <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>-->
-<!--                        <p-skeleton height=".5rem"></p-skeleton>-->
+  <div class="col-12">
+    <div class="card">
+      <div class="flex flex-column align-items-center mb-6">
+        <div class="text-900 text-4xl mb-4 font-medium">Your cart total is $82.00</div>
+        <p class="text-700 font-medium text-xl mt-0 mb-4">FREE SHIPPING AND RETURN</p>
+        <button pbutton="" pripple="" label="Check Out" class="p-element p-ripple p-button p-component"><span
+          class="p-button-label">Check Out</span><span class="p-ink"></span></button>
+      </div>
+      <ul class="list-none p-0 m-0">
+        <li class="flex flex-column md:flex-row py-6 border-top-1 border-bottom-1 surface-border md:align-items-center">
+          <img src="assets/demo/images/ecommerce/shopping-cart/shopping-cart-2-1.png"
+               class="w-12rem flex-shrink-0 mx-auto md:mx-0">
+          <div class="flex-auto py-5 md:pl-5">
+            <div
+              class="flex flex-wrap align-items-start sm:align-items-center sm:flex-row sm:justify-content-between surface-border pb-6">
+              <div class="w-full sm:w-6 flex flex-column"><span
+                class="text-900 text-xl font-medium mb-3">Product Name</span><span class="text-700">Medium</span></div>
+              <div class="w-full sm:w-6 flex align-items-start justify-content-between mt-3 sm:mt-0">
+                <div>
+<!--                  <p-dropdown class="p-element p-inputwrapper p-inputwrapper-filled">-->
+<!--                    <div class="p-dropdown p-component">-->
+<!--                      <div class="p-hidden-accessible"><input type="text" readonly="" aria-haspopup="listbox"-->
+<!--                                                              pautofocus="" role="combobox" class="p-element"-->
+<!--                                                              aria-expanded="false"></div>-->
+<!--                      <span class="p-element p-dropdown-label p-inputtext ng-star-inserted" id="pr_id_21_label">1&lt;!&ndash;&ndash;&gt;-->
+<!--                        &lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;</span>&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;-->
+<!--                      <div role="button" aria-label="dropdown trigger" aria-haspopup="listbox"-->
+<!--                           class="p-dropdown-trigger"><span class="p-dropdown-trigger-icon pi pi-chevron-down"></span>-->
+<!--                      </div>-->
+<!--                      <p-overlay class="p-element ng-tns-c18-103 ng-star-inserted">&lt;!&ndash;&ndash;&gt;</p-overlay>-->
 <!--                    </div>-->
-<!--                </div>-->
-<!--                <p-skeleton width="100%" height="150px"></p-skeleton>-->
-<!--                <div class="flex justify-content-between mt-3">-->
-<!--                    <p-skeleton width="4rem" height="2rem"></p-skeleton>-->
-<!--                    <p-skeleton width="4rem" height="2rem"></p-skeleton>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<!--                  </p-dropdown>-->
+                </div>
+                <div class="flex flex-column sm:align-items-end"><span
+                  class="text-900 text-xl font-medium mb-2 sm:mb-3">$20.00</span><a tabindex="0"
+                                                                                    class="cursor-pointer text-pink-500 font-medium text-sm hover:text-pink-600 transition-colors transition-duration-300">Remove</a>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-column"><span class="inline-flex align-items-center mb-3"><i
+              class="pi pi-envelope text-700 mr-2"></i><span class="text-700 mr-2">Order today.</span></span><span
+              class="inline-flex align-items-center mb-3"><i class="pi pi-send text-700 mr-2"></i><span
+              class="text-700 mr-2">Delivery by <span class="font-bold">Dec 23.</span></span></span><span
+              class="flex align-items-center"><i class="pi pi-exclamation-triangle text-700 mr-2"></i><span
+              class="text-700">Only 8 Available.</span></span></div>
+          </div>
+        </li>
+        <li class="flex flex-column md:flex-row py-6 border-top-1 border-bottom-1 surface-border md:align-items-center">
+          <img src="assets/demo/images/ecommerce/shopping-cart/shopping-cart-2-2.png"
+               class="w-12rem flex-shrink-0 mx-auto md:mx-0">
+          <div class="flex-auto py-5 md:pl-5">
+            <div
+              class="flex flex-wrap align-items-start sm:align-items-center sm:flex-row sm:justify-content-between surface-border pb-6">
+              <div class="w-full sm:w-6 flex flex-column"><span
+                class="text-900 text-xl font-medium mb-3">Product Name</span><span class="text-700">Medium</span></div>
+              <div class="w-full sm:w-6 flex align-items-start justify-content-between mt-3 sm:mt-0">
+                <div>
+<!--                  <p-dropdown class="p-element p-inputwrapper p-inputwrapper-filled">-->
+<!--                    <div class="p-dropdown p-component">-->
+<!--                      <div class="p-hidden-accessible"><input type="text" readonly="" aria-haspopup="listbox"-->
+<!--                                                              pautofocus="" role="combobox" class="p-element"-->
+<!--                                                              aria-expanded="false"></div>-->
+<!--                      <span class="p-element p-dropdown-label p-inputtext ng-star-inserted" id="pr_id_22_label">1&lt;!&ndash;&ndash;&gt;-->
+<!--                        &lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;</span>&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;&lt;!&ndash;&ndash;&gt;-->
+<!--                      <div role="button" aria-label="dropdown trigger" aria-haspopup="listbox"-->
+<!--                           class="p-dropdown-trigger"><span class="p-dropdown-trigger-icon pi pi-chevron-down"></span>-->
+<!--                      </div>-->
+<!--                      <p-overlay class="p-element ng-tns-c18-104 ng-star-inserted">&lt;!&ndash;&ndash;&gt;</p-overlay>-->
+<!--                    </div>-->
+<!--                  </p-dropdown>-->
+                </div>
+                <div class="flex flex-column sm:align-items-end"><span
+                  class="text-900 text-xl font-medium mb-2 sm:mb-3">$62.00</span><a tabindex="0"
+                                                                                    class="cursor-pointer text-pink-500 font-medium text-sm hover:text-pink-600 transition-colors transition-duration-300">Remove</a>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-column"><span class="inline-flex align-items-center mb-3"><i
+              class="pi pi-envelope text-700 mr-2"></i><span class="text-700 mr-2">Order today.</span></span><span
+              class="inline-flex align-items-center mb-3"><i class="pi pi-send text-700 mr-2"></i><span
+              class="text-700 mr-2">Delivery by <span class="font-bold">Dec 23.</span></span></span><span
+              class="flex align-items-center"><i class="pi pi-exclamation-triangle text-700 mr-2"></i><span
+              class="text-700">Only 2 Available.</span></span></div>
+          </div>
+        </li>
+      </ul>
+      <div class="flex">
+        <div class="w-12rem hidden md:block"></div>
+        <ul class="list-none py-0 pr-0 pl-0 md:pl-5 mt-6 mx-0 mb-0 flex-auto">
+          <li class="flex justify-content-between mb-4"><span
+            class="text-xl text-900 font-semibold">Subtotal</span><span class="text-xl text-900">$82.00</span></li>
+          <li class="flex justify-content-between mb-4"><span
+            class="text-xl text-900 font-semibold">Shipping</span><span class="text-xl text-900">Free</span></li>
+          <li class="flex justify-content-between mb-4"><span class="text-xl text-900 font-semibold">VAT</span><span
+            class="text-xl text-900">$8.00</span></li>
+          <li class="flex justify-content-between border-top-1 surface-border mb-4 pt-4"><span
+            class="text-xl text-900 font-bold text-3xl">Total</span><span class="text-xl text-900 font-bold text-3xl">$90.00</span>
+          </li>
+          <li class="flex justify-content-end">
+            <button pbutton="" pripple="" label="Check Out" class="p-element p-ripple p-button p-component"><span
+              class="p-button-label">Check Out</span><span class="p-ink"></span></button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
