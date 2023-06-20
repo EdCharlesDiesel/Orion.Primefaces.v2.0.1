@@ -17,6 +17,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import {ImageModule} from "primeng/image";
+import {MultiSelectModule} from "primeng/multiselect";
+import {TagModule} from "primeng/tag";
 
 @NgModule({
     imports: [
@@ -36,7 +38,9 @@ import {ImageModule} from "primeng/image";
         RadioButtonModule,
         InputNumberModule,
         DialogModule,
-        ImageModule
+        ImageModule,
+      MultiSelectModule,
+      TagModule,
     ],
     declarations: [ListUsersComponent]
 })
