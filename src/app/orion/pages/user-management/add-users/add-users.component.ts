@@ -1,8 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {MessageService} from "primeng/api";
 import {Product} from "../../../api/product";
-import {ProductService} from "../../../service/product.service";
 import {Table} from "primeng/table";
+import {ProductService} from "../../../services/product.service";
 
 
 @Component({

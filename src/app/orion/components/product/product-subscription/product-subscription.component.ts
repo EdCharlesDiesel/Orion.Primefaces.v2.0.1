@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import {SubscriptionService} from "../../../service/subscription.service";
-import {ProductSubscriptionService} from "../../../service/product-subscription.service";
-import {SnackbarService} from "../../../service/snackbar.service";
 import {Product} from "../../../api/product";
+import {SubscriptionService} from "../../../services/subscription.service";
+import {ProductSubscriptionService} from "../../../services/product-subscription.service";
+import {SnackbarService} from "../../../services/snackbar.service";
 
 
 

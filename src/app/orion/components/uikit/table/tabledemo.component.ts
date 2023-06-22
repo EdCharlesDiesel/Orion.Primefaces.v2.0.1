@@ -3,8 +3,8 @@ import { Table } from 'primeng/table';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import {Customer, Representative} from "../../../api/customer";
 import {Product} from "../../../api/product";
-import {CustomerService} from "../../../service/customer.service";
-import {ProductService} from "../../../service/product.service";
+import {CustomerService} from "../../../services/customer.service";
+import {ProductService} from "../../../services/product.service";
 
 interface expandedRows {
     [key: string]: boolean;

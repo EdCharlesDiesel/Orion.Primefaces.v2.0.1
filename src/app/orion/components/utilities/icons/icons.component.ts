@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {IconService} from "../../../service/icon.service";
+import {IconService} from "../../../services/icon.service";
 
 
 @Component({
@@ -16,7 +16,7 @@ export class IconsComponent implements OnInit {
     constructor(private iconService: IconService) { }
 
     ngOnInit() {
-        this.iconService.getIcons().subscribe(data => {
+        this.iconService.getIcons().subscribe((data: any[]) => {
             data = data.filter(value => {
                 return value.icon.tags.indexOf('deprecate') === -1;
             });

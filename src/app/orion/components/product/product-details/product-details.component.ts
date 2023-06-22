@@ -1,8 +1,8 @@
 import { Observable} from "rxjs";
 import {Component, OnInit} from "@angular/core";
-import {ProductService} from "../../../service/product.service";
 import {ActivatedRoute} from "@angular/router";
-import {SubscriptionService} from "../../../service/subscription.service";
+import {SubscriptionService} from "../../../services/subscription.service";
+import {ProductService} from "../../../services/product.service";
 
 
 @Component({
