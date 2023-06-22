@@ -13,17 +13,18 @@ import {IconService} from "./orion/services/icon.service";
 import {EventService} from "./orion/services/event.service";
 import {AuthenticationService} from "./orion/services/authentication.service";
 // import {ErrorComponent} from "./orion/shared/error/error.component";
-import {
-  AddtoproductsubscriptionComponent
-} from "./orion/components/addtoProductSubscription/addtoProductSubscription.component";
+// import {
+//   AddtoproductsubscriptionComponent
+// } from "./orion/components/addtoProductSubscription/addtoProductSubscription.component";
 import {
   ProductSubscriptionComponent
 } from "./orion/components/product/product-subscription/product-subscription.component";
 
 
+
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent,AddtoproductsubscriptionComponent,ProductSubscriptionComponent
+        AppComponent, NotfoundComponent,ProductSubscriptionComponent
     ],
     imports: [
         AppRoutingModule,

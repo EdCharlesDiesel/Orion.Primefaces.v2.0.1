@@ -1,30 +1,40 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Customer } from '../api/customer';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Customer} from '../api/customer';
+import {environment} from "../../../environments/environment";
+import {shareReplay} from "rxjs/operators";
 
 @Injectable()
 export class CustomerService {
 
-    constructor(private http: HttpClient) { }
+  baseURL = environment.baseURL + "Customer";
+  customers$ = this.getCustomers().pipe(shareReplay(1));
 
-    getCustomersSmall() {
-        return this.http.get<any>('assets/demo/data/customers-small.json')
-            .toPromise()
-            .then(res => res.data as Customer[])
-            .then(data => data);
-    }
+  constructor(private httpClient: HttpClient) {
+  }
 
-    getCustomersMedium() {
-        return this.http.get<any>('assets/demo/data/customers-medium.json')
-            .toPromise()
-            .then(res => res.data as Customer[])
-            .then(data => data);
-    }
+  getCustomers() {
+    return this.httpClient.get<Customer[]>(this.baseURL);
+  }
 
-    getCustomersLarge() {
-        return this.http.get<any>('assets/demo/data/customers-large.json')
-            .toPromise()
-            .then(res => res.data as Customer[])
-            .then(data => data);
-    }
+  getCustomersSmall() {
+    return this.httpClient.get<any>(this.baseURL )
+      .toPromise()
+      .then(res => res.data as Customer[])
+      .then(data => data);
+  }
+
+  getCustomersMedium() {
+    return this.httpClient.get<any>(this.baseURL + 'Customer')
+      .toPromise()
+      .then(res => res.data as Customer[])
+      .then(data => data);
+  }
+
+  getCustomersLarge() {
+    return this.httpClient.get<any>(this.baseURL + 'Customer')
+      .toPromise()
+      .then(res => res.data as Customer[])
+      .then(data => data);
+  }
 }

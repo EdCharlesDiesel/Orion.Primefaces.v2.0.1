@@ -22,15 +22,18 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th style="width:22%">Name</th>
+        <th style="width:22%">First name</th>
+        <th style="width:22%">Last Name</th>
         <th style="width:22%">Country</th>
-        <th style="width:22%">Agent</th>
         <th style="width:22%">Status</th>
         <th style="width:12%">Verified</th>
       </tr>
       <tr>
         <th>
-          <p-columnFilter type="text" field="name"></p-columnFilter>
+          <p-columnFilter type="text" field="first_name"></p-columnFilter>
+        </th>
+        <th>
+          <p-columnFilter type="text" field="last_name"></p-columnFilter>
         </th>
         <th>
           <p-columnFilter type="text" field="country.name"></p-columnFilter>
@@ -68,21 +71,25 @@
     <ng-template pTemplate="body" let-customer>
       <tr>
         <td>
-          {{ customer.name }}
+          {{ customer.first_name }}
+        </td>
+
+        <td>
+          {{ customer.last_name }}
         </td>
         <td>
-          <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" style="width: 20px" />
-          <span class="ml-1 vertical-align-middle">{{ customer.country.name }}</span>
+<!--          <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + customer.country.code" style="width: 20px" />-->
+<!--          <span class="ml-1 vertical-align-middle">{{ customer.country.name }}</span>-->
         </td>
         <td>
-          <img [alt]="customer.representative.name" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ customer.representative.image }}" width="32" style="vertical-align: middle" />
-          <span class="ml-1 vertical-align-middle">{{ customer.representative.name }}</span>
+<!--          <img [alt]="customer.representative.name" src="https://primefaces.org/cdn/primeng/images/demo/avatar/{{ customer.representative.image }}" width="32" style="vertical-align: middle" />-->
+<!--          <span class="ml-1 vertical-align-middle">{{ customer.representative.name }}</span>-->
         </td>
         <td>
-          <p-tag [value]="customer.status" [severity]="getSeverity(customer.status)"></p-tag>
+<!--          <p-tag [value]="customer.status" [severity]="getSeverity(customer.status)"></p-tag>-->
         </td>
         <td>
-          <i class="pi" [ngClass]="{ 'text-green-500 pi-check-circle': customer.verified, 'text-red-500 pi-times-circle': !customer.verified }"></i>
+<!--          <i class="pi" [ngClass]="{ 'text-green-500 pi-check-circle': customer.verified, 'text-red-500 pi-times-circle': !customer.verified }"></i>-->
         </td>
       </tr>
     </ng-template>
