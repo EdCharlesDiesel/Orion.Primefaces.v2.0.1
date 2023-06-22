@@ -2,9 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {MessageService} from "primeng/api";
 import {Table} from "primeng/table";
 import {Customer, Representative} from "../../../api/customer";
-import {CustomerService} from "../../../service/customer.service";
-
-
+import {CustomerService} from "../../../services/customer.service";
 @Component({
     templateUrl: './list-users.component.html',
     providers: [MessageService]

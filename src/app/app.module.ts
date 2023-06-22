@@ -4,19 +4,26 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
 import {NotfoundComponent} from "./orion/components/notfound/notfound.component";
-import {CustomerService} from "./orion/service/customer.service";
-import {CountryService} from "./orion/service/country.service";
-import {PhotoService} from "./orion/service/photo.service";
-import {ProductService} from "./orion/service/product.service";
-import {NodeService} from "./orion/service/node.service";
-import {IconService} from "./orion/service/icon.service";
-import {EventService} from "./orion/service/event.service";
-import {AuthenticationService} from "./orion/service/authentication.service";
+import {CustomerService} from "./orion/services/customer.service";
+import {CountryService} from "./orion/services/country.service";
+import {PhotoService} from "./orion/services/photo.service";
+import {ProductService} from "./orion/services/product.service";
+import {NodeService} from "./orion/services/node.service";
+import {IconService} from "./orion/services/icon.service";
+import {EventService} from "./orion/services/event.service";
+import {AuthenticationService} from "./orion/services/authentication.service";
+// import {ErrorComponent} from "./orion/shared/error/error.component";
+import {
+  AddtoproductsubscriptionComponent
+} from "./orion/components/addtoProductSubscription/addtoProductSubscription.component";
+import {
+  ProductSubscriptionComponent
+} from "./orion/components/product/product-subscription/product-subscription.component";
 
 
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent
+        AppComponent, NotfoundComponent,AddtoproductsubscriptionComponent,ProductSubscriptionComponent
     ],
     imports: [
         AppRoutingModule,

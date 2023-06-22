@@ -7,8 +7,8 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PasswordModule} from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
-import {AuthenticationService} from "../../../service/authentication.service";
 import {LayoutService} from "../../../../layout/service/app.layout.service";
+import {AuthenticationService} from "../../../services/authentication.service";
 
 @NgModule({
   imports: [

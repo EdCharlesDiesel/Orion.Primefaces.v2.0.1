@@ -1,9 +1,9 @@
 import { Product } from '../../api/product';
 import { Component, Input} from '@angular/core';
 import { OnChanges } from '@angular/core';
-import {ProductSubscriptionService} from "../../service/product-subscription.service";
-import {SubscriptionService} from "../../service/subscription.service";
-import {SnackbarService} from "../../service/snackbar.service";
+import {ProductSubscriptionService} from "../../services/product-subscription.service";
+import {SubscriptionService} from "../../services/subscription.service";
+import {SnackbarService} from "../../services/snackbar.service";
 
 @Component({
   selector: 'app-addtoProductSubscription',

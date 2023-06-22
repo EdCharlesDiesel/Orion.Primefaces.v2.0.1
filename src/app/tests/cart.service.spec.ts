@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
-import { CartService } from '../orion/service/cart.service';
+import {CartService} from "../orion/services/cart.service";
 
 describe('CartService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
