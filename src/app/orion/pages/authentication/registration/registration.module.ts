@@ -6,11 +6,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PasswordModule} from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
 import {RegistrationComponent} from "./registration.component";
-import {AuthenticationService} from "../../../service/authentication.service";
 import {LayoutService} from "../../../../layout/service/app.layout.service";
 import {RegistrationRoutingModule} from "./registration-routing.module";
 import {CalendarModule} from "primeng/calendar";
 import {DividerModule} from "primeng/divider";
+import {AuthenticationService} from "../../../services/authentication.service";
 
 @NgModule({
   imports: [

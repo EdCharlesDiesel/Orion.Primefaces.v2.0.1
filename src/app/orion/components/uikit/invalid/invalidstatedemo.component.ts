@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CountryService} from "../../../service/country.service";
-
+import {CountryService} from "../../../services/country.service";
 
 @Component({
     templateUrl: './invalidstatedemo.component.html'

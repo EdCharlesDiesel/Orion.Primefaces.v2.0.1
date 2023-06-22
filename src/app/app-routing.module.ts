@@ -2,6 +2,9 @@ import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {NotfoundComponent} from './orion/components/notfound/notfound.component';
 import {AppLayoutComponent} from "./layout/app.layout.component";
+import {RouteUrls} from "./app-routing.config";
+import {NotAuthenticatedGuard} from "./orion/shared/guards/not-authenticated.guard";
+import {AuthenticatedGuard} from "./orion/shared/guards/authenticated.guard";
 
 @NgModule({
   imports: [
@@ -37,7 +40,18 @@ import {AppLayoutComponent} from "./layout/app.layout.component";
         path: 'authentication',
         loadChildren: () => import('./orion/pages/authentication/auth.module').then(m => m.AuthModule)
       },
-
+      {
+        path: RouteUrls.LOGIN,
+        canLoad: [NotAuthenticatedGuard],
+        canActivate: [NotAuthenticatedGuard],
+        loadChildren: () => import('src/app/orion/pages/user-management/user-management-routing.module').then(m => m.UserManagementRoutingModule)
+      },
+      {
+        path: RouteUrls.CHAT,
+        canLoad: [AuthenticatedGuard],
+        canActivate: [AuthenticatedGuard],
+        loadChildren: () => import('src/app/orion/components/features/chat/chat.module').then(m => m.ChatModule)
+      },
       {path: 'landing', loadChildren: () => import('./orion/pages/landing/landing.module').then(m => m.LandingModule)},
       {path: 'notfound', component: NotfoundComponent},
       {path: '**', redirectTo: '/notfound'},

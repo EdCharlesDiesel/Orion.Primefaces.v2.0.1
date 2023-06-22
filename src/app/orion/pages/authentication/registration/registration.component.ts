@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {LayoutService} from "../../../../layout/service/app.layout.service";
-import {FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
-import {AuthenticationService} from "../../../service/authentication.service";
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {User} from "../../../api/user";
+import { AuthenticationService } from 'src/app/orion/services/authentication.service';
 
 @Component({
   selector: 'app-registration',

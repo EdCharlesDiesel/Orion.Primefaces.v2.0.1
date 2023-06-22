@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { DataView } from 'primeng/dataview';
-import {ProductService} from "../../../service/product.service";
 import {Product} from "../../../api/product";
+import {ProductService} from "../../../services/product.service";
 
 
 @Component({
