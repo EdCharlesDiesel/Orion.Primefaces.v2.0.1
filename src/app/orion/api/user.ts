@@ -11,4 +11,7 @@ export class User {
   subscription: string| undefined;
   userTypeId: number | undefined;
   isLoggedIn: boolean | undefined;
+  name: any;
+  code: string | undefined;
+  image: string | undefined;
 }

@@ -1,8 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {MessageService} from "primeng/api";
-import {Product} from "../../../api/product";
+import {User} from "../../../api/user";
 import {Table} from "primeng/table";
-import {ProductService} from "../../../services/product.service";
+import {UserService} from "../../../services/user.service"
+
 
 
 @Component({
@@ -11,17 +12,33 @@ import {ProductService} from "../../../services/product.service";
 })
 export class AddUsersComponent implements OnInit {
 
-    productDialog: boolean = false;
+    UserDialog: boolean = false;
 
-    deleteProductDialog: boolean = false;
+    deleteUserDialog: boolean = false;
 
-    deleteProductsDialog: boolean = false;
+    deleteUsersDialog: boolean = false;
 
-    products: Product[] = [];
+    Users: User[] = [];
 
-    product: Product = {};
+    User: User = {
+        id: undefined,
+        firstName: undefined,
+        lastName: undefined,
+        username: undefined,
+        idNumber: undefined,
+        emailAddress: undefined,
+        password: undefined,
+        birthday: undefined,
+        role: undefined,
+        subscription: undefined,
+        userTypeId: undefined,
+        isLoggedIn: undefined,
+        name: undefined,
+        code: undefined,
+        image: undefined
+    };
 
-    selectedProducts: Product[] = [];
+    selectedUsers: User[] = [];
 
     submitted: boolean = false;
 
@@ -31,13 +48,13 @@ export class AddUsersComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
 
-    constructor(private productService: ProductService, private messageService: MessageService) { }
+    constructor(private UserService: UserService, private messageService: MessageService) { }
 
     ngOnInit() {
-     //   this.productService.getProducts().then(data => this.products = data);
+     //   this.UserService.getUsers().then(data => this.Users = data);
 
         this.cols = [
-            { field: 'product', header: 'Product' },
+            { field: 'User', header: 'User' },
             { field: 'price', header: 'Price' },
             { field: 'category', header: 'Category' },
             { field: 'rating', header: 'Reviews' },
@@ -52,73 +69,115 @@ export class AddUsersComponent implements OnInit {
     }
 
     openNew() {
-        this.product = {};
+        this.User = {   id: undefined,
+        firstName: undefined,
+        lastName: undefined,
+        username: undefined,
+        idNumber: undefined,
+        emailAddress: undefined,
+        password: undefined,
+        birthday: undefined,
+        role: undefined,
+        subscription: undefined,
+        userTypeId: undefined,
+        isLoggedIn: undefined,
+        name: undefined,
+        code: undefined,
+        image: undefined};
         this.submitted = false;
-        this.productDialog = true;
+        this.UserDialog = true;
     }
 
-    deleteSelectedProducts() {
-        this.deleteProductsDialog = true;
+    deleteSelectedUsers() {
+        this.deleteUsersDialog = true;
     }
 
-    editProduct(product: Product) {
-        this.product = { ...product };
-        this.productDialog = true;
+    editUser(User: User) {
+        this.User = { ...User };
+        this.UserDialog = true;
     }
 
-    deleteProduct(product: Product) {
-        this.deleteProductDialog = true;
-        this.product = { ...product };
+    deleteUser(User: User) {
+        this.deleteUserDialog = true;
+        this.User = { ...User };
     }
 
     confirmDeleteSelected() {
-        this.deleteProductsDialog = false;
-        this.products = this.products.filter(val => !this.selectedProducts.includes(val));
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
-        this.selectedProducts = [];
+        this.deleteUsersDialog = false;
+        this.Users = this.Users.filter(val => !this.selectedUsers.includes(val));
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Users Deleted', life: 3000 });
+        this.selectedUsers = [];
     }
 
     confirmDelete() {
-        this.deleteProductDialog = false;
-        this.products = this.products.filter(val => val.id !== this.product.id);
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
-        this.product = {};
+        this.deleteUserDialog = false;
+        this.Users = this.Users.filter(val => val.id !== this.User.id);
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Deleted', life: 3000 });
+        this.User = {   id: undefined,
+        firstName: undefined,
+        lastName: undefined,
+        username: undefined,
+        idNumber: undefined,
+        emailAddress: undefined,
+        password: undefined,
+        birthday: undefined,
+        role: undefined,
+        subscription: undefined,
+        userTypeId: undefined,
+        isLoggedIn: undefined,
+        name: undefined,
+        code: undefined,
+        image: undefined};
     }
 
     hideDialog() {
-        this.productDialog = false;
+        this.UserDialog = false;
         this.submitted = false;
     }
 
-    saveProduct() {
+    saveUser() {
         this.submitted = true;
 
-        if (this.product.name?.trim()) {
-            if (this.product.id) {
+        if (this.User.name?.trim()) {
+            if (this.User.id) {
                 // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus.value ? this.product.inventoryStatus.value : this.product.inventoryStatus;
-                this.products[this.findIndexById(this.product.id)] = this.product;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
+                this.User.inventoryStatus = this.User.inventoryStatus.value ? this.User.inventoryStatus.value : this.User.inventoryStatus;
+                this.Users[this.findIndexById(this.User.id)] = this.User;
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
             } else {
-                this.product.id = this.createId();
-                this.product.code = this.createId();
-                this.product.image = 'product-placeholder.svg';
+                this.User.id = this.createId();
+                this.User.code = this.createId();
+                this.User.image = 'User-placeholder.svg';
                 // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus ? this.product.inventoryStatus.value : 'INSTOCK';
-                this.products.push(this.product);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
+                this.User.inventoryStatus = this.User.inventoryStatus ? this.User.inventoryStatus.value : 'INSTOCK';
+                this.Users.push(this.User);
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Created', life: 3000 });
             }
 
-            this.products = [...this.products];
-            this.productDialog = false;
-            this.product = {};
+            this.Users = [...this.Users];
+            this.UserDialog = false;
+            this.User = {   id: undefined,
+        firstName: undefined,
+        lastName: undefined,
+        username: undefined,
+        idNumber: undefined,
+        emailAddress: undefined,
+        password: undefined,
+        birthday: undefined,
+        role: undefined,
+        subscription: undefined,
+        userTypeId: undefined,
+        isLoggedIn: undefined,
+        name: undefined,
+        code: undefined,
+        image: undefined};
         }
     }
 
     findIndexById(id: string): number {
         let index = -1;
-        for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].id === id) {
+        for (let i = 0; i < this.Users.length; i++) {
+            if (this.Users[i].id === id) {
                 index = i;
                 break;
             }
