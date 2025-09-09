@@ -1,10 +1,10 @@
-import {Component, OnInit} from "@angular/core";
-import {MessageService} from "primeng/api";
-import {User} from "../../../api/user";
-import {Table} from "primeng/table";
-import {UserService} from "../../../services/user.service"
-
-
+//import { UserService } from './../../../services/user.service';
+//import { User } from './../../../api/user';
+import { Component, OnInit } from "@angular/core";
+import { MessageService } from "primeng/api";
+import { User } from "../../../api/user";
+import { Table } from "primeng/table";
+import { UserService } from "../../../services/user.service";
 
 @Component({
     templateUrl: './add-users.component.html',
@@ -12,190 +12,155 @@ import {UserService} from "../../../services/user.service"
 })
 export class AddUsersComponent implements OnInit {
 
-    UserDialog: boolean = false;
-
+    userDialog: boolean = false;
     deleteUserDialog: boolean = false;
-
     deleteUsersDialog: boolean = false;
 
-    Users: User[] = [];
-
-    User: User = {
-        id: undefined,
-        firstName: undefined,
-        lastName: undefined,
-        username: undefined,
-        idNumber: undefined,
-        emailAddress: undefined,
-        password: undefined,
-        birthday: undefined,
-        role: undefined,
-        subscription: undefined,
-        userTypeId: undefined,
-        isLoggedIn: undefined,
-        name: undefined,
-        code: undefined,
-        image: undefined
-    };
+    users: User[] = [];
+    user: User = this.getEmptyUser();
 
     selectedUsers: User[] = [];
-
     submitted: boolean = false;
 
     cols: any[] = [];
-
-    statuses: any[] = [];
-
     rowsPerPageOptions = [5, 10, 20];
 
-    constructor(private UserService: UserService, private messageService: MessageService) { }
+    constructor(
+        private userService: UserService,
+        private messageService: MessageService
+    ) {}
 
     ngOnInit() {
-     //   this.UserService.getUsers().then(data => this.Users = data);
+        // Fetch actual users
+        // this.userService.getUsers().subscribe(data => this.users = data);
 
         this.cols = [
-            { field: 'User', header: 'User' },
-            { field: 'price', header: 'Price' },
-            { field: 'category', header: 'Category' },
-            { field: 'rating', header: 'Reviews' },
-            { field: 'inventoryStatus', header: 'Status' }
-        ];
-
-        this.statuses = [
-            { label: 'INSTOCK', value: 'instock' },
-            { label: 'LOWSTOCK', value: 'lowstock' },
-            { label: 'OUTOFSTOCK', value: 'outofstock' }
+            { field: 'firstName', header: 'First Name' },
+            { field: 'lastName', header: 'Last Name' },
+            { field: 'username', header: 'Username' },
+            { field: 'emailAddress', header: 'Email' },
+            { field: 'role', header: 'Role' }
         ];
     }
 
     openNew() {
-        this.User = {   id: undefined,
-        firstName: undefined,
-        lastName: undefined,
-        username: undefined,
-        idNumber: undefined,
-        emailAddress: undefined,
-        password: undefined,
-        birthday: undefined,
-        role: undefined,
-        subscription: undefined,
-        userTypeId: undefined,
-        isLoggedIn: undefined,
-        name: undefined,
-        code: undefined,
-        image: undefined};
+        this.user = this.getEmptyUser();
         this.submitted = false;
-        this.UserDialog = true;
+        this.userDialog = true;
+    }
+
+    editUser(user: User) {
+        this.user = { ...user };
+        this.userDialog = true;
+    }
+
+    deleteUser(user: User) {
+        this.user = { ...user };
+        this.deleteUserDialog = true;
     }
 
     deleteSelectedUsers() {
         this.deleteUsersDialog = true;
     }
 
-    editUser(User: User) {
-        this.User = { ...User };
-        this.UserDialog = true;
-    }
-
-    deleteUser(User: User) {
-        this.deleteUserDialog = true;
-        this.User = { ...User };
+    confirmDelete() {
+        this.users = this.users.filter(val => val.id !== this.user.id);
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Deleted', life: 3000 });
+        this.deleteUserDialog = false;
+        this.user = this.getEmptyUser();
     }
 
     confirmDeleteSelected() {
-        this.deleteUsersDialog = false;
-        this.Users = this.Users.filter(val => !this.selectedUsers.includes(val));
+        this.users = this.users.filter(val => !this.selectedUsers.includes(val));
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Users Deleted', life: 3000 });
+        this.deleteUsersDialog = false;
         this.selectedUsers = [];
-    }
-
-    confirmDelete() {
-        this.deleteUserDialog = false;
-        this.Users = this.Users.filter(val => val.id !== this.User.id);
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Deleted', life: 3000 });
-        this.User = {   id: undefined,
-        firstName: undefined,
-        lastName: undefined,
-        username: undefined,
-        idNumber: undefined,
-        emailAddress: undefined,
-        password: undefined,
-        birthday: undefined,
-        role: undefined,
-        subscription: undefined,
-        userTypeId: undefined,
-        isLoggedIn: undefined,
-        name: undefined,
-        code: undefined,
-        image: undefined};
-    }
-
-    hideDialog() {
-        this.UserDialog = false;
-        this.submitted = false;
     }
 
     saveUser() {
         this.submitted = true;
 
-        if (this.User.name?.trim()) {
-            if (this.User.id) {
-                // @ts-ignore
-                this.User.inventoryStatus = this.User.inventoryStatus.value ? this.User.inventoryStatus.value : this.User.inventoryStatus;
-                this.Users[this.findIndexById(this.User.id)] = this.User;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
-            } else {
-                this.User.id = this.createId();
-                this.User.code = this.createId();
-                this.User.image = 'User-placeholder.svg';
-                // @ts-ignore
-                this.User.inventoryStatus = this.User.inventoryStatus ? this.User.inventoryStatus.value : 'INSTOCK';
-                this.Users.push(this.User);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Created', life: 3000 });
-            }
+        this.user.username = "Khotso"
+       this.user.id = this.createId();
+                this.users.push(this.user);
 
-            this.Users = [...this.Users];
-            this.UserDialog = false;
-            this.User = {   id: undefined,
-        firstName: undefined,
-        lastName: undefined,
-        username: undefined,
-        idNumber: undefined,
-        emailAddress: undefined,
-        password: undefined,
-        birthday: undefined,
-        role: undefined,
-        subscription: undefined,
-        userTypeId: undefined,
-        isLoggedIn: undefined,
-        name: undefined,
-        code: undefined,
-        image: undefined};
-        }
+                this.userService.registerUser(
+                    {
+                        id : "1",
+                        code : "",
+                        emailAddress: "Khotso@hotmai.com",
+                        username :this.user.username = "Khotso",
+                        birthday :999090,
+                        idNumber : "999090",
+                        firstName: "Khotso",
+                        lastName : "Mokhethi",
+                        image:"xxzczxc",
+                        name : "Mokhethi",
+                        isLoggedIn : true,
+                        password :"asdfg",
+                        role: "Web Master",
+                        subscription : "Ultimate",
+                        userTypeId : 2
+
+                    }
+                );
+                // this.users[index] = this.user;
+                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
+
+        // if (this.user.firstName?.trim()) {
+        //     if (this.user.id) {
+        //         const index = this.findIndexById(this.user.id);
+        //         if (index !== -1) {
+        //             this.users[index] = this.user;
+        //             this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
+        //         }
+        //     } else {
+        //         this.user.id = this.createId();
+        //         this.users.push(this.user);
+        //         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Created', life: 3000 });
+        //     }
+
+        //     this.users = [...this.users];
+        //     this.userDialog = false;
+        //     this.user = this.getEmptyUser();
+        // }
     }
 
-    findIndexById(id: string): number {
-        let index = -1;
-        for (let i = 0; i < this.Users.length; i++) {
-            if (this.Users[i].id === id) {
-                index = i;
-                break;
-            }
-        }
-
-        return index;
-    }
-
-    createId(): string {
-        let id = '';
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
+    hideDialog() {
+        this.userDialog = false;
+        this.submitted = false;
     }
 
     onGlobalFilter(table: Table, event: Event) {
         table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+    }
+
+    findIndexById(id: string): number {
+        return this.users.findIndex(u => u.id === id);
+    }
+
+    createId(): string {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        return Array.from({ length: 8 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    }
+
+    private getEmptyUser(): User {
+        return {
+            id: undefined,
+            firstName: '',
+            lastName: '',
+            username: '',
+            idNumber: '',
+            emailAddress: '',
+            password: '',
+            birthday: '',
+            role: '',
+            subscription: '',
+            userTypeId: undefined,
+            isLoggedIn: false,
+            name: '',
+            code: '',
+            image: ''
+        };
     }
 }

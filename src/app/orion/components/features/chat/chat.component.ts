@@ -202,17 +202,17 @@ export class ChatComponent implements OnInit, OnDestroy {
 
 // ====== DOWNLOAD ATTACHMENT UI EVENT ========
   downloadAttachment(attachment: AttachmentModel) {
-    this.downloadService.downloadAttachment(attachment).pipe(
-      catchError(e => {
-        this.messageService.add({
-          key: 'toast',
-          severity: 'error',
-          summary: 'Error ' + e.status + ': ' + e.statusText,
-          detail: attachment.name
-        });
-        return EMPTY;
-      })
-    ).subscribe();
+    // this.downloadService.downloadAttachment(attachment).pipe(
+    //   catchError(e => {
+    //     this.messageService.add({
+    //       key: 'toast',
+    //       severity: 'error',
+    //       summary: 'Error ' + e.status + ': ' + e.statusText,
+    //       detail: attachment.name
+    //     });
+    //     return EMPTY;
+    //   })
+    // ).subscribe();
   }
 
 // ====== USER TYPING UI EVENT ========

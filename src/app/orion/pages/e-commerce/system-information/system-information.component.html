@@ -1,0 +1,107 @@
+<div class="system-info-container">
+  <p-card header="System Information Management" [style]="{'margin-bottom': '20px'}">
+    <div class="card-actions">
+      <p-button
+        label="Refresh"
+        icon="pi pi-refresh"
+        (onClick)="refresh()"
+        [loading]="loading">
+      </p-button>
+    </div>
+  </p-card>
+
+  <p-table
+    [value]="systemInfoList"
+    [columns]="cols"
+    [loading]="loading"
+    selectionMode="single"
+    [(selection)]="selectedSystemInfo"
+    (onRowSelect)="onRowSelect($event)"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    responsiveLayout="scroll">
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{ col.header }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-systemInfo let-columns="columns">
+      <tr [pSelectableRow]="systemInfo">
+        <td>{{ systemInfo.systemInformationID }}</td>
+        <td>
+          <span *ngIf="systemInfo.databaseVersion; else noVersion">
+            {{ systemInfo.databaseVersion }}
+          </span>
+          <ng-template #noVersion>
+            <span class="text-muted">N/A</span>
+          </ng-template>
+        </td>
+        <td>{{ formatDate(systemInfo.versionDate) }}</td>
+        <td>{{ formatDate(systemInfo.modifiedDate) }}</td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4" class="text-center">No system information found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!-- Detail Dialog -->
+  <p-dialog
+    header="System Information Details"
+    [(visible)]="displayDialog"
+    [modal]="true"
+    [responsive]="true"
+    [style]="{width: '500px'}"
+    [closable]="true"
+    (onHide)="hideDialog()">
+
+    <div *ngIf="selectedSystemInfo" class="system-info-details">
+      <div class="field-group">
+        <label>System Information ID:</label>
+        <span class="value">{{ selectedSystemInfo.systemInformationID }}</span>
+      </div>
+
+      <div class="field-group">
+        <label>Database Version:</label>
+        <span class="value" *ngIf="selectedSystemInfo.databaseVersion; else noDbVersion">
+          {{ selectedSystemInfo.databaseVersion }}
+        </span>
+        <ng-template #noDbVersion>
+          <span class="value text-muted">Not Available</span>
+        </ng-template>
+      </div>
+
+      <div class="field-group">
+        <label>Version Date:</label>
+        <span class="value">{{ formatDate(selectedSystemInfo.versionDate) }}</span>
+      </div>
+
+      <div class="field-group">
+        <label>Modified Date:</label>
+        <span class="value">{{ formatDate(selectedSystemInfo.modifiedDate) }}</span>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Close"
+        icon="pi pi-times"
+        (onClick)="hideDialog()"
+        class="p-button-secondary">
+      </p-button>
+    </ng-template>
+  </p-dialog>
+
+  <!-- Toast Messages -->
+  <p-toast position="top-right"></p-toast>
+</div>
