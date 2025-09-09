@@ -10,34 +10,45 @@ import {AttachmentModel} from "../api/rich-message.model";
 })
 export class AttachmentService {
 
-  constructor(private http: HttpClient,
-              private urlFactory: UrlFactoryService) {
-  }
+  constructor(
+    private http: HttpClient,
+    private urlFactory: UrlFactoryService
+  ) {}
 
   uploadFormData(formData: FormData): Observable<HttpEvent<{ [id: string]: string }>> {
-    return this.http.post<{ [id: string]: string }>(this.urlFactory.getUploadUrl(), formData, {
-      reportProgress: true,
-      observe: 'events',
-      responseType: 'json'
-    });
-  }
-
-  downloadAttachment(attachment: AttachmentModel): Observable<any> {
-    const payload = new HttpParams().set('fileId', attachment.fileId);
-    return this.http.post(this.urlFactory.getDownloadUrl(), payload,
-      {observe: 'response', responseType: 'blob'}
-    ).pipe(
-      tap(response => this.redirectBlobToBrowser(response, attachment.name, attachment.type)),
+    return this.http.post<{ [id: string]: string }>(
+      this.urlFactory.getUploadUrl(),
+      formData,
+      {
+        reportProgress: true,
+        observe: 'events',
+        responseType: 'json'
+      }
     );
   }
 
-  redirectBlobToBrowser(response: HttpResponse<Blob> | any, fileName: string, fileType: string) {
-    const blob = new Blob([response.body], {type: fileType});
+  // downloadAttachment(attachment: AttachmentModel): Observable<Blob> {
+  //   const payload = new HttpParams().set('fileId', attachment.fileId);
+
+  //   return this.http.post(this.urlFactory.getDownloadUrl(), payload, {
+  //     observe: 'response',
+  //     responseType: 'blob'
+  //   }).pipe(
+  //     tap(response => this.redirectBlobToBrowser(response, attachment.name, attachment.type))
+  //   );
+  // }
+
+  private redirectBlobToBrowser(response: HttpResponse<Blob>, fileName: string, fileType: string): void {
+    const blob = new Blob([response.body!], { type: fileType });
     const url = URL.createObjectURL(blob);
+
     const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', fileName);
-    link.dispatchEvent(new MouseEvent(`click`, {bubbles: true, cancelable: true, view: window}));
-    URL.revokeObjectURL(url);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setTimeout(() => URL.revokeObjectURL(url), 100); // Delay revoking to allow download to start
   }
 }
