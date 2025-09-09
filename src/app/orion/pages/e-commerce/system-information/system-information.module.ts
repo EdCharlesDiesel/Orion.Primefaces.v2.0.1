@@ -12,22 +12,39 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { ButtonModule } from 'primeng/button';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import {SystemInformationService} from "./system-information.service";
+import {CardModule} from "primeng/card";
+import {TableModule} from "primeng/table";
+import {DialogModule} from "primeng/dialog";
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
-	imports: [
-		CommonModule,
-		SystemInformationRoutingModule,
-		ProgressBarModule,
-		BadgeModule,
-		AvatarModule,
-		ScrollPanelModule,
-		TagModule,
-		ChipModule,
-		ButtonModule,
-		SkeletonModule,
-		AvatarGroupModule,
-		ScrollTopModule
-	],
-	declarations: [SystemInformationComponent]
+  declarations: [
+    SystemInformationComponent
+  ],
+  imports: [
+    CommonModule,
+    SystemInformationRoutingModule,
+    ProgressBarModule,
+    BadgeModule,
+    AvatarModule,
+    ScrollPanelModule,
+    TagModule,
+    ChipModule,
+    ButtonModule,
+    SkeletonModule,
+    AvatarGroupModule,
+    ScrollTopModule,
+    CardModule,
+    TableModule,
+    DialogModule,
+    ToastModule
+  ],
+  providers: [
+    SystemInformationService
+  ],
+  exports: [
+    SystemInformationComponent
+  ]
 })
 export class SystemInformationModule { }

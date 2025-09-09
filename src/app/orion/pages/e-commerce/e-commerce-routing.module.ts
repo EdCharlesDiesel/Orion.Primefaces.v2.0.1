@@ -4,9 +4,9 @@ import {RouterModule} from '@angular/router';
 @NgModule({
   imports: [RouterModule.forChild([
     {
-      path: 'system information ',
+      path: 'system-information',
       data: {breadcrumb: 'Button'},
-      loadChildren: () => import('./product-overview/product-overview.module').then(m => m.ProductOverviewModule)
+      loadChildren: () => import('./system-information/system-information.module').then(m => m.SystemInformationModule)
     },
     {
       path: 'product-overview',

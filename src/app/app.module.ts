@@ -12,13 +12,11 @@ import {NodeService} from "./orion/services/node.service";
 import {IconService} from "./orion/services/icon.service";
 import {EventService} from "./orion/services/event.service";
 import {AuthenticationService} from "./orion/services/authentication.service";
-// import {ErrorComponent} from "./orion/shared/error/error.component";
-// import {
-//   AddtoproductsubscriptionComponent
-// } from "./orion/components/addtoProductSubscription/addtoProductSubscription.component";
+
 import {
   ProductSubscriptionComponent
 } from "./orion/components/product/product-subscription/product-subscription.component";
+import {SystemInformationModule} from "./orion/pages/e-commerce/system-information/system-information.module";
 
 
 
@@ -28,7 +26,8 @@ import {
     ],
     imports: [
         AppRoutingModule,
-        AppLayoutModule
+        AppLayoutModule,
+      SystemInformationModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

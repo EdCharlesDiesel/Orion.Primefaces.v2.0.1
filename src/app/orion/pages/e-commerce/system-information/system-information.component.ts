@@ -1,26 +1,81 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SystemInformation } from '../../../api/system-information.model'
+import { SystemInformationService } from './system-information.service'
+import { MessageService } from 'primeng/api';
 
 @Component({
-    templateUrl: './system-information.component.html'
+  selector: 'app-system-information',
+  templateUrl: './system-information.component.html',
+  styleUrls: ['./system-information.component.css'],
+  providers: [MessageService]
 })
-export class SystemInformationComponent implements OnInit, OnDestroy {
+export class SystemInformationComponent implements OnInit {
+  systemInfoList: SystemInformation[] = [];
+  selectedSystemInfo: SystemInformation | null = null;
+  loading = true;
+  displayDialog = false;
 
-    value = 0;
+  cols = [
+    { field: 'systemInformationID', header: 'ID' },
+    { field: 'databaseVersion', header: 'Database Version' },
+    { field: 'versionDate', header: 'Version Date' },
+    { field: 'modifiedDate', header: 'Modified Date' }
+  ];
 
-    interval: any;
+  constructor(
+    private systemInfoService: SystemInformationService,
+    private messageService: MessageService
+  ) {}
 
-    ngOnInit() {
-        this.interval = setInterval(() => {
-            this.value = this.value + Math.floor(Math.random() * 10) + 1;
-            if (this.value >= 100) {
-                this.value = 100;
-                clearInterval(this.interval);
-            }
-        }, 2000);
-    }
+  ngOnInit(): void {
+    this.loadSystemInformation();
+  }
 
-    ngOnDestroy() {
-        clearInterval(this.interval);
-    }
+  loadSystemInformation(): void {
+    this.loading = true;
+    this.systemInfoService.getSystemInformation().subscribe({
+      next: (data: any) => {
+        this.systemInfoList = data;
+        this.loading = false;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'System information loaded successfully'
+        });
+      },
+      error: (error: any) => {
+        console.error('Error loading system information:', error);
+        this.loading = false;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to load system information'
+        });
+      }
+    });
+  }
 
+  onRowSelect(event: any): void {
+    this.selectedSystemInfo = { ...event.data };
+    this.displayDialog = true;
+  }
+
+  hideDialog(): void {
+    this.displayDialog = false;
+    this.selectedSystemInfo = null;
+  }
+
+  formatDate(dateString: string): string {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  refresh(): void {
+    this.loadSystemInformation();
+  }
 }
