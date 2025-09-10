@@ -17,6 +17,8 @@ import {CardModule} from "primeng/card";
 import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CalendarModule} from "primeng/calendar";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,10 @@ import {ToastModule} from "primeng/toast";
     CardModule,
     TableModule,
     DialogModule,
-    ToastModule
+    ToastModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CalendarModule,
   ],
   providers: [
     SystemInformationService
