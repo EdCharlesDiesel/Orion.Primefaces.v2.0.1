@@ -7,7 +7,7 @@ import { SystemInformation } from '../../../api/system-information.model';
 @Injectable({
   providedIn: 'root'
 })
-export class SystemInformationService {
+export class TransactionHistoryService {
   private apiUrl = 'http://localhost:9005/api/AwBuildVersion';
 
   constructor(private http: HttpClient) {}

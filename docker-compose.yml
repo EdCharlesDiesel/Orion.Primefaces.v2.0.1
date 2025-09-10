@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "4201:4201"
-    container_name: orion.admin.primfaces.v1.0.1
+    container_name: orion.admin.primefaces.v1.0.1
     volumes:
       - ./
       - /usr/src/app/node_modules
