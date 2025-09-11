@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SystemInformation } from '../../../api/system-information.model';
+import {ErrorLog} from "../../../api/ErrorLog";
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +12,19 @@ export class ErrorLogService {
 
   constructor(private http: HttpClient) {}
 
-  getSystemInformation(): Observable<SystemInformation[]> {
-    return this.http.get<SystemInformation[]>(this.apiUrl);
+  getErrorLog(): Observable<ErrorLog[]> {
+    return this.http.get<ErrorLog[]>(this.apiUrl);
   }
 
-  getSystemInformationById(id: number): Observable<SystemInformation> {
-    return this.http.get<SystemInformation>(`${this.apiUrl}/${id}`);
+  getErrorLogById(id: number): Observable<ErrorLog> {
+    return this.http.get<ErrorLog>(`${this.apiUrl}/${id}`);
   }
 
-  updateSystemInformation(systemInfo: SystemInformation): Observable<SystemInformation> {
-    return this.http.put<SystemInformation>(`${this.apiUrl}/${systemInfo.systemInformationID}`, systemInfo);
+  updateErrorLog(systemInfo: ErrorLog): Observable<ErrorLog> {
+    return this.http.put<ErrorLog>(`${this.apiUrl}/${systemInfo.errorLogID}`, systemInfo);
   }
 
-  deleteSystemInformation(id: number): Observable<void> {
+  deleteErrorLog(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
