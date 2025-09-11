@@ -1,81 +1,98 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
-import {TransactionHistoryArchiveDto} from "../../../api/transactionHistoryArchiveDto";
-import {TransactionHistoryService} from "./transaction-history.service";
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { TransactionHistoryArchiveDto } from '../../../api/transactionHistoryArchiveDto';
+import { TransactionHistoryService } from './transaction-history.service';
 
 @Component({
-  selector: 'app-transaction-history',
+  selector: 'app-transaction-history-archive',
   templateUrl: './transaction-history.component.html',
   styleUrls: ['./transaction-history.component.css'],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
-export class TransactionHistoryComponent implements OnInit {
+export class TransactionHistoryArchiveComponent implements OnInit {
   systemInfoList: TransactionHistoryArchiveDto[] = [];
-  selectedSystemInfo: TransactionHistoryArchiveDto | null = null;
-  loading = true;
-  displayDialog = false;
-
-  cols = [
-    { field: 'TransactionHistoryArchiveDtoID', header: 'ID' },
-    { field: 'databaseVersion', header: 'Database Version' },
-    { field: 'versionDate', header: 'Version Date' },
-    { field: 'modifiedDate', header: 'Modified Date' }
-  ];
+  systemInfoDialog: boolean = false;
+  systemInfo: TransactionHistoryArchiveDto = {} as TransactionHistoryArchiveDto;
+  selectedSystemInfo!: TransactionHistoryArchiveDto | null;
+  loading: boolean = false;
+  cols: any[] = [];
 
   constructor(
-    private systemInfoService: TransactionHistoryService,
-    private messageService: MessageService
+    private service: TransactionHistoryService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
-    this.loadTransactionHistoryArchiveDto();
+    this.refresh();
+    this.cols = [
+      { field: 'transactionID', header: 'ID' },
+      { field: 'productID', header: 'Product ID' },
+      { field: 'referenceOrderID', header: 'Ref Order ID' },
+      { field: 'referenceOrderLineID', header: 'Ref Line ID' },
+      { field: 'transactionDate', header: 'Transaction Date' },
+      { field: 'transactionType', header: 'Type' },
+      { field: 'quantity', header: 'Quantity' },
+      { field: 'actualCost', header: 'Cost' },
+      { field: 'modifiedDate', header: 'Modified' }
+    ];
   }
 
-  loadTransactionHistoryArchiveDto(): void {
+  refresh() {
     this.loading = true;
-    this.systemInfoService.getTransactionHistoryArchive().subscribe({
-      next: (data: any) => {
+    this.service.getTransactionHistoryArchive().subscribe({
+      next: (data) => {
         this.systemInfoList = data;
         this.loading = false;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'System information loaded successfully'
-        });
       },
-      error: (error: any) => {
-        console.error('Error loading system information:', error);
-        this.loading = false;
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to load system information'
+      error: () => (this.loading = false)
+    });
+  }
+
+  openNew() {
+    this.systemInfo = {} as TransactionHistoryArchiveDto;
+    this.systemInfoDialog = true;
+  }
+
+  editSystemInfo(info: TransactionHistoryArchiveDto) {
+    this.systemInfo = { ...info };
+    this.systemInfoDialog = true;
+  }
+
+  saveTransactionHistoryArchiveDto() {
+    if (this.systemInfo.transactionID) {
+      // update
+      this.service.updateTransactionHistoryArchive(this.systemInfo).subscribe(() => {
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Updated Successfully' });
+        this.refresh();
+      });
+    } else {
+      // create
+      this.service.createTransactionHistoryArchive(this.systemInfo).subscribe(() => {
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Created Successfully' });
+        this.refresh();
+      });
+    }
+    this.systemInfoDialog = false;
+  }
+
+  deleteTransactionHistoryArchiveDto(info: TransactionHistoryArchiveDto) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete ' + info.transactionID + '?',
+      accept: () => {
+        this.service.deleteTransactionHistoryArchive(info.transactionID!).subscribe(() => {
+          this.systemInfoList = this.systemInfoList.filter(val => val.transactionID !== info.transactionID);
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Deleted Successfully' });
         });
       }
     });
   }
 
-  onRowSelect(event: any): void {
-    this.selectedSystemInfo = { ...event.data };
-    this.displayDialog = true;
+  hideDialog() {
+    this.systemInfoDialog = false;
   }
 
-  hideDialog(): void {
-    this.displayDialog = false;
-    this.selectedSystemInfo = null;
-  }
-
-  formatDate(dateString: string): string {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  }
-
-  refresh(): void {
-    this.loadTransactionHistoryArchiveDto();
+  formatDate(date: any): string {
+    return date ? new Date(date).toLocaleDateString() : '';
   }
 }

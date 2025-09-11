@@ -19,7 +19,7 @@ import {RouterModule} from '@angular/router';
       loadChildren: () => import('./database-log/database-log.module').then(m => m.DatabaseLogModule)
     },
     {
-      path: 'transaction-history',
+      path: 'transaction-history-archive',
       data: {breadcrumb: 'Charts'},
       loadChildren: () => import('./transaction-history-archive/transaction-history.module').then(m => m.TransactionHistoryModule)
     },

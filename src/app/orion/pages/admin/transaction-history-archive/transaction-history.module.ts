@@ -15,7 +15,6 @@ import {CardModule} from "primeng/card";
 import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
-import {TransactionHistoryComponent} from "./transaction-history.component";
 import {TransactionHistoryService} from "./transaction-history.service";
 
 @NgModule({

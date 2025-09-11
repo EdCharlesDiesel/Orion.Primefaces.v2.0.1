@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {TransactionHistoryComponent} from "./transaction-history.component";
+
 
 
 @NgModule({
