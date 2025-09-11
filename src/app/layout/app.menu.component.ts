@@ -27,7 +27,7 @@ export class AppMenuComponent implements OnInit {
           {label: 'System-Information', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/admin/system-information']},
           {label: 'Error Logs', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/admin/error-log']},
           {label: 'Database Logs', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/admin/database-log']},
-          {label: 'Transaction History Archive', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/admin/system-information']},
+          {label: 'Transaction History Archive', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/admin/transaction-history-archive']},
         ]
       },
       {

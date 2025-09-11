@@ -2,13 +2,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {ErrorLog} from "../../../api/ErrorLog";
+import {ErrorLog} from "../../../api/errorLog";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorLogService {
-  private apiUrl = 'http://localhost:9005/api/AwBuildVersion';
+  private apiUrl = 'http://localhost:9009/api/AwBuildVersion';
 
   constructor(private http: HttpClient) {}
 

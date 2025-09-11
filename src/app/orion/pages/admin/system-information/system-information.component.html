@@ -65,45 +65,23 @@
     <div *ngIf="selectedSystemInfo" class="system-info-details">
       <div class="field-group">
         <label>Database Log ID:</label>
-        <span class="value">{{ selectedSystemInfo.databaseLogID }}</span>
+        <span class="value">{{ selectedSystemInfo.systemInformationID }}</span>
       </div>
 
       <div class="field-group">
-        <label>Post Time:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.postTime) }}</span>
+        <label>Database Version:</label>
+        <span class="value">{{ formatDate(selectedSystemInfo.databaseVersion) }}</span>
       </div>
 
       <div class="field-group">
-        <label>Database User:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.databaseUser) }}</span>
+        <label>Version Date:</label>
+        <span class="value">{{ formatDate(selectedSystemInfo.versionDate) }}</span>
       </div>
 
       <div class="field-group">
         <label>Event:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.event) }}</span>
+        <span class="value">{{ formatDate(selectedSystemInfo.modifiedDate) }}</span>
       </div>
-
-      <div class="field-group">
-        <label>Schema:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.schema) }}</span>
-      </div>
-
-      <div class="field-group">
-        <label>Object:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.object) }}</span>
-      </div>
-
-      <div class="field-group">
-        <label>TSQL:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.tsql) }}</span>
-      </div>
-
-      <div class="field-group">
-        <label>XMLEvent:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.xmlEvent) }}</span>
-      </div>
-
-
     </div>
 
     <ng-template pTemplate="footer">
