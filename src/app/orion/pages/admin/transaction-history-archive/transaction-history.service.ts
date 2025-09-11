@@ -9,7 +9,7 @@ import {TransactionHistoryArchiveDto} from "../../../api/transactionHistoryArchi
   providedIn: 'root'
 })
 export class TransactionHistoryService {
-  private apiUrl = 'http://localhost:9005/api/AwBuildVersion';
+  private apiUrl = 'http://localhost:9007/api/TransactionHistoryArchive';
 
   constructor(private http: HttpClient) {}
 
