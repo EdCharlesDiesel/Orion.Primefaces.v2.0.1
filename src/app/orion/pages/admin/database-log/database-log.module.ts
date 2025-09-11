@@ -17,29 +17,31 @@ import {CardModule} from "primeng/card";
 import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     DatabaseLogComponent
   ],
-  imports: [
-    CommonModule,
-    DatabaseLogRoutingModule,
-    ProgressBarModule,
-    BadgeModule,
-    AvatarModule,
-    ScrollPanelModule,
-    TagModule,
-    ChipModule,
-    ButtonModule,
-    SkeletonModule,
-    AvatarGroupModule,
-    ScrollTopModule,
-    CardModule,
-    TableModule,
-    DialogModule,
-    ToastModule
-  ],
+    imports: [
+        CommonModule,
+        DatabaseLogRoutingModule,
+        ProgressBarModule,
+        BadgeModule,
+        AvatarModule,
+        ScrollPanelModule,
+        TagModule,
+        ChipModule,
+        ButtonModule,
+        SkeletonModule,
+        AvatarGroupModule,
+        ScrollTopModule,
+        CardModule,
+        TableModule,
+        DialogModule,
+        ToastModule,
+        ReactiveFormsModule
+    ],
   providers: [
     DatabaseLogService
   ],

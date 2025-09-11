@@ -2,6 +2,12 @@
   <p-card header="Database Logs" [style]="{'margin-bottom': '20px'}">
     <div class="card-actions">
       <p-button
+        label="Add New"
+        icon="pi pi-plus"
+        (onClick)="openNew()">
+      </p-button>
+
+      <p-button
         label="Refresh"
         icon="pi pi-refresh"
         (onClick)="refresh()"
@@ -29,11 +35,12 @@
           {{ col.header }}
           <p-sortIcon [field]="col.field"></p-sortIcon>
         </th>
+        <th>Actions</th>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-systemInfo let-columns="columns">
-      <tr [pSelectableRow]="systemInfo">
+      <tr>
         <td>{{ systemInfo.databaseLogID }}</td>
         <td>{{ systemInfo.postTime }}</td>
         <td>{{ systemInfo.databaseUser }}</td>
@@ -42,77 +49,62 @@
         <td>{{ systemInfo.object }}</td>
         <td>{{ systemInfo.tsql }}</td>
         <td>{{ systemInfo.xmlEvent }}</td>
+        <td>
+          <p-button icon="pi pi-pencil" class="p-button-text p-button-sm"
+                    (onClick)="editSystemInfo(systemInfo)"></p-button>
+          <p-button icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger"
+                    (onClick)="deleteSystemInfo(systemInfo)"></p-button>
+        </td>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="4" class="text-center">No Database Log found.</td>
+        <td colspan="9" class="text-center">No Database Log found.</td>
       </tr>
     </ng-template>
   </p-table>
 
-  <!-- Detail Dialog -->
+  <!-- Create/Edit Dialog -->
   <p-dialog
-    header="Database Log"
+    header="{{ editing ? 'Edit Database Log' : 'Add New Database Log' }}"
     [(visible)]="displayDialog"
     [modal]="true"
     [responsive]="true"
     [style]="{width: '500px'}"
-    [closable]="true"
-    (onHide)="hideDialog()">
+    [closable]="false">
 
-    <div *ngIf="selectedSystemInfo" class="system-info-details">
-      <div class="field-group">
-        <label>Database Log ID:</label>
-        <span class="value">{{ selectedSystemInfo.databaseLogID }}</span>
+    <form [formGroup]="systemInfoForm">
+      <div class="field">
+        <label for="databaseUser">Database User</label>
+        <input id="databaseUser" type="text" pInputText formControlName="databaseUser"/>
       </div>
 
-      <div class="field-group">
-        <label>Post Time:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.postTime) }}</span>
+      <div class="field">
+        <label for="event">Event</label>
+        <input id="event" type="text" pInputText formControlName="event"/>
       </div>
 
-      <div class="field-group">
-        <label>Database User:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.databaseUser) }}</span>
+      <div class="field">
+        <label for="schema">Schema</label>
+        <input id="schema" type="text" pInputText formControlName="schema"/>
       </div>
 
-      <div class="field-group">
-        <label>Event:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.event) }}</span>
+      <div class="field">
+        <label for="object">Object</label>
+        <input id="object" type="text" pInputText formControlName="object"/>
       </div>
 
-      <div class="field-group">
-        <label>Schema:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.schema) }}</span>
+      <div class="field">
+        <label for="tsql">TSQL</label>
+        <textarea id="tsql" pInputTextarea rows="3" formControlName="tsql"></textarea>
       </div>
-
-      <div class="field-group">
-        <label>Object:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.object) }}</span>
-      </div>
-
-      <div class="field-group">
-        <label>TSQL:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.tsql) }}</span>
-      </div>
-
-      <div class="field-group">
-        <label>XMLEvent:</label>
-        <span class="value">{{ formatDate(selectedSystemInfo.xmlEvent) }}</span>
-      </div>
-
-
-    </div>
+    </form>
 
     <ng-template pTemplate="footer">
-      <p-button
-        label="Close"
-        icon="pi pi-times"
-        (onClick)="hideDialog()"
-        class="p-button-secondary">
-      </p-button>
+      <p-button label="Cancel" icon="pi pi-times" class="p-button-secondary"
+                (onClick)="hideDialog()"></p-button>
+      <p-button label="Save" icon="pi pi-check" (onClick)="saveSystemInfo()"></p-button>
     </ng-template>
   </p-dialog>
 

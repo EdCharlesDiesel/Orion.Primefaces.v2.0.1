@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import {ErrorLogService} from "./error-log.service";
+import {ErrorLog} from "./../../../api/errorLog";
 
 
 @Component({

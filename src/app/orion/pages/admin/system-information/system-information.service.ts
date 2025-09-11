@@ -9,7 +9,7 @@ import { SystemInformation } from '../../../api/system-information.model';
 })
 
 export class SystemInformationService {
-  private apiUrl = 'http://localhost:8080/api/AwBuildVersion';
+  private apiUrl = 'http://localhost:9005/api/AwBuildVersion';
 
 
   constructor(private http: HttpClient) {}

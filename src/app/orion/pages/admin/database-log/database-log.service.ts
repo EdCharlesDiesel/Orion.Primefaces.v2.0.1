@@ -12,6 +12,9 @@ export class DatabaseLogService {
 
   constructor(private http: HttpClient) {}
 
+  createDatabaseLog(data: DatabaseLog): Observable<DatabaseLog> {
+    return this.http.post<DatabaseLog>(this.apiUrl, data);
+  }
   getDatabaseLog(): Observable<DatabaseLog[]> {
     return this.http.get<DatabaseLog[]>(this.apiUrl);
   }
@@ -20,8 +23,9 @@ export class DatabaseLogService {
     return this.http.get<DatabaseLog>(`${this.apiUrl}/${id}`);
   }
 
-  updateDatabaseLog(systemInfo: DatabaseLog): Observable<DatabaseLog> {
-    return this.http.put<DatabaseLog>(`${this.apiUrl}/${systemInfo}`, systemInfo);
+
+  updateDatabaseLog(id: number, data: DatabaseLog): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${id}`, data);
   }
 
   deleteDatabaseLog(id: number): Observable<void> {
