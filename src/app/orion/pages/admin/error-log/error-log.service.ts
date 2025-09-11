@@ -8,7 +8,7 @@ import {ErrorLog} from "../../../api/errorLog";
   providedIn: 'root'
 })
 export class ErrorLogService {
-  private apiUrl = 'http://localhost:9009/api/AwBuildVersion';
+  private apiUrl = 'http://localhost:9009/api/ErrorLog';
 
   constructor(private http: HttpClient) {}
 
