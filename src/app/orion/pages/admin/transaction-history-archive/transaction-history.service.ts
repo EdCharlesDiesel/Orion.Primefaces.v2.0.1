@@ -1,8 +1,9 @@
-// system-information.service.ts
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SystemInformation } from '../../../api/system-information.model';
+import {TransactionHistoryArchiveDto} from "../../../api/transactionHistoryArchiveDto";
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +13,19 @@ export class TransactionHistoryService {
 
   constructor(private http: HttpClient) {}
 
-  getSystemInformation(): Observable<SystemInformation[]> {
-    return this.http.get<SystemInformation[]>(this.apiUrl);
+  getTransactionHistoryArchive(): Observable<TransactionHistoryArchiveDto[]> {
+    return this.http.get<TransactionHistoryArchiveDto[]>(this.apiUrl);
   }
 
-  getSystemInformationById(id: number): Observable<SystemInformation> {
-    return this.http.get<SystemInformation>(`${this.apiUrl}/${id}`);
+  getTransactionHistoryArchiveById(id: number): Observable<TransactionHistoryArchiveDto> {
+    return this.http.get<TransactionHistoryArchiveDto>(`${this.apiUrl}/${id}`);
   }
 
-  updateSystemInformation(systemInfo: SystemInformation): Observable<SystemInformation> {
-    return this.http.put<SystemInformation>(`${this.apiUrl}/${systemInfo.systemInformationID}`, systemInfo);
+  updateTransactionHistoryArchive(systemInfo: TransactionHistoryArchiveDto): Observable<TransactionHistoryArchiveDto> {
+    return this.http.put<TransactionHistoryArchiveDto>(`${this.apiUrl}/${systemInfo.transactionID}`, systemInfo);
   }
 
-  deleteSystemInformation(id: number): Observable<void> {
+  deleteTransactionHistoryArchive(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
