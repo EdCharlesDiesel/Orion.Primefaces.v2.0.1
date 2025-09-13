@@ -70,11 +70,17 @@
     header="{{ editing ? 'Edit Database Log' : 'Add New Database Log' }}"
     [(visible)]="displayDialog"
     [modal]="true"
-    [responsive]="true"
     [style]="{width: '500px'}"
     [closable]="false">
 
-    <form [formGroup]="systemInfoForm"  class="p-fluid">
+    <form [formGroup]="systemInfoForm" class="p-fluid">
+
+
+      <div class="p-field">
+        <label for="postTime">Post Time</label>
+        <input id="postTime" type="text" pInputText formControlName="postTime"/>
+      </div>
+
       <div class="p-field">
         <label for="databaseUser">Database User</label>
         <input id="databaseUser" type="text" pInputText formControlName="databaseUser"/>
@@ -98,6 +104,11 @@
       <div class="p-field">
         <label for="tsql">TSQL</label>
         <textarea id="tsql" pInputTextarea rows="3" formControlName="tsql"></textarea>
+      </div>
+
+      <div class="p-field">
+        <label for="xmlEvent">xmlEvent</label>
+        <textarea id="xmlEvent" pInputTextarea rows="3" formControlName="xmlEvent"></textarea>
       </div>
     </form>
 

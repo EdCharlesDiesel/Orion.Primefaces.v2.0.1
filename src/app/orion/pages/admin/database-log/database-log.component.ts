@@ -39,11 +39,13 @@ export class DatabaseLogComponent implements OnInit {
     this.loadData();
 
     this.systemInfoForm = this.fb.group({
+      postTime: ['', Validators.required],
       databaseUser: ['', Validators.required],
       event: ['', Validators.required],
       schema: [''],
       object: [''],
-      tsql: ['']
+      tsql: [''],
+      xmlEvent: ['']
     });
   }
 
@@ -82,6 +84,7 @@ export class DatabaseLogComponent implements OnInit {
 
     if (this.editing && this.selectedSystemInfo) {
       this.service.updateDatabaseLog(this.selectedSystemInfo.databaseLogID!, formValue).subscribe(() => {
+
         this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
         this.loadData();
         this.hideDialog();

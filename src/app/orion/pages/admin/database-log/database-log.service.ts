@@ -11,8 +11,10 @@ export class DatabaseLogService {
   private apiUrl = 'http://localhost:9006/api/DatabaseLog';
 
   constructor(private http: HttpClient) {}
-
+  //TODO: Need to fix Not recommnded hence I need to start using Guid to begin with.
+  private tempId = 55;
   createDatabaseLog(data: DatabaseLog): Observable<DatabaseLog> {
+    data.databaseLogID = ++this.tempId; // negative IDs as temp placeholders
     return this.http.post<DatabaseLog>(this.apiUrl, data);
   }
   getDatabaseLog(): Observable<DatabaseLog[]> {
