@@ -7,15 +7,16 @@ import { SystemInformation } from '../../../api/system-information.model';
 @Injectable({
   providedIn: 'root'
 })
-<<<<<<<< HEAD:src/app/orion/pages/admin/system-information/system-information.service.ts
+
 export class SystemInformationService {
-  private apiUrl = 'http://localhost:8080/api/AwBuildVersion';
-========
-export class ErrorLogService {
   private apiUrl = 'http://localhost:9005/api/AwBuildVersion';
->>>>>>>> 446d715 (DatabaseLog):src/app/orion/pages/admin/error-log/error-log.service.ts
+
 
   constructor(private http: HttpClient) {}
+
+  createSystemInformation(info: SystemInformation): Observable<SystemInformation> {
+    return this.http.post<SystemInformation>(this.apiUrl, info);
+  }
 
   getSystemInformation(): Observable<SystemInformation[]> {
     return this.http.get<SystemInformation[]>(this.apiUrl);

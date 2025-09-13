@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatabaseLogService } from './database-log.service'
 import { MessageService } from 'primeng/api';
 import { DatabaseLog } from '../../../api/database-log';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-database-log',
@@ -11,75 +12,109 @@ import { DatabaseLog } from '../../../api/database-log';
 })
 export class DatabaseLogComponent implements OnInit {
   systemInfoList: DatabaseLog[] = [];
-  selectedSystemInfo: DatabaseLog | null = null;
-  loading = true;
-  displayDialog = false;
-
-  cols = [
-    { field: 'databaseLogID', header: 'ID' },
-    { field: 'postTime', header: 'Post Time' },
-    { field: 'databaseUser', header: 'Database User' },
-    { field: 'event', header: 'Event' },
-    { field: 'schema', header: 'Schema' },
-    { field: 'object', header: 'Object' },
-    { field: 'tsql', header: 'Tsql' },
-    { field: 'xmlEvent', header: 'XmlEvent' }
-  ];
+  selectedSystemInfo!: DatabaseLog | null;
+  displayDialog: boolean = false;
+  systemInfoForm!: FormGroup;
+  editing: boolean = false;
+  loading: boolean = false;
+  cols: any[] = [];
 
   constructor(
-    private databaseLog: DatabaseLogService,
+    private fb: FormBuilder,
+    private service: DatabaseLogService,
     private messageService: MessageService
   ) {}
 
-  ngOnInit(): void {
-    this.loadDatabaseLog();
-  }
+  ngOnInit() {
+    this.cols = [
+      { field: 'databaseLogID', header: 'ID' },
+      { field: 'postTime', header: 'Post Time' },
+      { field: 'databaseUser', header: 'Database User' },
+      { field: 'event', header: 'Event' },
+      { field: 'schema', header: 'Schema' },
+      { field: 'object', header: 'Object' },
+      { field: 'tsql', header: 'TSQL' },
+      { field: 'xmlEvent', header: 'XML Event' }
+    ];
+    this.loadData();
 
-  public loadDatabaseLog(): void {
-    this.loading = true;
-    this.databaseLog.getDatabaseLog().subscribe({
-      next: (data: any) => {
-        this.systemInfoList = data;
-        this.loading = false;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Database log loaded successfully'
-        });
-      },
-      error: (error: any) => {
-        console.error('Error loading Database log:', error);
-        this.loading = false;
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to load Database log'
-        });
-      }
+    this.systemInfoForm = this.fb.group({
+      postTime: ['', Validators.required],
+      databaseUser: ['', Validators.required],
+      event: ['', Validators.required],
+      schema: [''],
+      object: [''],
+      tsql: [''],
+      xmlEvent: ['']
     });
   }
 
-  public onRowSelect(event: any): void {
-    this.selectedSystemInfo = { ...event.data };
-    this.displayDialog = true;
+  loadData() {
+    this.loading = true;
+    this.service.getDatabaseLog().subscribe({
+      next: data => {
+        this.systemInfoList = data;
+        this.loading = false;
+      },
+      error: () => this.loading = false
+    });
   }
 
-  public hideDialog(): void {
+  refresh() {
+    this.loadData();
+  }
+
+  openNew() {
+    this.systemInfoForm.reset();
+    this.displayDialog = true;
+    this.editing = false;
+  }
+
+  editSystemInfo(systemInfo: DatabaseLog) {
+    this.systemInfoForm.patchValue(systemInfo);
+    this.selectedSystemInfo = systemInfo;
+    this.displayDialog = true;
+    this.editing = true;
+  }
+
+  saveSystemInfo() {
+    if (this.systemInfoForm.invalid) return;
+
+    const formValue = this.systemInfoForm.value;
+
+    if (this.editing && this.selectedSystemInfo) {
+      this.service.updateDatabaseLog(this.selectedSystemInfo.databaseLogID!, formValue).subscribe(() => {
+
+        this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
+        this.loadData();
+        this.hideDialog();
+      });
+    } else {
+      this.service.createDatabaseLog(formValue).subscribe(() => {
+        this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });
+        this.loadData();
+        this.hideDialog();
+      });
+    }
+  }
+
+  deleteSystemInfo(systemInfo: DatabaseLog) {
+    if (!systemInfo.databaseLogID) return;
+    this.service.deleteDatabaseLog(systemInfo.databaseLogID).subscribe(() => {
+      this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
+      this.loadData();
+    });
+  }
+
+  hideDialog() {
     this.displayDialog = false;
     this.selectedSystemInfo = null;
   }
 
-  public formatDate(dateString: string): string {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+  onRowSelect(event: any) {
+    this.selectedSystemInfo = event.data;
+    this.displayDialog = true;
   }
 
-  public refresh(): void {
-    this.loadDatabaseLog();
-  }
+
 }

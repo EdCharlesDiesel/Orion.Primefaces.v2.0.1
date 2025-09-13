@@ -9,10 +9,13 @@ import {TransactionHistoryArchiveDto} from "../../../api/transactionHistoryArchi
   providedIn: 'root'
 })
 export class TransactionHistoryService {
-  private apiUrl = 'http://localhost:9005/api/AwBuildVersion';
+  private apiUrl = 'http://localhost:9007/api/TransactionHistoryArchive';
 
   constructor(private http: HttpClient) {}
 
+  createTransactionHistoryArchive(info: TransactionHistoryArchiveDto): Observable<TransactionHistoryArchiveDto> {
+    return this.http.post<TransactionHistoryArchiveDto>(this.apiUrl, info);
+  }
   getTransactionHistoryArchive(): Observable<TransactionHistoryArchiveDto[]> {
     return this.http.get<TransactionHistoryArchiveDto[]>(this.apiUrl);
   }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import {ErrorLogService} from "./error-log.service";
-import {ErrorLog} from "../../../api/ErrorLog";
+import {ErrorLog} from "./../../../api/errorLog";
+
 
 @Component({
   selector: 'app-error-log',
@@ -40,16 +41,16 @@ export class ErrorLogComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: 'System information loaded successfully'
+          detail: 'Error Log loaded successfully'
         });
       },
       error: (error: any) => {
-        console.error('Error loading system information:', error);
+        console.error('Error loading Error Log:', error);
         this.loading = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Failed to load system information'
+          detail: 'Failed to load Error Log'
         });
       }
     });

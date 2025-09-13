@@ -15,12 +15,14 @@ import {CardModule} from "primeng/card";
 import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
-import {TransactionHistoryComponent} from "./transaction-history.component";
 import {TransactionHistoryService} from "./transaction-history.service";
+import {TransactionHistoryArchiveComponent} from "./transaction-history.component";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {PaginatorModule} from "primeng/paginator";
 
 @NgModule({
   declarations: [
-    TransactionHistoryComponent
+    TransactionHistoryArchiveComponent
   ],
   imports: [
     CommonModule,
@@ -38,13 +40,15 @@ import {TransactionHistoryService} from "./transaction-history.service";
     CardModule,
     TableModule,
     DialogModule,
-    ToastModule
+    ToastModule,
+    ConfirmDialogModule,
+    PaginatorModule
   ],
   providers: [
     TransactionHistoryService
   ],
   exports: [
-    TransactionHistoryComponent
+    TransactionHistoryArchiveComponent
   ]
 })
 export class TransactionHistoryModule { }

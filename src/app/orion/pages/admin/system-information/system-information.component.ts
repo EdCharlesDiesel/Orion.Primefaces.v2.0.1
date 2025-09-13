@@ -11,7 +11,7 @@ import { MessageService } from 'primeng/api';
 })
 export class SystemInformationComponent implements OnInit {
   systemInfoList: SystemInformation[] = [];
-  selectedSystemInfo: SystemInformation | null = null;
+  selectedSystemInfo: SystemInformation | null | undefined;
   loading = true;
   displayDialog = false;
 

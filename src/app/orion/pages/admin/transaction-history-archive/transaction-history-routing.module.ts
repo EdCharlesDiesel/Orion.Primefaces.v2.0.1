@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {TransactionHistoryComponent} from "./transaction-history.component";
+import {TransactionHistoryArchiveComponent} from "./transaction-history.component";
+
 
 
 @NgModule({
 	imports: [RouterModule.forChild([
-		{ path: '', component: TransactionHistoryComponent }
+		{ path: '', component: TransactionHistoryArchiveComponent }
 	])],
 	exports: [RouterModule]
 })

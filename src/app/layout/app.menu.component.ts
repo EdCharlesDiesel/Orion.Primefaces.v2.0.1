@@ -24,10 +24,10 @@ export class AppMenuComponent implements OnInit {
       {
         label: 'Admin',
         items: [
-          {label: 'System-Information', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/admin/system-information']},
-          {label: 'Error Logs', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/admin/error-log']},
-          {label: 'Database Logs', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/admin/database-log']},
-          {label: 'Transaction History Archive', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/admin/system-information']},
+          {label: 'System-Information', icon: 'pi pi-fw pi-compass', routerLink: ['/admin/system-information']},
+          {label: 'Error Logs', icon: 'pi pi-fw pi-filter', routerLink: ['/admin/error-log']},
+          {label: 'Database Logs', icon: 'pi pi-fw pi-database', routerLink: ['/admin/database-log']},
+          {label: 'Transaction History Archive', icon: 'pi pi-fw pi-times', routerLink: ['/admin/transaction-history-archive']},
         ]
       },
       {
