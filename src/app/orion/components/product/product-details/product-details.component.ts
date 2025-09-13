@@ -8,6 +8,7 @@ import {ProductService} from "../../../services/product.service";
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
+  standalone: true,
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {

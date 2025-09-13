@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {ActivatedRouteSnapshot,  Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {UserPrincipalService} from "../../services/user-principal.service";
@@ -8,7 +8,7 @@ import {RouteUrls} from "../../../app-routing.config";
 @Injectable({
   providedIn: 'root'
 })
-export class RootResolverGuard implements CanActivate {
+export class RootResolverGuard implements  {
 
   constructor(private userService: UserPrincipalService,
               private router: Router) {
