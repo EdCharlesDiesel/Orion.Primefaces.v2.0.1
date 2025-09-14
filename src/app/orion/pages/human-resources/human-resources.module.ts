@@ -4,6 +4,7 @@ import {NgModule} from "@angular/core";
 import {DepartmentModule} from "./department/department.module";
 import {DepartmentRoutingModule} from "./department/department-routing.module";
 import {EmployeeDepartmentHistoryModule} from "./employee-department-history/employee-department-history.module";
+import {ExternalEmployeesModule} from "./external-employees/external-employees.module";
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {EmployeeDepartmentHistoryModule} from "./employee-department-history/emp
 		HumanResourcesRoutingModule,
     DepartmentModule,
     DepartmentRoutingModule,
-    EmployeeDepartmentHistoryModule
+    EmployeeDepartmentHistoryModule,
+    ExternalEmployeesModule
 	]
 })
 export class HumanResourcesModule { }

@@ -1,11 +1,12 @@
 import {Customer} from "./customer";
+import {SalesPerson} from "./sales-person.model";
 
 export class Store implements IStore {
   /** Primary key. Foreign key to Customer.BusinessEntityID. */
   businessEntityID!: number;
   /** Name of the store. */
   name!: string;
-  /** ID of the sales person assigned to the customer. Foreign key to SalesPerson.BusinessEntityID. */
+  /** ID of the sales person assigned to the customer. Foreign key to SalesPersonModel.BusinessEntityID. */
   salesPersonID?: number | undefined;
   /** Demographic informationg about the store such as the number of employees, annual sales and store type. */
   demographics?: string | undefined;
@@ -75,7 +76,7 @@ export interface IStore {
   businessEntityID: number;
   /** Name of the store. */
   name: string;
-  /** ID of the sales person assigned to the customer. Foreign key to SalesPerson.BusinessEntityID. */
+  /** ID of the sales person assigned to the customer. Foreign key to SalesPersonModel.BusinessEntityID. */
   salesPersonID?: number | undefined;
   /** Demographic informationg about the store such as the number of employees, annual sales and store type. */
   demographics?: string | undefined;

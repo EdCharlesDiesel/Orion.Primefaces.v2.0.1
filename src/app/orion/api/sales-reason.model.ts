@@ -1,3 +1,5 @@
+import {SalesOrderHeaderSalesReason} from "./sales-order-header-sales-reason.model";
+
 export class SalesReason implements ISalesReason {
   /** Primary key for SalesReason records. */
   salesReasonID!: number;

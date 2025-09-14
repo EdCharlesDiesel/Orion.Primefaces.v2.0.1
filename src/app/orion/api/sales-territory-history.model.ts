@@ -1,5 +1,5 @@
 export class SalesTerritoryHistory implements ISalesTerritoryHistory {
-  /** Primary key. The sales rep.  Foreign key to SalesPerson.BusinessEntityID. */
+  /** Primary key. The sales rep.  Foreign key to SalesPersonModel.BusinessEntityID. */
   businessEntityID!: number;
   /** Primary key. Territory identification number. Foreign key to SalesTerritory.SalesTerritoryID. */
   territoryID!: number;
@@ -58,7 +58,7 @@ export class SalesTerritoryHistory implements ISalesTerritoryHistory {
 }
 
 export interface ISalesTerritoryHistory {
-  /** Primary key. The sales rep.  Foreign key to SalesPerson.BusinessEntityID. */
+  /** Primary key. The sales rep.  Foreign key to SalesPersonModel.BusinessEntityID. */
   businessEntityID: number;
   /** Primary key. Territory identification number. Foreign key to SalesTerritory.SalesTerritoryID. */
   territoryID: number;

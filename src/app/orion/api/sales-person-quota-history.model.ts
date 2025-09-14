@@ -1,5 +1,5 @@
 export class SalesPersonQuotaHistory implements ISalesPersonQuotaHistory {
-  /** Sales person identification number. Foreign key to SalesPerson.BusinessEntityID. */
+  /** Sales person identification number. Foreign key to SalesPersonModel.BusinessEntityID. */
   businessEntityID!: number;
   /** Sales quota date. */
   quotaDate!: Date;
@@ -51,7 +51,7 @@ export class SalesPersonQuotaHistory implements ISalesPersonQuotaHistory {
 }
 
 export interface ISalesPersonQuotaHistory {
-  /** Sales person identification number. Foreign key to SalesPerson.BusinessEntityID. */
+  /** Sales person identification number. Foreign key to SalesPersonModel.BusinessEntityID. */
   businessEntityID: number;
   /** Sales quota date. */
   quotaDate: Date;

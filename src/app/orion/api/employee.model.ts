@@ -1,12 +1,9 @@
-import { Person } from "./person.model";
-import { EmployeeDepartmentHistory } from "./employee-department-history.model";
-import { EmployeePayHistory } from "./employee-pay-history.model";
-import { JobCandidate } from "./job-candidate.model";
-import { Document } from "./document.model";
-import { PurchaseOrderHeader } from "./purchase-order-header.model";
-import { SalesPerson } from "./sales-person.model";
+
 
 // If you use Microsoft SQL HierarchyId, represent it as string for now
+import {EmployeeDepartmentHistory} from "./employee-department-history.model ";
+import {SalesPerson} from "./sales-person.model";
+
 export interface Employee {
   businessEntityID: number;
   nationalIDNumber: string;

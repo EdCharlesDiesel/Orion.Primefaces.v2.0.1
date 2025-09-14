@@ -1,3 +1,6 @@
+import {SalesTerritory} from "./sales-territory.model";
+import {SalesTaxRate} from "./sales-tax-rate.model";
+
 export class StateProvince implements IStateProvince {
   /** Primary key for StateProvince records. */
   stateProvinceID!: number;

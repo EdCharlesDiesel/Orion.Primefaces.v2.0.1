@@ -1,3 +1,6 @@
+import {ProductVendor} from "./product-vendor.model";
+import {PurchaseOrderHeader} from "./purchase-order-header.model";
+
 export class Vendor implements IVendor {
   /** Primary key for Vendor records.  Foreign key to BusinessEntity.BusinessEntityID */
   businessEntityID!: number;

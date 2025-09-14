@@ -1,6 +1,8 @@
 import {SalesTerritoryHistory} from "./sales-territory-history.model";
 import {Customer} from "./customer";
 import {StateProvince} from "./state-province.model";
+import {SalesOrderHeader} from "./sale-order-header.model";
+import {SalesPerson} from "./sales-person.model";
 
 export class SalesTerritory implements ISalesTerritory {
   /** Primary key for SalesTerritory records. */
