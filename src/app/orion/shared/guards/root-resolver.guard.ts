@@ -1,28 +1,35 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot,  Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable, of} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {UserPrincipalService} from "../../services/user-principal.service";
-import {RouteUrls} from "../../../app-routing.config";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { UserPrincipalService } from "../../services/user-principal.service";
+import { RouteUrls } from "../../../app-routing.config";
 
 @Injectable({
   providedIn: 'root'
 })
-export class RootResolverGuard implements  {
+export class RootResolverGuard implements CanActivate {
 
-  constructor(private userService: UserPrincipalService,
-              private router: Router) {
-  }
+  constructor(
+    private userService: UserPrincipalService,
+    private router: Router
+  ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean | UrlTree {
-    // activate error component
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | boolean | UrlTree {
+
+    // allow access to any URL other than the root
     if (state.url !== '/') {
       return true;
     }
-    // the root url is redirected based on specified conditions
+
+    // if root URL, redirect based on user login state
     return of(this.userService.getUser()).pipe(
-      map(t => this.router.createUrlTree([t === null ? RouteUrls.LOGIN : RouteUrls.CHAT])),
+      map(user => this.router.createUrlTree([
+        user === null ? RouteUrls.LOGIN : RouteUrls.CHAT
+      ]))
     );
   }
-
 }

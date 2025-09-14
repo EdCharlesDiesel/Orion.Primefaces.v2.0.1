@@ -30,6 +30,16 @@ export class AppMenuComponent implements OnInit {
           {label: 'Transaction History Archive', icon: 'pi pi-fw pi-times', routerLink: ['/admin/transaction-history-archive']},
         ]
       },
+
+      {
+        label: 'Human Resources',
+        items: [
+          {label: 'Departments', icon: 'pi pi-fw pi-compass', routerLink: ['/human-resources/departments']},
+          // {label: 'Error Logs', icon: 'pi pi-fw pi-filter', routerLink: ['/admin/error-log']},
+          // {label: 'Database Logs', icon: 'pi pi-fw pi-database', routerLink: ['/admin/database-log']},
+          // {label: 'Transaction History Archive', icon: 'pi pi-fw pi-times', routerLink: ['/admin/transaction-history-archive']},
+        ]
+      },
       {
         label: 'Apps',
         items: [
