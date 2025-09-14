@@ -11,7 +11,7 @@ import {EmployeeDepartmentHistory} from "../../../api/employee-department-histor
 export class ExternalEmployeesService {
   private apiUrl = 'http://localhost:9010/api/EmployeeDepartmentHistory';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}http://localhost:9010/
   //TODO: Need to fix Not recommnded hence I need to start using Guid to begin with.
   private tempId = 55;
   createEmployeeDepartmentHistory(data: ExternalEmployee): Observable<EmployeeDepartmentHistory> {
