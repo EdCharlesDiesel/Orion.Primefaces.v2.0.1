@@ -1,4 +1,5 @@
 import {PurchaseOrderHeader} from "./purchase-order-header.model";
+import {Product} from "./product";
 
 export class PurchaseOrderDetail implements IPurchaseOrderDetail {
   /** Primary key. Foreign key to PurchaseOrderHeader.PurchaseOrderID. */
