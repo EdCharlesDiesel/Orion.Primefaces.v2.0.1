@@ -18,9 +18,15 @@ export class ErrorLogComponent implements OnInit {
 
   cols = [
     { field: 'ErrorLogID', header: 'ID' },
-    { field: 'databaseVersion', header: 'Database Version' },
-    { field: 'versionDate', header: 'Version Date' },
-    { field: 'modifiedDate', header: 'Modified Date' }
+    { field: 'errorTime', header: 'Error Time' },
+    { field: 'userName', header: 'user Name' },
+    { field: 'errorNumber', header: 'Error Number' },
+    { field: 'errorSeverity', header: 'Error Severity' },
+    { field: 'errorState', header: 'Error State' },
+    { field: 'errorProcedure', header: 'Error Procedure' },
+    { field: 'errorLine', header: 'Error Line' },
+    { field: 'errorMessage', header: 'Error Message' }
+
   ];
 
   constructor(

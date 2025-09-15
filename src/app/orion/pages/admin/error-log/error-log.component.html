@@ -1,4 +1,4 @@
-<div class="system-info-container">
+<div class="error-log-container">
   <p-card header="Error Log" [style]="{'margin-bottom': '20px'}">
     <div class="card-actions">
       <p-button
@@ -35,16 +35,24 @@
     <ng-template pTemplate="body" let-systemInfo let-columns="columns">
       <tr [pSelectableRow]="systemInfo">
         <td>{{ systemInfo.systemInformationID }}</td>
-        <td>
-          <span *ngIf="systemInfo.databaseVersion; else noVersion">
-            {{ systemInfo.databaseVersion }}
-          </span>
-          <ng-template #noVersion>
-            <span class="text-muted">N/A</span>
-          </ng-template>
-        </td>
-        <td>{{ formatDate(systemInfo.versionDate) }}</td>
-        <td>{{ formatDate(systemInfo.modifiedDate) }}</td>
+        <td>{{ systemInfo.errorTime }}</td>
+        <td>{{ systemInfo.userName }}</td>
+        <td>{{ systemInfo.errorNumber }}</td>
+        <td>{{ systemInfo.errorSeverity }}</td>
+        <td>{{ systemInfo.errorState }}</td>
+        <td>{{ systemInfo.errorProcedure }}</td>
+        <td>{{ systemInfo.errorLine }}</td>
+        <td>{{ systemInfo.errorMessage }}</td>
+<!--        <td>-->
+<!--          <span *ngIf="systemInfo.databaseVersion; else noVersion">-->
+<!--            {{ systemInfo.databaseVersion }}-->
+<!--          </span>-->
+<!--          <ng-template #noVersion>-->
+<!--            <span class="text-muted">N/A</span>-->
+<!--          </ng-template>-->
+<!--        </td>-->
+<!--        <td>{{ formatDate(systemInfo.versionDate) }}</td>-->
+<!--        <td>{{ formatDate(systemInfo.modifiedDate) }}</td>-->
       </tr>
     </ng-template>
 
@@ -65,31 +73,15 @@
     [closable]="true"
     (onHide)="hideDialog()">
 
-    <div *ngIf="selectedSystemInfo" class="system-info-details">
+    <div *ngIf="selectedSystemInfo" class="error-log-details">
       <div class="field-group">
         <label>System Information ID:</label>
         <span class="value">{{ selectedSystemInfo.errorLogID }}</span>
       </div>
 
-<!--      <div class="field-group">-->
-<!--        <label>Database Version:</label>-->
-<!--        <span class="value" *ngIf="selectedSystemInfo.databaseVersion; else noDbVersion">-->
-<!--          {{ selectedSystemInfo.databaseVersion }}-->
-<!--        </span>-->
-<!--        <ng-template #noDbVersion>-->
-<!--          <span class="value text-muted">Not Available</span>-->
-<!--        </ng-template>-->
-<!--      </div>-->
 
-<!--      <div class="field-group">-->
-<!--        <label>Version Date:</label>-->
-<!--        <span class="value">{{ formatDate(selectedSystemInfo.versionDate) }}</span>-->
-<!--      </div>-->
 
-<!--      <div class="field-group">-->
-<!--        <label>Modified Date:</label>-->
-<!--        <span class="value">{{ formatDate(selectedSystemInfo.modifiedDate) }}</span>-->
-<!--      </div>-->
+
     </div>
 
     <ng-template pTemplate="footer">

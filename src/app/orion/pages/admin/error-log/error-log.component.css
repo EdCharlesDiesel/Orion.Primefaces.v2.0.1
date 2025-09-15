@@ -1,4 +1,4 @@
-.system-info-container {
+.error-log-container {
   padding: 20px;
 }
 
@@ -8,7 +8,7 @@
   gap: 10px;
 }
 
-.system-info-details {
+.error-log-details {
   padding: 10px 0;
 }
 

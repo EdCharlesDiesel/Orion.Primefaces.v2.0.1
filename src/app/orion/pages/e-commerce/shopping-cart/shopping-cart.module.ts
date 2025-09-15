@@ -12,22 +12,26 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { ButtonModule } from 'primeng/button';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import {OverlayModule} from "primeng/overlay";
+import {DropdownModule} from "primeng/dropdown";
 
 @NgModule({
-	imports: [
-		CommonModule,
-		ShoppingCartRoutingModule,
-		ProgressBarModule,
-		BadgeModule,
-		AvatarModule,
-		ScrollPanelModule,
-		TagModule,
-		ChipModule,
-		ButtonModule,
-		SkeletonModule,
-		AvatarGroupModule,
-		ScrollTopModule
-	],
+  imports: [
+    CommonModule,
+    ShoppingCartRoutingModule,
+    ProgressBarModule,
+    BadgeModule,
+    AvatarModule,
+    ScrollPanelModule,
+    TagModule,
+    ChipModule,
+    ButtonModule,
+    SkeletonModule,
+    AvatarGroupModule,
+    ScrollTopModule,
+    OverlayModule,
+    DropdownModule
+  ],
 	declarations: [ShoppingCartComponent]
 })
 export class ShoppingCartModule { }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DatabaseLogService } from './database-log.service'
+import { DatabaseLogService } from './database-log.service';
 import { MessageService } from 'primeng/api';
 import { DatabaseLog } from '../../../api/database-log';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-database-log',
@@ -36,10 +36,9 @@ export class DatabaseLogComponent implements OnInit {
       { field: 'tsql', header: 'TSQL' },
       { field: 'xmlEvent', header: 'XML Event' }
     ];
-    this.loadData();
 
     this.systemInfoForm = this.fb.group({
-      postTime: ['', Validators.required],
+      postTime: [new Date().toISOString(), Validators.required], // auto-fill current time
       databaseUser: ['', Validators.required],
       event: ['', Validators.required],
       schema: [''],
@@ -47,6 +46,8 @@ export class DatabaseLogComponent implements OnInit {
       tsql: [''],
       xmlEvent: ['']
     });
+
+    this.loadData();
   }
 
   loadData() {
@@ -65,9 +66,12 @@ export class DatabaseLogComponent implements OnInit {
   }
 
   openNew() {
-    this.systemInfoForm.reset();
+    this.systemInfoForm.reset({
+      postTime: new Date().toISOString() // reset with current time
+    });
     this.displayDialog = true;
     this.editing = false;
+    this.selectedSystemInfo = null;
   }
 
   editSystemInfo(systemInfo: DatabaseLog) {
@@ -82,27 +86,46 @@ export class DatabaseLogComponent implements OnInit {
 
     const formValue = this.systemInfoForm.value;
 
-    if (this.editing && this.selectedSystemInfo) {
-      this.service.updateDatabaseLog(this.selectedSystemInfo.databaseLogID!, formValue).subscribe(() => {
-
-        this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
-        this.loadData();
-        this.hideDialog();
+    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.databaseLogID) {
+      // Update existing log
+      this.service.updateDatabaseLog(this.selectedSystemInfo.databaseLogID, formValue).subscribe({
+        next: () => {
+          this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
+          this.loadData();
+          this.hideDialog();
+        },
+        error: (err) => {
+          console.error(err);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update log' });
+        }
       });
     } else {
-      this.service.createDatabaseLog(formValue).subscribe(() => {
-        this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });
-        this.loadData();
-        this.hideDialog();
+      // Create new log
+      this.service.createDatabaseLog(formValue).subscribe({
+        next: () => {
+          this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });
+          this.loadData();
+          this.hideDialog();
+        },
+        error: (err) => {
+          console.error(err);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create log' });
+        }
       });
     }
   }
 
   deleteSystemInfo(systemInfo: DatabaseLog) {
     if (!systemInfo.databaseLogID) return;
-    this.service.deleteDatabaseLog(systemInfo.databaseLogID).subscribe(() => {
-      this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
-      this.loadData();
+    this.service.deleteDatabaseLog(systemInfo.databaseLogID).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
+        this.loadData();
+      },
+      error: (err) => {
+        console.error(err);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to delete log' });
+      }
     });
   }
 
@@ -115,6 +138,4 @@ export class DatabaseLogComponent implements OnInit {
     this.selectedSystemInfo = event.data;
     this.displayDialog = true;
   }
-
-
 }

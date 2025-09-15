@@ -1,0 +1,108 @@
+<div class="system-info-container">
+  <p-card header="Transaction History Archive" [style]="{'margin-bottom': '20px'}">
+    <div class="card-actions">
+      <p-button
+        label="Add New"
+        icon="pi pi-plus"
+        (onClick)="openNew()">
+      </p-button>
+      <p-button
+        label="Refresh"
+        icon="pi pi-refresh"
+        (onClick)="refresh()"
+        [loading]="loading">
+      </p-button>
+    </div>
+  </p-card>
+
+  <p-table
+    [value]="systemInfoList"
+    [columns]="cols"
+    [loading]="loading"
+    selectionMode="single"
+    [(selection)]="selectedSystemInfo"
+    [paginator]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    responsiveLayout="scroll">
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{ col.header }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-systemInfo let-columns="columns">
+      <tr>
+        <td>{{ systemInfo.transactionID }}</td>
+        <td>{{ systemInfo.productID }}</td>
+        <td>{{ systemInfo.referenceOrderID }}</td>
+        <td>{{ systemInfo.referenceOrderLineID }}</td>
+        <td>{{ formatDate(systemInfo.transactionDate) }}</td>
+        <td>{{ systemInfo.transactionType }}</td>
+        <td>{{ systemInfo.quantity }}</td>
+        <td>{{ systemInfo.actualCost }}</td>
+        <td>{{ formatDate(systemInfo.modifiedDate) }}</td>
+        <td>
+          <p-button icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                    (onClick)="editSystemInfo(systemInfo)">
+          </p-button>
+          <p-button icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                    (onClick)="deleteDepartmentDto(systemInfo)">
+          </p-button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="10" class="text-center">No transaction history found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!-- Create/Edit Dialog -->
+  <p-dialog
+    [(visible)]="systemInfoDialog"
+    [style]="{width: '450px'}"
+    header="{{ systemInfo?.DepartmentID ? 'Edit Transaction' : 'New Transaction' }}"
+    [modal]="true"
+    class="p-fluid">
+
+    <div class="field">
+      <label for="productID">Product ID</label>
+      <input id="productID" type="number" pInputText [(ngModel)]="systemInfo.DepartmentID" required />
+    </div>
+
+<!--    <div class="field">-->
+<!--      <label for="transactionType">Transaction Type</label>-->
+<!--      <input id="transactionType" type="text" pInputText [(ngModel)]="systemInfo.transactionType" required />-->
+<!--    </div>-->
+
+<!--    <div class="field">-->
+<!--      <label for="quantity">Quantity</label>-->
+<!--      <input id="quantity" type="number" pInputText [(ngModel)]="systemInfo.quantity" />-->
+<!--    </div>-->
+
+<!--    <div class="field">-->
+<!--      <label for="actualCost">Actual Cost</label>-->
+<!--      <input id="actualCost" type="number" pInputText [(ngModel)]="systemInfo.actualCost" />-->
+<!--    </div>-->
+
+    <ng-template pTemplate="footer">
+      <p-button label="Cancel" icon="pi pi-times" class="p-button-text" (onClick)="hideDialog()"></p-button>
+      <p-button label="Save" icon="pi pi-check" (onClick)="saveDepartment()"></p-button>
+    </ng-template>
+  </p-dialog>
+
+  <!-- Delete Confirmation -->
+  <p-confirmDialog></p-confirmDialog>
+
+  <!-- Toast Messages -->
+  <p-toast position="top-right"></p-toast>
+</div>

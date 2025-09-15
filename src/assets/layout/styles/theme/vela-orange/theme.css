@@ -1961,7 +1961,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   background-color: #212529;
 }
 .p-button.p-button-raised {
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0px 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 .p-button.p-button-rounded {
   border-radius: 2rem;
@@ -2449,7 +2449,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: rgba(255, 255, 255, 0.6);
 }
 .p-splitbutton.p-button-raised {
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 .p-splitbutton.p-button-rounded {
   border-radius: 2rem;
@@ -4348,7 +4348,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   background: #1f2d40;
   color: #FFD54F;
   width: 2.357rem;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0px rgba(0, 0, 0, 0.12);
   border-radius: 0;
 }
 .p-tabview .p-tabview-nav-btn.p-link:focus {
@@ -4422,7 +4422,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 
 .p-dialog {
   border-radius: 3px;
-  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
   border: 1px solid #304562;
 }
 .p-dialog .p-dialog-header {
@@ -4494,7 +4494,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: rgba(255, 255, 255, 0.87);
   border: 1px solid #304562;
   border-radius: 3px;
-  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 .p-overlaypanel .p-overlaypanel-content {
   padding: 1rem;
@@ -4535,7 +4535,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   background: #1f2d40;
   color: rgba(255, 255, 255, 0.87);
   border: 1px solid #304562;
-  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
 }
 .p-sidebar .p-sidebar-header {
   padding: 1rem;
@@ -5634,7 +5634,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   background: #1f2d40;
   color: #FFD54F;
   width: 2.357rem;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0px rgba(0, 0, 0, 0.14), 0 1px 5px 0px rgba(0, 0, 0, 0.12);
   border-radius: 0;
 }
 .p-tabmenu .p-tabmenu-nav-btn.p-link:focus {

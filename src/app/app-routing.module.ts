@@ -20,6 +20,11 @@ import {AuthenticatedGuard} from "./orion/shared/guards/authenticated.guard";
             path: 'admin',
             loadChildren: () => import('./orion/pages/admin/admin.module').then(m => m.AdminModule)
           },
+
+          {
+            path: 'Human Resources',
+            loadChildren: () => import('./orion/pages/human-resources/human-resources.module').then(m => m.HumanResourcesModule)
+          },
           {
             path: 'apps',
             loadChildren: () => import('./orion/pages/apps/apps.module').then(m => m.AppsModule)

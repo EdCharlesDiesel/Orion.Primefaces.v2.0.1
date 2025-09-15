@@ -17,6 +17,7 @@ import {
   ProductSubscriptionComponent
 } from "./orion/components/product/product-subscription/product-subscription.component";
 import {AdminModule} from "./orion/pages/admin/admin.module";
+import {HumanResourcesModule} from "./orion/pages/human-resources/human-resources.module";
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import {AdminModule} from "./orion/pages/admin/admin.module";
         AppRoutingModule,
         AppLayoutModule,
         AdminModule,
+      HumanResourcesModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

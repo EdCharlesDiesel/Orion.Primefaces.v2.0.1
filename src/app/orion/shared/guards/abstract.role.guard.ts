@@ -1,28 +1,36 @@
-import {ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree} from '@angular/router';
-import {defer, Observable, of} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {UserPrincipalService} from "../../services/user-principal.service";
-import {UserModel} from "../../api/user.model";
+import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
+import { defer, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { UserPrincipalService } from '../../services/user-principal.service';
+import { UserModel } from '../../api/user.model';
 
-export abstract class AbstractRoleGuard implements CanLoad, CanActivate {
+export abstract class AbstractRoleGuard implements CanActivate, CanLoad {
 
-  protected constructor(protected userService: UserPrincipalService,
-                        protected router: Router,
-                        protected redirectStrategy: (t: UserModel | null) => string | null) {
+  protected constructor(
+    protected userService: UserPrincipalService,
+    protected router: Router,
+    protected redirectStrategy: (user: UserModel | null) => string | null
+  ) {}
+
+  private get allowOrRedirect$(): Observable<string | null> {
+    // Re-evaluate user state on each subscription
+    return defer(() => of(this.redirectStrategy(this.userService.getUser())));
   }
 
-  private allowOrRedirect$ = defer(() => of(this.redirectStrategy(this.userService.getUser())));
-
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> {
-    return this.allowOrRedirect$.pipe(map(r => {
-      if (r !== null) {
-        this.router.navigate([r]);
-      }
-      return r === null;
-    }));
+    return this.allowOrRedirect$.pipe(
+      map(redirectPath => {
+        if (redirectPath !== null) {
+          this.router.navigate([redirectPath]);
+        }
+        return redirectPath === null;
+      })
+    );
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
-    return this.allowOrRedirect$.pipe(map(r => r === null ? true : this.router.createUrlTree([r])));
+    return this.allowOrRedirect$.pipe(
+      map(redirectPath => redirectPath === null ? true : this.router.createUrlTree([redirectPath]))
+    );
   }
 }

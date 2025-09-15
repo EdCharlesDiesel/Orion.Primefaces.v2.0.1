@@ -1,26 +1,47 @@
-export interface Country {
-  name?: string;
-  code?: string;
+import {SalesTerritory} from "./sales-territory.model";
+import {SalesOrderHeader} from "./sale-order-header.model";
+import {Store} from "./store";
+import {Person} from "./person.model";
+
+export class Customer {
+  /** Primary key. */
+  customerID!: number;
+  /** Foreign key to Person.BusinessEntityID */
+  personID?: number | undefined;
+  /** Foreign key to Store.BusinessEntityID */
+  storeID?: number | undefined;
+  /** ID of the territory in which the customer is located. Foreign key to SalesTerritory.SalesTerritoryID. */
+  territoryID?: number | undefined;
+  /** Unique number identifying the customer assigned by the accounting system. */
+  accountNumber!: string;
+  /** ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample. */
+  rowguid!: string;
+  /** Date and time the record was last updated. */
+  modifiedDate!: Date;
+  person?: Person;
+  store?: Store;
+  salesTerritory?: SalesTerritory;
+  salesOrderHeaders?: SalesOrderHeader[] | undefined;
+
 }
 
-export interface Representative {
-  name?: string;
-  image?: string;
+export interface ICustomer {
+  /** Primary key. */
+  customerID: number;
+  /** Foreign key to Person.BusinessEntityID */
+  personID?: number | undefined;
+  /** Foreign key to Store.BusinessEntityID */
+  storeID?: number | undefined;
+  /** ID of the territory in which the customer is located. Foreign key to SalesTerritory.SalesTerritoryID. */
+  territoryID?: number | undefined;
+  /** Unique number identifying the customer assigned by the accounting system. */
+  accountNumber: string;
+  /** ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample. */
+  rowguid: string;
+  /** Date and time the record was last updated. */
+  modifiedDate: Date;
+  person?: Person;
+  store?: Store;
+  salesTerritory?: SalesTerritory;
+  salesOrderHeaders?: SalesOrderHeader[] | undefined;
 }
-
-export interface Customer {
-  customer_id?: string;
-  first_name?: string;
-  last_name?: string;
-  emailAddress?: string;
-  address?: string;
-  country?: Country;
-  company?: string;
-  date?: any;
-  status?: string;
-  activity?: number;
-  representative?: Representative;
-  verified?: boolean;
-  balance?: number;
-}
-
