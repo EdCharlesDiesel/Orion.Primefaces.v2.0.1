@@ -36,9 +36,7 @@ export class ProductService {
   }
 
 
-  public getBookById(id: any) {
-    return this.books$.pipe(map(book => book.find(b => b.id === id)));
-  }
+
 
   updateBookDetails(book:Product) {
     return this.http.put(this.baseURL, book);

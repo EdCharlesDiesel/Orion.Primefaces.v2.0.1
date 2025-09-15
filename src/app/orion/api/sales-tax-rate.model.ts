@@ -17,47 +17,6 @@ export class SalesTaxRate implements ISalesTaxRate {
   modifiedDate!: Date;
   stateProvince?: StateProvince;
 
-  constructor(data?: ISalesTaxRate) {
-    if (data) {
-      for (var property in data) {
-        if (data.hasOwnProperty(property))
-          (this as any)[property] = (data as any)[property];
-      }
-    }
-  }
-
-  init(_data?: any) {
-    if (_data) {
-      this.salesTaxRateID = _data["salesTaxRateID"];
-      this.stateProvinceID = _data["stateProvinceID"];
-      this.taxType = _data["taxType"];
-      this.taxRate = _data["taxRate"];
-      this.name = _data["name"];
-      this.rowguid = _data["rowguid"];
-      this.modifiedDate = _data["modifiedDate"] ? new Date(_data["modifiedDate"].toString()) : undefined as any;
-      this.stateProvince = _data["stateProvince"] ? StateProvince.fromJS(_data["stateProvince"]) : undefined as any;
-    }
-  }
-
-  static fromJS(data: any): SalesTaxRate {
-    data = typeof data === 'object' ? data : {};
-    let result = new SalesTaxRate();
-    result.init(data);
-    return result;
-  }
-
-  toJSON(data?: any) {
-    data = typeof data === 'object' ? data : {};
-    data["salesTaxRateID"] = this.salesTaxRateID;
-    data["stateProvinceID"] = this.stateProvinceID;
-    data["taxType"] = this.taxType;
-    data["taxRate"] = this.taxRate;
-    data["name"] = this.name;
-    data["rowguid"] = this.rowguid;
-    data["modifiedDate"] = this.modifiedDate ? this.modifiedDate.toISOString() : undefined as any;
-    data["stateProvince"] = this.stateProvince ? this.stateProvince.toJSON() : undefined as any;
-    return data;
-  }
 }
 
 export interface ISalesTaxRate {

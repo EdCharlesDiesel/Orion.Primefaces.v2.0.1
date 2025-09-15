@@ -1,7 +1,8 @@
-import {DepartmentDto} from "../../../api/department.model";
+
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Component, OnInit} from "@angular/core";
 import {DepartmentService} from "./department.service";
+import {Department} from "../../../api/department.model";
 
 
 @Component({
@@ -11,10 +12,10 @@ import {DepartmentService} from "./department.service";
   providers: [MessageService, ConfirmationService]
 })
 export class DepartmentComponent implements OnInit {
-  systemInfoList: DepartmentDto[] = [];
+  systemInfoList: Department[] = [];
   systemInfoDialog: boolean = false;
-  systemInfo: DepartmentDto = {} as DepartmentDto;
-  selectedSystemInfo!: DepartmentDto | null;
+  systemInfo: Department = {} as Department;
+  selectedSystemInfo!: Department | null;
   loading: boolean = false;
   cols: any[] = [];
 
@@ -51,11 +52,11 @@ export class DepartmentComponent implements OnInit {
   }
 
   openNew() {
-    this.systemInfo = {} as DepartmentDto;
+    this.systemInfo = {} as Department;
     this.systemInfoDialog = true;
   }
 
-  editSystemInfo(info: DepartmentDto) {
+  editSystemInfo(info: Department) {
     this.systemInfo = { ...info };
     this.systemInfoDialog = true;
   }
@@ -77,7 +78,7 @@ export class DepartmentComponent implements OnInit {
     this.systemInfoDialog = false;
   }
 
-  deleteDepartmentDto(info: DepartmentDto) {
+  deleteDepartmentDto(info: Department) {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + info.DepartmentID + '?',
       accept: () => {

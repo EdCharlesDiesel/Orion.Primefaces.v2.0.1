@@ -1,37 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
-
-
+import {Employee} from "../../../api/employee.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExternalEmployeesService {
-  private apiUrl = 'http://localhost:9010/api/EmployeeDepartmentHistory';
+  private apiUrl = 'http://localhost:9010/api/Employee';
 
-  constructor(private http: HttpClient) {}http://localhost:9010/
+  constructor(private http: HttpClient) {}//localhost:9010/
   //TODO: Need to fix Not recommnded hence I need to start using Guid to begin with.
-  private tempId = 55;
-  createEmployeeDepartmentHistory(data: ExternalEmployee): Observable<EmployeeDepartmentHistory> {
+  private tempId = 100;
+  createEmployee(data: Employee): Observable<Employee> {
     data.businessEntityID = ++this.tempId; // negative IDs as temp placeholders
-    return this.http.post<EmployeeDepartmentHistory>(this.apiUrl, data);
+    return this.http.post<Employee>(this.apiUrl, data);
   }
-  getEmployeeDepartmentHistory(): Observable<EmployeeDepartmentHistory[]> {
-    return this.http.get<EmployeeDepartmentHistory[]>(this.apiUrl);
-  }
-
-  getEmployeeDepartmentHistoryById(id: number): Observable<EmployeeDepartmentHistory> {
-    return this.http.get<EmployeeDepartmentHistory>(`${this.apiUrl}/${id}`);
+  getEmployee(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.apiUrl);
   }
 
+  getEmployeeById(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.apiUrl}/${id}`);
+  }
 
-  updateEmployeeDepartmentHistory(id: number, data: EmployeeDepartmentHistory): Observable<void> {
+
+  updateEmployee(id: number, data: Employee): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${id}`, data);
   }
 
-  deleteEmployeeDepartmentHistory(id: number): Observable<void> {
+  deleteEmployee(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

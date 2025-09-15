@@ -6,9 +6,9 @@ import {EmployeeDepartmentHistoryService} from "./employee-department-history.se
 import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
 
 @Component({
-  selector: 'app-database-log',
-  templateUrl: './database-log.component.html',
-  styleUrls: ['./database-log.component.css'],
+  selector: 'app-department-log',
+  templateUrl: './employee-department-history.component.html',
+  styleUrls: ['./employee-department-history.component.css'],
   providers: [MessageService]
 })
 export class EmployeeDepartmentHistoryComponent implements OnInit {

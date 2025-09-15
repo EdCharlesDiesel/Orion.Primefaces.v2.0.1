@@ -1,7 +1,7 @@
-import {DepartmentDto} from "../../../api/department.model";
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
+import {Department} from "../../../api/department.model";
 
 
 @Injectable({
@@ -12,19 +12,19 @@ export class DepartmentService {
 
   constructor(private http: HttpClient) {}
 
-  createDepartment(info: DepartmentDto): Observable<DepartmentDto> {
-    return this.http.post<DepartmentDto>(this.apiUrl, info);
+  createDepartment(info: Department): Observable<Department> {
+    return this.http.post<Department>(this.apiUrl, info);
   }
-  getDepartment(): Observable<DepartmentDto[]> {
-    return this.http.get<DepartmentDto[]>(this.apiUrl);
-  }
-
-  getDepartmentById(id: number): Observable<DepartmentDto> {
-    return this.http.get<DepartmentDto>(`${this.apiUrl}/${id}`);
+  getDepartment(): Observable<Department[]> {
+    return this.http.get<Department[]>(this.apiUrl);
   }
 
-  updateDepartment(systemInfo: DepartmentDto): Observable<DepartmentDto> {
-    return this.http.put<DepartmentDto>(`${this.apiUrl}/${systemInfo.DepartmentID}`, systemInfo);
+  getDepartmentById(id: number): Observable<Department> {
+    return this.http.get<Department>(`${this.apiUrl}/${id}`);
+  }
+
+  updateDepartment(systemInfo: Department): Observable<Department> {
+    return this.http.put<Department>(`${this.apiUrl}/${systemInfo.DepartmentID}`, systemInfo);
   }
 
   deleteDepartment(id: number): Observable<void> {

@@ -16,7 +16,7 @@ import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ExternalEmployeesService} from "./external-employees.service";
-import {EmployeePayHistoryComponent} from "./employee-pay-history.component";
+import {EmployeePayHistoryComponent} from "../employee-pay-history/employee-pay-history.component";
 
 @NgModule({
   declarations: [
