@@ -50,7 +50,7 @@ export class DatabaseLogComponent implements OnInit {
     this.loadData();
   }
 
-  loadData() {
+  public loadData() {
     this.loading = true;
     this.service.getDatabaseLog().subscribe({
       next: data => {
@@ -61,11 +61,11 @@ export class DatabaseLogComponent implements OnInit {
     });
   }
 
-  refresh() {
+  public refresh() {
     this.loadData();
   }
 
-  openNew() {
+  public openNew() {
     this.systemInfoForm.reset({
       postTime: new Date().toISOString() // reset with current time
     });
@@ -74,14 +74,14 @@ export class DatabaseLogComponent implements OnInit {
     this.selectedSystemInfo = null;
   }
 
-  editSystemInfo(systemInfo: DatabaseLog) {
+  public editSystemInfo(systemInfo: DatabaseLog) {
     this.systemInfoForm.patchValue(systemInfo);
     this.selectedSystemInfo = systemInfo;
     this.displayDialog = true;
     this.editing = true;
   }
 
-  saveSystemInfo() {
+  public saveSystemInfo() {
     if (this.systemInfoForm.invalid) return;
 
     const formValue = this.systemInfoForm.value;
@@ -115,7 +115,7 @@ export class DatabaseLogComponent implements OnInit {
     }
   }
 
-  deleteSystemInfo(systemInfo: DatabaseLog) {
+  public deleteSystemInfo(systemInfo: DatabaseLog) {
     if (!systemInfo.databaseLogID) return;
     this.service.deleteDatabaseLog(systemInfo.databaseLogID).subscribe({
       next: () => {
@@ -129,12 +129,12 @@ export class DatabaseLogComponent implements OnInit {
     });
   }
 
-  hideDialog() {
+  public hideDialog() {
     this.displayDialog = false;
     this.selectedSystemInfo = null;
   }
 
-  onRowSelect(event: any) {
+  public onRowSelect(event: any) {
     this.selectedSystemInfo = event.data;
     this.displayDialog = true;
   }

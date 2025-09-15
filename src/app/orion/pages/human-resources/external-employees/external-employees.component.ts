@@ -4,6 +4,7 @@ import { DatabaseLog } from '../../../api/database-log';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {ExternalEmployeesService} from "./external-employees.service";
 import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
+import {Employee} from "../../../api/employee.model";
 
 @Component({
   selector: 'app-database-log',
@@ -12,8 +13,8 @@ import {EmployeeDepartmentHistory} from "../../../api/employee-department-histor
   providers: [MessageService]
 })
 export class ExternalEmployeesComponent implements OnInit {
-  systemInfoList: EmployeeDepartmentHistory[] = [];
-  selectedSystemInfo!: DatabaseLog | null;
+  systemInfoList: Employee[] = [];
+  selectedSystemInfo!: Employee | null;
   displayDialog: boolean = false;
   systemInfoForm!: FormGroup;
   editing: boolean = false;
@@ -53,7 +54,7 @@ export class ExternalEmployeesComponent implements OnInit {
 
   loadData() {
     this.loading = true;
-    this.service.getEmployeeDepartmentHistory().subscribe({
+    this.service.getEmployee().subscribe({
       next: data => {
         this.systemInfoList = data;
         this.loading = false;
@@ -75,7 +76,7 @@ export class ExternalEmployeesComponent implements OnInit {
     this.selectedSystemInfo = null;
   }
 
-  editSystemInfo(systemInfo: DatabaseLog) {
+  editSystemInfo(systemInfo: Employee) {
     this.systemInfoForm.patchValue(systemInfo);
     this.selectedSystemInfo = systemInfo;
     this.displayDialog = true;
@@ -87,9 +88,9 @@ export class ExternalEmployeesComponent implements OnInit {
 
     const formValue = this.systemInfoForm.value;
 
-    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.databaseLogID) {
+    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.businessEntityID) {
       // Update existing log
-      this.service.updateEmployeeDepartmentHistory(this.selectedSystemInfo.databaseLogID, formValue).subscribe({
+      this.service.updateEmployee(this.selectedSystemInfo.businessEntityID, formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
           this.loadData();
@@ -102,7 +103,7 @@ export class ExternalEmployeesComponent implements OnInit {
       });
     } else {
       // Create new log
-      this.service.createEmployeeDepartmentHistory(formValue).subscribe({
+      this.service.createEmployee(formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });
           this.loadData();
@@ -118,7 +119,7 @@ export class ExternalEmployeesComponent implements OnInit {
 
   deleteSystemInfo(systemInfo: DatabaseLog) {
     if (!systemInfo.databaseLogID) return;
-    this.service.deleteEmployeeDepartmentHistory(systemInfo.databaseLogID).subscribe({
+    this.service.deleteEmployee(systemInfo.databaseLogID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();

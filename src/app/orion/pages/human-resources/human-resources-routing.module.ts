@@ -7,7 +7,7 @@ import {EmployeePayHistoryModule} from "./employee-pay-history/employee-pay-hist
     {
       path: 'departments',
       data: {breadcrumb: 'Button'},
-      loadChildren: () => import('./department/department.module').then(m => m.DepartmentModule)
+      loadChildren: () => import('./departments/departments.module').then(m => m.DepartmentModule)
     },
     {
       path: 'employee-department-history',

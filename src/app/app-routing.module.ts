@@ -22,7 +22,7 @@ import {AuthenticatedGuard} from "./orion/shared/guards/authenticated.guard";
           },
 
           {
-            path: 'Human Resources',
+            path: 'human-resources',
             loadChildren: () => import('./orion/pages/human-resources/human-resources.module').then(m => m.HumanResourcesModule)
           },
           {

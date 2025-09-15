@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {MessageService} from "primeng/api";
 import {Table} from "primeng/table";
-import {Customer, Representative} from "../../../api/customer";
+import {Customer} from "../../../api/customer";
 import {CustomerService} from "../../../services/customer.service";
 import {map, tap} from "rxjs/operators";
 @Component({
@@ -13,7 +13,7 @@ export class ListUsersComponent implements OnInit {
 
   customers!: Customer[];
 
-  representatives!: Representative[];
+  // representatives!: Representative[];
 
   statuses!: any[];
 

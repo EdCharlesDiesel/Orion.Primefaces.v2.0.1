@@ -15,7 +15,7 @@ export class OverlaysDemoComponent implements OnInit {
 
     products: Product[] = [];
 
-    selectedProduct: Product = {};
+    // selectedProduct: new Product();
 
     visibleSidebar1: boolean = false;
 

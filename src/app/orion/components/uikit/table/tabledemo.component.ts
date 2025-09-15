@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Table } from 'primeng/table';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import {Customer, Representative} from "../../../api/customer";
+import {Customer} from "../../../api/customer";
 import {Product} from "../../../api/product";
 import {CustomerService} from "../../../services/customer.service";
 import {ProductService} from "../../../services/product.service";
@@ -83,36 +83,36 @@ export class TableDemoComponent implements OnInit {
         ];
     }
 
-    onSort() {
+  public onSort() {
         this.updateRowGroupMetaData();
     }
 
-    updateRowGroupMetaData() {
+  public updateRowGroupMetaData() {
         this.rowGroupMetadata = {};
 
-        if (this.customers3) {
-            for (let i = 0; i < this.customers3.length; i++) {
-                const rowData = this.customers3[i];
-                const representativeName = rowData?.representative?.name || '';
-
-                if (i === 0) {
-                    this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
-                }
-                else {
-                    const previousRowData = this.customers3[i - 1];
-                    const previousRowGroup = previousRowData?.representative?.name;
-                    if (representativeName === previousRowGroup) {
-                        this.rowGroupMetadata[representativeName].size++;
-                    }
-                    else {
-                        this.rowGroupMetadata[representativeName] = { index: i, size: 1 };
-                    }
-                }
-            }
-        }
+        // if (this.customers3) {
+        //     for (let i = 0; i < this.customers3.length; i++) {
+        //         const rowData = this.customers3[i];
+        //         const representativeName = rowData?.representative?.name || '';
+        //
+        //         if (i === 0) {
+        //             this.rowGroupMetadata[representativeName] = { index: 0, size: 1 };
+        //         }
+        //         else {
+        //             const previousRowData = this.customers3[i - 1];
+        //             // const previousRowGroup = previousRowData?.representative?.name;
+        //             // if (representativeName === previousRowGroup) {
+        //             //     this.rowGroupMetadata[representativeName].size++;
+        //             // }
+        //             // else {
+        //             //     this.rowGroupMetadata[representativeName] = { index: i, size: 1 };
+        //             // }
+        //         }
+        //     }
+        // }
     }
 
-    expandAll() {
+  public expandAll() {
         if (!this.isExpanded) {
          //   this.products.forEach(product => product && product.name ? this.expandedRows[product.name] = true : '');
 
@@ -122,15 +122,15 @@ export class TableDemoComponent implements OnInit {
         this.isExpanded = !this.isExpanded;
     }
 
-    formatCurrency(value: number) {
+  public formatCurrency(value: number) {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     }
 
-    onGlobalFilter(table: Table, event: Event) {
+  public onGlobalFilter(table: Table, event: Event) {
         table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
     }
 
-    clear(table: Table) {
+  public clear(table: Table) {
         table.clear();
         this.filter.nativeElement.value = '';
     }
