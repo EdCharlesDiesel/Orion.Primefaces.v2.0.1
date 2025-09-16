@@ -1,5 +1,5 @@
 <div class="system-info-container">
-  <p-card header="Departments" [style]="{'margin-bottom': '20px'}">
+  <p-card header="All Departments" [style]="{'margin-bottom': '20px'}">
     <div class="card-actions">
       <p-button
         label="Add New"
@@ -39,9 +39,9 @@
 
     <ng-template pTemplate="body" let-systemInfo let-columns="columns">
       <tr>
-        <td>{{ systemInfo.transactionID }}</td>
-        <td>{{ systemInfo.productID }}</td>
-        <td>{{ systemInfo.referenceOrderID }}</td>
+        <td>{{ systemInfo.departmentID }}</td>
+        <td>{{ systemInfo.name }}</td>
+        <td>{{ systemInfo.groupName }}</td>
         <td>{{ formatDate(systemInfo.modifiedDate) }}</td>
         <td>
           <p-button icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
