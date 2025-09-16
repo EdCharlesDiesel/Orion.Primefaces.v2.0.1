@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Department} from "../../../../../api/department.model";
+import {Department} from "../../../api/department.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DepartmentsService} from "./departments.service";
 import {MessageService} from "primeng/api";

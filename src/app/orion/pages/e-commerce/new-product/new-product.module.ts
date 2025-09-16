@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MiscDemoComponent } from './new-product.component';
 import { NewProductRoutingModule } from './new-product-routing.module';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { BadgeModule } from 'primeng/badge';
@@ -19,29 +18,35 @@ import {MessagesModule} from "primeng/messages";
 import {ChipsModule} from "primeng/chips";
 import {DropdownModule} from "primeng/dropdown";
 import {OverlayPanelModule} from "primeng/overlaypanel";
+import {NewProductComponent} from "./new-product.component";
+import { MessageModule } from 'primeng/message';
+import {RippleModule} from "primeng/ripple";
 
 @NgModule({
-	imports: [
-		CommonModule,
-		NewProductRoutingModule,
-		ProgressBarModule,
-		BadgeModule,
-		AvatarModule,
-		ScrollPanelModule,
-		TagModule,
-		ChipModule,
-		ButtonModule,
-		SkeletonModule,
-		AvatarGroupModule,
-		ScrollTopModule,
+  imports: [
+    CommonModule,
+    NewProductRoutingModule,
+    ProgressBarModule,
+    BadgeModule,
+    AvatarModule,
+    ScrollPanelModule,
+    TagModule,
+    ChipModule,
+    ButtonModule,
+    SkeletonModule,
+    AvatarGroupModule,
+    ScrollTopModule,
     InputSwitchModule,
     EditorModule,
     FileUploadModule,
     MessagesModule,
     ChipsModule,
     DropdownModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    MessageModule,
+    RippleModule,
+
   ],
-	declarations: [MiscDemoComponent]
+	declarations: [NewProductComponent]
 })
 export class NewProductModule { }

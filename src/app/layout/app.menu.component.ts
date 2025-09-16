@@ -35,11 +35,29 @@ export class AppMenuComponent implements OnInit {
         items: [
           {label: 'Departments', icon: 'pi pi-fw pi-compass', routerLink: ['/human-resources/departments']},
           {label: 'Employee Department History', icon: 'pi pi-fw pi-filter', routerLink: ['/human-resources/employee-department-history']},
-          {label: 'Employee Pay History', icon: 'pi pi-fw pi-database', routerLink: ['/human-resources/Employee-pay-history']},
+          {label: 'Employee Pay History', icon: 'pi pi-fw pi-database', routerLink: ['/human-resources/employee-pay-history']},
           {label: 'Internal Employees', icon: 'pi pi-fw pi-compass', routerLink: ['/human-resources/internal-employees']},
           {label: 'External Employees', icon: 'pi pi-fw pi-times', routerLink: ['/human-resources/external-employees']},
           {label: 'Job Candidate', icon: 'pi pi-fw pi-database', routerLink: ['/human-resources/job-candidate']},
           {label: 'Shift', icon: 'pi pi-fw pi-times', routerLink: ['/human-resources/shift']},
+        ]
+      },
+      {
+        label: 'Persons',
+        items: [
+          {label: 'Address', icon: 'pi pi-fw pi-home', routerLink: ['person/address']},
+          {label: 'Address Type', icon: 'pi pi-fw pi-directions', routerLink: ['person/addressType']},
+          {label: 'Business Entity', icon: 'pi pi-fw pi-directions', routerLink: ['person/addressType']},
+          {label: 'Business Entity Address', icon: 'pi pi-fw pi-directions', routerLink: ['person/addressType']},
+          {label: 'Business Entity Contact', icon: 'pi pi-fw pi-directions', routerLink: ['person/addressType']},
+          {label: 'Contact Type', icon: 'pi pi-fw pi-directions', routerLink: ['person/addressType']},
+          {label: 'Country Region', icon: 'pi pi-fw pi-directions', routerLink: ['person/addressType']},
+          {label: 'Email Address', icon: 'pi pi-fw pi-directions', routerLink: ['person/addressType']},
+          {label: 'Password', icon: 'pi pi-fw pi-directions', routerLink: ['person/addressType']},
+          {label: 'Person', icon: 'pi pi-fw pi-directions', routerLink: ['person/addressType']},
+          {label: 'Person Phone', icon: 'pi pi-fw pi-directions', routerLink: ['person/addressType']},
+          {label: 'Phone Number Type', icon: 'pi pi-fw pi-directions', routerLink: ['person/addressType']},
+
         ]
       },
       {

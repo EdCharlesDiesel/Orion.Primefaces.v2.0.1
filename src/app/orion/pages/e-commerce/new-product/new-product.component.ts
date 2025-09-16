@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 @Component({
     templateUrl: './new-product.component.html'
 })
-export class MiscDemoComponent implements OnInit, OnDestroy {
+export class NewProductComponent implements OnInit, OnDestroy {
 
     value = 0;
 
