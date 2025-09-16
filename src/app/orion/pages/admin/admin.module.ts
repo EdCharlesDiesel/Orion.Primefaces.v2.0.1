@@ -6,6 +6,8 @@ import {ErrorLogModule} from "./error-log/error-log.module";
 import {TransactionHistoryModule} from "./transaction-history-archive/transaction-history.module";
 import {SystemInformationModule} from "./system-information/system-information.module";
 import {TransactionHistoryRoutingModule} from "./transaction-history-archive/transaction-history-routing.module";
+import {Address} from "../../api/address.model";
+import {AddressModule} from "../person/address/address.module";
 
 @NgModule({
 	imports: [
@@ -14,7 +16,9 @@ import {TransactionHistoryRoutingModule} from "./transaction-history-archive/tra
     DatabaseLogModule,
     ErrorLogModule,
     SystemInformationModule,
-    TransactionHistoryRoutingModule
+    TransactionHistoryRoutingModule,
+
+    AddressModule,
 	]
 })
 export class AdminModule { }

@@ -17,10 +17,13 @@ import {AuthenticatedGuard} from "./orion/shared/guards/authenticated.guard";
             loadChildren: () => import('./orion/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
           },
           {
+            path: 'person',
+            loadChildren: () => import('./orion/pages/person/person.module').then(m => m.PersonModule)
+          },
+          {
             path: 'admin',
             loadChildren: () => import('./orion/pages/admin/admin.module').then(m => m.AdminModule)
           },
-
           {
             path: 'human-resources',
             loadChildren: () => import('./orion/pages/human-resources/human-resources.module').then(m => m.HumanResourcesModule)
@@ -63,7 +66,7 @@ import {AuthenticatedGuard} from "./orion/shared/guards/authenticated.guard";
       },
       {path: 'landing', loadChildren: () => import('./orion/pages/landing/landing.module').then(m => m.LandingModule)},
       {path: 'notfound', component: NotfoundComponent},
-      {path: '**', redirectTo: '/notfound'},
+      // {path: '**', redirectTo: '/notfound'},
     ], {scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload'})
   ],
   exports: [RouterModule]

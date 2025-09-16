@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DepartmentsRoutingModule } from './departments-routing.module';
-import { DepartmentsComponent } from './components/departments/departments.component';
+import { DepartmentsComponent } from './departments.component';
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
 import {ConfirmDialogModule} from "primeng/confirmdialog";

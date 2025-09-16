@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { ProgressBarModule } from 'primeng/progressbar';
 import { BadgeModule } from 'primeng/badge';
 import { AvatarModule } from 'primeng/avatar';
@@ -15,18 +16,17 @@ import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
 import {ReactiveFormsModule} from "@angular/forms";
-import {ShiftsService} from "./shifts.service";
-import {EmployeePayHistoryComponent} from "../employee-pay-history/employee-pay-history.component";
-import {ShiftsComponent} from "./shifts.component";
-import {ShiftsRoutingModule} from "./shifts-routing.module";
+import {AddressTypesComponent} from "./address-types.component";
+import {AddressTypesRoutingModule} from "./address-types-routing.module";
+import {AddressTypeTypesService} from "./address-types.service";
 
 @NgModule({
   declarations: [
-    ShiftsComponent
+    AddressTypesComponent,
   ],
     imports: [
         CommonModule,
-        ShiftsRoutingModule,
+        AddressTypesRoutingModule,
         ProgressBarModule,
         BadgeModule,
         AvatarModule,
@@ -44,10 +44,10 @@ import {ShiftsRoutingModule} from "./shifts-routing.module";
         ReactiveFormsModule
     ],
   providers: [
-    ShiftsService
+    AddressTypeTypesService,
   ],
   exports: [
-    ShiftsComponent
+    AddressTypesComponent
   ]
 })
-export class ShiftsModule { }
+export class AddressTypesModule { }

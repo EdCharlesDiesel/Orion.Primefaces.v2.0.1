@@ -4,7 +4,9 @@ import { Component, OnInit } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { User } from "../../../api/user";
 import { Table } from "primeng/table";
-import { UserService } from "../../../services/user.service";
+import {UserManagementService} from "../user-management.service";
+import {Person} from "../../../api/person.model";
+
 
 @Component({
     templateUrl: './add-users.component.html',
@@ -16,23 +18,23 @@ export class AddUsersComponent implements OnInit {
     deleteUserDialog: boolean = false;
     deleteUsersDialog: boolean = false;
 
-    users: User[] = [];
-    user: User = this.getEmptyUser();
+    users: Person[] = [];
+    user: Person = this.getEmptyUser();
 
-    selectedUsers: User[] = [];
+    selectedUsers: Person[] = [];
     submitted: boolean = false;
 
     cols: any[] = [];
     rowsPerPageOptions = [5, 10, 20];
 
     constructor(
-        private userService: UserService,
+        private userService: UserManagementService,
         private messageService: MessageService
     ) {}
 
     ngOnInit() {
         // Fetch actual users
-        // this.userService.getUsers().subscribe(data => this.users = data);
+        this.userService.getUsers().subscribe(data => this.users = data);
 
         this.cols = [
             { field: 'firstName', header: 'First Name' },
@@ -49,12 +51,12 @@ export class AddUsersComponent implements OnInit {
         this.userDialog = true;
     }
 
-    editUser(user: User) {
+    editUser(user: Person) {
         this.user = { ...user };
         this.userDialog = true;
     }
 
-    deleteUser(user: User) {
+    deleteUser(user: Person) {
         this.user = { ...user };
         this.deleteUserDialog = true;
     }
@@ -64,7 +66,7 @@ export class AddUsersComponent implements OnInit {
     }
 
     confirmDelete() {
-        this.users = this.users.filter(val => val.id !== this.user.id);
+        this.users = this.users.filter(val => val.businessEntityID !== this.user.businessEntityID);
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Deleted', life: 3000 });
         this.deleteUserDialog = false;
         this.user = this.getEmptyUser();
@@ -80,50 +82,51 @@ export class AddUsersComponent implements OnInit {
     saveUser() {
         this.submitted = true;
 
-        this.user.username = "Khotso"
-       this.user.id = this.createId();
-                this.users.push(this.user);
+        // this.user. = "Khotso"
+      //TODO: Need to fix this
+        this.user.businessEntityID = this.createId();
+        this.users.push(this.user);
 
-                this.userService.registerUser(
-                    {
-                        id : "1",
-                        code : "",
-                        emailAddress: "Khotso@hotmai.com",
-                        username :this.user.username = "Khotso",
-                        birthday :999090,
-                        idNumber : "999090",
-                        firstName: "Khotso",
-                        lastName : "Mokhethi",
-                        image:"xxzczxc",
-                        name : "Mokhethi",
-                        isLoggedIn : true,
-                        password :"asdfg",
-                        role: "Web Master",
-                        subscription : "Ultimate",
-                        userTypeId : 2
-
-                    }
-                );
-                // this.users[index] = this.user;
-                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
-
-        // if (this.user.firstName?.trim()) {
-        //     if (this.user.id) {
-        //         const index = this.findIndexById(this.user.id);
-        //         if (index !== -1) {
-        //             this.users[index] = this.user;
-        //             this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
-        //         }
-        //     } else {
-        //         this.user.id = this.createId();
-        //         this.users.push(this.user);
-        //         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Created', life: 3000 });
+        // this.userService.registerUser(
+        //     {
+        //         "id": 1,
+        //         code : "",
+        //         emailAddress: "Khotso@hotmai.com",
+        //         username :this.user.username = "Khotso",
+        //         birthday :999090,
+        //         idNumber : "999090",
+        //         firstName: "Khotso",
+        //         lastName : "Mokhethi",
+        //         image:"xxzczxc",
+        //         name : "Mokhethi",
+        //         isLoggedIn : true,
+        //         // password :"asdfg",
+        //         role: "Web Master",
+        //         subscription : "Ultimate",
+        //         userTypeId : 2
+        //
         //     }
+        // );
+        // this.users[index] = this.user;
+            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
 
-        //     this.users = [...this.users];
-        //     this.userDialog = false;
-        //     this.user = this.getEmptyUser();
-        // }
+        if (this.user.firstName?.trim()) {
+            if (this.user.businessEntityID) {
+                const index = this.findIndexById(this.user.businessEntityID);
+                if (index !== -1) {
+                    this.users[index] = this.user;
+                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Updated', life: 3000 });
+                }
+            } else {
+                this.user.businessEntityID = this.createId();
+                this.users.push(this.user);
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Created', life: 3000 });
+            }
+
+            this.users = [...this.users];
+            this.userDialog = false;
+            this.user = this.getEmptyUser();
+        }
     }
 
     hideDialog() {
@@ -135,32 +138,20 @@ export class AddUsersComponent implements OnInit {
         table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
     }
 
-    findIndexById(id: string): number {
-        return this.users.findIndex(u => u.id === id);
+    findIndexById(id: number): number {
+        return this.users.findIndex(u => u.businessEntityID === id);
     }
 
-    createId(): string {
+    createId(): any {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         return Array.from({ length: 8 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
     }
 
-    private getEmptyUser(): User {
-        return {
-            id: undefined,
-            firstName: '',
-            lastName: '',
-            username: '',
-            idNumber: '',
-            emailAddress: '',
-            password: '',
-            birthday: '',
-            role: '',
-            subscription: '',
-            userTypeId: undefined,
-            isLoggedIn: false,
-            name: '',
-            code: '',
-            image: ''
-        };
+    private getEmptyUser(): Person {
+        return new Person();
     }
+
+  onAvatarUpload($event: any) {
+
+  }
 }

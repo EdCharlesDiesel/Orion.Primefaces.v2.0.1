@@ -23,6 +23,11 @@ import {RouterModule} from '@angular/router';
       data: {breadcrumb: 'Charts'},
       loadChildren: () => import('./transaction-history-archive/transaction-history.module').then(m => m.TransactionHistoryModule)
     },
+    {
+      path: 'address-type',
+      data: {breadcrumb: 'Charts'},
+      loadChildren: () => import('./address-types/address-types.module').then(m => m.AddressTypesModule)
+    },
     {path: '**', redirectTo: '/notfound'}
   ])],
   exports: [RouterModule]

@@ -1,18 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {Department} from "../../../../../api/department.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DepartmentsService} from "./departments.service";
-import {MessageService} from "primeng/api";
+import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {AddressType} from "../../../api/address-type.model";
+import {AddressTypeTypesService} from "./address-types.service";
 
 @Component({
-  selector: 'app-departments',
-  templateUrl: './departments.component.html',
-  styleUrls: ['./departments.component.scss'],
-  providers: [MessageService]   // <-- Add this
+  selector: 'app-address-types',
+  templateUrl: './address-types.component.html',
+  styleUrls: ['./address-types.component.css'],
+  providers: [MessageService]
 })
-export class DepartmentsComponent implements OnInit {
-  systemInfoList: Department[] = [];
-  selectedSystemInfo!: Department | null;
+export class AddressTypesComponent implements OnInit {
+  systemInfoList: AddressType[] = [];
+  selectedSystemInfo!: AddressType | null;
   displayDialog: boolean = false;
   systemInfoForm!: FormGroup;
   editing: boolean = false;
@@ -21,30 +21,38 @@ export class DepartmentsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: DepartmentsService,
+    private service: AddressTypeTypesService,
     private messageService: MessageService
-) {}
+  ) {}
 
   ngOnInit() {
     this.cols = [
-      { field: 'departmentID', header: 'ID' },
-      { field: 'name', header: 'Name' },
-      { field: 'groupName', header: 'Group Name' },
-      { field: 'ModifiedDate', header: 'Modified Date' }
+      { field: 'AddressID', header: 'ID' },
+      { field: 'postTime', header: 'Post Time' },
+      { field: 'databaseUser', header: 'Database User' },
+      { field: 'event', header: 'Event' },
+      { field: 'schema', header: 'Schema' },
+      { field: 'object', header: 'Object' },
+      { field: 'tsql', header: 'TSQL' },
+      { field: 'xmlEvent', header: 'XML Event' }
     ];
 
     this.systemInfoForm = this.fb.group({
-      Name: ['', Validators.required],
-      GroupName: ['', Validators.required],
-      ModifiedDate:  [new Date().toISOString(), Validators.required],
+      postTime: [new Date().toISOString(), Validators.required],
+      databaseUser: ['', Validators.required],
+      event: ['', Validators.required],
+      schema: [''],
+      object: [''],
+      tsql: [''],
+      xmlEvent: ['']
     });
 
     this.loadData();
   }
 
-public loadData() {
+  public loadData() {
     this.loading = true;
-    this.service.getDepartments().subscribe({
+    this.service.getAddressType().subscribe({
       next: data => {
         this.systemInfoList = data;
         this.loading = false;
@@ -53,11 +61,11 @@ public loadData() {
     });
   }
 
- public refresh() {
+  public refresh() {
     this.loadData();
   }
 
-public openNew() {
+  public openNew() {
     this.systemInfoForm.reset({
       postTime: new Date().toISOString() // reset with current time
     });
@@ -66,21 +74,21 @@ public openNew() {
     this.selectedSystemInfo = null;
   }
 
-
-public editSystemInfo(systemInfo: Department) {
+  public editSystemInfo(systemInfo: AddressType) {
     this.systemInfoForm.patchValue(systemInfo);
     this.selectedSystemInfo = systemInfo;
     this.displayDialog = true;
     this.editing = true;
   }
 
-public saveDepartment() {
+  public saveSystemInfo() {
     if (this.systemInfoForm.invalid) return;
 
     const formValue = this.systemInfoForm.value;
 
-    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.DepartmentID) {
-      this.service.updateDepartment(this.selectedSystemInfo.DepartmentID, formValue).subscribe({
+    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.addressTypeId) {
+      // Update existing log
+      this.service.updateAddressType(this.selectedSystemInfo.addressTypeId, formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
           this.loadData();
@@ -92,8 +100,8 @@ public saveDepartment() {
         }
       });
     } else {
-      // Create new Department
-      this.service.createDepartment(formValue).subscribe({
+      // Create new log
+      this.service.createAddressType(formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });
           this.loadData();
@@ -107,25 +115,27 @@ public saveDepartment() {
     }
   }
 
-public deleteDepartment(systemInfo: Department) {
-    if (!systemInfo.DepartmentID) return;
-    this.service.deleteDepartment(systemInfo.DepartmentID).subscribe({
+  public deleteSystemInfo(systemInfo: AddressType) {
+    if (!systemInfo.addressTypeId) return;
+    this.service.deleteAddressType(systemInfo.addressTypeId).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error(err);
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to delete log' });
       }
     });
   }
 
-public hideDialog() {
-    // this.systemInfoDialog = false;
+  public hideDialog() {
+    this.displayDialog = false;
+    this.selectedSystemInfo = null;
   }
 
-public formatDate(date: any): string {
-    return date ? new Date(date).toLocaleDateString() : '';
+  public onRowSelect(event: any) {
+    this.selectedSystemInfo = event.data;
+    this.displayDialog = true;
   }
 }

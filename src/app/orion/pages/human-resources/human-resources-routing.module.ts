@@ -39,7 +39,7 @@ import {EmployeePayHistoryModule} from "./employee-pay-history/employee-pay-hist
        data: {breadcrumb: 'Charts'},
        loadChildren: () => import('./shifts/shifts.module').then(m => m.ShiftsModule)
      },
-    {path: '**', redirectTo: '/notfound'}
+    // {path: '**', redirectTo: '/notfound'}
   ])],
   exports: [RouterModule]
 })

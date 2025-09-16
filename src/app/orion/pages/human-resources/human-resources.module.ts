@@ -9,7 +9,7 @@ import {EmployeeDepartmentHistoryModule} from "./employee-department-history/emp
 import {JobCandidatesModule} from "./job-candidates/job-candidates.module";
 import {ShiftsModule} from "./shifts/shifts.module";
 import { ConfirmationService } from 'primeng/api';
-import {DepartmentsComponent} from "./departments/components/departments/departments.component";
+import {DepartmentsComponent} from "./departments/departments.component";
 
 @NgModule({
   declarations: [],

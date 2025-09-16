@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
-import { UserService } from './user.service';
+import { AbstractControl, FormControl } from '@angular/forms';
+import {UserManagementService} from "../pages/user-management/user-management.service";
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class CustomValidationService {
 
   debouncer: any;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserManagementService) { }
 
   // patternValidator(): ValidatorFn {
   //   return (control: AbstractControl): { [key: string]: any } => {
