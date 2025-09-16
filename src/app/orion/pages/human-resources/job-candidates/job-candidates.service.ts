@@ -1,35 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Employee} from "../../../api/employee.model";
+import {JobCandidate} from "../../../api/job-candidate.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobCandidatesService {
-  private apiUrl = 'http://localhost:9010/api/Employee';
+  private apiUrl = 'http://localhost:9010/api/JobCandidate';
 
   constructor(private http: HttpClient) {}//localhost:9010/
   //TODO: Need to fix Not recommnded hence I need to start using Guid to begin with.
   private tempId = 100;
-  createEmployee(data: Employee): Observable<Employee> {
+  createJobCandidate(data: JobCandidate): Observable<JobCandidate> {
     data.businessEntityID = ++this.tempId; // negative IDs as temp placeholders
-    return this.http.post<Employee>(this.apiUrl, data);
+    return this.http.post<JobCandidate>(this.apiUrl, data);
   }
-  getEmployee(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.apiUrl);
-  }
-
-  getEmployeeById(id: number): Observable<Employee> {
-    return this.http.get<Employee>(`${this.apiUrl}/${id}`);
+  getJobCandidate(): Observable<JobCandidate[]> {
+    return this.http.get<JobCandidate[]>(this.apiUrl);
   }
 
+  getJobCandidateById(id: number): Observable<JobCandidate> {
+    return this.http.get<JobCandidate>(`${this.apiUrl}/${id}`);
+  }
 
-  updateEmployee(id: number, data: Employee): Observable<void> {
+
+  updateJobCandidate(id: number, data: JobCandidate): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${id}`, data);
   }
 
-  deleteEmployee(id: number): Observable<void> {
+  deleteJobCandidate(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

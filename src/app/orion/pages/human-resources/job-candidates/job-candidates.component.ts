@@ -7,11 +7,10 @@ import {EmployeeDepartmentHistory} from "../../../api/employee-department-histor
 import {Employee} from "../../../api/employee.model";
 
 @Component({
-  selector: 'app-database-log',
-  templateUrl: './employee-pay-history.component.html',
-  styleUrls: ['./employee-pay-history.component.css'],
+  selector: 'app-job-candidates',
+  templateUrl: './job-candidates.component.html',
+  styleUrls: ['./job-candidates.component.css'],
   providers: [MessageService]
-})
 export class JobCandidatesComponent implements OnInit {
   systemInfoList: Employee[] = [];
   selectedSystemInfo!: Employee | null;

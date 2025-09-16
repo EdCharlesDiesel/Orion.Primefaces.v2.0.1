@@ -6,7 +6,7 @@ import {EmployeePayHistoryService} from "./employee-pay-history.service";
 import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
 
 @Component({
-  selector: 'app-database-log',
+  selector: 'app-employee-pay-history',
   templateUrl: './employee-pay-history.component.html',
   styleUrls: ['./employee-pay-history.component.css'],
   providers: [MessageService]
