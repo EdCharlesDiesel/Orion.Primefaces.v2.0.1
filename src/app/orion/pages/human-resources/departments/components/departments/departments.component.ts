@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { DatabaseLogService } from './database-log.service';
-import { MessageService } from 'primeng/api';
-import { DatabaseLog } from '../../../api/database-log';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {Department} from "../../../../../api/department.model";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {DepartmentsService} from "./departments.service";
+import {MessageService} from "primeng/api";
 
 @Component({
-  selector: 'app-database-log',
-  templateUrl: './database-log.component.html',
-  styleUrls: ['./database-log.component.css'],
-  providers: [MessageService]
+  selector: 'app-departments',
+  templateUrl: './departments.component.html',
+  styleUrls: ['./departments.component.scss']
 })
-export class DatabaseLogComponent implements OnInit {
-  systemInfoList: DatabaseLog[] = [];
-  selectedSystemInfo!: DatabaseLog | null;
+export class DepartmentsComponent implements OnInit {
+  systemInfoList: Department[] = [];
+  selectedSystemInfo!: Department | null;
   displayDialog: boolean = false;
   systemInfoForm!: FormGroup;
   editing: boolean = false;
@@ -21,38 +20,30 @@ export class DatabaseLogComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: DatabaseLogService,
+    private service: DepartmentsService,
     private messageService: MessageService
-  ) {}
+) {}
 
   ngOnInit() {
     this.cols = [
-      { field: 'databaseLogID', header: 'ID' },
-      { field: 'postTime', header: 'Post Time' },
-      { field: 'databaseUser', header: 'Database User' },
-      { field: 'event', header: 'Event' },
-      { field: 'schema', header: 'Schema' },
-      { field: 'object', header: 'Object' },
-      { field: 'tsql', header: 'TSQL' },
-      { field: 'xmlEvent', header: 'XML Event' }
+      { field: 'DepartmentID', header: 'ID' },
+      { field: 'Name', header: 'Name' },
+      { field: 'GroupName', header: 'Group Name' },
+      { field: 'ModifiedDate', header: 'Modified Date' }
     ];
 
     this.systemInfoForm = this.fb.group({
-      postTime: [new Date().toISOString(), Validators.required], // auto-fill current time
-      databaseUser: ['', Validators.required],
-      event: ['', Validators.required],
-      schema: [''],
-      object: [''],
-      tsql: [''],
-      xmlEvent: ['']
+      Name: ['', Validators.required],
+      GroupName: ['', Validators.required],
+      ModifiedDate:  [new Date().toISOString(), Validators.required],
     });
 
     this.loadData();
   }
 
-  public loadData() {
+public loadData() {
     this.loading = true;
-    this.service.getDatabaseLog().subscribe({
+    this.service.getDepartments().subscribe({
       next: data => {
         this.systemInfoList = data;
         this.loading = false;
@@ -61,11 +52,11 @@ export class DatabaseLogComponent implements OnInit {
     });
   }
 
-  public refresh() {
+ public refresh() {
     this.loadData();
   }
 
-  public openNew() {
+public openNew() {
     this.systemInfoForm.reset({
       postTime: new Date().toISOString() // reset with current time
     });
@@ -74,21 +65,21 @@ export class DatabaseLogComponent implements OnInit {
     this.selectedSystemInfo = null;
   }
 
-  public editSystemInfo(systemInfo: DatabaseLog) {
+
+public editSystemInfo(systemInfo: Department) {
     this.systemInfoForm.patchValue(systemInfo);
     this.selectedSystemInfo = systemInfo;
     this.displayDialog = true;
     this.editing = true;
   }
 
-  public saveSystemInfo() {
+public saveDepartment() {
     if (this.systemInfoForm.invalid) return;
 
     const formValue = this.systemInfoForm.value;
 
-    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.databaseLogID) {
-      // Update existing log
-      this.service.updateDatabaseLog(this.selectedSystemInfo.databaseLogID, formValue).subscribe({
+    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.DepartmentID) {
+      this.service.updateDepartment(this.selectedSystemInfo.DepartmentID, formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
           this.loadData();
@@ -101,7 +92,7 @@ export class DatabaseLogComponent implements OnInit {
       });
     } else {
       // Create new log
-      this.service.createDatabaseLog(formValue).subscribe({
+      this.service.createDepartment(formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });
           this.loadData();
@@ -115,9 +106,9 @@ export class DatabaseLogComponent implements OnInit {
     }
   }
 
-  public deleteSystemInfo(systemInfo: DatabaseLog) {
-    if (!systemInfo.databaseLogID) return;
-    this.service.deleteDatabaseLog(systemInfo.databaseLogID).subscribe({
+public deleteDepartment(systemInfo: Department) {
+    if (!systemInfo.DepartmentID) return;
+    this.service.deleteDepartment(systemInfo.DepartmentID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();
@@ -129,13 +120,11 @@ export class DatabaseLogComponent implements OnInit {
     });
   }
 
-  public hideDialog() {
-    this.displayDialog = false;
-    this.selectedSystemInfo = null;
+public hideDialog() {
+    // this.systemInfoDialog = false;
   }
 
-  public onRowSelect(event: any) {
-    this.selectedSystemInfo = event.data;
-    this.displayDialog = true;
+public formatDate(date: any): string {
+    return date ? new Date(date).toLocaleDateString() : '';
   }
 }

@@ -27,7 +27,7 @@ import {HumanResourcesModule} from "./orion/pages/human-resources/human-resource
         AppRoutingModule,
         AppLayoutModule,
         AdminModule,
-      HumanResourcesModule
+        HumanResourcesModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

@@ -14,40 +14,38 @@ import {CardModule} from "primeng/card";
 import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
-
-import {ConfirmDialogModule} from "primeng/confirmdialog";
-import {PaginatorModule} from "primeng/paginator";
-import {DepartmentComponent} from "./department.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {InternalEmployeesService} from "./internal-employees.service";
+import {EmployeePayHistoryComponent} from "../employee-pay-history/employee-pay-history.component";
+import {InternalEmployeesComponent} from "./internal-employees.component";
 
 @NgModule({
   declarations: [
-    DepartmentComponent
+    InternalEmployeesComponent
   ],
-  imports: [
-    CommonModule,
-
-    ProgressBarModule,
-    BadgeModule,
-    AvatarModule,
-    ScrollPanelModule,
-    TagModule,
-    ChipModule,
-    ButtonModule,
-    SkeletonModule,
-    AvatarGroupModule,
-    ScrollTopModule,
-    CardModule,
-    TableModule,
-    DialogModule,
-    ToastModule,
-    ConfirmDialogModule,
-    PaginatorModule
-  ],
+    imports: [
+        CommonModule,
+        ProgressBarModule,
+        BadgeModule,
+        AvatarModule,
+        ScrollPanelModule,
+        TagModule,
+        ChipModule,
+        ButtonModule,
+        SkeletonModule,
+        AvatarGroupModule,
+        ScrollTopModule,
+        CardModule,
+        TableModule,
+        DialogModule,
+        ToastModule,
+        ReactiveFormsModule
+    ],
   providers: [
-
+    InternalEmployeesService
   ],
   exports: [
-    DepartmentComponent
+    InternalEmployeesComponent
   ]
 })
-export class DepartmentModule { }
+export class InternalEmployeesModule { }

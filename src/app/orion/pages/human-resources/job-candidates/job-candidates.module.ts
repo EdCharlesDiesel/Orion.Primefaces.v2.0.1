@@ -15,13 +15,13 @@ import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
 import {ReactiveFormsModule} from "@angular/forms";
-import {ExternalEmployeesService} from "./external-employees.service";
+import {JobCandidatesService} from "./job-candidates.service";
 import {EmployeePayHistoryComponent} from "../employee-pay-history/employee-pay-history.component";
-import {ExternalEmployeesComponent} from "./external-employees.component";
+import {JobCandidatesComponent} from "./job-candidates.component";
 
 @NgModule({
   declarations: [
-    ExternalEmployeesComponent
+    JobCandidatesComponent
   ],
     imports: [
         CommonModule,
@@ -42,10 +42,10 @@ import {ExternalEmployeesComponent} from "./external-employees.component";
         ReactiveFormsModule
     ],
   providers: [
-    ExternalEmployeesService
+    JobCandidatesService
   ],
   exports: [
-    ExternalEmployeesComponent
+    JobCandidatesComponent
   ]
 })
-export class ExternalEmployeesModule { }
+export class JobCandidatesModule { }

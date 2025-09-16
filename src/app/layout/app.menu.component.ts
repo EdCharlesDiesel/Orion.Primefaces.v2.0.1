@@ -35,9 +35,12 @@ export class AppMenuComponent implements OnInit {
         label: 'Human Resources',
         items: [
           {label: 'Departments', icon: 'pi pi-fw pi-compass', routerLink: ['/human-resources/departments']},
-          // {label: 'Error Logs', icon: 'pi pi-fw pi-filter', routerLink: ['/admin/error-log']},
-          // {label: 'Database Logs', icon: 'pi pi-fw pi-database', routerLink: ['/admin/database-log']},
-          // {label: 'Transaction History Archive', icon: 'pi pi-fw pi-times', routerLink: ['/admin/transaction-history-archive']},
+          {label: 'Employee Department History', icon: 'pi pi-fw pi-filter', routerLink: ['/human-resources/employee-department-history']},
+          {label: 'Employee Pay History', icon: 'pi pi-fw pi-database', routerLink: ['/human-resources/Employee-pay-history']},
+          {label: 'Internal Employees', icon: 'pi pi-fw pi-compass', routerLink: ['/human-resources/internal-employees']},
+          {label: 'External Employees', icon: 'pi pi-fw pi-times', routerLink: ['/human-resources/external-employees']},
+          {label: 'Job Candidate', icon: 'pi pi-fw pi-database', routerLink: ['/human-resources/job-candidate']},
+          {label: 'Shift', icon: 'pi pi-fw pi-times', routerLink: ['/human-resources/shift']},
         ]
       },
       {
