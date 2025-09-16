@@ -52,7 +52,7 @@ public loadData() {
     });
   }
 
-  refresh() {
+ public refresh() {
     this.loadData();
   }
 
@@ -79,18 +79,17 @@ public saveDepartment() {
     const formValue = this.systemInfoForm.value;
 
     if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.DepartmentID) {
-      // Update existing log
-      // this.service.updateDepartment(this.selectedSystemInfo.DepartmentID).subscribe({
-      //   next: () => {
-      //     this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
-      //     this.loadData();
-      //     this.hideDialog();
-      //   },
-      //   error: (err) => {
-      //     console.error(err);
-      //     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update log' });
-      //   }
-      // });
+      this.service.updateDepartment(this.selectedSystemInfo.DepartmentID, formValue).subscribe({
+        next: () => {
+          this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
+          this.loadData();
+          this.hideDialog();
+        },
+        error: (err) => {
+          console.error(err);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update log' });
+        }
+      });
     } else {
       // Create new log
       this.service.createDepartment(formValue).subscribe({
@@ -107,7 +106,7 @@ public saveDepartment() {
     }
   }
 
-public deleteSystemInfo(systemInfo: Department) {
+public deleteDepartment(systemInfo: Department) {
     if (!systemInfo.DepartmentID) return;
     this.service.deleteDepartment(systemInfo.DepartmentID).subscribe({
       next: () => {

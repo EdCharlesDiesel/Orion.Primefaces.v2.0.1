@@ -42,18 +42,13 @@
         <td>{{ systemInfo.transactionID }}</td>
         <td>{{ systemInfo.productID }}</td>
         <td>{{ systemInfo.referenceOrderID }}</td>
-        <td>{{ systemInfo.referenceOrderLineID }}</td>
-        <td>{{ formatDate(systemInfo.transactionDate) }}</td>
-        <td>{{ systemInfo.transactionType }}</td>
-        <td>{{ systemInfo.quantity }}</td>
-        <td>{{ systemInfo.actualCost }}</td>
         <td>{{ formatDate(systemInfo.modifiedDate) }}</td>
         <td>
           <p-button icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
                     (onClick)="editSystemInfo(systemInfo)">
           </p-button>
           <p-button icon="pi pi-trash" class="p-button-rounded p-button-danger"
-                    (onClick)="deleteDepartmentDto(systemInfo)">
+                    (onClick)="deleteDepartment(systemInfo)">
           </p-button>
         </td>
       </tr>
@@ -68,35 +63,57 @@
 
   <!-- Create/Edit Dialog -->
   <p-dialog
-    [(visible)]="systemInfoDialog"
-    [style]="{width: '450px'}"
-    header="{{ systemInfo?.DepartmentID ? 'Edit Transaction' : 'New Transaction' }}"
+    [header]="editing ? 'Edit Department' : 'Add New Department Log'"
+    [(visible)]="displayDialog"
     [modal]="true"
-    class="p-fluid">
+    [style]="{ width: '500px' }"
+    [closable]="false"
+  >
+    <form [formGroup]="systemInfoForm" class="p-fluid">
+      <div class="field">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          type="text"
+          pInputText
+          formControlName="Name"
+          required
+        />
+      </div>
 
-    <div class="field">
-      <label for="productID">Product ID</label>
-      <input id="productID" type="number" pInputText [(ngModel)]="systemInfo.DepartmentID" required />
-    </div>
+      <div class="field">
+        <label for="groupName">Group Name</label>
+        <input
+          id="groupName"
+          type="text"
+          pInputText
+          formControlName="GroupName"
+        />
+      </div>
 
-    <!--    <div class="field">-->
-    <!--      <label for="transactionType">Transaction Type</label>-->
-    <!--      <input id="transactionType" type="text" pInputText [(ngModel)]="systemInfo.transactionType" required />-->
-    <!--    </div>-->
-
-    <!--    <div class="field">-->
-    <!--      <label for="quantity">Quantity</label>-->
-    <!--      <input id="quantity" type="number" pInputText [(ngModel)]="systemInfo.quantity" />-->
-    <!--    </div>-->
-
-    <!--    <div class="field">-->
-    <!--      <label for="actualCost">Actual Cost</label>-->
-    <!--      <input id="actualCost" type="number" pInputText [(ngModel)]="systemInfo.actualCost" />-->
-    <!--    </div>-->
+      <div class="field">
+        <label for="modifiedDate">Modified Date</label>
+        <input
+          id="modifiedDate"
+          type="date"
+          pInputText
+          formControlName="ModifiedDate"
+        />
+      </div>
+    </form>
 
     <ng-template pTemplate="footer">
-      <p-button label="Cancel" icon="pi pi-times" class="p-button-text" (onClick)="hideDialog()"></p-button>
-      <p-button label="Save" icon="pi pi-check" (onClick)="saveDepartment()"></p-button>
+      <p-button
+        label="Cancel"
+        icon="pi pi-times"
+        class="p-button-text"
+        (onClick)="hideDialog()"
+      ></p-button>
+      <p-button
+        label="Save"
+        icon="pi pi-check"
+        (onClick)="saveDepartment()"
+      ></p-button>
     </ng-template>
   </p-dialog>
 

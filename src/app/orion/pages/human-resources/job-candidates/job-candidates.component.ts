@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DatabaseLog } from '../../../api/database-log';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import {ExternalEmployeesService} from "./external-employees.service";
+import {JobCandidatesService} from "./job-candidates.service";
 import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
 import {Employee} from "../../../api/employee.model";
 
 @Component({
-  selector: 'app-external-employees',
-  templateUrl: './external-employees.component.html',
-  styleUrls: ['./external-employees.component.css'],
+  selector: 'app-database-log',
+  templateUrl: './employee-pay-history.component.html',
+  styleUrls: ['./employee-pay-history.component.css'],
   providers: [MessageService]
 })
-export class ExternalEmployeesComponent implements OnInit {
+export class JobCandidatesComponent implements OnInit {
   systemInfoList: Employee[] = [];
   selectedSystemInfo!: Employee | null;
   displayDialog: boolean = false;
@@ -23,7 +23,7 @@ export class ExternalEmployeesComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: ExternalEmployeesService,
+    private service: JobCandidatesService,
     private messageService: MessageService
   ) {}
 
