@@ -7,9 +7,9 @@ import {EmployeeDepartmentHistory} from "../../../api/employee-department-histor
 import {Employee} from "../../../api/employee.model";
 
 @Component({
-  selector: 'app-database-log',
-  templateUrl: './employee-pay-history.component.html',
-  styleUrls: ['./employee-pay-history.component.css'],
+  selector: 'app-internal-employees',
+  templateUrl: './internal-employees.component.html',
+  styleUrls: ['./internal-employees.component.css'],
   providers: [MessageService]
 })
 export class InternalEmployeesComponent implements OnInit {

@@ -3,18 +3,16 @@ import { MessageService } from 'primeng/api';
 import { DatabaseLog } from '../../../api/database-log';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {JobCandidatesService} from "./job-candidates.service";
-import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
-import {Employee} from "../../../api/employee.model";
+import {JobCandidate} from "../../../api/job-candidate.model";
 
 @Component({
-  selector: 'app-database-log',
-  templateUrl: './employee-pay-history.component.html',
-  styleUrls: ['./employee-pay-history.component.css'],
-  providers: [MessageService]
-})
+  selector: 'app-job-candidates',
+  templateUrl: './job-candidates.component.html',
+  styleUrls: ['./job-candidates.component.css'],
+  providers: [MessageService]})
 export class JobCandidatesComponent implements OnInit {
-  systemInfoList: Employee[] = [];
-  selectedSystemInfo!: Employee | null;
+  systemInfoList: JobCandidate[] = [];
+  selectedSystemInfo!: JobCandidate | null;
   displayDialog: boolean = false;
   systemInfoForm!: FormGroup;
   editing: boolean = false;
@@ -54,7 +52,7 @@ export class JobCandidatesComponent implements OnInit {
 
   loadData() {
     this.loading = true;
-    this.service.getEmployee().subscribe({
+    this.service.getJobCandidate().subscribe({
       next: data => {
         this.systemInfoList = data;
         this.loading = false;
@@ -76,7 +74,7 @@ export class JobCandidatesComponent implements OnInit {
     this.selectedSystemInfo = null;
   }
 
-  editSystemInfo(systemInfo: Employee) {
+  editSystemInfo(systemInfo: JobCandidate) {
     this.systemInfoForm.patchValue(systemInfo);
     this.selectedSystemInfo = systemInfo;
     this.displayDialog = true;
@@ -90,7 +88,7 @@ export class JobCandidatesComponent implements OnInit {
 
     if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.businessEntityID) {
       // Update existing log
-      this.service.updateEmployee(this.selectedSystemInfo.businessEntityID, formValue).subscribe({
+      this.service.updateJobCandidate(this.selectedSystemInfo.businessEntityID, formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
           this.loadData();
@@ -103,7 +101,7 @@ export class JobCandidatesComponent implements OnInit {
       });
     } else {
       // Create new log
-      this.service.createEmployee(formValue).subscribe({
+      this.service.createJobCandidate(formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });
           this.loadData();
@@ -119,7 +117,7 @@ export class JobCandidatesComponent implements OnInit {
 
   deleteSystemInfo(systemInfo: DatabaseLog) {
     if (!systemInfo.databaseLogID) return;
-    this.service.deleteEmployee(systemInfo.databaseLogID).subscribe({
+    this.service.deleteJobCandidate(systemInfo.databaseLogID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();

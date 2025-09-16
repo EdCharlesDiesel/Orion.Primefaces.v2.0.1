@@ -8,8 +8,11 @@ import {EmployeePayHistoryModule} from "./employee-pay-history/employee-pay-hist
 import {EmployeeDepartmentHistoryModule} from "./employee-department-history/employee-department-history.module";
 import {JobCandidatesModule} from "./job-candidates/job-candidates.module";
 import {ShiftsModule} from "./shifts/shifts.module";
+import { ConfirmationService } from 'primeng/api';
+import {DepartmentsComponent} from "./departments/components/departments/departments.component";
 
 @NgModule({
+  declarations: [],
   imports: [
     CommonModule,
     DepartmentsModule,
@@ -20,6 +23,7 @@ import {ShiftsModule} from "./shifts/shifts.module";
     EmployeeDepartmentHistoryModule,
     JobCandidatesModule,
     ShiftsModule,
-  ]
+  ],
+  providers: [ConfirmationService]  // <-- Add this
 })
 export class HumanResourcesModule { }

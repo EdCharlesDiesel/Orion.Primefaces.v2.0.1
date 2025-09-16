@@ -8,14 +8,17 @@ import {Department} from "../../../../../api/department.model";
   providedIn: 'root'
 })
 export class DepartmentsService {
-  private apiUrl = 'http://localhost:9010/api/Department';
-
+  private apiUrl = 'http://localhost:9100/api/Department';
+  private tempId = 17;
   constructor(private http: HttpClient) {}
 
   public createDepartment(info: Department): Observable<Department> {
+    this.tempId += 1;
+    info.DepartmentID = this.tempId;  // increments each call
     return this.http.post<Department>(this.apiUrl, info);
   }
   public getDepartments(): Observable<Department[]> {
+
     return this.http.get<Department[]>(this.apiUrl);
   }
 

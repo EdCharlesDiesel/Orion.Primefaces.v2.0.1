@@ -7,7 +7,8 @@ import {MessageService} from "primeng/api";
 @Component({
   selector: 'app-departments',
   templateUrl: './departments.component.html',
-  styleUrls: ['./departments.component.scss']
+  styleUrls: ['./departments.component.scss'],
+  providers: [MessageService]   // <-- Add this
 })
 export class DepartmentsComponent implements OnInit {
   systemInfoList: Department[] = [];
@@ -26,9 +27,9 @@ export class DepartmentsComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'DepartmentID', header: 'ID' },
-      { field: 'Name', header: 'Name' },
-      { field: 'GroupName', header: 'Group Name' },
+      { field: 'departmentID', header: 'ID' },
+      { field: 'name', header: 'Name' },
+      { field: 'groupName', header: 'Group Name' },
       { field: 'ModifiedDate', header: 'Modified Date' }
     ];
 
@@ -91,7 +92,7 @@ public saveDepartment() {
         }
       });
     } else {
-      // Create new log
+      // Create new Department
       this.service.createDepartment(formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });

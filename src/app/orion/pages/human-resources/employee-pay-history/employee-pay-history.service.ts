@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
+import {EmployeePayHistory} from "../../../api/employee-pay-history.model";
 
 
 
@@ -14,24 +15,24 @@ export class EmployeePayHistoryService {
   constructor(private http: HttpClient) {}
   //TODO: Need to fix Not recommnded hence I need to start using Guid to begin with.
   private tempId = 55;
-  createEmployeeDepartmentHistory(data: EmployeeDepartmentHistory): Observable<EmployeeDepartmentHistory> {
+  createEmployeePayHistory(data: EmployeePayHistory): Observable<EmployeePayHistory> {
     data.businessEntityID = ++this.tempId; // negative IDs as temp placeholders
-    return this.http.post<EmployeeDepartmentHistory>(this.apiUrl, data);
+    return this.http.post<EmployeePayHistory>(this.apiUrl, data);
   }
-  getEmployeeDepartmentHistory(): Observable<EmployeeDepartmentHistory[]> {
-    return this.http.get<EmployeeDepartmentHistory[]>(this.apiUrl);
-  }
-
-  getEmployeeDepartmentHistoryById(id: number): Observable<EmployeeDepartmentHistory> {
-    return this.http.get<EmployeeDepartmentHistory>(`${this.apiUrl}/${id}`);
+  getEmployeePayHistory(): Observable<EmployeePayHistory[]> {
+    return this.http.get<EmployeePayHistory[]>(this.apiUrl);
   }
 
+  getEmployeePayHistoryById(id: number): Observable<EmployeePayHistory> {
+    return this.http.get<EmployeePayHistory>(`${this.apiUrl}/${id}`);
+  }
 
-  updateEmployeeDepartmentHistory(id: number, data: EmployeeDepartmentHistory): Observable<void> {
+
+  updateEmployeePayHistory(id: number, data: EmployeePayHistory): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${id}`, data);
   }
 
-  deleteEmployeeDepartmentHistory(id: number): Observable<void> {
+  deleteEmployeePayHistory(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

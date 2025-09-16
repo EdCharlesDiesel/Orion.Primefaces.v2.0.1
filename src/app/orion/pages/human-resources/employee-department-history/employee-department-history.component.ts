@@ -6,7 +6,7 @@ import {EmployeeDepartmentHistoryService} from "./employee-department-history.se
 import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
 
 @Component({
-  selector: 'app-department-log',
+  selector: 'app-employee-department-history',
   templateUrl: './employee-department-history.component.html',
   styleUrls: ['./employee-department-history.component.css'],
   providers: [MessageService]

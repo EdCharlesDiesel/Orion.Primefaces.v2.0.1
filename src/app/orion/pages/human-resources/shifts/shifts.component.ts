@@ -6,9 +6,9 @@ import {ShiftsService} from "./shifts.service";
 import {Shift} from "../../../api/shift.model";
 
 @Component({
-  selector: 'app-database-log',
-  templateUrl: './Shift-pay-history.component.html',
-  styleUrls: ['./Shift-pay-history.component.css'],
+  selector: 'app-shifts',
+  templateUrl: './shifts.component.html',
+  styleUrls: ['./shifts.component.css'],
   providers: [MessageService]
 })
 export class ShiftsComponent implements OnInit {

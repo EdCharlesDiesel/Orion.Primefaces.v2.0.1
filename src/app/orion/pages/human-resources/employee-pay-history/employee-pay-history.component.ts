@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { DatabaseLog } from '../../../api/database-log';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {EmployeePayHistoryService} from "./employee-pay-history.service";
-import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
+import {EmployeePayHistory} from "../../../api/employee-pay-history.model";
+import _default from "chart.js/dist/plugins/plugin.tooltip";
+import numbers = _default.defaults.animations.numbers;
 
 @Component({
-  selector: 'app-database-log',
+  selector: 'app-employee-pay-history',
   templateUrl: './employee-pay-history.component.html',
   styleUrls: ['./employee-pay-history.component.css'],
   providers: [MessageService]
 })
 export class EmployeePayHistoryComponent implements OnInit {
-  systemInfoList: EmployeeDepartmentHistory[] = [];
-  selectedSystemInfo!: DatabaseLog | null;
+  systemInfoList: EmployeePayHistory[] = [];
+  selectedSystemInfo!: EmployeePayHistory | null;
   displayDialog: boolean = false;
   systemInfoForm!: FormGroup;
   editing: boolean = false;
@@ -28,7 +29,7 @@ export class EmployeePayHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'databaseLogID', header: 'ID' },
+      { field: 'EmployeePayHistoryID', header: 'ID' },
       { field: 'postTime', header: 'Post Time' },
       { field: 'databaseUser', header: 'Database User' },
       { field: 'event', header: 'Event' },
@@ -53,7 +54,7 @@ export class EmployeePayHistoryComponent implements OnInit {
 
   loadData() {
     this.loading = true;
-    this.service.getEmployeeDepartmentHistory().subscribe({
+    this.service.getEmployeePayHistory().subscribe({
       next: data => {
         this.systemInfoList = data;
         this.loading = false;
@@ -75,7 +76,7 @@ export class EmployeePayHistoryComponent implements OnInit {
     this.selectedSystemInfo = null;
   }
 
-  editSystemInfo(systemInfo: DatabaseLog) {
+  editSystemInfo(systemInfo: EmployeePayHistory) {
     this.systemInfoForm.patchValue(systemInfo);
     this.selectedSystemInfo = systemInfo;
     this.displayDialog = true;
@@ -87,9 +88,9 @@ export class EmployeePayHistoryComponent implements OnInit {
 
     const formValue = this.systemInfoForm.value;
 
-    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.databaseLogID) {
+    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.businessEntityID) {
       // Update existing log
-      this.service.updateEmployeeDepartmentHistory(this.selectedSystemInfo.databaseLogID, formValue).subscribe({
+      this.service.updateEmployeePayHistory(this.selectedSystemInfo.businessEntityID, formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
           this.loadData();
@@ -102,7 +103,7 @@ export class EmployeePayHistoryComponent implements OnInit {
       });
     } else {
       // Create new log
-      this.service.createEmployeeDepartmentHistory(formValue).subscribe({
+      this.service.createEmployeePayHistory(formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });
           this.loadData();
@@ -116,9 +117,9 @@ export class EmployeePayHistoryComponent implements OnInit {
     }
   }
 
-  deleteSystemInfo(systemInfo: DatabaseLog) {
-    if (!systemInfo.databaseLogID) return;
-    this.service.deleteEmployeeDepartmentHistory(systemInfo.databaseLogID).subscribe({
+  deleteSystemInfo(businessEntityID: number) {
+    if (!businessEntityID) return;
+    this.service.deleteEmployeePayHistory(businessEntityID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();

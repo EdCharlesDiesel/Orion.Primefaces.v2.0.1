@@ -30,7 +30,6 @@ export class AppMenuComponent implements OnInit {
           {label: 'Transaction History Archive', icon: 'pi pi-fw pi-times', routerLink: ['/admin/transaction-history-archive']},
         ]
       },
-
       {
         label: 'Human Resources',
         items: [
