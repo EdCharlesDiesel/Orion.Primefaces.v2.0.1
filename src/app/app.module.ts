@@ -2,26 +2,24 @@ import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AppLayoutModule } from './layout/app.layout.module';
-import {NotfoundComponent} from "./orion/components/notfound/notfound.component";
-import {CustomerService} from "./orion/services/customer.service";
-import {CountryService} from "./orion/services/country.service";
-import {PhotoService} from "./orion/services/photo.service";
-import {ProductService} from "./orion/services/product.service";
-import {NodeService} from "./orion/services/node.service";
-import {IconService} from "./orion/services/icon.service";
-import {EventService} from "./orion/services/event.service";
-import {AuthenticationService} from "./orion/services/authentication.service";
+import {NotfoundComponent} from "./features/notfound/notfound.component";
+import {ProductSubscriptionComponent} from "./features/product/product-subscription/product-subscription.component";
+import {AppLayoutModule} from "./core/layout/app.layout.module";
+import {AdminModule} from "./features/admin/admin.module";
+import {HumanResourcesModule} from "./features/human-resources/human-resources.module";
+import {CountryService} from "./features/services/country.service";
+import {CustomerService} from "./features/services/customer.service";
+import {EventService} from "./features/services/event.service";
+import {AuthenticationService} from "./features/services/authentication.service";
+import {IconService} from "./features/services/icon.service";
+import {NodeService} from "./features/services/node.service";
+import {ProductService} from "./features/services/product.service";
+import {PhotoService} from "./features/services/photo.service";
 
-import {
-  ProductSubscriptionComponent
-} from "./orion/components/product/product-subscription/product-subscription.component";
-import {AdminModule} from "./orion/pages/admin/admin.module";
-import {HumanResourcesModule} from "./orion/pages/human-resources/human-resources.module";
 
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent,ProductSubscriptionComponent
+       NotfoundComponent,ProductSubscriptionComponent
     ],
     imports: [
         AppRoutingModule,
@@ -34,6 +32,6 @@ import {HumanResourcesModule} from "./orion/pages/human-resources/human-resource
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, AuthenticationService
     ],
-    bootstrap: [AppComponent]
+    // bootstrap: [AppComponent]
 })
 export class AppModule { }

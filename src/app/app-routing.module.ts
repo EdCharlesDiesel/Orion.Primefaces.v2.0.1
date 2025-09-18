@@ -1,10 +1,10 @@
-import {RouterModule} from '@angular/router';
-import {NgModule} from '@angular/core';
-import {NotfoundComponent} from './orion/components/notfound/notfound.component';
-import {AppLayoutComponent} from "./layout/app.layout.component";
-import {RouteUrls} from "./app-routing.config";
-import {NotAuthenticatedGuard} from "./orion/shared/guards/not-authenticated.guard";
-import {AuthenticatedGuard} from "./orion/shared/guards/authenticated.guard";
+import {inject, NgModule} from "@angular/core";
+import {RouterModule} from "@angular/router";
+import {AppLayoutComponent} from "./core/layout/app.layout.component";
+import {UserManagementService} from "./core/auth/services/user-management.service";
+import {map} from "rxjs/operators";
+import {NotfoundComponent} from "./features/notfound/notfound.component";
+
 
 @NgModule({
   imports: [
@@ -13,58 +13,107 @@ import {AuthenticatedGuard} from "./orion/shared/guards/authenticated.guard";
         path: '', component: AppLayoutComponent,
         children: [
           {
-            path: '',
-            loadChildren: () => import('./orion/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+            path: "",
+            loadComponent: () => import("./features/article/pages/home/home.component"),
           },
           {
-            path: 'person',
-            loadChildren: () => import('./orion/pages/person/person.module').then(m => m.PersonModule)
+            path: "login",
+            loadComponent: () => import("./core/auth/auth.component"),
+            canActivate: [
+              () => inject(UserManagementService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
+            ],
+          },
+          {
+            path: "register",
+            loadComponent: () => import("./core/auth/auth.component"),
+            canActivate: [
+              () => inject(UserManagementService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
+            ],
+          },
+          {
+            path: "settings",
+            loadChildren: () => import("./features/settings/settings.module").then(c => c.SettingsModule),
+            canActivate: [() => inject(UserManagementService).isAuthenticated],
+          },
+          {
+            path: "profile",
+            loadChildren: () => import("./features/profile/profile.routes"),
+          },
+          {
+            path: "editor",
+            children: [
+              {
+                path: "",
+                loadComponent: () =>
+                  import("./features/article/pages/editor/editor.component"),
+                canActivate: [() => inject(UserManagementService).isAuthenticated],
+              },
+              {
+                path: ":slug",
+                loadComponent: () =>
+                  import("./features/article/pages/editor/editor.component"),
+                canActivate: [() => inject(UserManagementService).isAuthenticated],
+              },
+            ],
+          },
+          {
+            path: "article/:slug",
+            loadComponent: () =>
+              import("./features/article/pages/article/article.component"),
+          },
+          {
+            path: 'dashboard',
+            loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
           },
           {
             path: 'admin',
-            loadChildren: () => import('./orion/pages/admin/admin.module').then(m => m.AdminModule)
-          },
+            loadChildren: () => import('./../app/features/admin/admin.module').then(m => m.AdminModule)
+          } ,
           {
             path: 'human-resources',
-            loadChildren: () => import('./orion/pages/human-resources/human-resources.module').then(m => m.HumanResourcesModule)
+            loadChildren: () => import('./../app/features/human-resources/departments/departments.module').then(m => m.DepartmentsModule)
+          }  ,
+          {
+            path: 'person',
+            loadChildren: () => import('./../app/features/person/person.module').then(m => m.PersonModule)
           },
           {
             path: 'apps',
-            loadChildren: () => import('./orion/pages/apps/apps.module').then(m => m.AppsModule)
+            loadChildren: () => import('./../app/features/apps/apps.module').then(m => m.AppsModule)
           },
           {
             path: 'e-commerce',
-            loadChildren: () => import('./orion/pages/e-commerce/e-commerce-routing.module').then(m => m.ECommerceRoutingModule)
+            loadChildren: () => import('./../app/features/e-commerce/e-commerce-routing.module').then(m => m.ECommerceRoutingModule)
           },
           {
             path: 'user-management',
-            loadChildren: () => import('./orion/pages/user-management/user-management-routing.module').then(m => m.UserManagementRoutingModule)
+            loadChildren: () => import('./../app/core/auth/services/user-management.service').then(m => m.UserManagementService)
           },
           {
             path: 'documentation',
-            loadChildren: () => import('./orion/components/documentation/documentation.module').then(m => m.DocumentationModule)
+            loadChildren: () => import('./../app/features/documentation/documentation.module').then(m => m.DocumentationModule)
           },
-          {path: 'pages', loadChildren: () => import('./orion/components/pages/pages.module').then(m => m.PagesModule)},
+          // {path: 'pages', loadChildren: () => import('./../app/features/pages.module').then(m => m.PagesModule)},
 
         ]
       },
-      {
-        path: 'authentication',
-        loadChildren: () => import('./orion/pages/authentication/auth.module').then(m => m.AuthModule)
-      },
-      {
-        path: RouteUrls.LOGIN,
-        canLoad: [NotAuthenticatedGuard],
-        canActivate: [NotAuthenticatedGuard],
-        loadChildren: () => import('src/app/orion/pages/user-management/user-management-routing.module').then(m => m.UserManagementRoutingModule)
-      },
-      {
-        path: RouteUrls.CHAT,
-        canLoad: [AuthenticatedGuard],
-        canActivate: [AuthenticatedGuard],
-        loadChildren: () => import('src/app/orion/components/features/chat/chat.module').then(m => m.ChatModule)
-      },
-      {path: 'landing', loadChildren: () => import('./orion/pages/landing/landing.module').then(m => m.LandingModule)},
+      // {
+      //   path: 'authentication',
+      //   loadChildren: () => import('./orion/pages/authentication/auth.module').then(m => m.AuthModule)
+      // },
+      // {
+      //   path: RouteUrls.LOGIN,
+      //   canLoad: [NotAuthenticatedGuard],
+      //   canActivate: [NotAuthenticatedGuard],
+      //   loadChildren: () => import('src/app/orion/pages/user-management/user-management-routing.module').then(m => m.UserManagementRoutingModule)
+      // },
+      // {
+      //   path: RouteUrls.CHAT,
+      //   canLoad: [AuthenticatedGuard],
+      //   canActivate: [AuthenticatedGuard],
+      //   loadChildren: () => import('src/app/orion/components/features/chat/chat.module').then(m => m.ChatModule)
+      // },
+      // {path: 'landing', loadChildren: () => import('./orion/pages/landing/landing.module').then(m => m.LandingModule)},
       {path: 'notfound', component: NotfoundComponent},
       // {path: '**', redirectTo: '/notfound'},
     ], {scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload'})
