@@ -3,7 +3,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 
 import { Article } from "../../models/article.model";
-import { ArticlesService } from "../../services/articles.service";
+import { HomeService } from "../../services/home.service";
 import { CommentsService } from "../../services/comments.service";
 
 
@@ -47,7 +47,7 @@ export default class ArticleComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly articleService: ArticlesService,
+    private readonly articleService: HomeService,
     private readonly commentsService: CommentsService,
     private readonly router: Router,
     private readonly userService: UserManagementService,

@@ -1,19 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuItem, MessageService } from 'primeng/api';
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {MenuItem, MessageService} from "primeng/api";
+import {Product} from "../../../core/models/product";
+import {Subscription} from "rxjs";
+import {ProductService} from "../../services/product.service";
+import {LayoutService} from "../../../core/layout/service/app.layout.service";
 
-import { ProductService } from '../services/product.service';
-import { Subscription } from 'rxjs';
-import { Product } from 'src/app/core/models/product';
-import { LayoutService } from 'src/app/core/layout/service/app.layout.service';
 
+@Component({  
 
-@Component({
-    selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboardhome.component.css'],
-    providers: [MessageService]
+      selector: 'app-home',
+      templateUrl: './home.component.html',
+      styleUrls: ['./home.component.css'],
+      providers: [MessageService]
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
 
     items!: MenuItem[];
 
@@ -54,8 +54,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     label: 'First Dataset',
                     data: [65, 59, 80, 81, 56, 55, 40],
                     fill: false,
-                    backgroundColor: documentStyle.getPropertyValue('--bluegray-700'),
-                    borderColor: documentStyle.getPropertyValue('--bluegray-700'),
+                    // backgroundColor: documentStyle.getPropertyValue('--bluegray-700'),
+                    // borderColor: documentStyle.getPropertyValue('--bluegray-700'),
                     tension: .4
                 },
                 {

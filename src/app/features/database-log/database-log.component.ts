@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseLogService } from './database-log.service';
 import { MessageService } from 'primeng/api';
-import { DatabaseLog } from '../../../api/database-log';
+
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { DatabaseLog } from 'src/app/core/models/database-log';
 
 @Component({
   selector: 'app-database-log',

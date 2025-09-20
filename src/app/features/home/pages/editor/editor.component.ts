@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 import { combineLatest } from "rxjs";
 import { Errors } from "../../../../core/models/errors.model";
-import { ArticlesService } from "../../services/articles.service";
+import { HomeService } from "../../services/home.service";
 import { ListErrorsComponent } from "../../../../shared/components/list-errors.component";
 import {UserManagementService} from "../../../../core/auth/services/user-management.service";
 
@@ -40,7 +40,7 @@ export default class EditorComponent implements OnInit {
   // destroyRef = inject(DestroyRef);
 
   constructor(
-    private readonly articleService: ArticlesService,
+    private readonly articleService: HomeService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly userService: UserManagementService,

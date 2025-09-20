@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {AddressRoutingModule} from "../address/address-routing.module";
+
 
 
 
@@ -8,7 +8,7 @@ import {AddressRoutingModule} from "../address/address-routing.module";
 	imports: [
 		CommonModule,
 
-    AddressRoutingModule
+
     // DatabaseLogModule,
     // ErrorLogModule,
     // SystemInformationModule,

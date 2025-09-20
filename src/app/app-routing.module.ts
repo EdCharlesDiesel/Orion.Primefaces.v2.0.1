@@ -14,7 +14,7 @@ import {NotfoundComponent} from "./features/notfound/notfound.component";
         children: [
           {
             path: "",
-            loadComponent: () => import("./features/article/pages/home/home.component"),
+            loadComponent: () => import("./features/home/components/home.component"),
           },
           {
             path: "login",
@@ -39,28 +39,28 @@ import {NotfoundComponent} from "./features/notfound/notfound.component";
             path: "profile",
             loadChildren: () => import("./features/profile/profile.routes"),
           },
-          {
-            path: "editor",
-            children: [
-              {
-                path: "",
-                loadComponent: () =>
-                  import("./features/article/pages/editor/editor.component"),
-                canActivate: [() => inject(UserManagementService).isAuthenticated],
-              },
-              {
-                path: ":slug",
-                loadComponent: () =>
-                  import("./features/article/pages/editor/editor.component"),
-                canActivate: [() => inject(UserManagementService).isAuthenticated],
-              },
-            ],
-          },
-          {
-            path: "article/:slug",
-            loadComponent: () =>
-              import("./features/article/pages/article/article.component"),
-          },
+          // {
+          //   path: "editor",
+          //   children: [
+          //     {
+          //       path: "",
+          //       loadComponent: () =>
+          //         import("./features/article/pages/editor/editor.component"),
+          //       canActivate: [() => inject(UserManagementService).isAuthenticated],
+          //     },
+          //     {
+          //       path: ":slug",
+          //       loadComponent: () =>
+          //         import("./features/article/pages/editor/editor.component"),
+          //       canActivate: [() => inject(UserManagementService).isAuthenticated],
+          //     },
+          //   ],
+          // },
+          // {
+          //   path: "article/:slug",
+          //   loadComponent: () =>
+          //     import("./features/article/pages/article/article.component"),
+          // },
           {
             path: 'dashboard',
             loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)

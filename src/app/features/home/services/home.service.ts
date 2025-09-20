@@ -6,7 +6,7 @@ import { ArticleListConfig } from "../models/article-list-config.model";
 import { Article } from "../models/article.model";
 
 @Injectable({ providedIn: "root" })
-export class ArticlesService {
+export class HomeService {
   constructor(private readonly http: HttpClient) {}
 
   public query(config: ArticleListConfig): Observable<{ articles: Article[]; articlesCount: number }> {
