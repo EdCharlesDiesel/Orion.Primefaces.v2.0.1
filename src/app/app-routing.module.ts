@@ -12,10 +12,10 @@ import {NotfoundComponent} from "./features/notfound/notfound.component";
       {
         path: '', component: AppLayoutComponent,
         children: [
-          {
-            path: "",
-            loadComponent: () => import("./features/home/components/home.component"),
-          },
+          // {
+          //   path: "",
+          //   loadComponent: () => import("./features/home/components/home.component"),
+          // },
           {
             path: "login",
             loadComponent: () => import("./core/auth/auth.component"),
@@ -35,10 +35,10 @@ import {NotfoundComponent} from "./features/notfound/notfound.component";
             loadChildren: () => import("./features/settings/settings.module").then(c => c.SettingsModule),
             canActivate: [() => inject(UserManagementService).isAuthenticated],
           },
-          {
-            path: "profile",
-            loadChildren: () => import("./features/profile/profile.routes"),
-          },
+          // {
+          //   path: "profile",
+          //   loadChildren: () => import("./features/profile/profile.routes"),
+          // },
           // {
           //   path: "editor",
           //   children: [
