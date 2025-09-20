@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Department} from "../../../api/department.model";
+
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DepartmentsService} from "./departments.service";
 import {MessageService} from "primeng/api";
+import { Department } from 'src/app/core/models/department.model';
 
 @Component({
   selector: 'app-departments',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { DatabaseLog } from '../../../api/database-log';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {JobCandidatesService} from "./job-candidates.service";
-import {JobCandidate} from "../../../api/job-candidate.model";
+import { JobCandidate } from 'src/app/core/models/job-candidate.model';
+
 
 @Component({
   selector: 'app-job-candidates',
@@ -27,7 +27,7 @@ export class JobCandidatesComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'databaseLogID', header: 'ID' },
+      { field: 'JobCandidateID', header: 'ID' },
       { field: 'postTime', header: 'Post Time' },
       { field: 'databaseUser', header: 'Database User' },
       { field: 'event', header: 'Event' },
@@ -38,7 +38,7 @@ export class JobCandidatesComponent implements OnInit {
     ];
 
     this.systemInfoForm = this.fb.group({
-      postTime: [new Date().toISOString(), Validators.required], // auto-fill current time
+      postTime: [new Date().toISOString(), Validators.required],
       databaseUser: ['', Validators.required],
       event: ['', Validators.required],
       schema: [''],
@@ -115,9 +115,9 @@ export class JobCandidatesComponent implements OnInit {
     }
   }
 
-  deleteSystemInfo(systemInfo: DatabaseLog) {
-    if (!systemInfo.databaseLogID) return;
-    this.service.deleteJobCandidate(systemInfo.databaseLogID).subscribe({
+  deleteSystemInfo(systemInfo: JobCandidate) {
+    if (!systemInfo.businessEntityID) return;
+    this.service.deleteJobCandidate(systemInfo.businessEntityID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();

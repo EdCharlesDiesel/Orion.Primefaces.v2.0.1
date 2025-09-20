@@ -1,10 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Table } from 'primeng/table';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import {Customer} from "../../../api/customer";
-import {Product} from "../../../api/product";
-import {CustomerService} from "../../../services/customer.service";
-import {ProductService} from "../../../services/product.service";
 
 interface expandedRows {
     [key: string]: boolean;

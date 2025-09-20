@@ -1,9 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs';
-import {ServerMessageModel} from "../../../../api/server-message.model";
-import {AttachmentModel, RichMessageModel} from "../../../../api/rich-message.model";
-import {UserModel} from "../../../../api/user.model";
-import {VideoSourceUpdateModel} from "../../../../api/video-source-update.model";
+
 
 
 @Component({

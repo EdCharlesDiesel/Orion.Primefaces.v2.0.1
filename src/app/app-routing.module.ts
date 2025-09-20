@@ -65,10 +65,10 @@ import {NotfoundComponent} from "./features/notfound/notfound.component";
             path: 'dashboard',
             loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
           },
-          {
-            path: 'admin',
-            loadChildren: () => import('./../app/features/admin/admin.module').then(m => m.AdminModule)
-          } ,
+          // {
+          //   path: 'admin',
+          //   loadChildren: () => import('./../app/features/admin/admin.module').then(m => m.AdminModule)
+          // } ,
           {
             path: 'human-resources',
             loadChildren: () => import('./../app/features/human-resources/departments/departments.module').then(m => m.DepartmentsModule)

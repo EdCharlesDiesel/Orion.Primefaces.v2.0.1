@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { DatabaseLog } from '../../../api/database-log';
+
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {ShiftsService} from "./shifts.service";
-import {Shift} from "../../../api/shift.model";
+import { Shift } from 'src/app/core/models/shift.model';
+
 
 @Component({
   selector: 'app-shifts',
@@ -28,7 +29,7 @@ export class ShiftsComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'databaseLogID', header: 'ID' },
+      { field: 'ShiftID', header: 'ID' },
       { field: 'postTime', header: 'Post Time' },
       { field: 'databaseUser', header: 'Database User' },
       { field: 'event', header: 'Event' },
@@ -116,9 +117,9 @@ export class ShiftsComponent implements OnInit {
     }
   }
 
-  deleteSystemInfo(systemInfo: DatabaseLog) {
-    if (!systemInfo.databaseLogID) return;
-    this.service.deleteShift(systemInfo.databaseLogID).subscribe({
+  deleteSystemInfo(systemInfo: Shift) {
+    if (!systemInfo.shiftID) return;
+    this.service.deleteShift(systemInfo.shiftID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();

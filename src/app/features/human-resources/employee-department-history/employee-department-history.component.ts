@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {EmployeeDepartmentHistoryService} from "./employee-department-history.service";
-import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
+import { EmployeeDepartmentHistory } from 'src/app/core/models/employee-department-history.model ';
+
 
 @Component({
   selector: 'app-employee-department-history',
@@ -74,7 +75,7 @@ export class EmployeeDepartmentHistoryComponent implements OnInit {
     this.selectedSystemInfo = null;
   }
 
-  editSystemInfo(systemInfo: DatabaseLog) {
+  editSystemInfo(systemInfo: EmployeeDepartmentHistory) {
     this.systemInfoForm.patchValue(systemInfo);
     this.selectedSystemInfo = systemInfo;
     this.displayDialog = true;
@@ -86,9 +87,9 @@ export class EmployeeDepartmentHistoryComponent implements OnInit {
 
     const formValue = this.systemInfoForm.value;
 
-    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.databaseLogID) {
+    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.businessEntityID) {
       // Update existing log
-      this.service.updateEmployeeDepartmentHistory(this.selectedSystemInfo.databaseLogID, formValue).subscribe({
+      this.service.updateEmployeeDepartmentHistory(this.selectedSystemInfo.businessEntityID, formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
           this.loadData();
@@ -115,9 +116,9 @@ export class EmployeeDepartmentHistoryComponent implements OnInit {
     }
   }
 
-  deleteSystemInfo(systemInfo: DatabaseLog) {
-    if (!systemInfo.databaseLogID) return;
-    this.service.deleteEmployeeDepartmentHistory(systemInfo.databaseLogID).subscribe({
+  deleteSystemInfo(systemInfo: EmployeeDepartmentHistory) {
+    if (!systemInfo.businessEntityID) return;
+    this.service.deleteEmployeeDepartmentHistory(systemInfo.businessEntityID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();

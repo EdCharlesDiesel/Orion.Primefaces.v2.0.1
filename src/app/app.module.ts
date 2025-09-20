@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {NotfoundComponent} from "./features/notfound/notfound.component";
 import {ProductSubscriptionComponent} from "./features/product/product-subscription/product-subscription.component";
 import {AppLayoutModule} from "./core/layout/app.layout.module";
-import {AdminModule} from "./features/admin/admin.module";
+// import {AdminModule} from "./fea";
 import {HumanResourcesModule} from "./features/human-resources/human-resources.module";
 import {CountryService} from "./features/services/country.service";
 import {CustomerService} from "./features/services/customer.service";
@@ -24,7 +24,7 @@ import {PhotoService} from "./features/services/photo.service";
     imports: [
         AppRoutingModule,
         AppLayoutModule,
-        AdminModule,
+        // AdminModule,
         HumanResourcesModule
     ],
     providers: [
@@ -32,6 +32,6 @@ import {PhotoService} from "./features/services/photo.service";
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, AuthenticationService
     ],
-    // bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

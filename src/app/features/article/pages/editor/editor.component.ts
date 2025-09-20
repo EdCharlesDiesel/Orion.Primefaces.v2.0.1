@@ -1,5 +1,5 @@
 import { NgForOf } from "@angular/common";
-import { Component, DestroyRef, inject, OnInit } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -10,9 +10,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { combineLatest } from "rxjs";
 import { Errors } from "../../../../core/models/errors.model";
 import { ArticlesService } from "../../services/articles.service";
-import { UserService } from "../../../../core/auth/services/user.service";
 import { ListErrorsComponent } from "../../../../shared/components/list-errors.component";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import {UserManagementService} from "../../../../core/auth/services/user-management.service";
+
 
 interface ArticleForm {
   title: FormControl<string>;
@@ -23,7 +23,7 @@ interface ArticleForm {
 @Component({
   selector: "app-editor-page",
   templateUrl: "./editor.component.html",
-  imports: [ListErrorsComponent, ReactiveFormsModule, NgForOf],
+  imports: [ReactiveFormsModule],
   standalone: true,
 })
 export default class EditorComponent implements OnInit {
@@ -37,13 +37,13 @@ export default class EditorComponent implements OnInit {
 
   errors: Errors | null = null;
   isSubmitting = false;
-  destroyRef = inject(DestroyRef);
+  // destroyRef = inject(DestroyRef);
 
   constructor(
     private readonly articleService: ArticlesService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly userService: UserService,
+    private readonly userService: UserManagementService,
   ) {}
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export default class EditorComponent implements OnInit {
         this.articleService.get(this.route.snapshot.params["slug"]),
         this.userService.getCurrentUser(),
       ])
-        .pipe(takeUntilDestroyed(this.destroyRef))
+        // .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(([article, { user }]) => {
           if (user.username === article.author.username) {
             this.tagList = article.tagList;
@@ -91,7 +91,7 @@ export default class EditorComponent implements OnInit {
         ...this.articleForm.value,
         tagList: this.tagList,
       })
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      // .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (article) => this.router.navigate(["/article/", article.slug]),
         error: (err) => {

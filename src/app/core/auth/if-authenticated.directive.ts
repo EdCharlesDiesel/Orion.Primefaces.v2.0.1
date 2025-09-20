@@ -1,5 +1,5 @@
 import {
-  DestroyRef,
+
   Directive,
   inject,
   Input,
@@ -8,7 +8,7 @@ import {
   ViewContainerRef,
 } from "@angular/core";
 
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+
 import {UserManagementService} from "./services/user-management.service";
 
 @Directive({
@@ -16,7 +16,7 @@ import {UserManagementService} from "./services/user-management.service";
   standalone: true,
 })
 export class IfAuthenticatedDirective<T> implements OnInit {
-  destroyRef = inject(DestroyRef);
+
   constructor(
     private templateRef: TemplateRef<T>,
     private userService: UserManagementService,
@@ -28,7 +28,7 @@ export class IfAuthenticatedDirective<T> implements OnInit {
 
   ngOnInit() {
     this.userService.isAuthenticated
-      .pipe(takeUntilDestroyed(this.destroyRef))
+
       .subscribe((isAuthenticated: boolean) => {
         const authRequired = isAuthenticated && this.condition;
         const unauthRequired = !isAuthenticated && !this.condition;

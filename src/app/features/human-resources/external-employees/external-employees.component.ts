@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { DatabaseLog } from '../../../api/database-log';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {ExternalEmployeesService} from "./external-employees.service";
-import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
-import {Employee} from "../../../api/employee.model";
+import { Employee } from 'src/app/core/models/employee.model';
+
 
 @Component({
   selector: 'app-external-employees',
@@ -29,7 +28,7 @@ export class ExternalEmployeesComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: 'databaseLogID', header: 'ID' },
+      { field: 'EmployeeID', header: 'ID' },
       { field: 'postTime', header: 'Post Time' },
       { field: 'databaseUser', header: 'Database User' },
       { field: 'event', header: 'Event' },
@@ -40,7 +39,7 @@ export class ExternalEmployeesComponent implements OnInit {
     ];
 
     this.systemInfoForm = this.fb.group({
-      postTime: [new Date().toISOString(), Validators.required], // auto-fill current time
+      postTime: [new Date().toISOString(), Validators.required],
       databaseUser: ['', Validators.required],
       event: ['', Validators.required],
       schema: [''],
@@ -117,9 +116,9 @@ export class ExternalEmployeesComponent implements OnInit {
     }
   }
 
-  deleteSystemInfo(systemInfo: DatabaseLog) {
-    if (!systemInfo.databaseLogID) return;
-    this.service.deleteEmployee(systemInfo.databaseLogID).subscribe({
+  deleteSystemInfo(systemInfo: Employee) {
+    if (!systemInfo.businessEntityID) return;
+    this.service.deleteEmployee(systemInfo.businessEntityID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
-import { DatabaseLog } from '../../../api/database-log';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import {InternalEmployeesService} from "./internal-employees.service";
-import {EmployeeDepartmentHistory} from "../../../api/employee-department-history.model ";
-import {Employee} from "../../../api/employee.model";
+import {Employee} from "../../../core/models/employee.model";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { InternalEmployeesService } from './internal-employees.service';
+import { MessageService } from 'primeng/api/messageservice';
+
 
 @Component({
   selector: 'app-internal-employees',
@@ -40,7 +39,7 @@ export class InternalEmployeesComponent implements OnInit {
     ];
 
     this.systemInfoForm = this.fb.group({
-      postTime: [new Date().toISOString(), Validators.required], // auto-fill current time
+      postTime: [new Date().toISOString(), Validators.required],
       databaseUser: ['', Validators.required],
       event: ['', Validators.required],
       schema: [''],
@@ -96,7 +95,7 @@ export class InternalEmployeesComponent implements OnInit {
           this.loadData();
           this.hideDialog();
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update log' });
         }
@@ -109,7 +108,7 @@ export class InternalEmployeesComponent implements OnInit {
           this.loadData();
           this.hideDialog();
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create log' });
         }
@@ -117,14 +116,14 @@ export class InternalEmployeesComponent implements OnInit {
     }
   }
 
-  deleteSystemInfo(systemInfo: DatabaseLog) {
-    if (!systemInfo.databaseLogID) return;
-    this.service.deleteEmployee(systemInfo.databaseLogID).subscribe({
+  deleteSystemInfo(systemInfo: Employee) {
+    if (!systemInfo.businessEntityID) return;
+    this.service.deleteEmployee(systemInfo.businessEntityID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error(err);
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to delete log' });
       }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ArticleListComponent } from "../../article/components/article-list.component";
+// import { ArticleListComponent } from "../../article/components/article-list.component";
 import { ProfileService } from "../services/profile.service";
 import { Profile } from "../models/profile.model";
 import { ArticleListConfig } from "../../article/models/article-list-config.model";
@@ -8,8 +8,8 @@ import { ArticleListConfig } from "../../article/models/article-list-config.mode
 
 @Component({
   selector: "app-profile-favorites",
-  template: `<app-article-list [limit]="10" [config]="favoritesConfig" />`,
-  imports: [ArticleListComponent],
+  template: "",
+  // imports: [ArticleListComponent],
   standalone: true,
 })
 export default class ProfileFavoritesComponent implements OnInit {

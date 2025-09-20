@@ -1,7 +1,8 @@
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Department} from "../../../api/department.model";
+import {Department} from "../../../core/models/department.model";
+
 
 
 @Injectable({

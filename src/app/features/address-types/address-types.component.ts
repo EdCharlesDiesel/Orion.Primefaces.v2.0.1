@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import {AddressType} from "../../../api/address-type.model";
+
 import {AddressTypeTypesService} from "./address-types.service";
+import { AddressType } from 'src/app/core/models/address-type.model';
 
 @Component({
   selector: 'app-address-types',

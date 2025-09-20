@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Shift} from "../../../api/shift.model";
+import { Shift } from 'src/app/core/models/shift.model';
+
 
 @Injectable({
   providedIn: 'root'

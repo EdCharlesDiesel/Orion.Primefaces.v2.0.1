@@ -1,7 +1,7 @@
 // shared/components/task-dialog/task-dialog.component.ts
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Task } from '../../../api/task.model';
+import { Task } from './../../../core/models/task.model';
 
 @Component({
   selector: 'app-task-dialog',

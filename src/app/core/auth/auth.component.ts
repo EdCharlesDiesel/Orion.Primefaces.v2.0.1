@@ -1,6 +1,5 @@
 import {
   Component,
-  DestroyRef,
   inject,
   OnInit
 } from "@angular/core";
@@ -10,12 +9,11 @@ import {
   FormControl,
   ReactiveFormsModule,
 } from "@angular/forms";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { NgIf } from "@angular/common";
+import { ActivatedRoute, Router } from "@angular/router";
+
 import { ListErrorsComponent } from "../../shared/components/list-errors.component";
 import { Errors } from "../models/errors.model";
-import { UserService } from "./services/user.service";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import {UserManagementService} from "./services/user-management.service";
 
 interface AuthForm {
   email: FormControl<string>;
@@ -35,12 +33,12 @@ export default class AuthComponent implements OnInit {
   errors: Errors = { errors: {} };
   isSubmitting = false;
   authForm: FormGroup<AuthForm>;
-  destroyRef = inject(DestroyRef);
+
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly userService: UserService,
+    private readonly userService: UserManagementService,
   ) {
     this.authForm = new FormGroup<AuthForm>({
       email: new FormControl("", {
@@ -85,7 +83,7 @@ export default class AuthComponent implements OnInit {
             },
           );
 
-    observable.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    observable.pipe().subscribe({
       next: () => void this.router.navigate(["/"]),
       error: (err) => {
         this.errors = err;

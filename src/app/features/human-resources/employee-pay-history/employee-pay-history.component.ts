@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {EmployeePayHistoryService} from "./employee-pay-history.service";
-import {EmployeePayHistory} from "../../../api/employee-pay-history.model";
+
 import _default from "chart.js/dist/plugins/plugin.tooltip";
 import numbers = _default.defaults.animations.numbers;
+import { EmployeePayHistory } from 'src/app/core/models/employee-pay-history.model';
 
 @Component({
   selector: 'app-employee-pay-history',

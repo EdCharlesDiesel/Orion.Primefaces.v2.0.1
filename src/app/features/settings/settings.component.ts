@@ -6,8 +6,8 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Errors } from "../../core/models/errors.model";
-// import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import {Person} from "../../core/auth/person.model";
+import {UserManagementService} from "../../core/auth/services/user-management.service";
 
 export interface SettingsForm {
   image: FormControl<string>;
@@ -44,9 +44,9 @@ export default class SettingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.settingsForm.patchValue(
-      this.userService.getCurrentUser() as Partial<Person>,
-    );
+    // this.settingsForm.patchValue(
+    //   this.userService.getCurrentUser() as Partial<Person>,
+    // );
   }
 
   logout(): void {
@@ -56,16 +56,16 @@ export default class SettingsComponent implements OnInit {
   submitForm() {
     this.isSubmitting = true;
 
-    this.userService
-      .update(this.settingsForm.value)
-      // .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: ({ user : any}) =>
-          void this.router.navigate(["/profile/", user.username]),
-        error: (err: any) => {
-          this.errors = err;
-          this.isSubmitting = false;
-        },
-      });
+    // this.userService
+    //   .update(this.settingsForm.value)
+    //   // .pipe(takeUntilDestroyed(this.destroyRef))
+    //   .subscribe({
+    //     next: ({ user : any}) =>
+    //       void this.router.navigate(["/profile/", user.username]),
+    //     error: (err: any) => {
+    //       this.errors = err;
+    //       this.isSubmitting = false;
+    //     },
+    //   });
   }
 }

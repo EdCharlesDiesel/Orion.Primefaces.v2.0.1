@@ -19,7 +19,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {AddressService} from "./address.service";
 
 import {AddressComponent} from "./address.component";
-import {PersonRoutingModule} from "../person-routing.module";
+import { PersonRoutingModule } from '../person/person-routing.module';
+
 
 @NgModule({
   declarations: [

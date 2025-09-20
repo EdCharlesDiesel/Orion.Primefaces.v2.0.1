@@ -8,30 +8,30 @@ import { FavoriteButtonComponent } from "./favorite-button.component";
 @Component({
   selector: "app-article-preview",
   template: `
-    <div class="article-preview">
-      <app-article-meta [article]="article">
-        <app-favorite-button
-          [article]="article"
-          (toggle)="toggleFavorite($event)"
-          class="pull-xs-right"
-        >
-          {{ article.favoritesCount }}
-        </app-favorite-button>
-      </app-article-meta>
+<!--    <div class="article-preview">-->
+<!--      <app-article-meta [article]="article">-->
+<!--        <app-favorite-button-->
+<!--          [article]="article"-->
+<!--          (toggle)="toggleFavorite($event)"-->
+<!--          class="pull-xs-right"-->
+<!--        >-->
+<!--          {{ article.favoritesCount }}-->
+<!--        </app-favorite-button>-->
+<!--      </app-article-meta>-->
 
-      <a [routerLink]="['/article', article.slug]" class="preview-link">
-        <h1>{{ article.title }}</h1>
-        <p>{{ article.description }}</p>
-        <span>Read more...</span>
-        <ul class="tag-list">
-          @for (tag of article.tagList; track tag) {
-            <li class="tag-default tag-pill tag-outline">
-              {{ tag }}
-            </li>
-          }
-        </ul>
-      </a>
-    </div>
+<!--      <a [routerLink]="['/article', article.slug]" class="preview-link">-->
+<!--        <h1>{{ article.title }}</h1>-->
+<!--        <p>{{ article.description }}</p>-->
+<!--        <span>Read more...</span>-->
+<!--        <ul class="tag-list">-->
+<!--&lt;!&ndash;          @for (tag of article.tagList; track tag) {&ndash;&gt;-->
+<!--&lt;!&ndash;            <li class="tag-default tag-pill tag-outline">&ndash;&gt;-->
+<!--&lt;!&ndash;              {{ tag }}&ndash;&gt;-->
+<!--&lt;!&ndash;            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;          }&ndash;&gt;-->
+<!--        </ul>-->
+<!--      </a>-->
+<!--    </div>-->
   `,
   imports: [ArticleMetaComponent, FavoriteButtonComponent, RouterLink, NgForOf],
   standalone: true,
@@ -39,13 +39,13 @@ import { FavoriteButtonComponent } from "./favorite-button.component";
 export class ArticlePreviewComponent {
   @Input() article!: Article;
 
-  toggleFavorite(favorited: boolean): void {
-    this.article.favorited = favorited;
-
-    if (favorited) {
-      this.article.favoritesCount++;
-    } else {
-      this.article.favoritesCount--;
-    }
-  }
+  // toggleFavorite(favorited: boolean): void {
+  //   this.article.favorited = favorited;
+  //
+  //   if (favorited) {
+  //     this.article.favoritesCount++;
+  //   } else {
+  //     this.article.favoritesCount--;
+  //   }
+  // }
 }

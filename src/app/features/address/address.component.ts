@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import {Address} from "../../../api/address.model";
-import {AddressService} from "./address.service";
+import { Address } from 'src/app/core/models/address.model';
+import { AddressService } from './address.service';
+
 
 @Component({
-  selector: 'app-address.component.html',
-  templateUrl: './address.component.html',
+  selector: 'app-address',
+   templateUrl: './address.component.html',
   styleUrls: ['./address.component.css'],
   providers: [MessageService]
 })
@@ -107,7 +108,7 @@ export class AddressComponent implements OnInit {
           this.loadData();
           this.hideDialog();
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create log' });
         }
@@ -129,6 +130,8 @@ export class AddressComponent implements OnInit {
   //   });
   // }
 
+
+  
   public hideDialog() {
     this.displayDialog = false;
     this.selectedSystemInfo = null;
