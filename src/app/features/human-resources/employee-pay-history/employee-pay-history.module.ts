@@ -22,24 +22,24 @@ import {EmployeePayHistoryComponent} from "./employee-pay-history.component";
   declarations: [
     EmployeePayHistoryComponent
   ],
-    imports: [
-        CommonModule,
-        ProgressBarModule,
-        BadgeModule,
-        AvatarModule,
-        ScrollPanelModule,
-        TagModule,
-        ChipModule,
-        ButtonModule,
-        SkeletonModule,
-        AvatarGroupModule,
-        ScrollTopModule,
-        CardModule,
-        TableModule,
-        DialogModule,
-        ToastModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    CommonModule,
+    ProgressBarModule,
+    BadgeModule,
+    AvatarModule,
+    ScrollPanelModule,
+    TagModule,
+    ChipModule,
+    ButtonModule,
+    SkeletonModule,
+    AvatarGroupModule,
+    ScrollTopModule,
+    CardModule,
+    TableModule,
+    DialogModule,
+    ToastModule,
+    ReactiveFormsModule
+  ],
   providers: [
     EmployeePayHistoryService
   ],

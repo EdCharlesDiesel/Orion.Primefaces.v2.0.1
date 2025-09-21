@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEvent, HttpParams, HttpResponse} from '@angular/common/http';
 import {UrlFactoryService} from './url-factory.service';
-import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {AttachmentModel} from "../api/rich-message.model";
+
 
 @Injectable({
   providedIn: 'root'

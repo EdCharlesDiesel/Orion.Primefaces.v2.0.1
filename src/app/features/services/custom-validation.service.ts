@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-import {UserManagementService} from "../pages/user-management/user-management.service";
+import {UserManagementService} from "../../core/auth/services/user-management.service";
+
 
 
 @Injectable({

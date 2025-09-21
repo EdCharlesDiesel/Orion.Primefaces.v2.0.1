@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import {EmployeePayHistoryService} from "./employee-pay-history.service";
+import { BusinessEntityContactService } from './business-entity-contact.service';
+import { BusinessEntityContact } from 'src/app/core/models/business-entity-contact.model';
 
-import _default from "chart.js/dist/plugins/plugin.tooltip";
-import numbers = _default.defaults.animations.numbers;
-import { EmployeePayHistory } from 'src/app/core/models/employee-pay-history.model';
 
 @Component({
-  selector: 'app-employee-pay-history',
-  templateUrl: './employee-pay-history.component.html',
-  styleUrls: ['./employee-pay-history.component.css'],
+  selector: 'app-business-entity-contacts',
+  templateUrl: './business-entity-contacts.component.html',
+  styleUrls: ['./business-entity-contacts.component.css'],
   providers: [MessageService]
 })
-export class EmployeePayHistoryComponent implements OnInit {
-  systemInfoList: EmployeePayHistory[] = [];
-  selectedSystemInfo!: EmployeePayHistory | null;
+export class BusinessEntityContactComponent implements OnInit {
+  systemInfoList: BusinessEntityContact[] = [];
+  selectedSystemInfo!: BusinessEntityContact | null;
   displayDialog: boolean = false;
   systemInfoForm!: FormGroup;
   editing: boolean = false;
@@ -24,13 +22,13 @@ export class EmployeePayHistoryComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: EmployeePayHistoryService,
+    private service: BusinessEntityContactService,
     private messageService: MessageService
   ) {}
 
   ngOnInit() {
     this.cols = [
-      { field: 'EmployeePayHistoryID', header: 'ID' },
+      { field: 'databaseLogID', header: 'ID' },
       { field: 'postTime', header: 'Post Time' },
       { field: 'databaseUser', header: 'Database User' },
       { field: 'event', header: 'Event' },
@@ -55,7 +53,7 @@ export class EmployeePayHistoryComponent implements OnInit {
 
   loadData() {
     this.loading = true;
-    this.service.getEmployeePayHistory().subscribe({
+    this.service.getBusinessEntityContact().subscribe({
       next: data => {
         this.systemInfoList = data;
         this.loading = false;
@@ -77,7 +75,7 @@ export class EmployeePayHistoryComponent implements OnInit {
     this.selectedSystemInfo = null;
   }
 
-  editSystemInfo(systemInfo: EmployeePayHistory) {
+  editSystemInfo(systemInfo: BusinessEntityContact) {
     this.systemInfoForm.patchValue(systemInfo);
     this.selectedSystemInfo = systemInfo;
     this.displayDialog = true;
@@ -91,26 +89,26 @@ export class EmployeePayHistoryComponent implements OnInit {
 
     if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.businessEntityID) {
       // Update existing log
-      this.service.updateEmployeePayHistory(this.selectedSystemInfo.businessEntityID, formValue).subscribe({
+      this.service.updateBusinessEntityContact(this.selectedSystemInfo.businessEntityID, formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
           this.loadData();
           this.hideDialog();
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update log' });
         }
       });
     } else {
       // Create new log
-      this.service.createEmployeePayHistory(formValue).subscribe({
+      this.service.createBusinessEntityContact(formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });
           this.loadData();
           this.hideDialog();
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error(err);
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create log' });
         }
@@ -118,14 +116,14 @@ export class EmployeePayHistoryComponent implements OnInit {
     }
   }
 
-  deleteSystemInfo(businessEntityID: number) {
-    if (!businessEntityID) return;
-    this.service.deleteEmployeePayHistory(businessEntityID).subscribe({
+  deleteSystemInfo(systemInfo: BusinessEntityContact) {
+    if (!systemInfo.businessEntityID) return;
+    this.service.deleteBusinessEntityContact(systemInfo.businessEntityID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error(err);
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to delete log' });
       }

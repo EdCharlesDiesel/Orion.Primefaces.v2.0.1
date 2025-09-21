@@ -15,36 +15,37 @@ import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
 import {ReactiveFormsModule} from "@angular/forms";
-import {EmployeeDepartmentHistoryService} from "./employee-department-history.service";
-import {EmployeeDepartmentHistoryComponent} from "./employee-department-history.component";
+import { ContactTypeComponent } from './contact-type.component';
+import { ContactTypeService } from './contact-type.service';
+
 
 @NgModule({
   declarations: [
-    EmployeeDepartmentHistoryComponent
+    ContactTypeComponent
   ],
-  imports: [
-    CommonModule,
-    ProgressBarModule,
-    BadgeModule,
-    AvatarModule,
-    ScrollPanelModule,
-    TagModule,
-    ChipModule,
-    ButtonModule,
-    SkeletonModule,
-    AvatarGroupModule,
-    ScrollTopModule,
-    CardModule,
-    TableModule,
-    DialogModule,
-    ToastModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        ProgressBarModule,
+        BadgeModule,
+        AvatarModule,
+        ScrollPanelModule,
+        TagModule,
+        ChipModule,
+        ButtonModule,
+        SkeletonModule,
+        AvatarGroupModule,
+        ScrollTopModule,
+        CardModule,
+        TableModule,
+        DialogModule,
+        ToastModule,
+        ReactiveFormsModule
+    ],
   providers: [
-    EmployeeDepartmentHistoryService
+    ContactTypeService
   ],
   exports: [
-    EmployeeDepartmentHistoryComponent
+    ContactTypeComponent
   ]
 })
-export class EmployeeDepartmentHistoryModule { }
+export class ContactTypeModule { }

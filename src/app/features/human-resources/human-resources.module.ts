@@ -10,6 +10,13 @@ import {JobCandidatesModule} from "./job-candidates/job-candidates.module";
 import {ShiftsModule} from "./shifts/shifts.module";
 import { ConfirmationService } from 'primeng/api';
 import {DepartmentsComponent} from "./departments/departments.component";
+import {InternalEmployeesRoutingModule} from "./internal-employees/internal-employees-routing.module";
+import {ExternalEmployeesRoutingModule} from "./external-employees/external-employees-routing.module";
+import {
+  EmployeeDepartmentHistoryRoutingModule
+} from "./employee-department-history/employee-department-history-routing.module";
+import {JobCandidatesRoutingModule} from "./job-candidates/job-candidates-routing.module";
+import {ShiftsRoutingModule} from "./shifts/shifts-routing.module";
 
 @NgModule({
   declarations: [],
@@ -18,11 +25,16 @@ import {DepartmentsComponent} from "./departments/departments.component";
     DepartmentsModule,
     DepartmentsRoutingModule,
     InternalEmployeesModule,
+    InternalEmployeesRoutingModule,
     ExternalEmployeesModule,
+    ExternalEmployeesRoutingModule,
     EmployeePayHistoryModule,
     EmployeeDepartmentHistoryModule,
+    EmployeeDepartmentHistoryRoutingModule,
     JobCandidatesModule,
+    JobCandidatesRoutingModule,
     ShiftsModule,
+    ShiftsRoutingModule,
   ],
   providers: [ConfirmationService]  // <-- Add this
 })

@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import {EmployeePayHistoryService} from "./employee-pay-history.service";
+import {BusinessEntityService} from "./business-entity.service";
 
 import _default from "chart.js/dist/plugins/plugin.tooltip";
 import numbers = _default.defaults.animations.numbers;
-import { EmployeePayHistory } from 'src/app/core/models/employee-pay-history.model';
+import { BusinessEntity } from 'src/app/core/models/business-entity.model';
 
 @Component({
-  selector: 'app-employee-pay-history',
-  templateUrl: './employee-pay-history.component.html',
-  styleUrls: ['./employee-pay-history.component.css'],
+  selector: 'app-business-entity',
+  templateUrl: './business-entity.component.html',
+  styleUrls: ['./business-entity.component.css'],
   providers: [MessageService]
 })
-export class EmployeePayHistoryComponent implements OnInit {
-  systemInfoList: EmployeePayHistory[] = [];
-  selectedSystemInfo!: EmployeePayHistory | null;
+export class BusinessEntityComponent implements OnInit {
+  systemInfoList: BusinessEntity[] = [];
+  selectedSystemInfo!: BusinessEntity | null;
   displayDialog: boolean = false;
   systemInfoForm!: FormGroup;
   editing: boolean = false;
@@ -24,13 +24,13 @@ export class EmployeePayHistoryComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: EmployeePayHistoryService,
+    private service: BusinessEntityService,
     private messageService: MessageService
   ) {}
 
   ngOnInit() {
     this.cols = [
-      { field: 'EmployeePayHistoryID', header: 'ID' },
+      { field: 'BusinessEntityID', header: 'ID' },
       { field: 'postTime', header: 'Post Time' },
       { field: 'databaseUser', header: 'Database User' },
       { field: 'event', header: 'Event' },
@@ -55,7 +55,7 @@ export class EmployeePayHistoryComponent implements OnInit {
 
   loadData() {
     this.loading = true;
-    this.service.getEmployeePayHistory().subscribe({
+    this.service.getBusinessEntity().subscribe({
       next: data => {
         this.systemInfoList = data;
         this.loading = false;
@@ -77,7 +77,7 @@ export class EmployeePayHistoryComponent implements OnInit {
     this.selectedSystemInfo = null;
   }
 
-  editSystemInfo(systemInfo: EmployeePayHistory) {
+  editSystemInfo(systemInfo: BusinessEntity) {
     this.systemInfoForm.patchValue(systemInfo);
     this.selectedSystemInfo = systemInfo;
     this.displayDialog = true;
@@ -91,7 +91,7 @@ export class EmployeePayHistoryComponent implements OnInit {
 
     if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.businessEntityID) {
       // Update existing log
-      this.service.updateEmployeePayHistory(this.selectedSystemInfo.businessEntityID, formValue).subscribe({
+      this.service.updateBusinessEntity(this.selectedSystemInfo.businessEntityID, formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
           this.loadData();
@@ -104,7 +104,7 @@ export class EmployeePayHistoryComponent implements OnInit {
       });
     } else {
       // Create new log
-      this.service.createEmployeePayHistory(formValue).subscribe({
+      this.service.createBusinessEntity(formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });
           this.loadData();
@@ -120,7 +120,7 @@ export class EmployeePayHistoryComponent implements OnInit {
 
   deleteSystemInfo(businessEntityID: number) {
     if (!businessEntityID) return;
-    this.service.deleteEmployeePayHistory(businessEntityID).subscribe({
+    this.service.deleteBusinessEntity(businessEntityID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();

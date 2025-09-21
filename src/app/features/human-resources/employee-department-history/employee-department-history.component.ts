@@ -39,7 +39,7 @@ export class EmployeeDepartmentHistoryComponent implements OnInit {
     ];
 
     this.systemInfoForm = this.fb.group({
-      postTime: [new Date().toISOString(), Validators.required], // auto-fill current time
+      postTime: [new Date().toISOString(), Validators.required],
       databaseUser: ['', Validators.required],
       event: ['', Validators.required],
       schema: [''],

@@ -12,10 +12,6 @@ import {NotfoundComponent} from "./features/notfound/notfound.component";
       {
         path: '', component: AppLayoutComponent,
         children: [
-          // {
-          //   path: "",
-          //   loadComponent: () => import("./features/home/components/home.component"),
-          // },
           {
             path: "login",
             loadComponent: () => import("./core/auth/auth.component"),
@@ -35,44 +31,14 @@ import {NotfoundComponent} from "./features/notfound/notfound.component";
             loadChildren: () => import("./features/settings/settings.module").then(c => c.SettingsModule),
             canActivate: [() => inject(UserManagementService).isAuthenticated],
           },
-          // {
-          //   path: "profile",
-          //   loadChildren: () => import("./features/profile/profile.routes"),
-          // },
-          // {
-          //   path: "editor",
-          //   children: [
-          //     {
-          //       path: "",
-          //       loadComponent: () =>
-          //         import("./features/article/pages/editor/editor.component"),
-          //       canActivate: [() => inject(UserManagementService).isAuthenticated],
-          //     },
-          //     {
-          //       path: ":slug",
-          //       loadComponent: () =>
-          //         import("./features/article/pages/editor/editor.component"),
-          //       canActivate: [() => inject(UserManagementService).isAuthenticated],
-          //     },
-          //   ],
-          // },
-          // {
-          //   path: "article/:slug",
-          //   loadComponent: () =>
-          //     import("./features/article/pages/article/article.component"),
-          // },
           {
             path: 'dashboard',
             loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
           },
-          // {
-          //   path: 'admin',
-          //   loadChildren: () => import('./../app/features/admin/admin.module').then(m => m.AdminModule)
-          // } ,
           {
             path: 'human-resources',
-            loadChildren: () => import('./../app/features/human-resources/departments/departments.module').then(m => m.DepartmentsModule)
-          }  ,
+            loadChildren: () => import('./../app/features/human-resources/human-resources-routing.module').then(m => m.HumanResourcesRoutingModule)
+          },
           {
             path: 'person',
             loadChildren: () => import('./../app/features/person/person.module').then(m => m.PersonModule)

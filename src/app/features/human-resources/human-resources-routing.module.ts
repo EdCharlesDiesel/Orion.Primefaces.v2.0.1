@@ -30,7 +30,7 @@ import {EmployeePayHistoryModule} from "./employee-pay-history/employee-pay-hist
        loadChildren: () => import('./external-employees/external-employees.module').then(m => m.ExternalEmployeesModule)
      },
      {
-       path: 'job-candidates',
+       path: 'job-candidate',
        data: {breadcrumb: 'Charts'},
       loadChildren: () => import('./job-candidates/job-candidates.module').then(m => m.JobCandidatesModule)
      },

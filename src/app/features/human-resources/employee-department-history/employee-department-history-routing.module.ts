@@ -4,9 +4,10 @@ import {NgModule} from "@angular/core";
 
 
 @NgModule({
-	imports: [RouterModule.forChild([
-		{ path: '', component: EmployeeDepartmentHistoryComponent }
-	])],
-	exports: [RouterModule]
+  imports: [RouterModule.forChild([
+    {path: '', component: EmployeeDepartmentHistoryComponent}
+  ])],
+  exports: [RouterModule]
 })
-export class EmployeeDepartmentHistoryRoutingModule { }
+export class EmployeeDepartmentHistoryRoutingModule {
+}

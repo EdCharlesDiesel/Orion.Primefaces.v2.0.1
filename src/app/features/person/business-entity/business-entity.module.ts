@@ -15,12 +15,12 @@ import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
 import {ReactiveFormsModule} from "@angular/forms";
-import {EmployeeDepartmentHistoryService} from "./employee-department-history.service";
-import {EmployeeDepartmentHistoryComponent} from "./employee-department-history.component";
+import { BusinessEntityComponent } from './business-entity.component';
+import { BusinessEntityService } from './business-entity.service';
 
 @NgModule({
   declarations: [
-    EmployeeDepartmentHistoryComponent
+    BusinessEntityComponent
   ],
   imports: [
     CommonModule,
@@ -41,10 +41,10 @@ import {EmployeeDepartmentHistoryComponent} from "./employee-department-history.
     ReactiveFormsModule
   ],
   providers: [
-    EmployeeDepartmentHistoryService
+    BusinessEntityService
   ],
   exports: [
-    EmployeeDepartmentHistoryComponent
+    BusinessEntityComponent
   ]
 })
-export class EmployeeDepartmentHistoryModule { }
+export class BusinessEntityModule { }

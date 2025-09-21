@@ -15,36 +15,37 @@ import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
 import {ReactiveFormsModule} from "@angular/forms";
-import {EmployeeDepartmentHistoryService} from "./employee-department-history.service";
-import {EmployeeDepartmentHistoryComponent} from "./employee-department-history.component";
+import { BusinessEntityAddressComponent } from './business-entity-address.component';
+import { BusinessEntityAddressService } from './business-entity-address.service';
+
 
 @NgModule({
   declarations: [
-    EmployeeDepartmentHistoryComponent
+    BusinessEntityAddressComponent
   ],
-  imports: [
-    CommonModule,
-    ProgressBarModule,
-    BadgeModule,
-    AvatarModule,
-    ScrollPanelModule,
-    TagModule,
-    ChipModule,
-    ButtonModule,
-    SkeletonModule,
-    AvatarGroupModule,
-    ScrollTopModule,
-    CardModule,
-    TableModule,
-    DialogModule,
-    ToastModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        ProgressBarModule,
+        BadgeModule,
+        AvatarModule,
+        ScrollPanelModule,
+        TagModule,
+        ChipModule,
+        ButtonModule,
+        SkeletonModule,
+        AvatarGroupModule,
+        ScrollTopModule,
+        CardModule,
+        TableModule,
+        DialogModule,
+        ToastModule,
+        ReactiveFormsModule
+    ],
   providers: [
-    EmployeeDepartmentHistoryService
+    BusinessEntityAddressService
   ],
   exports: [
-    EmployeeDepartmentHistoryComponent
+    BusinessEntityAddressComponent
   ]
 })
-export class EmployeeDepartmentHistoryModule { }
+export class BusinessEntityAddressModule { }
