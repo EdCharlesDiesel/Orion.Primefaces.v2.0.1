@@ -8,7 +8,7 @@ import { Employee } from 'src/app/core/models/employee.model';
 @Component({
   selector: 'app-external-employees',
   templateUrl: './external-employees.component.html',
-  styleUrls: ['./external-employees.component.css'],
+  styleUrls: ['./external-employees.component.scss'],
   providers: [MessageService]
 })
 export class ExternalEmployeesComponent implements OnInit {

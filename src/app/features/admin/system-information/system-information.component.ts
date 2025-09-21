@@ -1,62 +1,55 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import {ErrorLogService} from "./error-log.service";
-import {ErrorLog} from "./../../../api/errorLog";
-
+import { SystemInformation } from 'src/app/core/models/system-information.model';
+import { SystemInformationService } from './system-information.service';
 
 @Component({
-  selector: 'app-error-log',
-  templateUrl: './error-log.component.html',
-  styleUrls: ['./error-log.component.css'],
+  selector: 'app-system-information',
+  templateUrl: './system-information.component.html',
+  styleUrls: ['./system-information.component.scss'],
   providers: [MessageService]
 })
-export class ErrorLogComponent implements OnInit {
-  systemInfoList: ErrorLog[] = [];
-  selectedSystemInfo: ErrorLog | null = null;
+export class SystemInformationComponent implements OnInit {
+  systemInfoList: SystemInformation[] = [];
+  selectedSystemInfo: SystemInformation | null | undefined;
   loading = true;
   displayDialog = false;
 
   cols = [
-    { field: 'ErrorLogID', header: 'ID' },
-    { field: 'errorTime', header: 'Error Time' },
-    { field: 'userName', header: 'user Name' },
-    { field: 'errorNumber', header: 'Error Number' },
-    { field: 'errorSeverity', header: 'Error Severity' },
-    { field: 'errorState', header: 'Error State' },
-    { field: 'errorProcedure', header: 'Error Procedure' },
-    { field: 'errorLine', header: 'Error Line' },
-    { field: 'errorMessage', header: 'Error Message' }
-
+    { field: 'systemInformationID', header: 'ID' },
+    { field: 'databaseVersion', header: 'Database Version' },
+    { field: 'versionDate', header: 'Version Date' },
+    { field: 'modifiedDate', header: 'Modified Date' }
   ];
 
   constructor(
-    private systemInfoService: ErrorLogService,
+    private systemInfoService: SystemInformationService,
     private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
-    this.loadErrorLog();
+    this.loadSystemInformation();
   }
 
-  loadErrorLog(): void {
+  loadSystemInformation(): void {
     this.loading = true;
-    this.systemInfoService.getErrorLog().subscribe({
+    this.systemInfoService.getSystemInformation().subscribe({
       next: (data: any) => {
         this.systemInfoList = data;
         this.loading = false;
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
-          detail: 'Error Log loaded successfully'
+          detail: 'System information loaded successfully'
         });
       },
       error: (error: any) => {
-        console.error('Error loading Error Log:', error);
+        console.error('Error loading system information:', error);
         this.loading = false;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Failed to load Error Log'
+          detail: 'Failed to load system information'
         });
       }
     });
@@ -83,6 +76,6 @@ export class ErrorLogComponent implements OnInit {
   }
 
   refresh(): void {
-    this.loadErrorLog();
+    this.loadSystemInformation();
   }
 }

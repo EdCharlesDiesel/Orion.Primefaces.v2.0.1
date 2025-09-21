@@ -1,5 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {DatabaseLogComponent} from './database-log.component';
+import {DatabaseLogRoutingModule} from './database-log-routing.module';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {BadgeModule} from 'primeng/badge';
 import {AvatarModule} from 'primeng/avatar';
@@ -10,23 +12,20 @@ import {SkeletonModule} from 'primeng/skeleton';
 import {ButtonModule} from 'primeng/button';
 import {AvatarGroupModule} from 'primeng/avatargroup';
 import {ScrollTopModule} from 'primeng/scrolltop';
+import {DatabaseLogService} from "./database-log.service";
 import {CardModule} from "primeng/card";
 import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ToastModule} from "primeng/toast";
 import {ReactiveFormsModule} from "@angular/forms";
-import {ExternalEmployeesService} from "./external-employees.service";
-import {ExternalEmployeesComponent} from "./external-employees.component";
-import {ConfirmDialogModule} from "primeng/confirmdialog";
-import {ExternalEmployeesRoutingModule} from "./external-employees-routing.module";
 
 @NgModule({
   declarations: [
-    ExternalEmployeesComponent
+    DatabaseLogComponent
   ],
   imports: [
     CommonModule,
-    ExternalEmployeesRoutingModule,
+    DatabaseLogRoutingModule,
     ProgressBarModule,
     BadgeModule,
     AvatarModule,
@@ -42,14 +41,14 @@ import {ExternalEmployeesRoutingModule} from "./external-employees-routing.modul
     DialogModule,
     ToastModule,
     ReactiveFormsModule,
-    ConfirmDialogModule
+
   ],
   providers: [
-    ExternalEmployeesService
+    DatabaseLogService
   ],
   exports: [
-    ExternalEmployeesComponent
+    DatabaseLogComponent
   ]
 })
-export class ExternalEmployeesModule {
+export class DatabaseLogModule {
 }

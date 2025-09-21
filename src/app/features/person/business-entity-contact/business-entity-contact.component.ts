@@ -7,8 +7,8 @@ import { BusinessEntityContact } from 'src/app/core/models/business-entity-conta
 
 @Component({
   selector: 'app-business-entity-contacts',
-  templateUrl: './business-entity-contacts.component.html',
-  styleUrls: ['./business-entity-contacts.component.css'],
+  templateUrl: './business-entity-contact.component.html',
+  styleUrls: ['./business-entity-contact.component.scss'],
   providers: [MessageService]
 })
 export class BusinessEntityContactComponent implements OnInit {

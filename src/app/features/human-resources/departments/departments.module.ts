@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { DepartmentsRoutingModule } from './departments-routing.module';
 import { DepartmentsComponent } from './departments.component';
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {DialogModule} from "primeng/dialog";
-import {PaginatorModule} from "primeng/paginator";
-import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {ToastModule} from "primeng/toast";
 import {ReactiveFormsModule} from "@angular/forms";
@@ -21,7 +18,7 @@ import {ChipModule} from "primeng/chip";
 import {SkeletonModule} from "primeng/skeleton";
 import {AvatarGroupModule} from "primeng/avatargroup";
 import {ScrollTopModule} from "primeng/scrolltop";
-import {DatabaseLogService} from "../../database-log/database-log.service";
+import {DepartmentsService} from "./departments.service";
 
 
 @NgModule({
@@ -49,7 +46,7 @@ import {DatabaseLogService} from "../../database-log/database-log.service";
     ConfirmDialogModule
   ],
   providers: [
-    DatabaseLogService
+    DepartmentsService
   ],
   exports: [
     DepartmentsComponent

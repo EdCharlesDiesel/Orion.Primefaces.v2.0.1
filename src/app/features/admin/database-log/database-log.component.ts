@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {MessageService} from "primeng/api";
-import { CountryRegion } from 'src/app/core/models/country-region.model';
-import { CountryRegionsService } from './country-regions.service';
+import { Component, OnInit } from '@angular/core';
+import { DatabaseLogService } from './database-log.service';
+import { MessageService } from 'primeng/api';
 
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { DatabaseLog } from 'src/app/core/models/database-log';
 
 @Component({
-  selector: 'app-country-region',
-  templateUrl: './country-region.component.html',
-  styleUrls: ['./country-region.component.scss'],
-  providers: [MessageService]   // <-- Add this
+  selector: 'app-database-log',
+  templateUrl: './database-log.component.html',
+  styleUrls: ['./database-log.component.scss'],
+  providers: [MessageService]
 })
-export class CountryRegionComponent implements OnInit {
-  systemInfoList: CountryRegion[] = [];
-  selectedSystemInfo!: CountryRegion | null;
+export class DatabaseLogComponent implements OnInit {
+  systemInfoList: DatabaseLog[] = [];
+  selectedSystemInfo!: DatabaseLog | null;
   displayDialog: boolean = false;
   systemInfoForm!: FormGroup;
   editing: boolean = false;
@@ -22,30 +22,38 @@ export class CountryRegionComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: CountryRegionsService,
+    private service: DatabaseLogService,
     private messageService: MessageService
-) {}
+  ) {}
 
   ngOnInit() {
     this.cols = [
-      { field: 'CountryRegionID', header: 'ID' },
-      { field: 'name', header: 'Name' },
-      { field: 'groupName', header: 'Group Name' },
-      { field: 'ModifiedDate', header: 'Modified Date' }
+      { field: 'databaseLogID', header: 'ID' },
+      { field: 'postTime', header: 'Post Time' },
+      { field: 'databaseUser', header: 'Database User' },
+      { field: 'event', header: 'Event' },
+      { field: 'schema', header: 'Schema' },
+      { field: 'object', header: 'Object' },
+      { field: 'tsql', header: 'TSQL' },
+      { field: 'xmlEvent', header: 'XML Event' }
     ];
 
     this.systemInfoForm = this.fb.group({
-      Name: ['', Validators.required],
-      GroupName: ['', Validators.required],
-      ModifiedDate:  [new Date().toISOString(), Validators.required],
+      postTime: [new Date().toISOString(), Validators.required], // auto-fill current time
+      databaseUser: ['', Validators.required],
+      event: ['', Validators.required],
+      schema: [''],
+      object: [''],
+      tsql: [''],
+      xmlEvent: ['']
     });
 
     this.loadData();
   }
 
-public loadData() {
+  public loadData() {
     this.loading = true;
-    this.service.getCountryRegion().subscribe({
+    this.service.getDatabaseLog().subscribe({
       next: data => {
         this.systemInfoList = data;
         this.loading = false;
@@ -54,11 +62,11 @@ public loadData() {
     });
   }
 
- public refresh() {
+  public refresh() {
     this.loadData();
   }
 
-public openNew() {
+  public openNew() {
     this.systemInfoForm.reset({
       postTime: new Date().toISOString() // reset with current time
     });
@@ -67,21 +75,21 @@ public openNew() {
     this.selectedSystemInfo = null;
   }
 
-
-public editSystemInfo(systemInfo: CountryRegion) {
+  public editSystemInfo(systemInfo: DatabaseLog) {
     this.systemInfoForm.patchValue(systemInfo);
     this.selectedSystemInfo = systemInfo;
     this.displayDialog = true;
     this.editing = true;
   }
 
-public saveCountryRegion() {
+  public saveSystemInfo() {
     if (this.systemInfoForm.invalid) return;
 
     const formValue = this.systemInfoForm.value;
 
-    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.country-regionID) {
-      this.service.updateCountryRegion(this.selectedSystemInfo.country-regionID, formValue).subscribe({
+    if (this.editing && this.selectedSystemInfo && this.selectedSystemInfo.databaseLogID) {
+      // Update existing log
+      this.service.updateDatabaseLog(this.selectedSystemInfo.databaseLogID, formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Log updated successfully' });
           this.loadData();
@@ -93,8 +101,8 @@ public saveCountryRegion() {
         }
       });
     } else {
-      // Create new CountryRegion
-      this.service.createCountryRegion(formValue).subscribe({
+      // Create new log
+      this.service.createDatabaseLog(formValue).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Created', detail: 'Log added successfully' });
           this.loadData();
@@ -108,9 +116,9 @@ public saveCountryRegion() {
     }
   }
 
-public deleteCountryRegion(systemInfo: CountryRegion) {
-    if (!systemInfo.country-regionID) return;
-    this.service.deleteCountryRegion(systemInfo.country-regionID).subscribe({
+  public deleteSystemInfo(systemInfo: DatabaseLog) {
+    if (!systemInfo.databaseLogID) return;
+    this.service.deleteDatabaseLog(systemInfo.databaseLogID).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Deleted', detail: 'Log deleted successfully' });
         this.loadData();
@@ -122,11 +130,13 @@ public deleteCountryRegion(systemInfo: CountryRegion) {
     });
   }
 
-public hideDialog() {
-    // this.systemInfoDialog = false;
+  public hideDialog() {
+    this.displayDialog = false;
+    this.selectedSystemInfo = null;
   }
 
-public formatDate(date: any): string {
-    return date ? new Date(date).toLocaleDateString() : '';
+  public onRowSelect(event: any) {
+    this.selectedSystemInfo = event.data;
+    this.displayDialog = true;
   }
 }

@@ -18,7 +18,7 @@ import {ChipModule} from "primeng/chip";
 import {SkeletonModule} from "primeng/skeleton";
 import {AvatarGroupModule} from "primeng/avatargroup";
 import {ScrollTopModule} from "primeng/scrolltop";
-import {DatabaseLogService} from "../../database-log/database-log.service";
+import {DatabaseLogService} from "../../admin/database-log/database-log.service";
 import { AddressRoutingModule } from './address-routing.module';
 import { AddressComponent } from './address.component';
 

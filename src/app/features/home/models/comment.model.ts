@@ -1,4 +1,5 @@
-import { Profile } from "../../profile/models/profile.model";
+class Profile {
+}
 
 export interface Comment {
   id: string;

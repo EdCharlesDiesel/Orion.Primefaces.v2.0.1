@@ -28,20 +28,35 @@ export class AppMenuComponent implements OnInit {
           {label: 'System-Information', icon: 'pi pi-fw pi-compass', routerLink: ['/admin/system-information']},
           {label: 'Error Logs', icon: 'pi pi-fw pi-filter', routerLink: ['/admin/error-log']},
           {label: 'Database Logs', icon: 'pi pi-fw pi-database', routerLink: ['/admin/database-log']},
-          {label: 'Transaction History Archive', icon: 'pi pi-fw pi-times', routerLink: ['/admin/transaction-history-archive']},
-          {label: 'Address Type', icon: 'pi pi-fw pi-directions', routerLink: ['/admin/address-type']},
+          {
+            label: 'Transaction History Archive',
+            icon: 'pi pi-fw pi-times',
+            routerLink: ['/admin/transaction-history-archive']
+          }
         ]
       },
       {
         label: 'Human Resources',
         items: [
           {label: 'Departments', icon: 'pi pi-fw pi-compass', routerLink: ['/human-resources/departments']},
-          {label: 'Employee Department History', icon: 'pi pi-fw pi-filter', routerLink: ['/human-resources/employee-department-history']},
-          {label: 'Employee Pay History', icon: 'pi pi-fw pi-database', routerLink: ['/human-resources/employee-pay-history']},
-          {label: 'Internal Employees', icon: 'pi pi-fw pi-compass', routerLink: ['/human-resources/internal-employees']},
+          {
+            label: 'Employee Department History',
+            icon: 'pi pi-fw pi-filter',
+            routerLink: ['/human-resources/employee-department-history']
+          },
+          {
+            label: 'Employee Pay History',
+            icon: 'pi pi-fw pi-database',
+            routerLink: ['/human-resources/employee-pay-history']
+          },
+          {
+            label: 'Internal Employees',
+            icon: 'pi pi-fw pi-compass',
+            routerLink: ['/human-resources/internal-employees']
+          },
           {label: 'External Employees', icon: 'pi pi-fw pi-times', routerLink: ['/human-resources/external-employees']},
           {label: 'Job Candidate', icon: 'pi pi-fw pi-database', routerLink: ['/human-resources/job-candidate']},
-          {label: 'Shift', icon: 'pi pi-fw pi-times', routerLink: ['/human-resources/shift']},
+          {label: 'Shifts', icon: 'pi pi-fw pi-times', routerLink: ['/human-resources/shifts']},
         ]
       },
       {
@@ -97,7 +112,7 @@ export class AppMenuComponent implements OnInit {
         label: 'Info',
         items: [
           {label: 'Documentation', icon: 'pi pi-fw pi-id-card', routerLink: ['/']},
-          ]
+        ]
       },
     ];
   }

@@ -9,7 +9,7 @@ import { Shift } from 'src/app/core/models/shift.model';
 @Component({
   selector: 'app-shifts',
   templateUrl: './shifts.component.html',
-  styleUrls: ['./shifts.component.css'],
+  styleUrls: ['./shifts.component.scss'],
   providers: [MessageService]
 })
 export class ShiftsComponent implements OnInit {

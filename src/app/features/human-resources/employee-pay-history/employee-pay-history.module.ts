@@ -17,6 +17,9 @@ import {ToastModule} from "primeng/toast";
 import {ReactiveFormsModule} from "@angular/forms";
 import {EmployeePayHistoryService} from "./employee-pay-history.service";
 import {EmployeePayHistoryComponent} from "./employee-pay-history.component";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import { EmployeePayHistoryRoutingModule } from './employee-pay-history-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import {EmployeePayHistoryComponent} from "./employee-pay-history.component";
   ],
   imports: [
     CommonModule,
+    EmployeePayHistoryRoutingModule,
     ProgressBarModule,
     BadgeModule,
     AvatarModule,
@@ -38,7 +42,8 @@ import {EmployeePayHistoryComponent} from "./employee-pay-history.component";
     TableModule,
     DialogModule,
     ToastModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ConfirmDialogModule
   ],
   providers: [
     EmployeePayHistoryService

@@ -8,7 +8,7 @@ import { JobCandidate } from 'src/app/core/models/job-candidate.model';
 @Component({
   selector: 'app-job-candidates',
   templateUrl: './job-candidates.component.html',
-  styleUrls: ['./job-candidates.component.css'],
+  styleUrls: ['./job-candidates.component.scss'],
   providers: [MessageService]})
 export class JobCandidatesComponent implements OnInit {
   systemInfoList: JobCandidate[] = [];

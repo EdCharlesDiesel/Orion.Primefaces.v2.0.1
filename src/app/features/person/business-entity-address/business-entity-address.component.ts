@@ -9,7 +9,7 @@ import { BusinessEntityAddressService } from './business-entity-address.service'
 @Component({
   selector: 'app-business-entity-address',
   templateUrl: './business-entity-address.component.html',
-  styleUrls: ['./business-entity-address.component.css'],
+  styleUrls: ['./business-entity-address.component.scss'],
   providers: [MessageService]
 })
 export class BusinessEntityAddressComponent implements OnInit {

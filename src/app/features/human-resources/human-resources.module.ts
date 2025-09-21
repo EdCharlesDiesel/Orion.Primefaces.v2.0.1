@@ -17,6 +17,7 @@ import {
 } from "./employee-department-history/employee-department-history-routing.module";
 import {JobCandidatesRoutingModule} from "./job-candidates/job-candidates-routing.module";
 import {ShiftsRoutingModule} from "./shifts/shifts-routing.module";
+import {EmployeePayHistoryRoutingModule} from "./employee-pay-history/employee-pay-history-routing.module";
 
 @NgModule({
   declarations: [],
@@ -24,13 +25,14 @@ import {ShiftsRoutingModule} from "./shifts/shifts-routing.module";
     CommonModule,
     DepartmentsModule,
     DepartmentsRoutingModule,
+    EmployeeDepartmentHistoryModule,
+    EmployeeDepartmentHistoryRoutingModule,
     InternalEmployeesModule,
     InternalEmployeesRoutingModule,
     ExternalEmployeesModule,
     ExternalEmployeesRoutingModule,
     EmployeePayHistoryModule,
-    EmployeeDepartmentHistoryModule,
-    EmployeeDepartmentHistoryRoutingModule,
+    EmployeePayHistoryRoutingModule,
     JobCandidatesModule,
     JobCandidatesRoutingModule,
     ShiftsModule,

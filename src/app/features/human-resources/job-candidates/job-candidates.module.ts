@@ -18,6 +18,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {JobCandidatesService} from "./job-candidates.service";
 import {EmployeePayHistoryComponent} from "../employee-pay-history/employee-pay-history.component";
 import {JobCandidatesComponent} from "./job-candidates.component";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {JobCandidatesRoutingModule} from "./job-candidates-routing.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import {JobCandidatesComponent} from "./job-candidates.component";
   ],
     imports: [
         CommonModule,
+        JobCandidatesRoutingModule,
         ProgressBarModule,
         BadgeModule,
         AvatarModule,
@@ -39,7 +42,8 @@ import {JobCandidatesComponent} from "./job-candidates.component";
         TableModule,
         DialogModule,
         ToastModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ConfirmDialogModule
     ],
   providers: [
     JobCandidatesService

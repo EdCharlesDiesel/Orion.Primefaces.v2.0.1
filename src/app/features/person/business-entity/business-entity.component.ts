@@ -10,7 +10,7 @@ import { BusinessEntity } from 'src/app/core/models/business-entity.model';
 @Component({
   selector: 'app-business-entity',
   templateUrl: './business-entity.component.html',
-  styleUrls: ['./business-entity.component.css'],
+  styleUrls: ['./business-entity.component.scss'],
   providers: [MessageService]
 })
 export class BusinessEntityComponent implements OnInit {

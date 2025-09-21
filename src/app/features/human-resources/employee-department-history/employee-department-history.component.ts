@@ -8,7 +8,7 @@ import { EmployeeDepartmentHistory } from 'src/app/core/models/employee-departme
 @Component({
   selector: 'app-employee-department-history',
   templateUrl: './employee-department-history.component.html',
-  styleUrls: ['./employee-department-history.component.css'],
+  styleUrls: ['./employee-department-history.component.scss'],
   providers: [MessageService]
 })
 export class EmployeeDepartmentHistoryComponent implements OnInit {

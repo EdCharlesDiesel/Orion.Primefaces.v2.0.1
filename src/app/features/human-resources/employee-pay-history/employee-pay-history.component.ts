@@ -10,7 +10,7 @@ import { EmployeePayHistory } from 'src/app/core/models/employee-pay-history.mod
 @Component({
   selector: 'app-employee-pay-history',
   templateUrl: './employee-pay-history.component.html',
-  styleUrls: ['./employee-pay-history.component.css'],
+  styleUrls: ['./employee-pay-history.component.scss'],
   providers: [MessageService]
 })
 export class EmployeePayHistoryComponent implements OnInit {
