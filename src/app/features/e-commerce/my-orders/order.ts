@@ -1,4 +1,4 @@
-import {ShoppingCart} from "../e-commerce/shoppingcart/shoppingcart";
+import {ShoppingCart} from "../shoppingcart/shoppingcart";
 
 
 export class Order {
