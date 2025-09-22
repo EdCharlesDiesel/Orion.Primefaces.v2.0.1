@@ -1,7 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {MenuItem, MessageService} from 'primeng/api';
 
-import {ProductService} from '../../shared/services/product.service';
+import {ProductService} from '../../../shared/services/product.service';
 import {fromEvent, of, Subscription} from 'rxjs';
 import {Product} from 'src/app/core/models/product';
 import {LayoutService} from 'src/app/core/layout/service/app.layout.service';

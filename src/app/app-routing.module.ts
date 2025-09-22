@@ -3,7 +3,7 @@ import {RouterModule} from "@angular/router";
 import {AppLayoutComponent} from "./core/layout/app.layout.component";
 import {UserManagementService} from "./core/authentication/services/user-management.service";
 import {map} from "rxjs/operators";
-import {NotfoundComponent} from "./features/notfound/notfound.component";
+import {NotfoundComponent} from "./shared/components/notfound/notfound.component";
 
 
 @NgModule({
@@ -33,7 +33,7 @@ import {NotfoundComponent} from "./features/notfound/notfound.component";
           },
           {
             path: 'dashboard',
-            loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
+            loadChildren: () => import('./features/home/dashboard/dashboard.module').then(m => m.DashboardModule)
           },
           {
             path: 'human-resources',
