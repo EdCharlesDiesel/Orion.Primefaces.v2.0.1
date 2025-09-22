@@ -11,7 +11,7 @@ export interface MessageWithAttachment {
 @Component({
   selector: 'app-message-input',
   templateUrl: './message-input.component.html',
-  styleUrls: ['./message-input.component.css']
+  styleUrls: ['./message-input.component.scss']
 })
 export class MessageInputComponent implements OnInit {
 

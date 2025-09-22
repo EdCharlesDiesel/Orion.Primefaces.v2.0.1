@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 
 import { MailRoutingModule } from './mail-routing.module';
@@ -9,7 +9,8 @@ import { MailComponent } from './mail.component';
     imports: [
         CommonModule,
         MailRoutingModule,
-        ButtonModule
+        ButtonModule,
+        NgOptimizedImage
     ],
     declarations: [MailComponent]
 })

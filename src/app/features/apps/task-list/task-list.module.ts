@@ -22,6 +22,8 @@ import {TaskDialogComponent} from "./task-dialog.component";
 import {CalendarModule} from "primeng/calendar";
 import {CheckboxModule} from "primeng/checkbox";
 import {ReactiveFormsModule} from "@angular/forms";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {InputTextModule} from "primeng/inputtext";
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     PaginatorModule,
     CalendarModule,
     CheckboxModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InputTextareaModule,
+    InputTextModule
   ],
   providers: [
     TaskService

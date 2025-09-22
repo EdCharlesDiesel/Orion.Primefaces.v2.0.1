@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CheckoutComponent } from './checkout.component';
 import { CheckoutRoutingModule } from './checkout-routing.module';
@@ -21,26 +21,27 @@ import {OverlayModule} from "primeng/overlay";
 import { DropdownModule} from "primeng/dropdown";
 
 @NgModule({
-	imports: [
-		CommonModule,
-		FormsModule,
-		CheckoutRoutingModule,
-		ToolbarModule,
-		ButtonModule,
-		RippleModule,
-		SplitButtonModule,
-		AccordionModule,
-		TabViewModule,
-		FieldsetModule,
-		MenuModule,
-		InputTextModule,
-		DividerModule,
-		SplitterModule,
+  imports: [
+    CommonModule,
+    FormsModule,
+    CheckoutRoutingModule,
+    ToolbarModule,
+    ButtonModule,
+    RippleModule,
+    SplitButtonModule,
+    AccordionModule,
+    TabViewModule,
+    FieldsetModule,
+    MenuModule,
+    InputTextModule,
+    DividerModule,
+    SplitterModule,
     CheckboxModule,
     InputNumberModule,
     PanelModule,
     OverlayModule,
     DropdownModule,
+    NgOptimizedImage,
 
   ],
 	declarations: [CheckoutComponent]

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AppsRoutingModule } from './apps-routing.module';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AppsRoutingModule} from './apps-routing.module';
 import {FormsModule} from "@angular/forms";
 import {TaskListModule} from "./task-list/task-list.module";
 
@@ -11,7 +11,7 @@ import {TaskListModule} from "./task-list/task-list.module";
     FormsModule,
     TaskListModule
   ],
-    declarations: [
-    ]
+  declarations: []
 })
-export class AppsModule { }
+export class AppsModule {
+}
