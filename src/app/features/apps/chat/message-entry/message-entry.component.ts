@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 @Component({
   selector: 'app-message-entry',
   templateUrl: './message-entry.component.html',
-  styleUrls: ['./message-entry.component.css']
+  styleUrls: ['./message-entry.component.scss']
 })
 export class MessageEntryComponent implements OnInit {
 

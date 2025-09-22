@@ -9,7 +9,10 @@ import {RouterModule} from '@angular/router';
     },
     {path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule)},
     {path: 'error', loadChildren: () => import('./error/error.module').then(m => m.ErrorModule)},
-    {path: 'access-denied', loadChildren: () => import('./access-denied/access-denied.module').then(m => m.AccessDeniedModule)},
+    {
+      path: 'access-denied',
+      loadChildren: () => import('./access-denied/access-denied.module').then(m => m.AccessDeniedModule)
+    },
     {path: '**', redirectTo: '/notfound'}
   ])],
   exports: [RouterModule]

@@ -1,8 +1,7 @@
-// tasks/task-list/task-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { TaskService } from './task.service';
-import { Task } from './../../../core/models/task.model';
+import { Task } from '../../../core/models/task.model';
 
 
 @Component({

@@ -1,6 +1,6 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 //
-// import { AddtocartComponent } from './addtocart.component';
+// import { AddtocartComponent } from './add-to-cart.component';
 //
 // describe('AddtocartComponent', () => {
 //   let component: AddtocartComponent;

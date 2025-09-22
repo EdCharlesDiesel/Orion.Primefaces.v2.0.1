@@ -18,8 +18,7 @@ export class AppMenuComponent implements OnInit {
       {
         label: 'Dashboard',
         items: [
-
-          {label: 'System-Information', icon: 'pi pi-fw pi-compass', routerLink: ['/admin/system-information']},
+          {label: 'Dashboard Summary', icon: 'pi pi-fw pi-compass', routerLink: ['/admin/system-information']},
         ]
       },
       {
@@ -28,11 +27,6 @@ export class AppMenuComponent implements OnInit {
           {label: 'System-Information', icon: 'pi pi-fw pi-compass', routerLink: ['/admin/system-information']},
           {label: 'Error Logs', icon: 'pi pi-fw pi-filter', routerLink: ['/admin/error-log']},
           {label: 'Database Logs', icon: 'pi pi-fw pi-database', routerLink: ['/admin/database-log']},
-          {
-            label: 'Transaction History Archive',
-            icon: 'pi pi-fw pi-times',
-            routerLink: ['/admin/transaction-history-archive']
-          }
         ]
       },
       {

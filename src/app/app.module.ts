@@ -15,6 +15,7 @@ import {NodeService} from "./shared/services/node.service";
 import {ProductService} from "./shared/services/product.service";
 import {PhotoService} from "./shared/services/photo.service";
 import {AdminModule} from "./features/admin/admin.module";
+import {AuthenticationModule} from "./core/authentication/authentication.module";
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {AdminModule} from "./features/admin/admin.module";
   imports: [
     AppRoutingModule,
     AppLayoutModule,
+    AuthenticationModule,
     HumanResourcesModule,
     AdminModule
   ],

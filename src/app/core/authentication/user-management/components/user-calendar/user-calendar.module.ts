@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {AddUsersRoutingModule} from './add-users-routing.module';
-import {AddUsersComponent} from './add-users.component';
+import {ListUsersComponent} from '../list-users/list-users.component';
 import {TableModule} from 'primeng/table';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ButtonModule} from 'primeng/button';
@@ -16,11 +15,16 @@ import {DropdownModule} from 'primeng/dropdown';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {DialogModule} from 'primeng/dialog';
+import {ImageModule} from "primeng/image";
+import {MultiSelectModule} from "primeng/multiselect";
+import {TagModule} from "primeng/tag";
+import {UserCalendarRoutingModule} from "./user-calendar-routing.module";
+
 
 @NgModule({
   imports: [
     CommonModule,
-    AddUsersRoutingModule,
+    UserCalendarRoutingModule,
     TableModule,
     FileUploadModule,
     FormsModule,
@@ -34,9 +38,12 @@ import {DialogModule} from 'primeng/dialog';
     DropdownModule,
     RadioButtonModule,
     InputNumberModule,
-    DialogModule
+    DialogModule,
+    ImageModule,
+    MultiSelectModule,
+    TagModule,
   ],
-  declarations: [AddUsersComponent]
+  declarations: [ListUsersComponent]
 })
-export class AddUsersModule {
+export class UserCalendarModule {
 }

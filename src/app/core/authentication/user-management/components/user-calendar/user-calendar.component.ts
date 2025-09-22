@@ -1,4 +1,4 @@
-// user-calendar-matching.component.ts
+// user-calendar.component.ts
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import {StringMeetingModel} from "../../../../models/string-meeting.model";
@@ -7,10 +7,10 @@ import {CalendarMatchingService} from "../../../../../shared/services/calendar-m
 
 
 @Component({
-  selector: 'app-user-calendar-matching',
-  templateUrl: './user-user-calendar-matching.component.html'
+  selector: 'app-user-calendar',
+  templateUrl: './user-user-calendar.component.html'
 })
-export class UserCalendarMatchingComponent {
+export class UserCalendarComponent {
   form: FormGroup;
   results: StringMeetingModel[] = [];
   loading = false;

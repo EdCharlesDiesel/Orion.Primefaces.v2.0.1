@@ -27,9 +27,6 @@ import {MenubarModule} from "primeng/menubar";
         AppMenuComponent,
         AppSidebarComponent,
         AppLayoutComponent,
-
-
-
     ],
   imports: [
     BrowserModule,
