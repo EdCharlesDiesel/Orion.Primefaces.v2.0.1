@@ -5,9 +5,9 @@
 // import { Observable } from 'rxjs';
 //
 // @Component({
-//   selector: 'app-similarbooks',
-//   templateUrl: './similarbooks.component.html',
-//   styleUrls: ['./similarbooks.component.scss']
+//   selector: 'app-similar-products',
+//   templateUrl: './similar-products.component.html',
+//   styleUrls: ['./similar-products.component.scss']
 // })
 // export class SimilarbooksComponent implements OnInit {
 //

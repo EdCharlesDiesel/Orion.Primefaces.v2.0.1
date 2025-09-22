@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {ProductListRoutingModule} from './product-list-routing.module';
 import {ProductListComponent} from './product-list.component';
 import {ButtonModule} from 'primeng/button';
@@ -15,6 +15,7 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
     RippleModule,
     SplitButtonModule,
     ToggleButtonModule,
+    NgOptimizedImage,
   ],
   declarations: [ProductListComponent]
 })

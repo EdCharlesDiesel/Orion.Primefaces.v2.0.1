@@ -12,7 +12,7 @@ import {Product} from "../../core/models/product";
 })
 export class ProductService {
 
-  baseURL = environment.baseURL + "book";
+  baseURL = environment.baseURL + "product";
 
   constructor(private http: HttpClient) { }
 
@@ -20,30 +20,26 @@ export class ProductService {
 
 
 
-  books$ = this.getAllBooks().pipe(shareReplay(1));
+  products$ = this.getAllProducts().pipe(shareReplay(1));
 
 
-  getAllBooks() {
+  getAllProducts() {
     return this.http.get<Product[]>(this.baseURL);
   }
 
-  addBook(book:Product) {
-    return this.http.post(this.baseURL, book);
+  addProduct(product:Product) {
+    return this.http.post(this.baseURL, product);
   }
 
-
-  getsimilarBooks(bookId: number) {
-    return this.http.get<Product[]>(this.baseURL + 'GetSimilarBooks/' + bookId);
+  getSimilarProducts(productId: number) {
+    return this.http.get<Product[]>(this.baseURL + 'GetSimilarProducts/' + productId);
   }
 
-
-
-
-  updateBookDetails(book:Product) {
-    return this.http.put(this.baseURL, book);
+  updateProductDetails(product:Product) {
+    return this.http.put(this.baseURL, product);
   }
 
-  deleteBook(id: number) {
+  deleteProduct(id: number) {
     return this.http.delete(this.baseURL + id);
   }
 

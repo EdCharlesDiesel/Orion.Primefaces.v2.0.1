@@ -1,6 +1,6 @@
 // import { Component, Input, OnChanges } from '@angular/core';
 // import {Product} from "../../api/product";
-// import {WishlistService} from "../../service/wishlist.service";
+// import {WishlistService} from "../../service/wish-list.service";
 // import {SubscriptionService} from "../../service/subscription.service";
 // import {SnackbarService} from "../../service/snackbar.service";
 //
@@ -8,7 +8,7 @@
 // @Component({
 //   selector: 'app-addtowishlist',
 //   templateUrl: './addtowishlist.component.html',
-//   styleUrls: ['./addtowishlist.component.scss']
+//   styleUrls: ['./add-to-wish-list.component.scss']
 // })
 // export class AddtowishlistComponent implements OnChanges {
 //
@@ -69,7 +69,7 @@
 //        //   this.snackBarService.showSnackBar('Item removed from your Wishlist');
 //         }
 //       }, error => {
-//         console.log('Error ocurred while adding to wishlist : ', error);
+//         console.log('Error ocurred while adding to wish-list : ', error);
 //       });
 //   }
 // }

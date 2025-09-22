@@ -2,14 +2,14 @@
 // import { Book } from 'src/app/components/product/product';
 // import { SubscriptionService } from 'src/app/services/subscription.service';
 // import { Observable, Subject } from 'rxjs';
-// import { WishlistService } from 'src/app/services/wishlist.service';
+// import { WishlistService } from 'src/app/services/wish-list.service';
 // import { SnackbarService } from 'src/app/services/snackbar.service';
 // import { takeUntil } from 'rxjs/operators';
 //
 // @Component({
-//   selector: 'app-wishlist',
-//   templateUrl: './wishlist.component.html',
-//   styleUrls: ['./wishlist.component.scss']
+//   selector: 'app-wish-list',
+//   templateUrl: './wish-list.component.html',
+//   styleUrls: ['./wish-list.component.scss']
 // })
 // export class WishlistComponent implements OnInit {
 //
@@ -44,7 +44,7 @@
 //           this.snackBarService.showSnackBar('Wishlist cleared!!!');
 //         //  this.getShoppingCartItems();
 //         }, error => {
-//           console.log('Error ocurred while deleting wishlist item : ', error);
+//           console.log('Error ocurred while deleting wish-list item : ', error);
 //         });
 //   }
 // }

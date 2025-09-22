@@ -85,7 +85,7 @@ export class AuthenticationService {
 
   public  resetSubscription() : void {
     this.subscriptionService.userData.next(new Product());
-    //FIXME need to include wishlist items.
+    //FIXME need to include wish-list items.
     //this.subscriptionService.wishlistItem$.next([]);
     this.subscriptionService.wishlistItemcount$.next(0);
     this.subscriptionService.cartItemcount$.next(0);

@@ -1,20 +1,20 @@
 // import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 //
-// import { SimilarbooksComponent } from './similarbooks.component';
+// import { WishlistComponent } from './wish-list.component';
 //
-// describe('SimilarbooksComponent', () => {
-//   let component: SimilarbooksComponent;
-//   let fixture: ComponentFixture<SimilarbooksComponent>;
+// describe('WishlistComponent', () => {
+//   let component: WishlistComponent;
+//   let fixture: ComponentFixture<WishlistComponent>;
 //
 //   beforeEach(waitForAsync(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ SimilarbooksComponent ]
+//       declarations: [ WishlistComponent ]
 //     })
 //     .compileComponents();
 //   }));
 //
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(SimilarbooksComponent);
+//     fixture = TestBed.createComponent(WishlistComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

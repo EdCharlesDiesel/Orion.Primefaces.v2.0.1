@@ -59,7 +59,7 @@
 //     //       this.snackBarService.showSnackBar('Item removed from your Productsubscription');
 //     //     }
 //     //   }, error => {
-//     //     console.log('Error ocurred while adding to wishlist : ', error);
+//     //     console.log('Error ocurred while adding to wish-list : ', error);
 //     //   });
 //   }
 // }
