@@ -1,8 +1,8 @@
 // user-calendar-matching.component.ts
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import {StringMeetingModel} from "../../../models/string-meeting.model";
-import {CalendarMatchingService} from "../../../../shared/services/calendar-matching.service";
+import {StringMeetingModel} from "../../../../models/string-meeting.model";
+import {CalendarMatchingService} from "../../../../../shared/services/calendar-matching.service";
 
 
 

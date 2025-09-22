@@ -65,7 +65,7 @@ import {NotfoundComponent} from "./shared/components/notfound/notfound.component
       },
       // {
       //   path: 'authentication',
-      //   loadChildren: () => import('./orion/pages/authentication/auth.module').then(m => m.AuthModule)
+      //   loadChildren: () => import('./orion/pages/authentication/auth.module').then(m => m.AuthenticationModule)
       // },
       // {
       //   path: RouteUrls.LOGIN,

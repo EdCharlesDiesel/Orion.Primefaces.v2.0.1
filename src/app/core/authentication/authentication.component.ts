@@ -23,11 +23,11 @@ interface AuthForm {
 
 @Component({
   selector: "app-auth-page",
-  templateUrl: "./auth.component.html",
+  templateUrl: "./authentication.component.html",
   imports: [ ReactiveFormsModule],
   standalone: true,
 })
-export default class AuthComponent implements OnInit {
+export default class AuthenticationComponent implements OnInit {
   authType = "";
   title = "";
   errors: Errors = { errors: {} };

@@ -3,7 +3,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MessageService } from "primeng/api";
 import { Table } from "primeng/table";
-import {UserManagementService} from "../../services/user-management.service";
+import {UserManagementService} from "../../../services/user-management.service";
 
 
 

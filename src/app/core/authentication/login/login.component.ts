@@ -1,23 +1,17 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LayoutService} from 'src/app/layout/service/app.layout.service';
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../../shared/services/authentication.service";
+import {LayoutService} from "../../layout/service/app.layout.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styles: [`
-    :host ::ng-deep .pi-eye,
-    :host ::ng-deep .pi-eye-slash {
-      transform: scale(1.6);
-      margin-right: 1rem;
-      color: var(--primary-color) !important;
-    }
-  `]
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   loginForm: FormGroup;
+
   constructor(private formBuilder: FormBuilder,
               public layoutService: LayoutService,
               private authService: AuthenticationService,
@@ -38,7 +32,7 @@ export class LoginComponent {
         .subscribe(
           (user: any) => {
             console.log("User is logged in");
-            console.log("User details: ",user);
+            console.log("User details: ", user);
             this.router.navigateByUrl('/');
           }
         );

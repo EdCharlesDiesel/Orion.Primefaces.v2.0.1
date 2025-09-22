@@ -12,4 +12,4 @@ import {FormsModule} from "@angular/forms";
     declarations: [
     ]
 })
-export class AuthModule { }
+export class AuthenticationModule { }

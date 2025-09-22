@@ -3,7 +3,7 @@ import {MessageService} from "primeng/api";
 import {Table} from "primeng/table";
 import {Customer} from "../../../api/customer";
 import {FormGroup, Validators} from "@angular/forms";
-import {UserManagementService} from "../../services/user-management.service";
+import {UserManagementService} from "../../../services/user-management.service";
 import {Person} from "../../../api/person.model";
 @Component({
     templateUrl: './list-users.component.html',

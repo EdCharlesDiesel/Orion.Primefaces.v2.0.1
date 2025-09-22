@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CardModule} from "primeng/card";
 import {TableModule} from "primeng/table";
 import {ButtonModule} from "primeng/button";
-import {UserCalendarMatchingComponent} from "./user-calendar/user-calendar-matching.component";
+import {UserCalendarMatchingComponent} from "./components/user-calendar/user-calendar-matching.component";
 
 @NgModule({
   imports: [
