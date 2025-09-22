@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import {SiteTheme} from "./custom-theme";
-import {ThemeService} from "../../../shared/services/theme.service";
+import {ThemePickerService} from "./theme-picker.service";
 
 @Component({
   selector: 'app-theme-picker',
@@ -41,7 +41,7 @@ export class ThemePickerComponent implements OnInit {
     }
   ];
 
-  constructor(public themeService: ThemeService) { }
+  constructor(public themeService: ThemePickerService) { }
 
   ngOnInit() {
     this.installTheme('indigo-pink');

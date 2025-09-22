@@ -1,5 +1,5 @@
 import {ProductInventory} from "./product-inventory.model";
-import {WorkOrderRouting} from "./WorkOrderRouting";
+import {WorkOrderRoutingModel} from "./work-order-routing.model";
 
 export class Location  {
   /** Primary key for Location records. */
@@ -13,7 +13,7 @@ export class Location  {
   /** Date and time the record was last updated. */
   modifiedDate!: Date;
   productInventories?: ProductInventory[] | undefined;
-  workOrderRoutings?: WorkOrderRouting[] | undefined;
+  workOrderRoutings?: WorkOrderRoutingModel[] | undefined;
 
 }
 
@@ -29,5 +29,5 @@ export interface ILocation {
   /** Date and time the record was last updated. */
   modifiedDate: Date;
   productInventories?: ProductInventory[] | undefined;
-  workOrderRoutings?: WorkOrderRouting[] | undefined;
+  workOrderRoutings?: WorkOrderRoutingModel[] | undefined;
 }

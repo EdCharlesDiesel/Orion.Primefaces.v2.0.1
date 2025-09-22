@@ -1,4 +1,4 @@
-import {WorkOrderRouting} from "./WorkOrderRouting";
+import {WorkOrderRoutingModel} from "./work-order-routing.model";
 import {ScrapReason} from "./scrap-reason";
 import {Product} from "./product";
 
@@ -25,7 +25,7 @@ export class WorkOrder {
   modifiedDate!: Date;
   product?: Product;
   scrapReason?: ScrapReason;
-  workOrderRoutings?: WorkOrderRouting[] | undefined;
+  workOrderRoutings?: WorkOrderRoutingModel[] | undefined;
 
 }
 
@@ -52,5 +52,5 @@ export interface IWorkOrder {
   modifiedDate: Date;
   product?: Product;
   scrapReason?: ScrapReason;
-  workOrderRoutings?: WorkOrderRouting[] | undefined;
+  workOrderRoutings?: WorkOrderRoutingModel[] | undefined;
 }

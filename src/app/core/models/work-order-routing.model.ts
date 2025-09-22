@@ -1,6 +1,6 @@
 import {WorkOrder} from "./work-order.model";
 
-export class WorkOrderRouting implements IWorkOrderRouting {
+export class WorkOrderRoutingModel implements IWorkOrderRouting {
   /** Primary key. Foreign key to WorkOrder.WorkOrderID. */
   workOrderID!: number;
   /** Primary key. Foreign key to Product.ProductID. */
