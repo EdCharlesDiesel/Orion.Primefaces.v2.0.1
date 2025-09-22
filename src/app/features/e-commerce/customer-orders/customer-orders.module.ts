@@ -1,8 +1,6 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {ShipmentComponent} from './shipment.component';
-import {ShipmentRoutingModule} from './shipment-routing.module';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
@@ -15,12 +13,18 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DividerModule} from 'primeng/divider';
 import {SplitterModule} from 'primeng/splitter';
 import {PanelModule} from 'primeng/panel';
+import {CheckboxModule} from "primeng/checkbox";
+import {InputNumberModule} from "primeng/inputnumber";
+import {OverlayModule} from "primeng/overlay";
+import {DropdownModule} from "primeng/dropdown";
+import {CustomerOrdersRoutingModule} from "./customer-orders-routing.module";
+import {CustomerOrdersComponent} from "./customer-orders.component";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ShipmentRoutingModule,
+    CustomerOrdersRoutingModule,
     ToolbarModule,
     ButtonModule,
     RippleModule,
@@ -32,9 +36,14 @@ import {PanelModule} from 'primeng/panel';
     InputTextModule,
     DividerModule,
     SplitterModule,
-    PanelModule
+    CheckboxModule,
+    InputNumberModule,
+    PanelModule,
+    OverlayModule,
+    DropdownModule,
+    NgOptimizedImage,
   ],
-  declarations: [ShipmentComponent]
+  declarations: [CustomerOrdersComponent]
 })
-export class ShipmentModule {
+export class CustomerOrdersModule {
 }

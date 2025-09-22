@@ -19,6 +19,7 @@ import {ImageModule} from "primeng/image";
 import {MultiSelectModule} from "primeng/multiselect";
 import {TagModule} from "primeng/tag";
 import {UserCalendarRoutingModule} from "./user-calendar-routing.module";
+import {UserCalendarService} from "./user-calendar.service";
 
 
 @NgModule({
@@ -42,6 +43,9 @@ import {UserCalendarRoutingModule} from "./user-calendar-routing.module";
     ImageModule,
     MultiSelectModule,
     TagModule,
+  ],
+  providers: [
+    UserCalendarService
   ],
   declarations: [ListUsersComponent]
 })

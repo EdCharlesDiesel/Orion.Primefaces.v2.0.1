@@ -1,25 +1,25 @@
-// import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-//
-// import { ShoppingcartComponent } from './shoppingcart.component';
-//
-// describe('ShoppingcartComponent', () => {
-//   let component: ShoppingcartComponent;
-//   let fixture: ComponentFixture<ShoppingcartComponent>;
-//
-//   beforeEach(waitForAsync(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ ShoppingcartComponent ]
-//     })
-//     .compileComponents();
-//   }));
-//
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(ShoppingcartComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
-//
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+
+import {ShoppingCartComponent} from './shopping-cart.component';
+
+describe('ShoppingcartComponent', () => {
+  let component: ShoppingCartComponent;
+  let fixture: ComponentFixture<ShoppingCartComponent>;
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ ShoppingCartComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ShoppingCartComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {DatabaseLog} from "../../../core/models/database-log";
 
 
@@ -10,13 +10,17 @@ import {DatabaseLog} from "../../../core/models/database-log";
 export class DatabaseLogService {
   private apiUrl = 'http://localhost:9006/api/DatabaseLog';
 
-  constructor(private http: HttpClient) {}
-  //TODO: Need to fix Not recommnded hence I need to start using Guid to begin with.
+  constructor(private http: HttpClient) {
+  }
+
+  //TODO: Need to fix Not recommended hence I need to start using Guid to begin with.
   private tempId = 55;
+
   createDatabaseLog(data: DatabaseLog): Observable<DatabaseLog> {
     data.databaseLogID = ++this.tempId; // negative IDs as temp placeholders
     return this.http.post<DatabaseLog>(this.apiUrl, data);
   }
+
   getDatabaseLog(): Observable<DatabaseLog[]> {
     return this.http.get<DatabaseLog[]>(this.apiUrl);
   }
