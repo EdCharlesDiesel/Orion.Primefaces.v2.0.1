@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import {Product} from "../../../core/models/product";
-import {SubscriptionService} from "../../../shared/services/subscription.service";
-import {ProductSubscriptionService} from "../../../shared/services/product-subscription.service";
-import {SnackbarService} from "../../../shared/services/snackbar.service";
+import {Product} from "../../../../core/models/product";
+import {SubscriptionService} from "../../../../shared/services/subscription.service";
+import {ProductSubscriptionService} from "../../../../shared/services/product-subscription.service";
+import {SnackbarService} from "../../../../shared/services/snackbar.service";
 
 
 

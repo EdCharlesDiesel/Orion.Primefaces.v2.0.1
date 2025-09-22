@@ -3,7 +3,7 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {NotfoundComponent} from "./features/notfound/notfound.component";
-import {ProductSubscriptionComponent} from "./features/product/product-subscription/product-subscription.component";
+import {ProductSubscriptionComponent} from "./features/production/product/product-subscription/product-subscription.component";
 import {AppLayoutModule} from "./core/layout/app.layout.module";
 import {HumanResourcesModule} from "./features/human-resources/human-resources.module";
 import {CountryService} from "./shared/services/country.service";
