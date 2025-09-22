@@ -1,19 +1,17 @@
 import {NgModule} from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
-import {ErrorRoutingModule} from './error-routing.module';
-import {ErrorComponent} from './error.component';
 import {ButtonModule} from 'primeng/button';
 import {RippleModule} from "primeng/ripple";
+import {AccessDeniedComponent} from "./access-denied.component";
 
 @NgModule({
   imports: [
     CommonModule,
-    ErrorRoutingModule,
     ButtonModule,
     NgOptimizedImage,
     RippleModule
   ],
-  declarations: [ErrorComponent]
+  declarations: [AccessDeniedComponent]
 })
-export class ErrorModule {
+export class AccessDeniedModule {
 }
