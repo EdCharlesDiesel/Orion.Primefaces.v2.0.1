@@ -57,7 +57,7 @@ import {NotfoundComponent} from "./shared/components/notfound/notfound.component
           },
           {
             path: 'documentation',
-            loadChildren: () => import('./../app/features/documentation/documentation.module').then(m => m.DocumentationModule)
+            loadChildren: () => import('./shared/utilities/documentation/documentation.module').then(m => m.DocumentationModule)
           },
           // {path: 'pages', loadChildren: () => import('./../app/features/pages.module').then(m => m.PagesModule)},
 
