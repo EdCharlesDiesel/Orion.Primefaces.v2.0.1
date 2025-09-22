@@ -2,11 +2,11 @@ import {Component, OnDestroy, OnInit} from "@angular/core";
 import {MenuItem, MessageService} from "primeng/api";
 import {Product} from "../../../core/models/product";
 import {Subscription} from "rxjs";
-import {ProductService} from "../../services/product.service";
+import {ProductService} from "../../../shared/services/product.service";
 import {LayoutService} from "../../../core/layout/service/app.layout.service";
 
 
-@Component({  
+@Component({
 
       selector: 'app-home',
       templateUrl: './home.component.html',

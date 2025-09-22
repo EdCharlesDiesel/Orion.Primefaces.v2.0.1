@@ -6,14 +6,14 @@ import {NotfoundComponent} from "./features/notfound/notfound.component";
 import {ProductSubscriptionComponent} from "./features/product/product-subscription/product-subscription.component";
 import {AppLayoutModule} from "./core/layout/app.layout.module";
 import {HumanResourcesModule} from "./features/human-resources/human-resources.module";
-import {CountryService} from "./features/services/country.service";
-import {CustomerService} from "./features/services/customer.service";
-import {EventService} from "./features/services/event.service";
-import {AuthenticationService} from "./features/services/authentication.service";
-import {IconService} from "./features/services/icon.service";
-import {NodeService} from "./features/services/node.service";
-import {ProductService} from "./features/services/product.service";
-import {PhotoService} from "./features/services/photo.service";
+import {CountryService} from "./shared/services/country.service";
+import {CustomerService} from "./shared/services/customer.service";
+import {EventService} from "./shared/services/event.service";
+import {AuthenticationService} from "./shared/services/authentication.service";
+import {IconService} from "./shared/services/icon.service";
+import {NodeService} from "./shared/services/node.service";
+import {ProductService} from "./shared/services/product.service";
+import {PhotoService} from "./shared/services/photo.service";
 import {AdminModule} from "./features/admin/admin.module";
 
 

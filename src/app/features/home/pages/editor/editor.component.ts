@@ -11,7 +11,7 @@ import { combineLatest } from "rxjs";
 import { Errors } from "../../../../core/models/errors.model";
 import { HomeService } from "../../services/home.service";
 import { ListErrorsComponent } from "../../../../shared/components/list-errors.component";
-import {UserManagementService} from "../../../../core/auth/services/user-management.service";
+import {UserManagementService} from "../../../../core/authentication/services/user-management.service";
 
 
 interface ArticleForm {

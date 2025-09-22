@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { SubscriptionService } from './subscription.service';
 import {environment} from "../../../environments/environment";
 import {LoginDto} from "../../core/models/loginDto";
-import {Person} from "../../core/auth/person.model";
+import {Person} from "../../core/authentication/person.model";
 import {Product} from "../../core/models/product";
 
 

@@ -2,7 +2,7 @@ import { Component, inject } from "@angular/core";
 
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { AsyncPipe, NgIf } from "@angular/common";
-import { IfAuthenticatedDirective } from "../auth/if-authenticated.directive";
+import { IfAuthenticatedDirective } from "../authentication/if-authenticated.directive";
 
 @Component({
   selector: "app-layout-header",

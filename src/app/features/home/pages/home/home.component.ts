@@ -5,8 +5,8 @@ import { ArticleListConfig } from "../../models/article-list-config.model";
 import { AsyncPipe, NgClass, NgForOf } from "@angular/common";
 import { tap } from "rxjs/operators";
 
-import { IfAuthenticatedDirective } from "../../../../core/auth/if-authenticated.directive";
-import {UserManagementService} from "../../../../core/auth/services/user-management.service";
+import { IfAuthenticatedDirective } from "../../../../core/authentication/if-authenticated.directive";
+import {UserManagementService} from "../../../../core/authentication/services/user-management.service";
 
 
 @Component({

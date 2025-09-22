@@ -5,7 +5,7 @@ import {Course} from "./course.model";
 import {SalesPerson} from "./sales-person.model";
 import {EmployeePayHistory} from "./employee-pay-history.model";
 import {JobCandidate} from "./job-candidate.model";
-import {Person} from "../auth/person.model";
+import {Person} from "../authentication/person.model";
 
 export class Employee {
   /** Primary key for Employee records.  Foreign key to BusinessEntity.BusinessEntityID. */

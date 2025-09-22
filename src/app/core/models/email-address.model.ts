@@ -1,4 +1,4 @@
-import {Person} from "../auth/person.model";
+import {Person} from "../authentication/person.model";
 
 export class EmailAddress  {
   /** Primary key. Person associated with this email address.  Foreign key to Person.BusinessEntityID */

@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {IEnvConfig} from "../env.injector";
+import {IEnvConfig} from "../../features/env.injector";
 
 
 @Injectable({

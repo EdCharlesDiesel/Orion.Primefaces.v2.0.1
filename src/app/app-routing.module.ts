@@ -1,7 +1,7 @@
 import {inject, NgModule} from "@angular/core";
 import {RouterModule} from "@angular/router";
 import {AppLayoutComponent} from "./core/layout/app.layout.component";
-import {UserManagementService} from "./core/auth/services/user-management.service";
+import {UserManagementService} from "./core/authentication/services/user-management.service";
 import {map} from "rxjs/operators";
 import {NotfoundComponent} from "./features/notfound/notfound.component";
 
@@ -14,21 +14,21 @@ import {NotfoundComponent} from "./features/notfound/notfound.component";
         children: [
           {
             path: "login",
-            loadComponent: () => import("./core/auth/auth.component"),
+            loadComponent: () => import("./core/authentication/auth.component"),
             canActivate: [
               () => inject(UserManagementService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
             ],
           },
           {
             path: "register",
-            loadComponent: () => import("./core/auth/auth.component"),
+            loadComponent: () => import("./core/authentication/auth.component"),
             canActivate: [
               () => inject(UserManagementService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
             ],
           },
           {
             path: "settings",
-            loadChildren: () => import("./features/settings/settings.module").then(c => c.SettingsModule),
+            loadChildren: () => import("./shared/components/settings/settings.module").then(c => c.SettingsModule),
             canActivate: [() => inject(UserManagementService).isAuthenticated],
           },
           {
@@ -53,7 +53,7 @@ import {NotfoundComponent} from "./features/notfound/notfound.component";
           },
           {
             path: 'user-management',
-            loadChildren: () => import('./../app/core/auth/services/user-management.service').then(m => m.UserManagementService)
+            loadChildren: () => import('./core/authentication/services/user-management.service').then(m => m.UserManagementService)
           },
           {
             path: 'documentation',

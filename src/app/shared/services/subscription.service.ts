@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import {Product} from "../../core/models/product";
-import {Person} from "../../core/auth/person.model";
+import {Person} from "../../core/authentication/person.model";
 
 
 

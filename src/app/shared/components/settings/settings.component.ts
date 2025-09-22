@@ -5,9 +5,9 @@ import {
   Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Errors } from "../../core/models/errors.model";
-import {Person} from "../../core/auth/person.model";
-import {UserManagementService} from "../../core/auth/services/user-management.service";
+import { Errors } from "../../../core/models/errors.model";
+import {Person} from "../../../core/authentication/person.model";
+import {UserManagementService} from "../../../core/authentication/services/user-management.service";
 
 export interface SettingsForm {
   image: FormControl<string>;

@@ -16,8 +16,8 @@ import { Comment } from "../../models/comment.model";
 import { Errors } from "../../../../core/models/errors.model";
 import { Profile } from "../../../profile/models/profile.model";
 
-import {Person} from "../../../../core/auth/person.model";
-import {UserManagementService} from "../../../../core/auth/services/user-management.service";
+import {Person} from "../../../../core/authentication/person.model";
+import {UserManagementService} from "../../../../core/authentication/services/user-management.service";
 
 @Component({
   selector: "app-article-page",

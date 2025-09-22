@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {AbstractRoleGuard} from "./abstract.role.guard";
-import {UserPrincipalService} from "../../features/services/user-principal.service";
+import {UserPrincipalService} from "../services/user-principal.service";
 import {RouteUrls} from "../../app-routing.config";
 
 @Injectable({

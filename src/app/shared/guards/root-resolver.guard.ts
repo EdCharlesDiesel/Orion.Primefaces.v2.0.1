@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
-import {UserPrincipalService} from "../../features/services/user-principal.service";
+import {UserPrincipalService} from "../services/user-principal.service";
 import {Observable, of} from "rxjs";
 import {map} from "rxjs/operators";
 import {RouteUrls} from "../../app-routing.config";

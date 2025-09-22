@@ -1,5 +1,5 @@
 import {PhoneNumberType} from "./phone-number-type.model";
-import {Person} from "../auth/person.model";
+import {Person} from "../authentication/person.model";
 
 export class PersonPhone {
   /** Business entity identification number. Foreign key to Person.BusinessEntityID. */

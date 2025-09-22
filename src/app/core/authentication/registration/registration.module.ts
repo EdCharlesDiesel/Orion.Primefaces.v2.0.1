@@ -10,7 +10,7 @@ import {LayoutService} from "../../../../layout/service/app.layout.service";
 import {RegistrationRoutingModule} from "./registration-routing.module";
 import {CalendarModule} from "primeng/calendar";
 import {DividerModule} from "primeng/divider";
-import {AuthenticationService} from "../../services/authentication.service";
+import {AuthenticationService} from "../../../shared/services/authentication.service";
 
 @NgModule({
   imports: [

@@ -1,7 +1,7 @@
 import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { defer, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {UserPrincipalService} from "../../features/services/user-principal.service";
+import {UserPrincipalService} from "../services/user-principal.service";
 import {UserModel} from "../../core/models/user.model";
 
 

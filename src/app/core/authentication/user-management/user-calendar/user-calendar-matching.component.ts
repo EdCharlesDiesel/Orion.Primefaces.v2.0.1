@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import {StringMeetingModel} from "../../../models/string-meeting.model";
-import {CalendarMatchingService} from "../../../../features/services/calendar-matching.service";
+import {CalendarMatchingService} from "../../../../shared/services/calendar-matching.service";
 
 
 
