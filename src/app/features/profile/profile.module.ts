@@ -7,8 +7,6 @@ import { ConfirmationService } from 'primeng/api';
   declarations: [],
   imports: [
     CommonModule,
-    DepartmentsModule,
-    DepartmentsRoutingModule,
 
   ],
   providers: [ConfirmationService]  // <-- Add this

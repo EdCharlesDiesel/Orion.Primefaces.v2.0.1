@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {ListUsersComponent} from '../list-users/list-users.component';
 import {TableModule} from 'primeng/table';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ButtonModule} from 'primeng/button';
@@ -20,6 +19,7 @@ import {MultiSelectModule} from "primeng/multiselect";
 import {TagModule} from "primeng/tag";
 import {UserCalendarRoutingModule} from "./user-calendar-routing.module";
 import {UserCalendarService} from "./user-calendar.service";
+import {UserCalendarComponent} from "./user-calendar.component";
 
 
 @NgModule({
@@ -47,7 +47,7 @@ import {UserCalendarService} from "./user-calendar.service";
   providers: [
     UserCalendarService
   ],
-  declarations: [ListUsersComponent]
+  declarations: [UserCalendarComponent]
 })
 export class UserCalendarModule {
 }

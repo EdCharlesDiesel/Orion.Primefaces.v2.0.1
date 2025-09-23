@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { RegistrationComponent } from '../orion/pages/authentication/registration/registration.component';
+import {RegistrationComponent} from "../core/authentication/registration/registration.component";
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;

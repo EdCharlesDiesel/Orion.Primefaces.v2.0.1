@@ -2,20 +2,20 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import {StringMeetingModel} from "../../../../models/string-meeting.model";
-import {CalendarMatchingService} from "./calendar-matching.service";
+import {UserCalendarService} from "./user-calendar.service";
 
 
 
 @Component({
   selector: 'app-user-calendar',
-  templateUrl: './user-user-calendar.component.html'
+  templateUrl: './user-calendar.component.html'
 })
 export class UserCalendarComponent {
   form: FormGroup;
   results: StringMeetingModel[] = [];
   loading = false;
 
-  constructor(private fb: FormBuilder, private service: CalendarMatchingService) {
+  constructor(private fb: FormBuilder, private service: UserCalendarService) {
     this.form = this.fb.group({
       calendar1: this.fb.array([]),
       dailyBounds1: this.fb.group({

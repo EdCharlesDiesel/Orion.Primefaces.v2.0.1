@@ -6,11 +6,15 @@ import {ProductService} from "../../../shared/services/product.service";
 import {LayoutService} from "../../../core/layout/service/app.layout.service";
 
 
+
+class FormGroup {
+}
+
 @Component({
 
       selector: 'app-home',
       templateUrl: './home.component.html',
-      styleUrls: ['./home.component.css'],
+      styleUrls: ['./home.component.scss'],
       providers: [MessageService]
 })
 export class HomeComponent implements OnInit, OnDestroy {
@@ -24,6 +28,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     chartOptions: any;
 
     subscription!: Subscription;
+  systemInfoForm: FormGroup | undefined;
+  editing: string | undefined;
+  displayDialog: any;
+  loading: boolean | undefined;
 
     constructor(private productService: ProductService, public layoutService: LayoutService) {
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
@@ -105,4 +113,28 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.subscription.unsubscribe();
         }
     }
+
+  saveDepartment() {
+
+  }
+
+  hideDialog() {
+
+  }
+
+  deleteDepartment(systemInfo: any) {
+
+  }
+
+  editSystemInfo(systemInfo: any) {
+
+  }
+
+  openNew() {
+
+  }
+
+  refresh() {
+
+  }
 }

@@ -24,7 +24,7 @@ interface AuthForm {
 @Component({
   selector: "app-auth-page",
   templateUrl: "./authentication.component.html",
-  imports: [ ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ListErrorsComponent],
   standalone: true,
 })
 export default class AuthenticationComponent implements OnInit {

@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from "@angular/forms";
-import {UserManagementModule} from "./user-management/user-management.module";
-import {UserManagementRoutingModule} from "./user-management/user-management-routing.module";
+import { UserManagementRoutingModule } from './user-management/user-management-routing.module';
+import { UserManagementModule } from './user-management/user-management.module';
 
 @NgModule({
   imports: [

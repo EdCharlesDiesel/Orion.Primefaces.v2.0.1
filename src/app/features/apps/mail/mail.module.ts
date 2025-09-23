@@ -4,13 +4,15 @@ import { ButtonModule } from 'primeng/button';
 
 import { MailRoutingModule } from './mail-routing.module';
 import { MailComponent } from './mail.component';
+import {RippleModule} from "primeng/ripple";
 
 @NgModule({
     imports: [
         CommonModule,
         MailRoutingModule,
         ButtonModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        RippleModule
     ],
     declarations: [MailComponent]
 })

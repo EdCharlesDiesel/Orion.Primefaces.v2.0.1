@@ -1,10 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {MessageService} from "primeng/api";
 import {Table} from "primeng/table";
-import {Customer} from "../../../api/customer";
+
 import {FormGroup, Validators} from "@angular/forms";
 import {UserManagementService} from "../../../services/user-management.service";
-import {Person} from "../../../api/person.model";
+import { Customer } from "src/app/core/models/customer";
+import { Person } from "../../../person.model";
+
 @Component({
     templateUrl: './list-users.component.html',
     providers: [MessageService]

@@ -14,14 +14,14 @@ import {NotfoundComponent} from "./shared/components/notfound/notfound.component
         children: [
           {
             path: "login",
-            loadComponent: () => import("./core/authentication/auth.component"),
+            loadComponent: () => import("./core/authentication/authentication.component"),
             canActivate: [
               () => inject(UserManagementService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
             ],
           },
           {
             path: "register",
-            loadComponent: () => import("./core/authentication/auth.component"),
+            loadComponent: () => import("./core/authentication/authentication.component"),
             canActivate: [
               () => inject(UserManagementService).isAuthenticated.pipe(map((isAuth) => !isAuth)),
             ],
@@ -59,27 +59,8 @@ import {NotfoundComponent} from "./shared/components/notfound/notfound.component
             path: 'documentation',
             loadChildren: () => import('./shared/utilities/documentation/documentation.module').then(m => m.DocumentationModule)
           },
-          // {path: 'pages', loadChildren: () => import('./../app/features/pages.module').then(m => m.PagesModule)},
-
         ]
       },
-      // {
-      //   path: 'authentication',
-      //   loadChildren: () => import('./orion/pages/authentication/auth.module').then(m => m.AuthenticationModule)
-      // },
-      // {
-      //   path: RouteUrls.LOGIN,
-      //   canLoad: [NotAuthenticatedGuard],
-      //   canActivate: [NotAuthenticatedGuard],
-      //   loadChildren: () => import('src/app/orion/pages/user-management/user-management-routing.module').then(m => m.UserManagementRoutingModule)
-      // },
-      // {
-      //   path: RouteUrls.CHAT,
-      //   canLoad: [AuthenticatedGuard],
-      //   canActivate: [AuthenticatedGuard],
-      //   loadChildren: () => import('src/app/orion/components/features/chat/chat.module').then(m => m.ChatModule)
-      // },
-      // {path: 'landing', loadChildren: () => import('./orion/pages/landing/landing.module').then(m => m.LandingModule)},
       {path: 'notfound', component: NotfoundComponent},
       // {path: '**', redirectTo: '/notfound'},
     ], {scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload'})

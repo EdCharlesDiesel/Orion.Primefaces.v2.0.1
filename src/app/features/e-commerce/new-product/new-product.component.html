@@ -21,8 +21,8 @@
                      class="p-inputtext p-component p-element ng-untouched ng-pristine ng-valid">
             </div>
             <div class="col-12 field">
-              <p-editor class="p-element ng-untouched ng-pristine ng-valid">
-                <div class="p-editor-container"><!---->
+              <!--<p-editor class="p-element ng-untouched ng-pristine ng-valid">
+                <div class="p-editor-container">
                   <div class="p-editor-toolbar ql-toolbar ql-snow ng-star-inserted"><span class="ql-formats"><span
                     class="ql-header ql-picker"><span class="ql-picker-label" tabindex="0" role="button"
                                                       aria-expanded="false" aria-controls="ql-picker-options-0"
@@ -385,7 +385,7 @@
                     class="ql-stroke" x1="11" x2="15" y1="11" y2="15"></line> <line class="ql-stroke" x1="15" x2="11"
                                                                                     y1="11" y2="15"></line> <rect
                     class="ql-fill" height="1" rx="0.5" ry="0.5" width="7" x="2" y="14"></rect> </svg></button></span>
-                  </div><!---->
+                  </div>
                   <div class="p-editor-content ql-container ql-snow" style="height: 250px;">
                     <div class="ql-editor ql-blank" data-gramm="false" contenteditable="true"><p><br></p></div>
                     <div class="ql-clipboard" contenteditable="true" tabindex="-1"></div>
@@ -396,23 +396,22 @@
                       class="ql-action"></a><a class="ql-remove"></a></div>
                   </div>
                 </div>
-              </p-editor>
+              </p-editor>-->
             </div>
             <div class="col-12 field">
-              <p-fileUpload
-                name="images[]"
-                url="./upload.php"
-                accept="image/*"
-                mode="advanced"
-                [multiple]="true"
-                [auto]="false"
-                [showUploadButton]="true"
-                [showCancelButton]="true"
-                chooseLabel="Choose"
-                uploadLabel="Upload"
-                cancelLabel="Cancel"
-                styleClass="border-1 surface-border surface-card border-round">
-              </p-fileUpload>
+<!--              <p-fileUpload-->
+<!--                name="images[]"-->
+<!--                url="./upload.php"-->
+<!--                accept="image/*"-->
+<!--                mode="advanced"-->
+<!--                [multiple]="true"-->
+<!--                [auto]="false"-->
+<!--                [showUploadButton]="true"-->
+<!--                chooseLabel="Choose"-->
+<!--                uploadLabel="Upload"-->
+<!--                cancelLabel="Cancel"-->
+<!--                styleClass="border-1 surface-border surface-card border-round">-->
+<!--              </p-fileUpload>-->
             </div>
           </div>
         </div>
@@ -433,26 +432,26 @@
           <div class="border-1 surface-border border-round">
             <span class="text-900 font-bold block border-bottom-1 surface-border p-3">Tags</span>
             <div class="p-3 flex flex-wrap gap-1">
-              <p-chip label="Nike" ></p-chip>
-              <p-chip label="Sneaker"></p-chip>
+<!--              <p-chip label="Nike" ></p-chip>-->
+<!--              <p-chip label="Sneaker"></p-chip>-->
             </div>
           </div>
           <div class="border-1 surface-border border-round"><span
             class="text-900 font-bold block border-bottom-1 surface-border p-3">Category</span>
             <div class="p-3">
-              <p-dropdown placeholder="Select a category"
+              <!--<p-dropdown placeholder="Select a category"
                           class="p-element p-inputwrapper ng-untouched ng-pristine ng-valid p-inputwrapper-filled">
                 <div class="p-dropdown p-component">
                   <div class="p-hidden-accessible"><input type="text" readonly="" aria-haspopup="listbox" pautofocus=""
                                                           role="combobox" class="p-element"
                                                           placeholder="Select a category" aria-expanded="false"></div>
                   <span class="p-element p-dropdown-label p-inputtext ng-star-inserted" id="pr_id_1_label">Sneakers
-                    <!----><!----><!----></span><!----><!----><!----><!---->
+                   </span>
                   <div role="button" aria-label="dropdown trigger" aria-haspopup="listbox" class="p-dropdown-trigger">
                     <span class="p-dropdown-trigger-icon pi pi-chevron-down"></span></div>
-                  <p-overlay class="p-element ng-tns-c18-3 ng-star-inserted"><!----></p-overlay>
+                  <p-overlay class="p-element ng-tns-c18-3 ng-star-inserted"></p-overlay>
                 </div>
-              </p-dropdown>
+              </p-dropdown>-->
             </div>
           </div>
           <div class="border-1 surface-border border-round"><span
@@ -471,7 +470,7 @@
           <div class="border-1 surface-border border-round"><span
             class="text-900 font-bold block border-bottom-1 surface-border p-3">Stock</span>
             <div class="p-3">
-              <p-dropdown placeholder="Select stock"
+              <!--<p-dropdown placeholder="Select stock"
                           class="p-element p-inputwrapper ng-untouched ng-pristine ng-valid p-inputwrapper-filled">
                 <div class="p-dropdown p-component">
                   <div class="p-hidden-accessible"><input type="text" readonly="" aria-haspopup="listbox" pautofocus=""
@@ -483,17 +482,17 @@
                     <span class="p-dropdown-trigger-icon pi pi-chevron-down"></span></div>
                   <p-overlay class="p-element ng-tns-c18-4 ng-star-inserted"></p-overlay>
                 </div>
-              </p-dropdown>
+              </p-dropdown>-->
             </div>
           </div>
           <div
             class="border-1 surface-border flex justify-content-between align-items-center py-2 px-3 border-round">
             <span class="text-900 font-bold p-3">In stock</span>
-            <p-inputSwitch class="p-element ng-untouched ng-pristine ng-valid">
+            <!--<p-inputSwitch class="p-element ng-untouched ng-pristine ng-valid">
               <div class="p-inputswitch p-component p-inputswitch-checked">
                 <div class="p-hidden-accessible"><input type="checkbox" role="switch" aria-checked="true"></div>
                 <span class="p-inputswitch"></span></div>
-            </p-inputSwitch>
+            </p-inputSwitch>-->
           </div>
           <div class="flex flex-column sm:flex-row justify-content-between align-items-center gap-3 py-2">
             <button
@@ -517,4 +516,4 @@
       </div>
     </div>
   </div>
-</div>
+
