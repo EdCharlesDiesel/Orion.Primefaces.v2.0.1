@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -7,4 +7,6 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   template: `<router-outlet></router-outlet>`
 })
-export class AppComponent {}
+export class AppComponent {
+    protected readonly title = signal('Orion');
+}

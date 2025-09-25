@@ -33,7 +33,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TextareaModule } from 'primeng/textarea';
 import { ShiftsService } from './shifts.service';
-import { Shift } from './shift.model';
+import { Shift } from '../../core/models/shift.model';
 
 interface Column {
     field: string;

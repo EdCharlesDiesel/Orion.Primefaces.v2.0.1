@@ -10,7 +10,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Department } from './department.model';
 import { DepartmentsService } from './departments.service';
 import { tap } from 'rxjs';
 import { DatePickerModule } from 'primeng/datepicker';
@@ -34,6 +33,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ListboxModule } from 'primeng/listbox';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TextareaModule } from 'primeng/textarea';
+import { Department } from '../../core/models/department.model';
 
 interface Column {
     field: string;
@@ -254,6 +254,7 @@ export class Departments implements OnInit {
             if (this.department.DepartmentID) {
                 _departments[this.findIndexById(this.department.DepartmentID)] = this.department;
                 this.departments.set([..._departments]);
+
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -262,6 +263,7 @@ export class Departments implements OnInit {
                 });
             } else {
                 this.department.DepartmentID = this.createId();
+                this.departmentService.createDepartment(this.department)
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',

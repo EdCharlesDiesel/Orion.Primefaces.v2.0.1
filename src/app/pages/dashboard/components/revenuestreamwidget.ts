@@ -8,9 +8,21 @@ import { LayoutService } from '../../../layout/service/layout.service';
     selector: 'app-revenue-stream-widget',
     imports: [ChartModule],
     template: `<div class="card !mb-8">
-        <div class="font-semibold text-xl mb-4">Revenue Stream</div>
-        <p-chart type="bar" [data]="chartData" [options]="chartOptions" class="h-80" />
-    </div>`
+            <div class="font-semibold text-xl mb-4">Revenue Stream</div>
+            <p-chart type="bar" [data]="chartData" [options]="chartOptions" class="h-80" />
+        </div>
+
+    <template id="pony-template">
+        <style>
+            h1 {
+                color: orange;
+            }
+        </style>
+        <h1>General Soda</h1>
+    </template>
+
+
+        `
 })
 export class RevenueStreamWidget {
     chartData: any;
@@ -111,3 +123,13 @@ export class RevenueStreamWidget {
         }
     }
 }
+
+// class Pony extends HTMLElement {
+//     constructor() {
+//         super();
+//         const template = document.querySelector('#pony-template');
+//         const clonedTemplate = document.importNode(template.content, true);
+//         const shadow = this.attachShadow({ mode: 'open' });
+//         shadow.appendChild(clonedTemplate);
+//     }
+// }

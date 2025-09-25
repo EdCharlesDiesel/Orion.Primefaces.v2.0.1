@@ -1,5 +1,4 @@
 import {CreditCard} from "./credit-card.model";
-import {Person} from "../authentication/person.model";
 
 export class PersonCreditCard {
   /** Business entity identification number. Foreign key to Person.BusinessEntityID. */

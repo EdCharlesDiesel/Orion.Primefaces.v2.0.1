@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Employee} from "../../../core/models/employee.model";
+import { Employee } from '../../core/models/employee.model';
+
 
 
 @Injectable({

@@ -1,0 +1,161 @@
+<!--<div class="login-container">-->
+<!--    <p-toast></p-toast>-->
+
+<!--    <div class="login-card-wrapper">-->
+<!--        <p-card class="login-card">-->
+<!--            <ng-template pTemplate="header">-->
+<!--                <div class="card-header">-->
+<!--                    <div class="logo-section">-->
+<!--                        <i class="pi pi-sign-in logo-icon"></i>-->
+<!--                        <h2>Welcome Back</h2>-->
+<!--                    </div>-->
+<!--                    <p class="subtitle">Sign in to your account</p>-->
+<!--                </div>-->
+<!--            </ng-template>-->
+
+<!--            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">-->
+<!--                &lt;!&ndash; Email Field &ndash;&gt;-->
+<!--                <div class="form-field">-->
+<!--                    <label for="email" class="field-label">-->
+<!--                        Email Address <span class="required">*</span>-->
+<!--                    </label>-->
+<!--                    <div class="input-wrapper">-->
+<!--                        <i class="pi pi-envelope input-icon"></i>-->
+<!--                        <p-inputText-->
+<!--                            id="email"-->
+<!--                            formControlName="email"-->
+<!--                            placeholder="Enter your email"-->
+<!--                            class="w-full"-->
+<!--                            [class.ng-invalid]="isFieldInvalid('email')"-->
+<!--                            [class.ng-dirty]="f['email'].dirty">-->
+<!--                        </p-inputText>-->
+<!--                    </div>-->
+<!--                    <small-->
+<!--                        class="error-message"-->
+<!--                        *ngIf="isFieldInvalid('email')">-->
+<!--                        {{ getFieldError('email') }}-->
+<!--                    </small>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Password Field &ndash;&gt;-->
+<!--                <div class="form-field">-->
+<!--                    <label for="password" class="field-label">-->
+<!--                        Password <span class="required">*</span>-->
+<!--                    </label>-->
+<!--                    <div class="password-wrapper">-->
+<!--                        <p-password-->
+<!--                            id="password"-->
+<!--                            formControlName="password"-->
+<!--                            placeholder="Enter your password"-->
+<!--                            [toggleMask]="true"-->
+<!--                            [feedback]="false"-->
+<!--                            class="w-full"-->
+<!--                            [class.ng-invalid]="isFieldInvalid('password')"-->
+<!--                            [class.ng-dirty]="f['password'].dirty">-->
+<!--                        </p-password>-->
+<!--                    </div>-->
+<!--                    <small-->
+<!--                        class="error-message"-->
+<!--                        *ngIf="isFieldInvalid('password')">-->
+<!--                        {{ getFieldError('password') }}-->
+<!--                    </small>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Remember Me & Forgot Password &ndash;&gt;-->
+<!--                <div class="form-options">-->
+<!--                    <div class="remember-me">-->
+<!--                        <p-checkbox-->
+<!--                            formControlName="rememberMe"-->
+<!--                            [binary]="true"-->
+<!--                            inputId="rememberMe">-->
+<!--                        </p-checkbox>-->
+<!--                        <label for="rememberMe" class="checkbox-label">-->
+<!--                            Remember me-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                    <a (click)="onForgotPassword()" class="forgot-password-link">-->
+<!--                        Forgot password?-->
+<!--                    </a>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Submit Button &ndash;&gt;-->
+<!--                <div class="form-actions">-->
+<!--                    <p-button-->
+<!--                        type="submit"-->
+<!--                        label="Sign In"-->
+<!--                        icon="pi pi-sign-in"-->
+<!--                        [loading]="loading"-->
+<!--                        [disabled]="loading"-->
+<!--                        class="w-full login-button">-->
+<!--                    </p-button>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Demo Login Buttons (remove in production) &ndash;&gt;-->
+<!--                <div class="demo-section" *ngIf="true"> &lt;!&ndash; Set to false in production &ndash;&gt;-->
+<!--                    <p-divider align="center">-->
+<!--                        <span class="divider-text">Demo Accounts</span>-->
+<!--                    </p-divider>-->
+<!--                    <div class="demo-buttons">-->
+<!--                        <p-button-->
+<!--                            type="button"-->
+<!--                            label="Demo User"-->
+<!--                            icon="pi pi-user"-->
+<!--                            class="p-button-outlined demo-button"-->
+<!--                            (click)="onDemoLogin('user')">-->
+<!--                        </p-button>-->
+<!--                        <p-button-->
+<!--                            type="button"-->
+<!--                            label="Demo Admin"-->
+<!--                            icon="pi pi-shield"-->
+<!--                            class="p-button-outlined demo-button"-->
+<!--                            (click)="onDemoLogin('admin')">-->
+<!--                        </p-button>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Divider &ndash;&gt;-->
+<!--                <p-divider align="center">-->
+<!--                    <span class="divider-text">or</span>-->
+<!--                </p-divider>-->
+
+<!--                &lt;!&ndash; Social Login &ndash;&gt;-->
+<!--                <div class="social-buttons">-->
+<!--                    <p-button-->
+<!--                        type="button"-->
+<!--                        label="Continue with Google"-->
+<!--                        icon="pi pi-google"-->
+<!--                        class="p-button-outlined w-full social-button google-button"-->
+<!--                        (click)="onSocialLogin('Google')">-->
+<!--                    </p-button>-->
+<!--                    <p-button-->
+<!--                        type="button"-->
+<!--                        label="Continue with Microsoft"-->
+<!--                        icon="pi pi-microsoft"-->
+<!--                        class="p-button-outlined w-full social-button microsoft-button"-->
+<!--                        (click)="onSocialLogin('Microsoft')">-->
+<!--                    </p-button>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Register Link &ndash;&gt;-->
+<!--                <div class="register-link">-->
+<!--                    <span>Don't have an account? </span>-->
+<!--                    <a (click)="navigateToRegister()" class="link">Create one here</a>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </p-card>-->
+
+<!--        &lt;!&ndash; Additional Info &ndash;&gt;-->
+<!--        <div class="additional-info">-->
+<!--            <div class="info-card">-->
+<!--                <i class="pi pi-shield info-icon"></i>-->
+<!--                <h4>Secure Login</h4>-->
+<!--                <p>Your data is protected with enterprise-grade security</p>-->
+<!--            </div>-->
+<!--            <div class="info-card">-->
+<!--                <i class="pi pi-clock info-icon"></i>-->
+<!--                <h4>Quick Access</h4>-->
+<!--                <p>Sign in once and stay logged in across devices</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

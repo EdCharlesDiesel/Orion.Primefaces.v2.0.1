@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Employee} from "../../../core/models/employee.model";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InternalEmployeesService } from './internal-employees.service';
 import { MessageService } from 'primeng/api';
+import { Employee } from '../../core/models/employee.model';
 
 
 @Component({

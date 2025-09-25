@@ -1,0 +1,45 @@
+<div class="access-denied-container">
+  <p-card class="access-denied-card">
+    <ng-template pTemplate="header">
+      <div class="card-header">
+        <i class="pi pi-exclamation-triangle warning-icon"></i>
+        <h2>Access Denied</h2>
+      </div>
+    </ng-template>
+
+    <div class="content">
+      <p class="message">
+        You don't have permission to access this page.
+      </p>
+      <p class="sub-message">
+        If you believe this is an error, please contact your administrator
+        or try logging in with a different account.
+      </p>
+
+      <div class="user-info" *ngIf="currentUser">
+        <p><strong>Current User:</strong> {{ currentUser.name }} ({{ currentUser.email }})</p>
+        <p><strong>Role:</strong> {{ currentUser.role || 'User' }}</p>
+      </div>
+
+      <div class="actions">
+        <p-button
+          label="Go Back"
+          icon="pi pi-arrow-left"
+          class="p-button-outlined"
+          (click)="goBack()">
+        </p-button>
+        <p-button
+          label="Dashboard"
+          icon="pi pi-home"
+          (click)="goToDashboard()">
+        </p-button>
+        <p-button
+          label="Logout"
+          icon="pi pi-sign-out"
+          class="p-button-outlined p-button-secondary"
+          (click)="logout()">
+        </p-button>
+      </div>
+    </div>
+  </p-card>
+</div>
