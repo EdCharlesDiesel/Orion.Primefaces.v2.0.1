@@ -1,10 +1,29 @@
-# Orion
+# Orion Angular Front-end
 
-## Theme Further help
+## Project Summary 
 
-Theme from [sakai-ng](https://github.com/primefaces/sakai-ng)
+Orion is an E-Commerce application for a virtual shoe store. We manufacture shoes end to end, sell,
+customise and deliver to the customer.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
+## Features
+
+-Human Resources API
+
+-Person API
+
+-Production API
+
+-Sales API
+
+-Purchasing API
+
+-Applications - Apps
+
+-UserManagement - API
+
+-Many more
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version CLI: 19.0.6
 
 ## Development server
 
