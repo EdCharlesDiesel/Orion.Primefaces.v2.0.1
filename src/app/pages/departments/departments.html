@@ -107,8 +107,9 @@
                 <small class="text-red-500" *ngIf="submitted && !department.GroupName">Group name is required.</small>
             </div>
             <div>
-              <label for="name" class="block font-bold mb-3">Modified -Date</label>
-              <p-datepicker [showIcon]="true" pInputText id="GroupName" [showButtonBar]="true" [(ngModel)]="department.ModifiedDate"></p-datepicker>
+            <label for="name" class="block font-bold mb-3">Modified Date</label>
+              <p-datepicker [showIcon]="true" pInputText id="ModifiedDate" [showButtonBar]="true" [(ngModel)]="department.ModifiedDate"></p-datepicker>
+<!--              <input type="text" pInputText id="ModifiedDate" [(ngModel)]="department.ModifiedDate" required autofocus fluid />-->
               <small class="text-red-500" *ngIf="submitted && !department.ModifiedDate">ModifiedDate is required.</small>
             </div>
         </div>

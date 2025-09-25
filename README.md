@@ -1,4 +1,4 @@
-# Orion Angular Front-end
+# Orion Angular PrimeNG Front-end
 
 ## Project Summary 
 

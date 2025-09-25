@@ -1,19 +1,19 @@
 import { Component, OnInit, signal, ViewChild } from '@angular/core';
-import { Button, ButtonModule } from 'primeng/button';
-import { ConfirmDialog } from 'primeng/confirmdialog';
+import {  ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CommonModule, CurrencyPipe, NgIf } from '@angular/common';
-import { Dialog } from 'primeng/dialog';
+import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
-import { IconField, IconFieldModule } from 'primeng/iconfield';
-import { InputIcon, InputIconModule } from 'primeng/inputicon';
-import { InputText, InputTextModule } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Department } from './department.model';
 import { DepartmentsService } from './departments.service';
 import { tap } from 'rxjs';
-import { DatePicker, DatePickerModule } from 'primeng/datepicker';
+import { DatePickerModule } from 'primeng/datepicker';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -79,7 +79,8 @@ interface ExportColumn {
     TextareaModule,
     Toolbar,
     TableModule,
-    Dialog
+    ConfirmDialogModule,
+    DialogModule
   ],
     templateUrl: 'departments.html',
     providers: [MessageService, DepartmentsService, ConfirmationService]
