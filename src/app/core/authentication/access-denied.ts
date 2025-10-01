@@ -125,8 +125,8 @@ export class AccessDeniedComponent implements OnInit {
     }
 
     logout(): void {
-        this.authService.logout().subscribe(() => {
-            // Logout will automatically redirect to login page
-        });
+        // this.authService.logout().subscribe(() => {
+        //     // Logout will automatically redirect to login page
+        // });
     }
 }

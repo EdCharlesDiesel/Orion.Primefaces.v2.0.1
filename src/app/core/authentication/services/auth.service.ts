@@ -1,5 +1,7 @@
 // Add this property and method to your existing AuthService
 
+import { Observable, of } from 'rxjs';
+
 export class AuthResponse {
     refreshToken: boolean | undefined;
     token:any ;
@@ -84,7 +86,15 @@ export class AuthService {
 
     }
 
-    register(registerData: ) {
+    register(registerData: any) {
 
+    }
+
+    // requestPasswordReset(email: any): Observable<void> {
+    //
+    //     return of(any)
+    // }
+    requestPasswordReset(email: any) {
+        
     }
 }

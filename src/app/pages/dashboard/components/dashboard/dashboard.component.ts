@@ -9,7 +9,7 @@ import { RevenueStreamWidget } from '../revenuestreamwidget';
     selector: 'app-dashboard',
     imports: [StatsWidget, RecentSalesWidget, BestSellingWidget, RevenueStreamWidget, NotificationsWidget],
     template: `
-
+<p>vxcvcvxcvxc</p>
     `
 })
 export class DashboardComponent {}

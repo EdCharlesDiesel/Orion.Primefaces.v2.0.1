@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { Error } from './error/error';
 import { Signup } from '../pages/signup';
 import { AccessDenied } from './access-denied/access-denied';
-import { LoginComponent } from '../pages/login/login';
+import { LoginComponent } from '../pages/login/login.component';
 
 export default [
     { path: 'access', component: AccessDenied },

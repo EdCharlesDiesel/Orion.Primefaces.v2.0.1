@@ -130,18 +130,23 @@ import { Documentation } from './app/pages/documentation/documentation';
 import { Landing } from './app/pages/landing/landing';
 import { Notfound } from './app/pages/notfound/notfound';
 import { DashboardComponent } from './app/pages/dashboard/components/dashboard/dashboard.component';
+import { LoginComponent } from './app/core/pages/login/login.component';
+import { RegisterComponent } from './app/core/pages/register/register.component';
 export const appRoutes: Routes = [
     {
         path: '',
         component: AppLayout,
         children: [
-            { path: '', component: DashboardComponent },
+            { path: 'home', component: DashboardComponent },
             { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
             { path: 'documentation', component: Documentation },
             { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') },
             { path: 'database-log', component: DatabaseLog },
+            { path: 'human-resources', component: DatabaseLog },
         ]
     },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
     { path: 'landing', component: Landing },
     { path: 'notfound', component: Notfound },
     // { path: 'auth', loadChildren: () => import('./app/pages/auth/auth.routes') },

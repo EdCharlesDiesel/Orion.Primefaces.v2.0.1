@@ -121,8 +121,8 @@ export class Departments implements OnInit {
     loadDemoData() {
         this.departmentService.getDepartments().pipe(
             tap((p) => console.log(JSON.stringify(p))),
-        ).subscribe((data) => {
-            this.departments.set(data);
+        ).subscribe((data): any => {
+        //    this.departments.set(data);
 
         //
         // this.departmentService.getDepartments().then((data) => {

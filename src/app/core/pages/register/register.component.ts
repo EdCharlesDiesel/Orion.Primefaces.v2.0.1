@@ -1,12 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService, RegisterRequest } from '../../authentication/services/auth.service';
+import { AuthService } from '../../authentication/services/auth.service';
 import { MessageService } from 'primeng/api';
+import { Toast } from 'primeng/toast';
+import { Card } from 'primeng/card';
+import { Password } from 'primeng/password';
+import { Checkbox } from 'primeng/checkbox';
+import { Button } from 'primeng/button';
+import { Divider } from 'primeng/divider';
+
+class RegisterRequest {}
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
+    imports: [Toast, Card, ReactiveFormsModule, Password, Checkbox, Button, Divider],
     styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
@@ -22,19 +31,18 @@ export class RegisterComponent implements OnInit {
         private router: Router,
         private messageService: MessageService
     ) {
-        this.registerForm = this.formBuilder.group({
-            name: ['', [Validators.required, Validators.minLength(2)]],
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', [
-                Validators.required,
-                Validators.minLength(8),
-                Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
-            ]],
-            confirmPassword: ['', Validators.required],
-            acceptTerms: [false, Validators.requiredTrue]
-        }, {
-            validators: this.passwordMatchValidator
-        });
+        this.registerForm = this.formBuilder.group(
+            {
+                name: ['', [Validators.required, Validators.minLength(2)]],
+                email: ['', [Validators.required, Validators.email]],
+                password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)]],
+                confirmPassword: ['', Validators.required],
+                acceptTerms: [false, Validators.requiredTrue]
+            },
+            {
+                validators: this.passwordMatchValidator
+            }
+        );
     }
 
     ngOnInit(): void {
@@ -83,31 +91,31 @@ export class RegisterComponent implements OnInit {
             password: this.f['password'].value
         };
 
-        this.authService.register(registerData).subscribe({
-            next: (response: any) => {
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Registration Successful',
-                    detail: 'Your account has been created successfully!'
-                });
-
-                // Redirect to dashboard or login page
-                setTimeout(() => {
-                    this.router.navigate(['/dashboard']);
-                }, 1500);
-            },
-            error: (error: any) => {
-                this.loading = false;
-                this.messageService.add({
-                    severity: 'error',
-                    summary: 'Registration Failed',
-                    detail: error || 'An error occurred during registration'
-                });
-            },
-            complete: () => {
-                this.loading = false;
-            }
-        });
+        // this.authService.register(registerData).subscribe({
+        //     next: (response: any) => {
+        //         this.messageService.add({
+        //             severity: 'success',
+        //             summary: 'Registration Successful',
+        //             detail: 'Your account has been created successfully!'
+        //         });
+        //
+        //         // Redirect to dashboard or login page
+        //         setTimeout(() => {
+        //             this.router.navigate(['/dashboard']);
+        //         }, 1500);
+        //     },
+        //     error: (error: any) => {
+        //         this.loading = false;
+        //         this.messageService.add({
+        //             severity: 'error',
+        //             summary: 'Registration Failed',
+        //             detail: error || 'An error occurred during registration'
+        //         });
+        //     },
+        //     complete: () => {
+        //         this.loading = false;
+        //     }
+        // });
     }
 
     togglePasswordVisibility(): void {
@@ -123,7 +131,7 @@ export class RegisterComponent implements OnInit {
     }
 
     private markFormGroupTouched(): void {
-        Object.keys(this.registerForm.controls).forEach(key => {
+        Object.keys(this.registerForm.controls).forEach((key) => {
             const control = this.registerForm.get(key);
             control?.markAsTouched();
         });
