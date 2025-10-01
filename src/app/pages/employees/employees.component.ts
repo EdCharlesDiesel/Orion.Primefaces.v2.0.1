@@ -10,7 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { DepartmentsService } from './departments.service';
+import { EmployeesService } from './employees.service';
 import { tap } from 'rxjs';
 import { DatePickerModule } from 'primeng/datepicker';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -33,7 +33,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ListboxModule } from 'primeng/listbox';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TextareaModule } from 'primeng/textarea';
-import { Department } from '../../core/models/department.model';
+import { Employee } from '../../core/models/employee.model';
+import { SqlHierarchyId } from '../../core/models/SqlHierarchyId';
 
 interface Column {
     field: string;
@@ -47,7 +48,7 @@ interface ExportColumn {
 }
 
 @Component({
-    selector: 'app-departments',
+    selector: 'app-employees',
     standalone: true,
   imports: [
     CommonModule,
@@ -82,17 +83,17 @@ interface ExportColumn {
     ConfirmDialogModule,
     DialogModule
   ],
-    templateUrl: 'departments.html',
-    providers: [MessageService, DepartmentsService, ConfirmationService]
+    templateUrl: 'employees.component.html',
+    providers: [MessageService, EmployeesService, ConfirmationService]
 })
-export class Departments implements OnInit {
-    departmentDialog: boolean = false;
+export class EmployeesComponent implements OnInit {
+    employeeDialog: boolean = false;
 
-    departments = signal<Department[]>([]);
+    employees = signal<Employee[]>([]);
 
-    department!: Department;
+    employee!: Employee;
 
-    selectedDepartments!: Department[] | null;
+    selectedEmployees!: Employee[] | null;
 
     submitted: boolean = false;
 
@@ -105,7 +106,7 @@ export class Departments implements OnInit {
     cols!: Column[];
 
     constructor(
-        private departmentService: DepartmentsService,
+        private employeeService: EmployeesService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -119,19 +120,19 @@ export class Departments implements OnInit {
     }
 
     loadDemoData() {
-        this.departmentService.getDepartments().pipe(
+        this.employeeService.getEmployees().pipe(
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data): any => {
-        //    this.departments.set(data);
+        //    this.employees.set(data);
 
         //
-        // this.departmentService.getDepartments().then((data) => {
-        //     this.departments.set(data);
+        // this.employeeService.getEmployees().then((data) => {
+        //     this.employees.set(data);
         // });
 
-        // this.departmentService.departmentsResult$.subscribe(
+        // this.employeeService.employeesResult$.subscribe(
         //     (data: any) => {
-        //         this.departments.set(data);
+        //         this.employees.set(data);
              }
         );
 
@@ -142,7 +143,7 @@ export class Departments implements OnInit {
         ];
 
         this.cols = [
-            { field: 'Department ID', header: 'Code', customExportHeader: 'Department Code' },
+            { field: 'Employee ID', header: 'Code', customExportHeader: 'Employee Code' },
             { field: 'Name', header: 'Name' },
             { field: 'GroupName', header: 'Group Name' },
             { field: 'ModifiedDate', header: 'Modified Date' },
@@ -156,29 +157,39 @@ export class Departments implements OnInit {
     }
 
     public openNew() {
-        this.department = {
-            DepartmentID : 0,
-            Name : "",
-            GroupName :"",
-            ModifiedDate: new Date()
+        this.employee = {
+            businessEntityID : 0,
+            nationalIDNumber: "",
+            loginID: "",
+            organizationLevel:1,
+            jobTitle: "",
+            birthDate: new Date(),
+            maritalStatus: "",
+            gender: "",
+            hireDate: new Date(),
+            salariedFlag: false,
+            vacationHours: 0,
+            sickLeaveHours:0,
+            currentFlag:false,
+            modifiedDate: new Date()
         };
         this.submitted = false;
-        this.departmentDialog = true;
+        this.employeeDialog = true;
     }
 
-    public editDepartment(department: Department) {
-        this.department = { ...department };
-        this.departmentDialog = true;
+    public editEmployee(employee: Employee) {
+        this.employee = { ...employee };
+        this.employeeDialog = true;
     }
 
-    public deleteSelectedDepartments() {
+    public deleteSelectedEmployees() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected departments?',
+            message: 'Are you sure you want to delete the selected employees?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.departments.set(this.departments().filter((val) => !this.selectedDepartments?.includes(val)));
-                this.selectedDepartments = null;
+                this.employees.set(this.employees().filter((val) => !this.selectedEmployees?.includes(val)));
+                this.selectedEmployees = null;
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -190,27 +201,37 @@ export class Departments implements OnInit {
     }
 
     public hideDialog() {
-        this.departmentDialog = false;
+        this.employeeDialog = false;
         this.submitted = false;
     }
 
-    public deleteDepartment(department: Department) {
+    public deleteEmployee(employee: Employee) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + department.Name + '?',
+            message: 'Are you sure you want to delete employee ID:' + employee.businessEntityID + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.departments.set(this.departments().filter((val) => val.DepartmentID !== department.DepartmentID));
-                this.department = {
-                    DepartmentID : 0,
-                    Name : "",
-                    GroupName :"",
-                    ModifiedDate: new Date(),
+                this.employees.set(this.employees().filter((val) => val.businessEntityID !== employee.businessEntityID));
+                this.employee = {
+                    businessEntityID : 0,
+                    nationalIDNumber: "",
+                    loginID: "",
+                    organizationLevel:1,
+                    jobTitle: "",
+                    birthDate: new Date(),
+                    maritalStatus: "",
+                    gender: "",
+                    hireDate: new Date(),
+                    salariedFlag: false,
+                    vacationHours: 0,
+                    sickLeaveHours:0,
+                    currentFlag:false,
+                    modifiedDate: new Date()
                 };
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Department Deleted',
+                    detail: 'Employee Deleted',
                     life: 3000
                 });
             }
@@ -219,8 +240,8 @@ export class Departments implements OnInit {
 
     private findIndexById(id: number): number {
         let index = -1;
-        for (let i = 0; i < this.departments().length; i++) {
-            if (this.departments()[i].DepartmentID === id) {
+        for (let i = 0; i < this.employees().length; i++) {
+            if (this.employees()[i].businessEntityID === id) {
                 index = i;
                 break;
             }
@@ -247,38 +268,48 @@ export class Departments implements OnInit {
         }
     }
 
-    public saveDepartment() {
+    public saveEmployee() {
         this.submitted = true;
-        let _departments = this.departments();
-        if (this.department.Name?.trim()) {
-            if (this.department.DepartmentID) {
-                _departments[this.findIndexById(this.department.DepartmentID)] = this.department;
-                this.departments.set([..._departments]);
+        let _employees = this.employees();
+        if (this.employee.loginID?.trim()) {
+            if (this.employee.businessEntityID) {
+                _employees[this.findIndexById(this.employee.businessEntityID)] = this.employee;
+                this.employees.set([..._employees]);
 
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Department Updated',
+                    detail: 'Employee Updated',
                     life: 3000
                 });
             } else {
-                this.department.DepartmentID = this.createId();
-                this.departmentService.createDepartment(this.department)
+                this.employee.businessEntityID = this.createId();
+                this.employeeService.createEmployee(this.employee)
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Department Created',
+                    detail: 'Employee Created',
                     life: 3000
                 });
-                this.departments.set([..._departments, this.department]);
+                this.employees.set([..._employees, this.employee]);
             }
 
-            this.departmentDialog = false;
-            this.department = {
-                DepartmentID : 0,
-                Name : "",
-                GroupName :"",
-                ModifiedDate: new Date(),
+            this.employeeDialog = false;
+            this.employee = {
+                businessEntityID : 0,
+                nationalIDNumber: "",
+                loginID: "",
+                organizationLevel:1,
+                jobTitle: "",
+                birthDate: new Date(),
+                maritalStatus: "",
+                gender: "",
+                hireDate: new Date(),
+                salariedFlag: false,
+                vacationHours: 0,
+                sickLeaveHours:0,
+                currentFlag:false,
+                modifiedDate: new Date()
             };
         }
     }

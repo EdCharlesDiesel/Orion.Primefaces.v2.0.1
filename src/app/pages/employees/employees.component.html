@@ -5,7 +5,7 @@
 <p-toolbar styleClass="mb-6">
     <ng-template #start>
         <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
-        <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedDepartments()" [disabled]="!selectedDepartments || !selectedDepartments.length" />
+        <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedEmployees()" [disabled]="!selectedEmployees || !selectedEmployees.length" />
     </ng-template>
 
     <ng-template #end>
@@ -15,16 +15,16 @@
 
 <p-table
     #dt
-    [value]="departments()"
+    [value]="employees()"
     [rows]="10"
     [columns]="cols"
     [paginator]="true"
     [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
     [tableStyle]="{ 'min-width': '75rem' }"
-    [(selection)]="selectedDepartments"
+    [(selection)]="selectedEmployees"
     [rowHover]="true"
     dataKey="id"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} departments"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
     [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[10, 20, 30]"
 >
@@ -42,7 +42,7 @@
             <th style="width: 3rem">
                 <p-tableHeaderCheckbox />
             </th>
-            <th style="min-width: 16rem">Department ID</th>
+            <th style="min-width: 16rem">Employee ID</th>
             <th pSortableColumn="name" style="min-width:16rem">
                 Name
                 <p-sortIcon field="Name" />
@@ -75,49 +75,49 @@
             <th style="min-width: 12rem"></th>
         </tr>
     </ng-template>
-    <ng-template #body let-department>
+    <ng-template #body let-employee>
         <tr>
            <td style="width: 3rem">
-                <p-tableCheckbox [value]="department" />
+                <p-tableCheckbox [value]="employee" />
           </td>
-           <td style="min-width: 12rem">{{ department.departmentID }}</td>
-            <td style="min-width: 16rem">{{ department.name }}</td>
-            <td style="min-width: 16rem">{{ department.groupName }}</td>
-            <td style="min-width: 16rem">{{ department.modifiedDate }}</td>
+           <td style="min-width: 12rem">{{ employee.employeeID }}</td>
+            <td style="min-width: 16rem">{{ employee.name }}</td>
+            <td style="min-width: 16rem">{{ employee.groupName }}</td>
+            <td style="min-width: 16rem">{{ employee.modifiedDate }}</td>
             <td>
-                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editDepartment(department)" />
-                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteDepartment(department)" />
+                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editEmployee(employee)" />
+                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteEmployee(employee)" />
             </td>
         </tr>
     </ng-template>
 </p-table>
 
-<p-dialog [(visible)]="departmentDialog" [style]="{ width: '450px' }" header="Department Details" [modal]="true">
+<p-dialog [(visible)]="employeeDialog" [style]="{ width: '450px' }" header="Employee Details" [modal]="true">
     <ng-template #content>
         <div class="flex flex-col gap-6">
-<!--            <img [src]="'https://primefaces.org/cdn/primeng/images/demo/department/' + department.image" [alt]="department.image" class="block m-auto pb-4" *ngIf="department.image" />-->
-            <div>
-                <label for="name" class="block font-bold mb-3">Name</label>
-                <input type="text" pInputText id="name" [(ngModel)]="department.Name" required autofocus fluid />
-                <small class="text-red-500" *ngIf="submitted && !department.Name">Name is required.</small>
-            </div>
-            <div>
-                <label for="name" class="block font-bold mb-3">Group Name</label>
-                <input type="text" pInputText id="GroupName" [(ngModel)]="department.GroupName" required autofocus fluid />
-                <small class="text-red-500" *ngIf="submitted && !department.GroupName">Group name is required.</small>
-            </div>
+<!--            <img [src]="'https://primefaces.org/cdn/primeng/images/demo/employee/' + employee.image" [alt]="employee.image" class="block m-auto pb-4" *ngIf="employee.image" />-->
+<!--            <div>-->
+<!--                <label for="name" class="block font-bold mb-3">Name</label>-->
+<!--                <input type="text" pInputText id="name" [(ngModel)]="employee.Name" required autofocus fluid />-->
+<!--                <small class="text-red-500" *ngIf="submitted && !employee.Name">Name is required.</small>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label for="name" class="block font-bold mb-3">Group Name</label>-->
+<!--                <input type="text" pInputText id="GroupName" [(ngModel)]="employee.GroupName" required autofocus fluid />-->
+<!--                <small class="text-red-500" *ngIf="submitted && !employee.GroupName">Group name is required.</small>-->
+<!--            </div>-->
             <div>
             <label for="name" class="block font-bold mb-3">Modified Date</label>
-              <p-datepicker [showIcon]="true" pInputText id="ModifiedDate" [showButtonBar]="true" [(ngModel)]="department.ModifiedDate"></p-datepicker>
-<!--              <input type="text" pInputText id="ModifiedDate" [(ngModel)]="department.ModifiedDate" required autofocus fluid />-->
-              <small class="text-red-500" *ngIf="submitted && !department.ModifiedDate">ModifiedDate is required.</small>
+              <p-datepicker [showIcon]="true" pInputText id="ModifiedDate" [showButtonBar]="true" [(ngModel)]="employee.ModifiedDate"></p-datepicker>
+<!--              <input type="text" pInputText id="ModifiedDate" [(ngModel)]="employee.ModifiedDate" required autofocus fluid />-->
+              <small class="text-red-500" *ngIf="submitted && !employee.ModifiedDate">ModifiedDate is required.</small>
             </div>
         </div>
     </ng-template>
 
     <ng-template #footer>
         <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
-        <p-button label="Save" icon="pi pi-check" (click)="saveDepartment()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveEmployee()" />
     </ng-template>
 </p-dialog>
 

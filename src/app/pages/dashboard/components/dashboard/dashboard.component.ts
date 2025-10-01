@@ -8,8 +8,6 @@ import { RevenueStreamWidget } from '../revenuestreamwidget';
 @Component({
     selector: 'app-dashboard',
     imports: [StatsWidget, RecentSalesWidget, BestSellingWidget, RevenueStreamWidget, NotificationsWidget],
-    template: `
-<p>vxcvcvxcvxc</p>
-    `
+    templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent {}

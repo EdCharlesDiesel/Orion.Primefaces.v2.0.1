@@ -5,7 +5,6 @@ import {Course} from "./course.model";
 import {SalesPerson} from "./sales-person.model";
 import {EmployeePayHistory} from "./employee-pay-history.model";
 import {JobCandidate} from "./job-candidate.model";
-import {Person} from "../authentication/person.model";
 
 export class Employee {
   /** Primary key for Employee records.  Foreign key to BusinessEntity.BusinessEntityID. */
@@ -35,10 +34,11 @@ export class Employee {
   /** 0 = Inactive, 1 = Active */
   currentFlag!: boolean;
   /** ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample. */
-  rowguid!: string;
+  rowguid?: string| undefined;
   /** Date and time the record was last updated. */
   modifiedDate!: Date;
-  person?: Person;
+  //TODO: Need to fix.
+  //person?: Person;
   employeeDepartmentHistories?: EmployeeDepartmentHistory[] | undefined;
   employeePayHistories?: EmployeePayHistory[] | undefined;
   jobCandidates?: JobCandidate[] | undefined;
@@ -87,7 +87,7 @@ export interface IEmployee {
   rowguid: string;
   /** Date and time the record was last updated. */
   modifiedDate: Date;
-  person?: Person;
+  //person?: Person;
   employeeDepartmentHistories?: EmployeeDepartmentHistory[] | undefined;
   employeePayHistories?: EmployeePayHistory[] | undefined;
   jobCandidates?: JobCandidate[] | undefined;

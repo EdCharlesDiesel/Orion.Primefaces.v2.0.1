@@ -1,4 +1,4 @@
-export class OrionCalendarEventDto {
+export class OrionCalendarEvent {
   firstName?: string | undefined;
   lastName?: string | undefined;
   employeeNumber?: string | undefined;

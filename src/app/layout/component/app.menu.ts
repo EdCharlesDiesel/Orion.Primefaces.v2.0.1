@@ -100,7 +100,7 @@ export class AppMenu {
                         icon: 'pi pi-fw pi-bookmark',
                         items: [
                             {
-                                label: 'Departments',
+                                label: 'EmployeesComponent',
                                 icon: 'pi pi-fw pi-bookmark',
                                 routerLink: ['/pages/departments']
                             }
