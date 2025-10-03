@@ -2,7 +2,7 @@
 
 import { Observable, of } from 'rxjs';
 import { AuthResponse } from '../../models/auth-response.model';
-import { Result } from '../../../pages/departments/departments.service';
+//import { Result } from '../../../pages/departments/departments.service';
 
 
 
@@ -84,6 +84,7 @@ export class AuthService {
 
     }
 
+    // @ts-ignore
     public register(registerData: any): Observable<void> {
 
     }

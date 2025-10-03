@@ -1,39 +1,18 @@
 import { Component, OnInit, signal, ViewChild } from '@angular/core';
-import {  ButtonModule } from 'primeng/button';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { CommonModule, CurrencyPipe, NgIf } from '@angular/common';
-import { DialogModule } from 'primeng/dialog';
+import { Button } from 'primeng/button';
+import { ConfirmDialog } from 'primeng/confirmdialog';
+import { CurrencyPipe, NgIf } from '@angular/common';
+import { Dialog } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
-import { InputTextModule } from 'primeng/inputtext';
+import { IconField } from 'primeng/iconfield';
+import { InputIcon } from 'primeng/inputicon';
+import { InputText } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Department } from './department.model';
 import { DepartmentsService } from './departments.service';
 import { tap } from 'rxjs';
-import { DatePickerModule } from 'primeng/datepicker';
-import { CheckboxModule } from 'primeng/checkbox';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { FluidModule } from 'primeng/fluid';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { AutoCompleteModule } from 'primeng/autocomplete';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { SliderModule } from 'primeng/slider';
-import { RatingModule } from 'primeng/rating';
-import { ColorPickerModule } from 'primeng/colorpicker';
-import { KnobModule } from 'primeng/knob';
-import { SelectModule } from 'primeng/select';
-import { ToggleButtonModule } from 'primeng/togglebutton';
-import { ToggleSwitchModule } from 'primeng/toggleswitch';
-import { TreeSelectModule } from 'primeng/treeselect';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { ListboxModule } from 'primeng/listbox';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { TextareaModule } from 'primeng/textarea';
-import { Department } from '../../core/models/department.model';
 
 interface Column {
     field: string;
@@ -49,39 +28,18 @@ interface ExportColumn {
 @Component({
     selector: 'app-departments',
     standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    InputTextModule,
-    ButtonModule,
-    CheckboxModule,
-    RadioButtonModule,
-    SelectButtonModule,
-    InputGroupModule,
-    FluidModule,
-    IconFieldModule,
-    InputIconModule,
-    FloatLabelModule,
-    AutoCompleteModule,
-    InputNumberModule,
-    SliderModule,
-    RatingModule,
-    ColorPickerModule,
-    KnobModule,
-    SelectModule,
-    DatePickerModule,
-    ToggleButtonModule,
-    ToggleSwitchModule,
-    TreeSelectModule,
-    MultiSelectModule,
-    ListboxModule,
-    InputGroupAddonModule,
-    TextareaModule,
-    Toolbar,
-    TableModule,
-    ConfirmDialogModule,
-    DialogModule
-  ],
+    imports: [
+        Button,
+        ConfirmDialog,
+        Dialog,
+        FormsModule,
+        IconField,
+        InputIcon,
+        InputText,
+        NgIf,
+        TableModule,
+        Toolbar
+    ],
     templateUrl: 'departments.html',
     providers: [MessageService, DepartmentsService, ConfirmationService]
 })
@@ -121,8 +79,8 @@ export class Departments implements OnInit {
     loadDemoData() {
         this.departmentService.getDepartments().pipe(
             tap((p) => console.log(JSON.stringify(p))),
-        ).subscribe((data): any => {
-        //    this.departments.set(data);
+        ).subscribe((data) => {
+            this.departments.set(data);
 
         //
         // this.departmentService.getDepartments().then((data) => {
@@ -160,7 +118,8 @@ export class Departments implements OnInit {
             DepartmentID : 0,
             Name : "",
             GroupName :"",
-            ModifiedDate: new Date()
+            ModifiedDate: new Date(),
+            EmployeeDepartmentHistories: []
         };
         this.submitted = false;
         this.departmentDialog = true;
@@ -182,7 +141,7 @@ export class Departments implements OnInit {
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'EmployeesComponent Deleted',
+                    detail: 'Departments Deleted',
                     life: 3000
                 });
             }
@@ -206,6 +165,7 @@ export class Departments implements OnInit {
                     Name : "",
                     GroupName :"",
                     ModifiedDate: new Date(),
+                    EmployeeDepartmentHistories: []
                 };
                 this.messageService.add({
                     severity: 'success',
@@ -254,7 +214,6 @@ export class Departments implements OnInit {
             if (this.department.DepartmentID) {
                 _departments[this.findIndexById(this.department.DepartmentID)] = this.department;
                 this.departments.set([..._departments]);
-
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -263,7 +222,7 @@ export class Departments implements OnInit {
                 });
             } else {
                 this.department.DepartmentID = this.createId();
-                this.departmentService.createDepartment(this.department)
+                this.departmentService.createDepartment(this.department);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -274,12 +233,13 @@ export class Departments implements OnInit {
             }
 
             this.departmentDialog = false;
-            this.department = {
-                DepartmentID : 0,
-                Name : "",
-                GroupName :"",
-                ModifiedDate: new Date(),
-            };
+            // this.department = {
+            //     DepartmentID : 0,
+            //     Name : "",
+            //     GroupName :"",
+            //     ModifiedDate: new Date(),
+            //     EmployeeDepartmentHistories: []
+            //  };
         }
     }
 }

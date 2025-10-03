@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="font-semibold text-xl mb-4">EmployeesComponent</div>
+    <div class="font-semibold text-xl mb-4">Departments</div>
 </div>
 
 <p-toolbar styleClass="mb-6">
@@ -30,7 +30,7 @@
 >
     <ng-template #caption>
         <div class="flex items-center justify-between">
-            <h5 class="m-0">Manage EmployeesComponent</h5>
+            <h5 class="m-0">Manage Departments</h5>
             <p-iconfield>
                 <p-inputicon styleClass="pi pi-search" />
                 <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
@@ -107,10 +107,9 @@
                 <small class="text-red-500" *ngIf="submitted && !department.GroupName">Group name is required.</small>
             </div>
             <div>
-            <label for="name" class="block font-bold mb-3">Modified Date</label>
-              <p-datepicker [showIcon]="true" pInputText id="ModifiedDate" [showButtonBar]="true" [(ngModel)]="department.ModifiedDate"></p-datepicker>
-<!--              <input type="text" pInputText id="ModifiedDate" [(ngModel)]="department.ModifiedDate" required autofocus fluid />-->
-              <small class="text-red-500" *ngIf="submitted && !department.ModifiedDate">ModifiedDate is required.</small>
+                <label for="name" class="block font-bold mb-3">Modified Date</label>
+                <input type="text" pInputText id="GroupName" [(ngModel)]="department.ModifiedDate" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !department.ModifiedDate">ModifiedDate is required.</small>
             </div>
         </div>
     </ng-template>

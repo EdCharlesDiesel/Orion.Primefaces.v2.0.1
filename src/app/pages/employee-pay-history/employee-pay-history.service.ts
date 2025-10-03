@@ -8,7 +8,7 @@ import { EmployeePayHistory } from '../../core/models/employee-pay-history.model
   providedIn: 'root'
 })
 export class EmployeePayHistoryService {
-  private apiUrl = 'http://localhost:9010/api/EmployeeDepartmentHistory';
+  private apiUrl = 'http://localhost:9100/api/EmployeePayHistory';
 
   constructor(private http: HttpClient) {}
   //TODO: Need to fix Not recommnded hence I need to start using Guid to begin with.
