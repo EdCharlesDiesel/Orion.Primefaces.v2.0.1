@@ -108,6 +108,30 @@ export class AppMenu {
                                 label: 'Employee Pay History',
                                 icon: 'pi pi-fw pi-bookmark',
                                 routerLink: ['/pages/employee-pay-history']
+                            },           {
+                                label: 'Employee Department History',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Internal Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/human-resources/internal-employees']
+                            },
+                            {
+                                label: 'External Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/human-resources/external-employees']
+                            },
+                            {
+                                label: 'Job-Candidates',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/human-resources/job-candidate']
+                            },
+                            {
+                                label: 'Shifts',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/shifts']
                             }
                         ]
                     }

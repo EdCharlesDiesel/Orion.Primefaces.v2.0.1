@@ -1,5 +1,5 @@
 import { catchError, Observable, of, shareReplay, tap } from 'rxjs';
-import { inject, Injectable } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Department } from './department.model';
 import { HttpErrorService } from '../../shared/http-error.service';
@@ -10,46 +10,81 @@ import { map } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class DepartmentsService {
-    private apiUrl = 'http://localhost:9100/api/Department';
-    private tempId = 17;
+    private DepartmentsUrl = 'http://localhost:9100/api/ExternalDepartments';
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
 
-    public departmentsResult$ = this.http.get<Department[]>(this.apiUrl).pipe(
-        map((p) => ({ data: p }) as unknown as Result<Department[]>),
-        // tap((p) => console.log(JSON.stringify(p))),
-        shareReplay(1),
-        catchError((err: any) =>
-            of({
-                data: [],
-                error: this.errorService.formatError(err)
-            } as unknown as Result<Department[]>)
-        )
-    );
+    //Signal state
+    private departmentsSignal = signal<Department[]>([]);
+    private loadingSignal = signal<boolean>(false);
+    private errorSignal = signal<string | null>(null);
 
-    public createDepartment(info: Department): Observable<Department> {
-        return this.http.post<Department>(this.apiUrl, info).pipe(
-            map((p) => ({ data: p }) as unknown as Department),
-            tap((p) => console.log(JSON.stringify(p))),
-            catchError((err: any) =>
-                of({
-                    data: [],
-                    error: this.errorService.formatError(err)
-                } as unknown as Department)
-            ));
+    //public computed signals
+    departmentsComputed = computed(() => this.departmentsSignal);
+    isLoadingComputed = computed(() => this.loadingSignal);
+    errorComputed = computed(() => this.errorSignal);
+
+    // constructor() {
+    //   effect(() => {
+    //     console.log('Departments changes: ', this.departmentsComputed)
+    //   });
+    // }
+
+    public loadDepartments() {
+        this.loadingSignal.set(true);
+        this.http
+            .get<Department[]>(this.DepartmentsUrl)
+            .pipe(
+                tap({
+                    next: (data) => {
+                        this.departmentsSignal.set(data);
+                        this.errorSignal.set(null);
+                    },
+                    error: (err) => this.errorSignal.set(err.message),
+                    finalize: () => this.loadingSignal.set(false)
+                })
+            )
+            .subscribe();
     }
+
     public getDepartments(): Observable<Department[]> {
-        return this.http.get<Department[]>(this.apiUrl);
+        return this.http.get<Department[]>(this.DepartmentsUrl)
     }
 
-    public getDepartmentById(id: number): Observable<Department> {
-        return this.http.get<Department>(`${this.apiUrl}/${id}`);
-    }
-    public updateDepartment(id: number, payload: any): Observable<Department> {
-        return this.http.put<Department>(`${this.apiUrl}/${id}`, payload);
+    public addDepartments(department: Department) {
+        this.http
+            .post<Department>(this.DepartmentsUrl, department)
+            .pipe(tap((data) => console.log(data)))
+            .subscribe({
+                next: (newDepartment) => {
+                    this.departmentsSignal.update((departmentsComputed) => [...departmentsComputed, newDepartment]);
+                },
+                error: (err: any) => {
+                    this.errorSignal.set(err.message);
+                }
+            });
     }
 
-    public deleteDepartment(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    public updateDepartments(department: Department) {
+        this.http.put<Department>(this.DepartmentsUrl, department).subscribe({
+            next: (updatedDepartment) => {
+                this.departmentsSignal.update((department) => department.map((x) => (x.DepartmentID === updatedDepartment.DepartmentID ? updatedDepartment : x)));
+            },
+            error: (err: any) => {
+                this.errorSignal.set(err.message);
+            }
+        });
+    }
+
+    deleteDepartments(departmentID: number) {
+        this.loadingSignal.set(true);
+        this.http.delete<Department>(`${this.DepartmentsUrl}/${departmentID}`).subscribe({
+            next: () => {
+                this.departmentsSignal.update((departments) => departments.filter((x) => x.DepartmentID !== departmentID));
+            },
+            error: (err: any) => {
+                this.errorSignal.set(err.message);
+            }
+        });
     }
 }

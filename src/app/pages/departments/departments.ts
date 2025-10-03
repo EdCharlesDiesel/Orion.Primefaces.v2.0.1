@@ -81,17 +81,7 @@ export class Departments implements OnInit {
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data) => {
             this.departments.set(data);
-
-        //
-        // this.departmentService.getDepartments().then((data) => {
-        //     this.departments.set(data);
-        // });
-
-        // this.departmentService.departmentsResult$.subscribe(
-        //     (data: any) => {
-        //         this.departments.set(data);
-             }
-        );
+            });
 
         this.statuses = [
             { label: 'INSTOCK', value: 'instock' },
@@ -222,7 +212,7 @@ export class Departments implements OnInit {
                 });
             } else {
                 this.department.DepartmentID = this.createId();
-                this.departmentService.createDepartment(this.department);
+                this.departmentService.addDepartments(this.department);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',

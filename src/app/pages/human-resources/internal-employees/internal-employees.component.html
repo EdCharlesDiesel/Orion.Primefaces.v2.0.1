@@ -1,0 +1,123 @@
+<div class="card">
+    <div class="font-semibold text-xl mb-4">Employees</div>
+</div>
+
+<p-toolbar styleClass="mb-6">
+    <ng-template #start>
+        <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
+        <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedEmployees()" [disabled]="!selectedEmployees || !selectedEmployees.length" />
+    </ng-template>
+
+    <ng-template #end>
+        <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
+    </ng-template>
+</p-toolbar>
+
+<p-table
+    #dt
+    [value]="employees()"
+    [rows]="10"
+    [columns]="cols"
+    [paginator]="true"
+    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedEmployees"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employees"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 20, 30]"
+>
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0">Manage Employees</h5>
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
+            </p-iconfield>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox />
+            </th>
+            <th style="min-width: 16rem">Employee ID</th>
+            <th pSortableColumn="name" style="min-width:16rem">
+                Name
+                <p-sortIcon field="Name" />
+            </th>
+            <th pSortableColumn="groupName" style="min-width:16rem">
+                Group Name
+                <p-sortIcon field="GroupName" />
+            </th>
+            <th pSortableColumn="ModifiedDate" style="min-width:16rem">
+                Modified Date
+                <p-sortIcon field="ModifiedDate" />
+            </th>
+            <!--            <th>Image</th>-->
+            <!--            <th pSortableColumn="price" style="min-width: 8rem">-->
+            <!--                Price-->
+            <!--                <p-sortIcon field="price" />-->
+            <!--            </th>-->
+            <!--            <th pSortableColumn="category" style="min-width:10rem">-->
+            <!--                Category-->
+            <!--                <p-sortIcon field="category" />-->
+            <!--            </th>-->
+            <!--            <th pSortableColumn="rating" style="min-width: 12rem">-->
+            <!--                Reviews-->
+            <!--                <p-sortIcon field="rating" />-->
+            <!--            </th>-->
+            <!--            <th pSortableColumn="inventoryStatus" style="min-width: 12rem">-->
+            <!--                Status-->
+            <!--                <p-sortIcon field="inventoryStatus" />-->
+            <!--            </th>-->
+            <th style="min-width: 12rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-employee>
+        <tr>
+            <td style="width: 3rem">
+                <p-tableCheckbox [value]="employee" />
+            </td>
+            <td style="min-width: 12rem">{{ employee.employeeID }}</td>
+            <td style="min-width: 16rem">{{ employee.name }}</td>
+            <td style="min-width: 16rem">{{ employee.groupName }}</td>
+            <td style="min-width: 16rem">{{ employee.modifiedDate }}</td>
+            <td>
+                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editEmployee(employee)" />
+                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteEmployee(employee)" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="employeeDialog" [style]="{ width: '450px' }" header="Employee Details" [modal]="true">
+    <ng-template #content>
+        <div class="flex flex-col gap-6">
+            <!--            <img [src]="'https://primefaces.org/cdn/primeng/images/demo/employee/' + employee.image" [alt]="employee.image" class="block m-auto pb-4" *ngIf="employee.image" />-->
+<!--            <div>-->
+<!--                <label for="name" class="block font-bold mb-3">Name</label>-->
+<!--                <input type="text" pInputText id="name" [(ngModel)]="employee.Name" required autofocus fluid />-->
+<!--                <small class="text-red-500" *ngIf="submitted && !employee.Name">Name is required.</small>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label for="name" class="block font-bold mb-3">Group Name</label>-->
+<!--                <input type="text" pInputText id="GroupName" [(ngModel)]="employee.GroupName" required autofocus fluid />-->
+<!--                <small class="text-red-500" *ngIf="submitted && !employee.GroupName">Group name is required.</small>-->
+<!--            </div>-->
+            <div>
+                <label for="name" class="block font-bold mb-3">Modified Date</label>
+                <input type="text" pInputText id="GroupName" [(ngModel)]="employee.modifiedDate" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !employee.modifiedDate">ModifiedDate is required.</small>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveEmployee()" />
+    </ng-template>
+</p-dialog>
+
+<p-confirmdialog [style]="{ width: '450px' }" />

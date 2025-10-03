@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Shift } from '../../core/models/shift.model';
+import { Shift } from '../../../core/models/shift.model';
 
 
 @Injectable({

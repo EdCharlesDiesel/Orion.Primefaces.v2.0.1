@@ -1,22 +1,16 @@
+import { Shift } from '../../../core/models/shift.model';
 import { Component, OnInit, signal, ViewChild } from '@angular/core';
-import {  ButtonModule } from 'primeng/button';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { CommonModule, } from '@angular/common';
-import { DialogModule } from 'primeng/dialog';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
-import { Table, TableModule } from 'primeng/table';
-import { Toolbar } from 'primeng/toolbar';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { tap } from 'rxjs';
-import { DatePickerModule } from 'primeng/datepicker';
+import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { FluidModule } from 'primeng/fluid';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -25,6 +19,7 @@ import { RatingModule } from 'primeng/rating';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { KnobModule } from 'primeng/knob';
 import { SelectModule } from 'primeng/select';
+import { DatePickerModule } from 'primeng/datepicker';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { TreeSelectModule } from 'primeng/treeselect';
@@ -32,8 +27,14 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ListboxModule } from 'primeng/listbox';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { TextareaModule } from 'primeng/textarea';
+import { Toolbar } from 'primeng/toolbar';
+import { Table, TableModule } from 'primeng/table';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ShiftsService } from './shifts.service';
-import { Shift } from '../../core/models/shift.model';
+import { tap } from 'rxjs';
+
 
 interface Column {
     field: string;
@@ -85,7 +86,7 @@ interface ExportColumn {
     templateUrl: 'shifts.html',
     providers: [MessageService, ShiftsService, ConfirmationService]
 })
-export class Shifts implements OnInit {
+export class ShiftsComponent implements OnInit {
     shiftDialog: boolean = false;
 
     shifts = signal<Shift[]>([]);
@@ -122,17 +123,17 @@ export class Shifts implements OnInit {
         this.shiftService.getShifts().pipe(
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data) => {
-            this.shifts.set(data);
+                this.shifts.set(data);
 
-        //
-        // this.shiftService.getShifts().then((data) => {
-        //     this.shifts.set(data);
-        // });
+                //
+                // this.shiftService.getShifts().then((data) => {
+                //     this.shifts.set(data);
+                // });
 
-        // this.shiftService.shiftsResult$.subscribe(
-        //     (data: any) => {
-        //         this.shifts.set(data);
-             }
+                // this.shiftService.shiftsResult$.subscribe(
+                //     (data: any) => {
+                //         this.shifts.set(data);
+            }
         );
 
         this.statuses = [
@@ -158,11 +159,11 @@ export class Shifts implements OnInit {
     public openNew() {
         this.shift = {
             shiftID : 0,
-            name : "",
+            name: "",
             endTime: "",
             startTime: "",
-            employeeDepartmentHistories: undefined,
             modifiedDate: new Date(),
+            employeeDepartmentHistories: []
         };
         this.submitted = false;
         this.shiftDialog = true;
@@ -205,11 +206,11 @@ export class Shifts implements OnInit {
                 this.shifts.set(this.shifts().filter((val) => val.shiftID !== shift.shiftID));
                 this.shift = {
                     shiftID : 0,
-                    name : "",
+                    name: "",
                     endTime: "",
                     startTime: "",
-                    employeeDepartmentHistories: undefined,
                     modifiedDate: new Date(),
+                    employeeDepartmentHistories: []
                 };
                 this.messageService.add({
                     severity: 'success',
@@ -266,6 +267,7 @@ export class Shifts implements OnInit {
                 });
             } else {
                 this.shift.shiftID = this.createId();
+                this.shiftService.createShift(this.shift);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -276,14 +278,13 @@ export class Shifts implements OnInit {
             }
 
             this.shiftDialog = false;
-            this.shift = {
-                shiftID : 0,
-                name : "",
-                endTime: "",
-                startTime: "",
-                employeeDepartmentHistories: undefined,
-                modifiedDate: new Date(),
-            };
+            // this.shift = {
+            //     ShiftID : 0,
+            //     Name : "",
+            //     GroupName :"",
+            //     ModifiedDate: new Date(),
+            //     EmployeeShiftHistories: []
+            //  };
         }
     }
 }

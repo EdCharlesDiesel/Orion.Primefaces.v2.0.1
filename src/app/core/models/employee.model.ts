@@ -13,7 +13,7 @@ export class Employee {
   nationalIDNumber!: string;
   /** Network login. */
   loginID!: string;
-  organizationNode?: SqlHierarchyId;
+  organizationNode?: string;
   /** The depth of the employee in the corporate hierarchy. */
   organizationLevel?: number | undefined;  /** Work title such as Buyer or Sales Representative. */
   jobTitle!: string;
