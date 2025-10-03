@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {ExternalEmployeesService} from "./external-employees.service";
-import { Employee } from 'src/app/core/models/employee.model';
+import { Employee } from '../../core/models/employee.model';
+
 
 
 @Component({

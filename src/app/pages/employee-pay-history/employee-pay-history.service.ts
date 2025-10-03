@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {EmployeePayHistory} from "../../../core/models/employee-pay-history.model";
-
-
+import { EmployeePayHistory } from '../../core/models/employee-pay-history.model';
 
 
 @Injectable({

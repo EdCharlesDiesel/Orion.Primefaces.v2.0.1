@@ -1,6 +1,6 @@
 import {BusinessEntity} from "./business-entity.model";
 import {ContactType} from "./contact-type.model";
-import {Person} from "../authentication/person.model";
+import { Person } from './person.model';
 
 export class BusinessEntityContact  {
   /** Primary key. Foreign key to BusinessEntity.BusinessEntityID. */

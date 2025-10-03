@@ -1,4 +1,5 @@
-import {Person} from "../authentication/person.model";
+import { Person } from './person.model';
+
 
 export class Password {
   businessEntityID!: number;

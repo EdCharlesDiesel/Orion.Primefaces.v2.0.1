@@ -1,7 +1,7 @@
 import {SalesTerritory} from "./sales-territory.model";
 import {SalesOrderHeader} from "./sale-order-header.model";
 import {Store} from "./store";
-import {Person} from "../authentication/person.model";
+import { Person } from './person.model';
 
 export class Customer {
   /** Primary key. */

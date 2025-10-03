@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
+import { AuthService } from './services/auth.service';
 
 interface ProfileStats {
     loginCount: number;
@@ -19,9 +20,9 @@ interface ProfileStats {
     styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-    user: User | null = null;
-    profileForm: FormGroup | undefined;
-    passwordForm: FormGroup | undefined;
+    user: any | null = null;
+    profileForm: FormGroup | any;
+    passwordForm: FormGroup | any;
 
     // UI State
     editMode = false;
@@ -164,77 +165,77 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
     }
 
-    onSaveProfile(): void {
-        if (!this.profileForm.invalid) {
-            this.loading = true;
-            const formData = this.profileForm.value;
-            const userData: Partial<User> = {
-                name: formData.name,
-                email: formData.email
-            };
-            this.authService
-                .updateProfile(userData)
-                .pipe(takeUntil(this.destroy$))
-                .subscribe({
-                    next: (updatedUser: any) => {
-                        this.user = updatedUser;
-                        this.editMode = false;
-                        this.messageService.add({
-                            severity: 'success',
-                            summary: 'Profile Updated',
-                            detail: 'Your profile has been updated successfully'
-                        });
-                    },
-                    error: (error: any) => {
-                        this.messageService.add({
-                            severity: 'error',
-                            summary: 'Update Failed',
-                            detail: error || 'Failed to update profile'
-                        });
-                    },
-                    complete: () => {
-                        this.loading = false;
-                    }
-                });
-        } else {
-            this.markFormGroupTouched(this.profileForm);
-            return;
-        }
-    }
-
-    onChangePassword(): void {
-        if (this.passwordForm.invalid) {
-            this.markFormGroupTouched(this.passwordForm);
-            return;
-        }
-
-        this.passwordLoading = true;
-        const { currentPassword, newPassword } = this.passwordForm.value;
-
-        this.authService
-            .changePassword(currentPassword, newPassword)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-                next: () => {
-                    this.passwordForm.reset();
-                    this.messageService.add({
-                        severity: 'success',
-                        summary: 'Password Changed',
-                        detail: 'Your password has been changed successfully'
-                    });
-                },
-                error: (error) => {
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'Password Change Failed',
-                        detail: error || 'Failed to change password'
-                    });
-                },
-                complete: () => {
-                    this.passwordLoading = false;
-                }
-            });
-    }
+    // onSaveProfile(): void {
+    //     if (!this.profileForm.invalid) {
+    //         this.loading = true;
+    //         const formData = this.profileForm.value;
+    //         const userData: Partial<User> = {
+    //             name: formData.name,
+    //             email: formData.email
+    //         };
+    //         this.authService
+    //             .updateProfile(userData)
+    //             .pipe(takeUntil(this.destroy$))
+    //             .subscribe({
+    //                 next: (updatedUser: any) => {
+    //                     this.user = updatedUser;
+    //                     this.editMode = false;
+    //                     this.messageService.add({
+    //                         severity: 'success',
+    //                         summary: 'Profile Updated',
+    //                         detail: 'Your profile has been updated successfully'
+    //                     });
+    //                 },
+    //                 error: (error: any) => {
+    //                     this.messageService.add({
+    //                         severity: 'error',
+    //                         summary: 'Update Failed',
+    //                         detail: error || 'Failed to update profile'
+    //                     });
+    //                 },
+    //                 complete: () => {
+    //                     this.loading = false;
+    //                 }
+    //             });
+    //     } else {
+    //         this.markFormGroupTouched(this.profileForm);
+    //         return;
+    //     }
+    // }
+    //
+    // onChangePassword(): void {
+    //     if (this.passwordForm.invalid) {
+    //         this.markFormGroupTouched(this.passwordForm);
+    //         return;
+    //     }
+    //
+    //     this.passwordLoading = true;
+    //     const { currentPassword, newPassword } = this.passwordForm.value;
+    //
+    //     this.authService
+    //         .changePassword(currentPassword, newPassword)
+    //         .pipe(takeUntil(this.destroy$))
+    //         .subscribe({
+    //             next: () => {
+    //                 this.passwordForm.reset();
+    //                 this.messageService.add({
+    //                     severity: 'success',
+    //                     summary: 'Password Changed',
+    //                     detail: 'Your password has been changed successfully'
+    //                 });
+    //             },
+    //             error: (error:any) => {
+    //                 this.messageService.add({
+    //                     severity: 'error',
+    //                     summary: 'Password Change Failed',
+    //                     detail: error || 'Failed to change password'
+    //                 });
+    //             },
+    //             complete: () => {
+    //                 this.passwordLoading = false;
+    //             }
+    //         });
+    // }
 
     // Avatar handling
     onAvatarSelect(event: any): void {
@@ -369,19 +370,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     // Getters for template
-    get profileFormControls() {
-        return this.profileForm.controls;
-    }
-
-    get passwordFormControls() {
-        return this.passwordForm.controls;
-    }
-
-    get notificationControls() {
-        return (this.profileForm.get('notifications') as FormGroup).controls;
-    }
-
-    get privacyControls() {
-        return (this.profileForm.get('privacy') as FormGroup).controls;
-    }
+    // get profileFormControls() {
+    //     return this.profileForm.controls;
+    // }
+    //
+    // get passwordFormControls() {
+    //     return this.passwordForm.controls;
+    // }
+    //
+    // get notificationControls() {
+    //     return (this.profileForm.get('notifications') as FormGroup).controls;
+    // }
+    //
+    // get privacyControls() {
+    //     return (this.profileForm.get('privacy') as FormGroup).controls;
+    // }
 }

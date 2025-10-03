@@ -3,7 +3,7 @@ import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { RippleModule } from 'primeng/ripple';
 import { AppFloatingConfigurator } from '../../../layout/component/app.floatingconfigurator';
@@ -11,6 +11,11 @@ import { Subject } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../authentication/services/auth.service';
+import { Toast } from 'primeng/toast';
+import { Card } from 'primeng/card';
+import { Divider } from 'primeng/divider';
+import { IconField } from 'primeng/iconfield';
+import { InputIcon } from 'primeng/inputicon';
 
 class LoginRequest {
     email: string | undefined;
@@ -20,9 +25,10 @@ class LoginRequest {
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, AppFloatingConfigurator],
+    imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, Toast, Card, Divider, ReactiveFormsModule, IconField, InputIcon],
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+    styleUrls: ['./login.component.scss'],
+    providers: [AuthService, MessageService]
 })
 export class LoginComponent implements OnInit, OnDestroy {
     loginForm: FormGroup;
@@ -99,7 +105,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         // Handle remember me functionality
         if (this.f['rememberMe'].value) {
-          //  this.saveCredentials(loginData.email, loginData.password);
+            //  this.saveCredentials(loginData.email, loginData.password);
         } else {
             this.clearSavedCredentials();
         }

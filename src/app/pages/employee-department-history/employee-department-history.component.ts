@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {EmployeeDepartmentHistoryService} from "./employee-department-history.service";
-import { EmployeeDepartmentHistory } from 'src/app/core/models/employee-department-history.model ';
+import { EmployeeDepartmentHistory } from '../../core/models/employee-department-history.model ';
+
 
 
 @Component({

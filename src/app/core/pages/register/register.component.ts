@@ -9,14 +9,20 @@ import { Password } from 'primeng/password';
 import { Checkbox } from 'primeng/checkbox';
 import { Button } from 'primeng/button';
 import { Divider } from 'primeng/divider';
+import { NgIf } from '@angular/common';
+import { IconField } from 'primeng/iconfield';
+import { InputIcon } from 'primeng/inputicon';
+import { InputText } from 'primeng/inputtext';
 
 class RegisterRequest {}
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
-    imports: [Toast, Card, ReactiveFormsModule, Password, Checkbox, Button, Divider],
-    styleUrls: ['./register.component.scss']
+    standalone: true,
+    imports: [Toast, Card, ReactiveFormsModule, Password, Checkbox, Button, Divider, NgIf, IconField, InputIcon, InputText],
+    styleUrls: ['./register.component.scss'],
+    providers: [AuthService, MessageService]
 })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
@@ -91,31 +97,31 @@ export class RegisterComponent implements OnInit {
             password: this.f['password'].value
         };
 
-        // this.authService.register(registerData).subscribe({
-        //     next: (response: any) => {
-        //         this.messageService.add({
-        //             severity: 'success',
-        //             summary: 'Registration Successful',
-        //             detail: 'Your account has been created successfully!'
-        //         });
-        //
-        //         // Redirect to dashboard or login page
-        //         setTimeout(() => {
-        //             this.router.navigate(['/dashboard']);
-        //         }, 1500);
-        //     },
-        //     error: (error: any) => {
-        //         this.loading = false;
-        //         this.messageService.add({
-        //             severity: 'error',
-        //             summary: 'Registration Failed',
-        //             detail: error || 'An error occurred during registration'
-        //         });
-        //     },
-        //     complete: () => {
-        //         this.loading = false;
-        //     }
-        // });
+        this.authService.register(registerData).subscribe({
+            next: (response: any) => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Registration Successful',
+                    detail: 'Your account has been created successfully!'
+                });
+
+                // Redirect to dashboard or login page
+                setTimeout(() => {
+                    this.router.navigate(['/dashboard']);
+                }, 1500);
+            },
+            error: (error: any) => {
+                this.loading = false;
+                this.messageService.add({
+                    severity: 'error',
+                    summary: 'Registration Failed',
+                    detail: error || 'An error occurred during registration'
+                });
+            },
+            complete: () => {
+                this.loading = false;
+            }
+        });
     }
 
     togglePasswordVisibility(): void {

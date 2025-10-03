@@ -100,31 +100,232 @@ export class AppMenu {
                         icon: 'pi pi-fw pi-bookmark',
                         items: [
                             {
-                                label: 'EmployeesComponent',
+                                label: 'Departments',
                                 icon: 'pi pi-fw pi-bookmark',
                                 routerLink: ['/pages/departments']
-                            }
+                            },
+                            {
+                                label: 'Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employee Department Histories',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employee Pay Histories',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'External Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Internal Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Job Candidates',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Shifts',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
                         ]
                     },
                     {
-                        label: 'Submenu 2',
+                        label: 'Person',
                         icon: 'pi pi-fw pi-bookmark',
                         items: [
                             {
-                                label: 'Submenu 2.1',
+                                label: 'Departments',
                                 icon: 'pi pi-fw pi-bookmark',
-                                items: [
-                                    { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
-                                    { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' }
-                                ]
+                                routerLink: ['/pages/departments']
                             },
                             {
-                                label: 'Submenu 2.2',
+                                label: 'Employees',
                                 icon: 'pi pi-fw pi-bookmark',
-                                items: [{ label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' }]
-                            }
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employee Department Histories',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employee Pay Histories',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'External Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Internal Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Job Candidates',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Shifts',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
                         ]
-                    }
+                    }                    ,
+                    {
+                        label: 'Production',
+                        icon: 'pi pi-fw pi-bookmark',
+                        items: [
+                            {
+                                label: 'Departments',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employee Department Histories',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employee Pay Histories',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'External Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Internal Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Job Candidates',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Shifts',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                        ]
+                    },
+                    {
+                        label: 'Purchasing',
+                        icon: 'pi pi-fw pi-bookmark',
+                        items: [
+                            {
+                                label: 'Departments',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employee Department Histories',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employee Pay Histories',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'External Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Internal Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Job Candidates',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Shifts',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                        ]
+                    },
+                    {
+                        label: 'Sales',
+                        icon: 'pi pi-fw pi-bookmark',
+                        items: [
+                            {
+                                label: 'Departments',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employee Department Histories',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Employee Pay Histories',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'External Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Internal Employees',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Job Candidates',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                            {
+                                label: 'Shifts',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/pages/departments']
+                            },
+                        ]
+                    },
+
                 ]
             },
             {
