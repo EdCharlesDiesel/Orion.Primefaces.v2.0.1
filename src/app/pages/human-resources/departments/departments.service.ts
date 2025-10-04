@@ -1,10 +1,9 @@
-import { catchError, Observable, of, shareReplay, tap } from 'rxjs';
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { Observable,tap } from 'rxjs';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Department } from './department.model';
 import { HttpErrorService } from '../../../shared/http-error.service';
-import { Result } from 'postcss';
-import { map } from 'rxjs/operators';
+
 
 @Injectable({
     providedIn: 'root'
@@ -41,10 +40,10 @@ export class DepartmentsService {
                         this.errorSignal.set(null);
                     },
                     error: (err) => this.errorSignal.set(err.message),
-                    finalize: () => this.loadingSignal.set(false)
-                })
-            )
-            .subscribe();
+                    finalize: () => this.loadingSignal.set(false),
+
+                }),
+            ).subscribe();
     }
 
     public getDepartments(): Observable<Department[]> {
