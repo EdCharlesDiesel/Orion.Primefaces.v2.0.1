@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { Departments } from '../departments/departments';
+import { Departments } from './departments/departments';
 import { EmployeeDepartmentHistoryComponent } from './employee-department-history/employee-department-history.component';
 import { EmployeePayHistoryComponent } from './employee-pay-history/employee-pay-history.component';
 import { ExternalEmployeesComponent } from './external-employees/external-employees.component';
 import { InternalEmployeesComponent } from './internal-employees/internal-employees.component';
 import { JobCandidatesComponent } from './job-candidates/job-candidates.component';
-import { ShiftsComponent } from './shifts/shifts';
+import { ShiftsComponent } from './shifts/shifts.component';
 
 
 export default [

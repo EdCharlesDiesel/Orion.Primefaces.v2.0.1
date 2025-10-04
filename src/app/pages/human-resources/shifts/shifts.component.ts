@@ -83,7 +83,7 @@ interface ExportColumn {
     ConfirmDialogModule,
     DialogModule
   ],
-    templateUrl: 'shifts.html',
+    templateUrl: 'shifts.component.html',
     providers: [MessageService, ShiftsService, ConfirmationService]
 })
 export class ShiftsComponent implements OnInit {

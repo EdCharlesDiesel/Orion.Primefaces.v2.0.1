@@ -30,7 +30,7 @@ interface ExportColumn {
     templateUrl: './internal-employees.component.html',
     styleUrls: ['./internal-employees.component.scss'],
     imports: [Button, ConfirmDialog, Dialog, IconField, InputIcon, InputText, NgIf, ReactiveFormsModule, TableModule, Toolbar, FormsModule],
-    providers: [MessageService]
+    providers: [MessageService,ConfirmationService,EmployeesService]
 })
 export class InternalEmployeesComponent implements OnInit {
     employeeDialog: boolean = false;

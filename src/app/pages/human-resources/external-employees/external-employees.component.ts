@@ -28,9 +28,10 @@ interface ExportColumn {
 @Component({
     selector: 'app-external-employees',
     templateUrl: './external-employees.component.html',
+    standalone: true,
     styleUrls: ['./external-employees.component.scss'],
     imports: [Button, ConfirmDialog, Dialog, IconField, InputIcon, InputText, NgIf, ReactiveFormsModule, TableModule, Toolbar, FormsModule],
-    providers: [MessageService]
+    providers: [MessageService,ConfirmationService,EmployeesService]
 })
 export class ExternalEmployeesComponent implements OnInit {
     employeeDialog: boolean = false;

@@ -14,6 +14,7 @@ import { JobCandidate } from '../../../core/models/job-candidate.model';
 import { JobCandidatesService } from './job-candidates.service';
 import { tap } from 'rxjs';
 import { Employee } from '../../../core/models/employee.model';
+import { EmployeesService } from '../../employees/employees.service';
 
 interface Column {
     field: string;
@@ -30,7 +31,7 @@ interface ExportColumn {
     templateUrl: './job-candidates.component.html',
     styleUrls: ['./job-candidates.component.scss'],
     imports: [Button, ConfirmDialog, Dialog, IconField, InputIcon, InputText, NgIf, ReactiveFormsModule, TableModule, Toolbar, FormsModule],
-    providers: [MessageService]
+    providers: [MessageService,ConfirmationService,JobCandidatesService]
 })
 export class JobCandidatesComponent implements OnInit {
     jobCandidateDialog: boolean = false;

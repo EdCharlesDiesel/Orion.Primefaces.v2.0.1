@@ -31,7 +31,7 @@ interface ExportColumn {
     templateUrl: './employee-pay-history.component.html',
     styleUrls: ['./employee-pay-history.component.scss'],
     imports: [Button, ReactiveFormsModule, Dialog, TableModule, Toolbar, IconField, InputIcon, FormsModule, NgIf],
-    providers: [MessageService]
+    providers: [MessageService,ConfirmationService,EmployeePayHistoryService]
 })
 export class EmployeePayHistoryComponent implements OnInit {
     employeePayHistoryDialog: boolean = false;
@@ -72,15 +72,6 @@ export class EmployeePayHistoryComponent implements OnInit {
             .pipe(tap((p) => console.log(JSON.stringify(p))))
             .subscribe((data) => {
                 this.employeePayHistorys.set(data);
-
-                //
-                // this.employeePayHistoryService.getEmployeePayHistorys().then((data) => {
-                //     this.employeePayHistorys.set(data);
-                // });
-
-                // this.employeePayHistoryService.employeePayHistorysResult$.subscribe(
-                //     (data: any) => {
-                //         this.employeePayHistorys.set(data);
             });
 
         this.statuses = [

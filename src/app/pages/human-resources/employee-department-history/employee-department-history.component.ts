@@ -33,7 +33,7 @@ interface ExportColumn {
     templateUrl: './employee-department-history.component.html',
     styleUrls: ['./employee-department-history.component.scss'],
     imports: [Button, ConfirmDialog, Dialog, IconField, InputIcon, InputText, NgIf, ReactiveFormsModule, TableModule, Toolbar, FormsModule],
-    providers: [MessageService]
+    providers: [MessageService,ConfirmationService,EmployeeDepartmentHistoryService]
 })
 export class EmployeeDepartmentHistoryComponent implements OnInit {
     systemInfoList: EmployeeDepartmentHistory[] = [];

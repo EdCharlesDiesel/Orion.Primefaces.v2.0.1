@@ -94,6 +94,8 @@ export class AppMenu {
             },
             {
                 label: 'E-Commerce',
+                icon: 'pi pi-fw pi-briefcase',
+                routerLink: ['/human-resources'],
                 items: [
                     {
                         label: 'Human Resources',
@@ -102,36 +104,36 @@ export class AppMenu {
                             {
                                 label: 'Departments',
                                 icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/pages/departments']
+                                routerLink: ['/human-resources/departments']
                             },
                             {
                                 label: 'Employee Pay History',
                                 icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/pages/employee-pay-history']
+                                routerLink: ['/human-resources/employee-pay-history']
                             },           {
                                 label: 'Employee Department History',
                                 icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/pages/departments']
+                                routerLink: ['/human-resources/employee-department-history']
                             },
                             {
                                 label: 'Internal Employees',
                                 icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/pages/human-resources/internal-employees']
+                                routerLink: ['/human-resources/internal-employees']
                             },
                             {
                                 label: 'External Employees',
                                 icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/pages/human-resources/external-employees']
+                                routerLink: ['/human-resources/external-employees']
                             },
                             {
                                 label: 'Job-Candidates',
                                 icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/pages/human-resources/job-candidate']
+                                routerLink: ['/human-resources/job-candidate']
                             },
                             {
                                 label: 'Shifts',
                                 icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/pages/shifts']
+                                routerLink: ['/human-resources/shifts']
                             }
                         ]
                     }
