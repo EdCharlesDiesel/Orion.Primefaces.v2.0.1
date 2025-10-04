@@ -13,6 +13,7 @@ export const appRoutes: Routes = [
         children: [
             { path: '', component: Dashboard },
             { path: 'human-resources', loadChildren: () => import('./app/pages/human-resources/human-resources.routes') },
+            { path: 'person', loadChildren: () => import('./app/pages/person/person.routes') },
             { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
             { path: 'documentation', component: Documentation },
             { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') },

@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="font-semibold text-xl mb-4">JobCandidates</div>
+    <div class="font-semibold text-xl mb-4">Job Candidates</div>
 </div>
 
 <p-toolbar styleClass="mb-6">
@@ -30,7 +30,7 @@
 >
     <ng-template #caption>
         <div class="flex items-center justify-between">
-            <h5 class="m-0">Manage JobCandidates</h5>
+            <h5 class="m-0">Manage Job Candidates</h5>
             <p-iconfield>
                 <p-inputicon styleClass="pi pi-search" />
                 <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
@@ -42,36 +42,20 @@
             <th style="width: 3rem">
                 <p-tableHeaderCheckbox />
             </th>
-            <th style="min-width: 16rem">JobCandidate ID</th>
-            <th pSortableColumn="name" style="min-width:16rem">
-                Name
-                <p-sortIcon field="Name" />
+            <th style="min-width: 16rem">Job Candidate ID</th>
+            <th pSortableColumn="BusinessEntityID" style="min-width:16rem">
+                BusinessEntityID
+                <p-sortIcon field="businessEntityID" />
             </th>
-            <th pSortableColumn="groupName" style="min-width:16rem">
-                Group Name
-                <p-sortIcon field="GroupName" />
+            <th pSortableColumn="resume" style="min-width:16rem">
+                Resume
+                <p-sortIcon field="resume" />
             </th>
             <th pSortableColumn="ModifiedDate" style="min-width:16rem">
                 Modified Date
                 <p-sortIcon field="ModifiedDate" />
             </th>
-            <!--            <th>Image</th>-->
-            <!--            <th pSortableColumn="price" style="min-width: 8rem">-->
-            <!--                Price-->
-            <!--                <p-sortIcon field="price" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="category" style="min-width:10rem">-->
-            <!--                Category-->
-            <!--                <p-sortIcon field="category" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="rating" style="min-width: 12rem">-->
-            <!--                Reviews-->
-            <!--                <p-sortIcon field="rating" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="inventoryStatus" style="min-width: 12rem">-->
-            <!--                Status-->
-            <!--                <p-sortIcon field="inventoryStatus" />-->
-            <!--            </th>-->
+
             <th style="min-width: 12rem"></th>
         </tr>
     </ng-template>
@@ -81,8 +65,8 @@
                 <p-tableCheckbox [value]="jobCandidate" />
             </td>
             <td style="min-width: 12rem">{{ jobCandidate.jobCandidateID }}</td>
-            <td style="min-width: 16rem">{{ jobCandidate.name }}</td>
-            <td style="min-width: 16rem">{{ jobCandidate.groupName }}</td>
+            <td style="min-width: 16rem">{{ jobCandidate.businessEntityID }}</td>
+            <td style="min-width: 16rem">{{ jobCandidate.resume }}</td>
             <td style="min-width: 16rem">{{ jobCandidate.modifiedDate }}</td>
             <td>
                 <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editJobCandidate(jobCandidate)" />

@@ -1,43 +1,43 @@
 import { Observable,tap } from 'rxjs';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Department } from './department.model';
 import { HttpErrorService } from '../../../shared/http-error.service';
 import { environment } from '../../../../environments/environment';
+import { Address } from '../../../core/models/address.model';
 
 
 @Injectable({
     providedIn: 'root'
 })
-export class DepartmentsService {
-    private DepartmentsUrl = environment.humanResourcesBaseURL + 'department';
+export class AddressService {
+    private AddresssUrl = environment.personBaseURL + 'address';
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
 
     //Signal state
-    private departmentsSignal = signal<Department[]>([]);
+    private addresssSignal = signal<Address[]>([]);
     private loadingSignal = signal<boolean>(false);
     private errorSignal = signal<string | null>(null);
 
     //public computed signals
-    departmentsComputed = computed(() => this.departmentsSignal);
+    addresssComputed = computed(() => this.addresssSignal);
     isLoadingComputed = computed(() => this.loadingSignal);
     errorComputed = computed(() => this.errorSignal);
 
     // constructor() {
     //   effect(() => {
-    //     console.log('Departments changes: ', this.departmentsComputed)
+    //     console.log('Addresss changes: ', this.addresssComputed)
     //   });
     // }
 
-    public loadDepartments() {
+    public loadAddresss() {
         this.loadingSignal.set(true);
         this.http
-            .get<Department[]>(this.DepartmentsUrl)
+            .get<Address[]>(this.AddresssUrl)
             .pipe(
                 tap({
                     next: (data) => {
-                        this.departmentsSignal.set(data);
+                        this.addresssSignal.set(data);
                         this.errorSignal.set(null);
                     },
                     error: (err) => this.errorSignal.set(err.message),
@@ -47,17 +47,17 @@ export class DepartmentsService {
             ).subscribe();
     }
 
-    public getDepartments(): Observable<Department[]> {
-        return this.http.get<Department[]>(this.DepartmentsUrl)
+    public getAddresss(): Observable<Address[]> {
+        return this.http.get<Address[]>(this.AddresssUrl)
     }
 
-    public addDepartments(department: Department) {
+    public addAddresss(address: Address) {
         this.http
-            .post<Department>(this.DepartmentsUrl, department)
+            .post<Address>(this.AddresssUrl, address)
             .pipe(tap((data) => console.log(data)))
             .subscribe({
-                next: (newDepartment) => {
-                    this.departmentsSignal.update((departmentsComputed) => [...departmentsComputed, newDepartment]);
+                next: (newAddress) => {
+                    this.addresssSignal.update((addresssComputed) => [...addresssComputed, newAddress]);
                 },
                 error: (err: any) => {
                     this.errorSignal.set(err.message);
@@ -65,10 +65,10 @@ export class DepartmentsService {
             });
     }
 
-    public updateDepartments(department: Department) {
-        this.http.put<Department>(this.DepartmentsUrl, department).subscribe({
-            next: (updatedDepartment) => {
-                this.departmentsSignal.update((department) => department.map((x) => (x.DepartmentID === updatedDepartment.DepartmentID ? updatedDepartment : x)));
+    public updateAddresss(address: Address) {
+        this.http.put<Address>(this.AddresssUrl, address).subscribe({
+            next: (updatedAddress) => {
+                this.addresssSignal.update((address) => address.map((x) => (x.addressID === updatedAddress.addressID ? updatedAddress : x)));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);
@@ -76,11 +76,11 @@ export class DepartmentsService {
         });
     }
 
-    deleteDepartments(departmentID: number) {
+    deleteAddresss(addressID: number) {
         this.loadingSignal.set(true);
-        this.http.delete<Department>(`${this.DepartmentsUrl}/${departmentID}`).subscribe({
+        this.http.delete<Address>(`${this.AddresssUrl}/${addressID}`).subscribe({
             next: () => {
-                this.departmentsSignal.update((departments) => departments.filter((x) => x.DepartmentID !== departmentID));
+                this.addresssSignal.update((addresss) => addresss.filter((x) => x.addressID !== addressID));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);

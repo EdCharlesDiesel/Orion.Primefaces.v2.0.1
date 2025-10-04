@@ -30,7 +30,7 @@
 >
     <ng-template #caption>
         <div class="flex items-center justify-between">
-            <h5 class="m-0">Manage Employees</h5>
+            <h5 class="m-0">Manage External Employees</h5>
             <p-iconfield>
                 <p-inputicon styleClass="pi pi-search" />
                 <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
@@ -42,36 +42,75 @@
             <th style="width: 3rem">
                 <p-tableHeaderCheckbox />
             </th>
-            <th style="min-width: 16rem">Employee ID</th>
-            <th pSortableColumn="name" style="min-width:16rem">
-                Name
-                <p-sortIcon field="Name" />
+            <th style="min-width: 16rem">Business Entity ID</th>
+            <th pSortableColumn="nationalIDNumber" style="min-width:16rem">
+                National ID Number
+                <p-sortIcon field="nationalIDNumber" />
             </th>
-            <th pSortableColumn="groupName" style="min-width:16rem">
-                Group Name
-                <p-sortIcon field="GroupName" />
+
+            <th pSortableColumn="loginID" style="min-width:16rem">
+                Login ID
+                <p-sortIcon field="loginID" />
             </th>
-            <th pSortableColumn="ModifiedDate" style="min-width:16rem">
+
+            <th pSortableColumn="jobTitle" style="min-width:16rem">
+                Job Title
+                <p-sortIcon field="jobTitle" />
+            </th>
+
+            <th pSortableColumn="birthDate" style="min-width:16rem">
+                Birth Date
+                <p-sortIcon field="birthDate" />
+            </th>
+
+            <th pSortableColumn="maritalStatus" style="min-width:16rem">
+                Marital Status
+                <p-sortIcon field="maritalStatus" />
+            </th>
+            <th pSortableColumn="gender" style="min-width:16rem">
+                Gender
+                <p-sortIcon field="gender" />
+            </th>
+            <th pSortableColumn="hireDate" style="min-width:16rem">
+                Hire Date
+                <p-sortIcon field="hireDate" />
+            </th>
+            <th pSortableColumn="vacationHours" style="min-width:16rem">
+                Vacation Hours
+                <p-sortIcon field="vacationHours" />
+            </th>
+
+            <th pSortableColumn="sickLeaveHours" style="min-width:16rem">
+                Sick Leave Hours
+                <p-sortIcon field="sickLeaveHours" />
+            </th>
+
+            <th pSortableColumn="yearsInService" style="min-width:16rem">
+                Years In Service
+                <p-sortIcon field="yearsInService" />
+            </th>
+
+            <th pSortableColumn="suggestedBonus" style="min-width:16rem">
+                Suggested Bonus
+                <p-sortIcon field="suggestedBonus" />
+            </th>
+
+            <th pSortableColumn="salary" style="min-width:16rem">
+                Salary
+                <p-sortIcon field="salary" />
+            </th>
+            <th pSortableColumn="minimumRaiseGiven" style="min-width:16rem">
+                Minimum Raise Given
+                <p-sortIcon field="minimumRaiseGiven" />
+            </th>
+            <th pSortableColumn="entityVersion" style="min-width:16rem">
+                Entity Version
+                <p-sortIcon field="entityVersion" />
+            </th>
+            <th pSortableColumn="modifiedDate" style="min-width:16rem">
                 Modified Date
-                <p-sortIcon field="ModifiedDate" />
+                <p-sortIcon field="modifiedDate" />
             </th>
-            <!--            <th>Image</th>-->
-            <!--            <th pSortableColumn="price" style="min-width: 8rem">-->
-            <!--                Price-->
-            <!--                <p-sortIcon field="price" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="category" style="min-width:10rem">-->
-            <!--                Category-->
-            <!--                <p-sortIcon field="category" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="rating" style="min-width: 12rem">-->
-            <!--                Reviews-->
-            <!--                <p-sortIcon field="rating" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="inventoryStatus" style="min-width: 12rem">-->
-            <!--                Status-->
-            <!--                <p-sortIcon field="inventoryStatus" />-->
-            <!--            </th>-->
             <th style="min-width: 12rem"></th>
         </tr>
     </ng-template>
@@ -80,9 +119,21 @@
             <td style="width: 3rem">
                 <p-tableCheckbox [value]="employee" />
             </td>
-            <td style="min-width: 12rem">{{ employee.employeeID }}</td>
-            <td style="min-width: 16rem">{{ employee.name }}</td>
-            <td style="min-width: 16rem">{{ employee.groupName }}</td>
+            <td style="min-width: 12rem">{{ employee.businessEntityID }}</td>
+            <td style="min-width: 16rem">{{ employee.nationalIDNumber }}</td>
+            <td style="min-width: 16rem">{{ employee.loginID }}</td>
+            <td style="min-width: 16rem">{{ employee.jobTitle }}</td>
+            <td style="min-width: 12rem">{{ employee.birthDate }}</td>
+            <td style="min-width: 16rem">{{ employee.maritalStatus }}</td>
+            <td style="min-width: 16rem">{{ employee.gender }}</td>
+            <td style="min-width: 16rem">{{ employee.hireDate }}</td>
+            <td style="min-width: 12rem">{{ employee.vacationHours }}</td>
+            <td style="min-width: 16rem">{{ employee.sickLeaveHours }}</td>
+            <td style="min-width: 16rem">{{ employee.yearsInService }}</td>
+            <td style="min-width: 16rem">{{ employee.suggestedBonus }}</td>
+            <td style="min-width: 12rem">{{ employee.salary }}</td>
+            <td style="min-width: 16rem">{{ employee.minimumRaiseGiven }}</td>
+            <td style="min-width: 16rem">{{ employee.entityVersion }}</td>
             <td style="min-width: 16rem">{{ employee.modifiedDate }}</td>
             <td>
                 <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editEmployee(employee)" />

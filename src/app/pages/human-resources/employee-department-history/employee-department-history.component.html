@@ -42,36 +42,28 @@
             <th style="width: 3rem">
                 <p-tableHeaderCheckbox />
             </th>
-            <th style="min-width: 16rem">EmployeeDepartmentHistory ID</th>
-            <th pSortableColumn="name" style="min-width:16rem">
-                Name
-                <p-sortIcon field="Name" />
+            <th style="min-width: 16rem">BusinessEntity ID</th>
+            <th pSortableColumn="departmentID" style="min-width:16rem">
+                Department ID
+                <p-sortIcon field="departmentID" />
             </th>
-            <th pSortableColumn="groupName" style="min-width:16rem">
-                Group Name
-                <p-sortIcon field="GroupName" />
+            <th pSortableColumn="De" style="min-width:16rem">
+                Start Date
+                <p-sortIcon field="startDate" />
+            </th>
+            <th pSortableColumn="De" style="min-width:16rem">
+                Start Date
+                <p-sortIcon field="startDate" />
+            </th>
+            <th pSortableColumn="endDate" style="min-width:16rem">
+                End Date
+                <p-sortIcon field="endDate" />
             </th>
             <th pSortableColumn="ModifiedDate" style="min-width:16rem">
                 Modified Date
                 <p-sortIcon field="ModifiedDate" />
             </th>
-            <!--            <th>Image</th>-->
-            <!--            <th pSortableColumn="price" style="min-width: 8rem">-->
-            <!--                Price-->
-            <!--                <p-sortIcon field="price" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="category" style="min-width:10rem">-->
-            <!--                Category-->
-            <!--                <p-sortIcon field="category" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="rating" style="min-width: 12rem">-->
-            <!--                Reviews-->
-            <!--                <p-sortIcon field="rating" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="inventoryStatus" style="min-width: 12rem">-->
-            <!--                Status-->
-            <!--                <p-sortIcon field="inventoryStatus" />-->
-            <!--            </th>-->
+
             <th style="min-width: 12rem"></th>
         </tr>
     </ng-template>
@@ -80,9 +72,11 @@
             <td style="width: 3rem">
                 <p-tableCheckbox [value]="employeeDepartmentHistory" />
             </td>
-            <td style="min-width: 12rem">{{ employeeDepartmentHistory.employeeDepartmentHistoryID }}</td>
-            <td style="min-width: 16rem">{{ employeeDepartmentHistory.name }}</td>
-            <td style="min-width: 16rem">{{ employeeDepartmentHistory.groupName }}</td>
+            <td style="min-width: 12rem">{{ employeeDepartmentHistory.businessEntityID }}</td>
+            <td style="min-width: 16rem">{{ employeeDepartmentHistory.departmentID }}</td>
+            <td style="min-width: 16rem">{{ employeeDepartmentHistory.shiftID }}</td>
+            <td style="min-width: 16rem">{{ employeeDepartmentHistory.startDate }}</td>
+            <td style="min-width: 16rem">{{ employeeDepartmentHistory.endDate }}</td>
             <td style="min-width: 16rem">{{ employeeDepartmentHistory.modifiedDate }}</td>
             <td>
                 <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editEmployeeDepartmentHistory(employeeDepartmentHistory)" />

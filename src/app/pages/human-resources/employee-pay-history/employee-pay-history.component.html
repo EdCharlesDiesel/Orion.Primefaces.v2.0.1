@@ -5,7 +5,7 @@
 <p-toolbar styleClass="mb-6">
     <ng-template #start>
         <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
-<!--        <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteEmployeePayHistory()" [disabled]="!selectedEmployeePayHistory || !selectedEmployeePayHistory.length" />-->
+      <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedEmployeePayHistorys()" [disabled]="!selectedEmployeePayHistorys || !selectedEmployeePayHistorys.length" />
     </ng-template>
 
     <ng-template #end>
@@ -42,36 +42,24 @@
             <th style="width: 3rem">
                 <p-tableHeaderCheckbox />
             </th>
-            <th style="min-width: 16rem">EmployeePayHistory ID</th>
-            <th pSortableColumn="name" style="min-width:16rem">
-                Name
-                <p-sortIcon field="Name" />
+            <th style="min-width: 16rem">Business Entity ID</th>
+            <th pSortableColumn="rateChangeDate" style="min-width:16rem">
+                Rate Change Date
+                <p-sortIcon field="rateChangeDate" />
             </th>
-            <th pSortableColumn="groupName" style="min-width:16rem">
-                Group Name
-                <p-sortIcon field="GroupName" />
+            <th pSortableColumn="rate" style="min-width:16rem">
+                Rate
+                <p-sortIcon field="rate" />
+            </th>
+            <th pSortableColumn="payFrequency" style="min-width:16rem">
+                Pay Frequency
+                <p-sortIcon field="payFrequency" />
             </th>
             <th pSortableColumn="ModifiedDate" style="min-width:16rem">
                 Modified Date
                 <p-sortIcon field="ModifiedDate" />
             </th>
-            <!--            <th>Image</th>-->
-            <!--            <th pSortableColumn="price" style="min-width: 8rem">-->
-            <!--                Price-->
-            <!--                <p-sortIcon field="price" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="category" style="min-width:10rem">-->
-            <!--                Category-->
-            <!--                <p-sortIcon field="category" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="rating" style="min-width: 12rem">-->
-            <!--                Reviews-->
-            <!--                <p-sortIcon field="rating" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="inventoryStatus" style="min-width: 12rem">-->
-            <!--                Status-->
-            <!--                <p-sortIcon field="inventoryStatus" />-->
-            <!--            </th>-->
+
             <th style="min-width: 12rem"></th>
         </tr>
     </ng-template>
@@ -80,9 +68,10 @@
             <td style="width: 3rem">
                 <p-tableCheckbox [value]="employeePayHistory" />
             </td>
-            <td style="min-width: 12rem">{{ employeePayHistory.employeePayHistoryID }}</td>
-            <td style="min-width: 16rem">{{ employeePayHistory.name }}</td>
-            <td style="min-width: 16rem">{{ employeePayHistory.groupName }}</td>
+            <td style="min-width: 12rem">{{ employeePayHistory.businessEntityID }}</td>
+            <td style="min-width: 16rem">{{ employeePayHistory.rateChangeDate }}</td>
+            <td style="min-width: 16rem">{{ employeePayHistory.rate }}</td>
+            <td style="min-width: 16rem">{{ employeePayHistory.payFrequency }}</td>
             <td style="min-width: 16rem">{{ employeePayHistory.modifiedDate }}</td>
             <td>
                 <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editEmployeePayHistory(employeePayHistory)" />

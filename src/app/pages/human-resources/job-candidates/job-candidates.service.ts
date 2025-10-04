@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JobCandidate } from '../../../core/models/job-candidate.model';
+import { environment } from '../../../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobCandidatesService {
-  private apiUrl = 'http://localhost:9010/api/JobCandidate';
+    private apiUrl = environment.humanResourcesBaseURL +'JobCandidate';
 
   constructor(private http: HttpClient) {}//localhost:9010/
   //TODO: Need to fix Not recommended hence I need to start using Guid to begin with.

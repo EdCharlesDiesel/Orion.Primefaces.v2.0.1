@@ -14,6 +14,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { EmployeesService } from '../../employees/employees.service';
 import { tap } from 'rxjs';
 import { SalesPerson } from '../../../core/models/sales-person.model';
+import { InternalEmployeesService } from './internal-employees.service';
 
 interface Column {
     field: string;
@@ -30,7 +31,7 @@ interface ExportColumn {
     templateUrl: './internal-employees.component.html',
     styleUrls: ['./internal-employees.component.scss'],
     imports: [Button, ConfirmDialog, Dialog, IconField, InputIcon, InputText, NgIf, ReactiveFormsModule, TableModule, Toolbar, FormsModule],
-    providers: [MessageService,ConfirmationService,EmployeesService]
+    providers: [MessageService,ConfirmationService,InternalEmployeesService]
 })
 export class InternalEmployeesComponent implements OnInit {
     employeeDialog: boolean = false;
@@ -52,7 +53,7 @@ export class InternalEmployeesComponent implements OnInit {
     cols!: Column[];
 
     constructor(
-        private employeeService: EmployeesService,
+        private employeeService: InternalEmployeesService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -262,7 +263,7 @@ export class InternalEmployeesComponent implements OnInit {
                 });
             } else {
                 this.employee.businessEntityID = this.createId();
-                this.employeeService.createEmployee(this.employee);
+                this.employeeService.addEmployees(this.employee);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',

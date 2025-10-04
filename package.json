@@ -1,5 +1,5 @@
 {
-    "name": "sakai-ng",
+    "name": "orion-primefaces-ng",
     "version": "19.0.1",
     "scripts": {
         "ng": "ng",

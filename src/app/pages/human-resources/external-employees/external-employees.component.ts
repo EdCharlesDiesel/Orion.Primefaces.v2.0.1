@@ -12,8 +12,10 @@ import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { EmployeesService } from '../../employees/employees.service';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { SalesPerson } from '../../../core/models/sales-person.model';
+import { InternalEmployeesService } from '../internal-employees/internal-employees.service';
+import { ExternalEmployeesService } from './external-employees.service';
 
 interface Column {
     field: string;
@@ -31,7 +33,7 @@ interface ExportColumn {
     standalone: true,
     styleUrls: ['./external-employees.component.scss'],
     imports: [Button, ConfirmDialog, Dialog, IconField, InputIcon, InputText, NgIf, ReactiveFormsModule, TableModule, Toolbar, FormsModule],
-    providers: [MessageService,ConfirmationService,EmployeesService]
+    providers: [MessageService,ConfirmationService,ExternalEmployeesService]
 })
 export class ExternalEmployeesComponent implements OnInit {
     employeeDialog: boolean = false;
@@ -53,7 +55,7 @@ export class ExternalEmployeesComponent implements OnInit {
     cols!: Column[];
 
     constructor(
-        private employeeService: EmployeesService,
+        private employeeService: ExternalEmployeesService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -65,6 +67,7 @@ export class ExternalEmployeesComponent implements OnInit {
     ngOnInit() {
         this.loadDemoData();
     }
+
 
     loadDemoData() {
         this.employeeService
@@ -263,7 +266,7 @@ export class ExternalEmployeesComponent implements OnInit {
                 });
             } else {
                 this.employee.businessEntityID = this.createId();
-                this.employeeService.createEmployee(this.employee);
+                this.employeeService.addEmployees(this.employee);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',

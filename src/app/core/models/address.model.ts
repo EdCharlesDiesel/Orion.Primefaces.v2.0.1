@@ -16,7 +16,7 @@ export class Address {
   stateProvinceID!: number;
   /** Postal code for the street address. */
   postalCode!: string;
-  spatialLocation?: SqlGeography;
+  spatialLocation?: string;
   /** ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample. */
   rowguid!: string;
   /** Date and time the record was last updated. */

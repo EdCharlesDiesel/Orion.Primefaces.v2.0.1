@@ -1,20 +1,22 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorService } from '../../../shared/http-error.service';
-import { IEmployee } from '../../../core/models/employee.model';
-import { tap } from 'rxjs';
+import { Employee } from '../../../core/models/employee.model';
+import { Observable, tap } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExternalEmployeesService {
-  private EmployeesUrl = 'http://localhost:9100/api/ExternalEmployees';
+
+  private apiUrl = environment.humanResourcesBaseURL +'ExternalEmployees';
   private http = inject(HttpClient);
   private errorService = inject(HttpErrorService);
 
   //Signal state
-  private employeesSignal = signal<IEmployee[]>([]);
+  private employeesSignal = signal<Employee[]>([]);
   private loadingSignal = signal<boolean>(false);
   private errorSignal = signal<string | null>(null);
 
@@ -29,9 +31,12 @@ export class ExternalEmployeesService {
     });
   }
 
+    public getEmployees(): Observable<Employee[]> {
+        return this.http.get<Employee[]>(this.apiUrl)
+    }
   public loadEmployees() {
     this.loadingSignal.set(true);
-    this.http.get<IEmployee[]>(this.EmployeesUrl).pipe(
+    this.http.get<Employee[]>(this.apiUrl).pipe(
       tap({
         next: (data) => {
           this.employeesSignal.set(data);
@@ -44,8 +49,8 @@ export class ExternalEmployeesService {
     ).subscribe();
   }
 
-  public addEmployees(employee: IEmployee) {
-    this.http.post<IEmployee>(this.EmployeesUrl, employee)
+  public addEmployees(employee: Employee) {
+    this.http.post<Employee>(this.apiUrl, employee)
       .subscribe({
         next: (newEmployee) => {
           this.employeesSignal.update(employeesComputed => [...employeesComputed, newEmployee])
@@ -56,8 +61,8 @@ export class ExternalEmployeesService {
       });
   }
 
-  public updateEmployees(employee: IEmployee) {
-    this.http.put<IEmployee>(this.EmployeesUrl, employee)
+  public updateEmployees(employee: Employee) {
+    this.http.put<Employee>(this.apiUrl, employee)
       .subscribe({
         next: (updatedEmployee) => {
           this.employeesSignal.update(
@@ -72,7 +77,7 @@ export class ExternalEmployeesService {
 
   deleteEmployees(businessEntityID: number) {
     this.loadingSignal.set(true);
-    this.http.delete<IEmployee>(`${this.EmployeesUrl}/${businessEntityID}`).subscribe({
+    this.http.delete<Employee>(`${this.apiUrl}/${businessEntityID}`).subscribe({
       next: () => {
         this.employeesSignal.update(
           employees => employees.filter(x => x.businessEntityID !== businessEntityID))
@@ -82,4 +87,6 @@ export class ExternalEmployeesService {
       }
     });
   }
+
+
 }
