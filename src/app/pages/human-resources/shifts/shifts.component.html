@@ -47,31 +47,18 @@
                 Name
                 <p-sortIcon field="Name" />
             </th>
-            <th pSortableColumn="groupName" style="min-width:16rem">
-                Group Name
-                <p-sortIcon field="GroupName" />
+            <th pSortableColumn="startTime" style="min-width:16rem">
+                Start Time
+                <p-sortIcon field="startTime" />
+            </th>
+            <th pSortableColumn="endTime" style="min-width:16rem">
+                End Time
+                <p-sortIcon field="endTime" />
             </th>
             <th pSortableColumn="ModifiedDate" style="min-width:16rem">
                 Modified Date
                 <p-sortIcon field="ModifiedDate" />
             </th>
-            <!--            <th>Image</th>-->
-            <!--            <th pSortableColumn="price" style="min-width: 8rem">-->
-            <!--                Price-->
-            <!--                <p-sortIcon field="price" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="category" style="min-width:10rem">-->
-            <!--                Category-->
-            <!--                <p-sortIcon field="category" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="rating" style="min-width: 12rem">-->
-            <!--                Reviews-->
-            <!--                <p-sortIcon field="rating" />-->
-            <!--            </th>-->
-            <!--            <th pSortableColumn="inventoryStatus" style="min-width: 12rem">-->
-            <!--                Status-->
-            <!--                <p-sortIcon field="inventoryStatus" />-->
-            <!--            </th>-->
             <th style="min-width: 12rem"></th>
         </tr>
     </ng-template>
@@ -82,7 +69,8 @@
             </td>
             <td style="min-width: 12rem">{{ shift.shiftID }}</td>
             <td style="min-width: 16rem">{{ shift.name }}</td>
-            <td style="min-width: 16rem">{{ shift.groupName }}</td>
+            <td style="min-width: 16rem">{{ shift.startTime }}</td>
+            <td style="min-width: 16rem">{{ shift.endTime }}</td>
             <td style="min-width: 16rem">{{ shift.modifiedDate }}</td>
             <td>
                 <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editShift(shift)" />
@@ -95,17 +83,22 @@
 <p-dialog [(visible)]="shiftDialog" [style]="{ width: '450px' }" header="Shift Details" [modal]="true">
     <ng-template #content>
         <div class="flex flex-col gap-6">
-            <!--            <img [src]="'https://primefaces.org/cdn/primeng/images/demo/shift/' + shift.image" [alt]="shift.image" class="block m-auto pb-4" *ngIf="shift.image" />-->
+
             <div>
                 <label for="name" class="block font-bold mb-3">Name</label>
                 <input type="text" pInputText id="name" [(ngModel)]="shift.name" required autofocus fluid />
                 <small class="text-red-500" *ngIf="submitted && !shift.name">Name is required.</small>
             </div>
-<!--            <div>-->
-<!--                <label for="name" class="block font-bold mb-3">Group Name</label>-->
-<!--                <input type="text" pInputText id="GroupName" [(ngModel)]="shift.GroupName" required autofocus fluid />-->
-<!--                <small class="text-red-500" *ngIf="submitted && !shift.GroupName">Group name is required.</small>-->
-<!--            </div>-->
+            <div>
+                <label for="name" class="block font-bold mb-3">Start Time</label>
+                <input type="text" pInputText id="Start Time" [(ngModel)]="shift.startTime" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !shift.startTime">Start Time is required.</small>
+            </div>
+            <div>
+                <label for="name" class="block font-bold mb-3">End Time</label>
+                <input type="text" pInputText id="GroupName" [(ngModel)]="shift.endTime" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !shift.endTime">End Time is required.</small>
+            </div>
             <div>
                 <label for="name" class="block font-bold mb-3">Modified Date</label>
                 <input type="text" pInputText id="GroupName" [(ngModel)]="shift.modifiedDate" required autofocus fluid />

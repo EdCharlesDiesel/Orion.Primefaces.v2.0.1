@@ -3,13 +3,14 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Department } from './department.model';
 import { HttpErrorService } from '../../../shared/http-error.service';
+import { environment } from '../../../../environments/environment';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class DepartmentsService {
-    private DepartmentsUrl = 'http://localhost:9100/api/Department';
+    private DepartmentsUrl = environment.humanResourcesBaseURL;
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
 

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Shift } from '../../../core/models/shift.model';
+import { environment } from '../../../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShiftsService {
-  private apiUrl = 'http://localhost:9010/api/Shift';
+  private apiUrl = environment.humanResourcesBaseURL +'Shift';
 
   constructor(private http: HttpClient) {}//localhost:9010/
   //TODO: Need to fix Not recommended hence I need to start using Guid to begin with.
