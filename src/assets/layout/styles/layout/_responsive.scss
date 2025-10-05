@@ -93,7 +93,7 @@
 
             .layout-mask {
                 display: block;
-                animation: fadein $transitionDuration;
+                animation: fadein .2s;
             }
         }
     }

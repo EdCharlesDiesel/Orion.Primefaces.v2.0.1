@@ -1,0 +1,519 @@
+// Variables
+$primary-color: #3b82f6;
+$primary-hover: #2563eb;
+$danger-color: #ef4444;
+$success-color: #10b981;
+$text-primary: #1f2937;
+$text-secondary: #6b7280;
+$text-muted: #9ca3af;
+$border-color: #e5e7eb;
+$background: #f9fafb;
+$white: #ffffff;
+$error-color: #dc2626;
+
+$border-radius: 8px;
+$border-radius-lg: 12px;
+$transition: all 0.3s ease;
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+// Login Container
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem 1rem;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.4;
+    }
+}
+
+.login-card-wrapper {
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    z-index: 1;
+}
+
+// Card Styles
+.login-card {
+    ::ng-deep .p-card {
+        border-radius: $border-radius-lg;
+        box-shadow: $shadow-lg, 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        border: none;
+        overflow: hidden;
+    }
+
+    ::ng-deep .p-card-body {
+        padding: 0;
+    }
+
+    ::ng-deep .p-card-content {
+        padding: 2rem;
+        padding-top: 0;
+    }
+}
+
+// Card Header
+.card-header {
+    background: linear-gradient(135deg, $primary-color 0%, #6366f1 100%);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    color: $white;
+
+    .logo-section {
+        margin-bottom: 0.5rem;
+
+        .logo-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: 700;
+            animation: fadeInUp 0.6s ease;
+        }
+    }
+
+    .subtitle {
+        margin: 0;
+        font-size: 0.95rem;
+        opacity: 0.9;
+        animation: fadeIn 0.8s ease;
+    }
+}
+
+// Form Styles
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .field-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: $text-primary;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+
+        .required {
+            color: $error-color;
+        }
+    }
+
+    .input-wrapper {
+        position: relative;
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: $text-muted;
+            z-index: 1;
+            font-size: 0.95rem;
+        }
+
+        ::ng-deep .p-inputtext {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.75rem;
+            border: 2px solid $border-color;
+            border-radius: $border-radius;
+            font-size: 0.95rem;
+            transition: $transition;
+
+            &:focus {
+                border-color: $primary-color;
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            }
+
+            &.ng-invalid.ng-dirty {
+                border-color: $error-color;
+
+                &:focus {
+                    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+                }
+            }
+        }
+    }
+
+    .password-wrapper {
+        ::ng-deep .p-password {
+            width: 100%;
+
+            input {
+                width: 100%;
+                padding: 0.75rem 3rem 0.75rem 1rem;
+                border: 2px solid $border-color;
+                border-radius: $border-radius;
+                font-size: 0.95rem;
+                transition: $transition;
+
+                &:focus {
+                    border-color: $primary-color;
+                    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+                }
+
+                &.ng-invalid.ng-dirty {
+                    border-color: $error-color;
+
+                    &:focus {
+                        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+                    }
+                }
+            }
+
+            .p-password-toggle-icon {
+                color: $text-muted;
+            }
+        }
+    }
+
+    .error-message {
+        color: $error-color;
+        font-size: 0.8125rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin-top: -0.25rem;
+
+        &::before {
+            content: '⚠';
+            font-size: 0.875rem;
+        }
+    }
+}
+
+// Form Options
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -0.5rem;
+
+    .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .checkbox-label {
+            font-size: 0.875rem;
+            color: $text-secondary;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+
+    .forgot-password-link {
+        font-size: 0.875rem;
+        color: $primary-color;
+        text-decoration: none;
+        cursor: pointer;
+        font-weight: 500;
+        transition: $transition;
+
+        &:hover {
+            color: $primary-hover;
+            text-decoration: underline;
+        }
+    }
+}
+
+// Form Actions
+.form-actions {
+    ::ng-deep .login-button {
+        .p-button {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, $primary-color 0%, #6366f1 100%);
+            border: none;
+            border-radius: $border-radius;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: $transition;
+            box-shadow: $shadow-md;
+
+            &:hover:not(:disabled) {
+                background: linear-gradient(135deg, $primary-hover 0%, #4f46e5 100%);
+                transform: translateY(-2px);
+                box-shadow: $shadow-lg;
+            }
+
+            &:active:not(:disabled) {
+                transform: translateY(0);
+            }
+
+            &:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+// Demo Section
+.demo-section {
+    ::ng-deep .p-divider {
+        margin: 1.5rem 0 1rem;
+
+        .p-divider-content {
+            background: $white;
+        }
+    }
+
+    .divider-text {
+        font-size: 0.8125rem;
+        color: $text-muted;
+        font-weight: 500;
+        padding: 0 0.75rem;
+    }
+
+    .demo-buttons {
+        display: flex;
+        gap: 0.75rem;
+
+        ::ng-deep .demo-button {
+            flex: 1;
+
+            .p-button {
+                width: 100%;
+                padding: 0.625rem;
+                font-size: 0.875rem;
+                border-radius: $border-radius;
+                transition: $transition;
+
+                &:hover {
+                    background: rgba($primary-color, 0.05);
+                    border-color: $primary-color;
+                    color: $primary-color;
+                    transform: translateY(-1px);
+                }
+            }
+        }
+    }
+}
+
+// Divider
+::ng-deep .p-divider {
+    margin: 1.5rem 0;
+
+    &.p-divider-horizontal {
+        &::before {
+            border-top: 1px solid $border-color;
+        }
+    }
+
+    .p-divider-content {
+        background: $white;
+    }
+
+    .divider-text {
+        font-size: 0.8125rem;
+        color: $text-muted;
+        font-weight: 500;
+        padding: 0 0.75rem;
+    }
+}
+
+// Social Buttons
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    ::ng-deep .social-button {
+        .p-button {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: $border-radius;
+            font-weight: 500;
+            transition: $transition;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: $shadow-md;
+            }
+        }
+
+        &.google-button .p-button:hover {
+            background: rgba(234, 67, 53, 0.05);
+            border-color: #ea4335;
+            color: #ea4335;
+        }
+
+        &.microsoft-button .p-button:hover {
+            background: rgba(0, 120, 212, 0.05);
+            border-color: #0078d4;
+            color: #0078d4;
+        }
+    }
+}
+
+// Register Link
+.register-link {
+    text-align: center;
+    font-size: 0.875rem;
+    color: $text-secondary;
+    margin-top: 0.5rem;
+
+    .link {
+        color: $primary-color;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: $transition;
+
+        &:hover {
+            color: $primary-hover;
+            text-decoration: underline;
+        }
+    }
+}
+
+// Additional Info
+.additional-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    .info-card {
+        background: $white;
+        padding: 1.5rem;
+        border-radius: $border-radius;
+        text-align: center;
+        box-shadow: $shadow-md;
+        transition: $transition;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: $shadow-lg;
+        }
+
+        .info-icon {
+            font-size: 2rem;
+            color: $primary-color;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        h4 {
+            margin: 0 0 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: $text-primary;
+        }
+
+        p {
+            margin: 0;
+            font-size: 0.8125rem;
+            color: $text-secondary;
+            line-height: 1.4;
+        }
+    }
+}
+
+// Animations
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Responsive Design
+@media (max-width: 640px) {
+    .login-container {
+        padding: 1rem;
+    }
+
+    .card-header {
+        padding: 2rem 1.5rem;
+
+        .logo-section {
+            .logo-icon {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    .login-card {
+        ::ng-deep .p-card-content {
+            padding: 1.5rem;
+        }
+    }
+
+    .additional-info {
+        grid-template-columns: 1fr;
+    }
+
+    .demo-buttons {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-form {
+        gap: 1.25rem;
+    }
+
+    .form-field {
+        .input-wrapper {
+            ::ng-deep .p-inputtext {
+                padding: 0.65rem 1rem 0.65rem 2.5rem;
+                font-size: 0.875rem;
+            }
+        }
+    }
+}

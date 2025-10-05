@@ -4,7 +4,7 @@
 
 Theme from [sakai-ng](https://github.com/primefaces/sakai-ng)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version CLI: 19.0.6
 
 ## Development server
 

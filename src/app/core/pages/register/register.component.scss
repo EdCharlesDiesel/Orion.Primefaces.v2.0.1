@@ -1,0 +1,305 @@
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+    .register-card-wrapper {
+        width: 100%;
+        max-width: 500px;
+
+        .register-card {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            border: none;
+            overflow: hidden;
+
+            ::ng-deep .p-card-header {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 2rem;
+                border-radius: 16px 16px 0 0;
+
+                .card-header {
+                    text-align: center;
+
+                    .logo-section {
+                        margin-bottom: 1rem;
+
+                        .logo-icon {
+                            font-size: 3rem;
+                            margin-bottom: 1rem;
+                            display: block;
+                        }
+
+                        h2 {
+                            margin: 0;
+                            font-size: 2rem;
+                            font-weight: 600;
+                        }
+                    }
+
+                    .subtitle {
+                        margin: 0;
+                        opacity: 0.9;
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+
+            ::ng-deep .p-card-body {
+                padding: 2rem;
+            }
+        }
+    }
+}
+
+.register-form {
+    .form-field {
+        margin-bottom: 1.5rem;
+
+        .field-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.95rem;
+
+            .required {
+                color: #ef4444;
+                margin-left: 2px;
+            }
+        }
+
+        .checkbox-label {
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+
+            .link {
+                color: #667eea;
+                text-decoration: none;
+                font-weight: 500;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            .required {
+                color: #ef4444;
+                margin-left: 2px;
+            }
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        .password-hint {
+            color: #6b7280;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: block;
+            line-height: 1.4;
+        }
+
+        // PrimeNG component styling
+        ::ng-deep {
+            .p-inputtext,
+            .p-password input {
+                width: 100% !important;
+                padding: 0.875rem;
+                border-radius: 8px;
+                border: 2px solid #e5e7eb;
+                font-size: 0.95rem;
+                transition: all 0.2s ease;
+
+                &:focus {
+                    border-color: #667eea;
+                    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+                }
+
+                &.ng-invalid.ng-dirty,
+                &.ng-invalid.ng-touched {
+                    border-color: #ef4444;
+
+                    &:focus {
+                        border-color: #ef4444;
+                        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+                    }
+                }
+            }
+
+            .p-password {
+                width: 100%;
+
+                .p-password-panel {
+                    margin-top: 0.5rem;
+                    border-radius: 8px;
+                }
+            }
+
+            .p-checkbox {
+                .p-checkbox-box {
+                    border-radius: 4px;
+                    border: 2px solid #e5e7eb;
+                    width: 20px;
+                    height: 20px;
+
+                    &.p-highlight {
+                        background: #667eea;
+                        border-color: #667eea;
+                    }
+
+                    &:focus {
+                        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+                    }
+                }
+            }
+        }
+    }
+
+    .form-actions {
+        margin: 2rem 0 1.5rem 0;
+
+        ::ng-deep .register-button {
+            .p-button {
+                width: 100%;
+                padding: 0.875rem;
+                font-size: 1rem;
+                font-weight: 600;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border: none;
+                border-radius: 8px;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    transform: translateY(-1px);
+                    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+                }
+
+                &:disabled {
+                    opacity: 0.7;
+                    transform: none;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+
+    ::ng-deep .p-divider {
+        margin: 1.5rem 0;
+
+        .p-divider-content {
+            background: white;
+            padding: 0 1rem;
+        }
+
+        .divider-text {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+    }
+
+    .social-buttons {
+        margin-bottom: 1.5rem;
+
+        ::ng-deep .social-button {
+            .p-button {
+                width: 100%;
+                padding: 0.75rem;
+                border: 2px solid #e5e7eb;
+                color: #374151;
+                border-radius: 8px;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    border-color: #667eea;
+                    color: #667eea;
+                    transform: translateY(-1px);
+                }
+
+                .p-button-icon {
+                    margin-right: 0.5rem;
+                }
+            }
+        }
+    }
+
+    .login-link {
+        text-align: center;
+        color: #6b7280;
+        font-size: 0.95rem;
+
+        .link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+// Responsive design
+@media (max-width: 640px) {
+    .register-container {
+        padding: 1rem 0.5rem;
+
+        .register-card-wrapper {
+            .register-card {
+                ::ng-deep .p-card-header {
+                    padding: 1.5rem;
+
+                    .card-header {
+                        .logo-section {
+                            .logo-icon {
+                                font-size: 2.5rem;
+                            }
+
+                            h2 {
+                                font-size: 1.75rem;
+                            }
+                        }
+
+                        .subtitle {
+                            font-size: 1rem;
+                        }
+                    }
+                }
+
+                ::ng-deep .p-card-body {
+                    padding: 1.5rem;
+                }
+            }
+        }
+    }
+}
+
+// Dark mode support (optional)
+@media (prefers-color-scheme: dark) {
+    .register-form {
+        .form-field {
+            .field-label {
+       //         color: #f3f4f6;
+            }
+
+            .password-hint {
+     //           color: #9ca3af;
+            }
+        }
+
+        .login-link {
+   //         color: #9ca3af;
+        }
+    }
+}

@@ -1,0 +1,117 @@
+<div class="card">
+    <div class="font-semibold text-xl mb-4">Employee Department History</div>
+</div>
+
+<p-toolbar styleClass="mb-6">
+    <ng-template #start>
+        <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
+        <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedEmployeeDepartmentHistorys()" [disabled]="!selectedEmployeeDepartmentHistorys || !selectedEmployeeDepartmentHistorys.length" />
+    </ng-template>
+
+    <ng-template #end>
+        <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
+    </ng-template>
+</p-toolbar>
+
+<p-table
+    #dt
+    [value]="employeeDepartmentHistorys()"
+    [rows]="10"
+    [columns]="cols"
+    [paginator]="true"
+    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedEmployeeDepartmentHistorys"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} employeeDepartmentHistorys"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 20, 30]"
+>
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0">Manage Employee Department History</h5>
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
+            </p-iconfield>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox />
+            </th>
+            <th style="min-width: 16rem">BusinessEntity ID</th>
+            <th pSortableColumn="departmentID" style="min-width:16rem">
+                Department ID
+                <p-sortIcon field="departmentID" />
+            </th>
+            <th pSortableColumn="De" style="min-width:16rem">
+                Start Date
+                <p-sortIcon field="startDate" />
+            </th>
+            <th pSortableColumn="De" style="min-width:16rem">
+                Start Date
+                <p-sortIcon field="startDate" />
+            </th>
+            <th pSortableColumn="endDate" style="min-width:16rem">
+                End Date
+                <p-sortIcon field="endDate" />
+            </th>
+            <th pSortableColumn="ModifiedDate" style="min-width:16rem">
+                Modified Date
+                <p-sortIcon field="ModifiedDate" />
+            </th>
+
+            <th style="min-width: 12rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-employeeDepartmentHistory>
+        <tr>
+            <td style="width: 3rem">
+                <p-tableCheckbox [value]="employeeDepartmentHistory" />
+            </td>
+            <td style="min-width: 12rem">{{ employeeDepartmentHistory.businessEntityID }}</td>
+            <td style="min-width: 16rem">{{ employeeDepartmentHistory.departmentID }}</td>
+            <td style="min-width: 16rem">{{ employeeDepartmentHistory.shiftID }}</td>
+            <td style="min-width: 16rem">{{ employeeDepartmentHistory.startDate }}</td>
+            <td style="min-width: 16rem">{{ employeeDepartmentHistory.endDate }}</td>
+            <td style="min-width: 16rem">{{ employeeDepartmentHistory.modifiedDate }}</td>
+            <td>
+                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editEmployeeDepartmentHistory(employeeDepartmentHistory)" />
+                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteEmployeeDepartmentHistory(employeeDepartmentHistory)" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="employeeDepartmentHistoryDialog" [style]="{ width: '450px' }" header="EmployeeDepartmentHistory Details" [modal]="true">
+    <ng-template #content>
+        <div class="flex flex-col gap-6">
+            <!--            <img [src]="'https://primefaces.org/cdn/primeng/images/demo/employeeDepartmentHistory/' + employeeDepartmentHistory.image" [alt]="employeeDepartmentHistory.image" class="block m-auto pb-4" *ngIf="employeeDepartmentHistory.image" />-->
+<!--            <div>-->
+<!--                <label for="name" class="block font-bold mb-3">Name</label>-->
+<!--                <input type="text" pInputText id="name" [(ngModel)]="employeeDepartmentHistory.Name" required autofocus fluid />-->
+<!--                <small class="text-red-500" *ngIf="submitted && !employeeDepartmentHistory.Name">Name is required.</small>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <label for="name" class="block font-bold mb-3">Group Name</label>-->
+<!--                <input type="text" pInputText id="GroupName" [(ngModel)]="employeeDepartmentHistory.GroupName" required autofocus fluid />-->
+<!--                <small class="text-red-500" *ngIf="submitted && !employeeDepartmentHistory.GroupName">Group name is required.</small>-->
+<!--            </div>-->
+            <div>
+                <label for="name" class="block font-bold mb-3">Modified Date</label>
+                <input type="text" pInputText id="GroupName" [(ngModel)]="employeeDepartmentHistory.modifiedDate" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !employeeDepartmentHistory.modifiedDate">Modified Date is required.</small>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveEmployeeDepartmentHistory()" />
+    </ng-template>
+</p-dialog>
+
+<p-confirmdialog [style]="{ width: '450px' }" />

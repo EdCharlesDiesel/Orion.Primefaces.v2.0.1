@@ -1,0 +1,107 @@
+<div class="card">
+    <div class="font-semibold text-xl mb-4">Job Candidates</div>
+</div>
+
+<p-toolbar styleClass="mb-6">
+    <ng-template #start>
+        <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
+        <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedJobCandidates()" [disabled]="!selectedJobCandidates || !selectedJobCandidates.length" />
+    </ng-template>
+
+    <ng-template #end>
+        <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
+    </ng-template>
+</p-toolbar>
+
+<p-table
+    #dt
+    [value]="jobCandidates()"
+    [rows]="10"
+    [columns]="cols"
+    [paginator]="true"
+    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedJobCandidates"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} jobCandidates"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 20, 30]"
+>
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0">Manage Job Candidates</h5>
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
+            </p-iconfield>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox />
+            </th>
+            <th style="min-width: 16rem">Job Candidate ID</th>
+            <th pSortableColumn="BusinessEntityID" style="min-width:16rem">
+                BusinessEntityID
+                <p-sortIcon field="businessEntityID" />
+            </th>
+            <th pSortableColumn="resume" style="min-width:16rem">
+                Resume
+                <p-sortIcon field="resume" />
+            </th>
+            <th pSortableColumn="ModifiedDate" style="min-width:16rem">
+                Modified Date
+                <p-sortIcon field="ModifiedDate" />
+            </th>
+
+            <th style="min-width: 12rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-jobCandidate>
+        <tr>
+            <td style="width: 3rem">
+                <p-tableCheckbox [value]="jobCandidate" />
+            </td>
+            <td style="min-width: 12rem">{{ jobCandidate.jobCandidateID }}</td>
+            <td style="min-width: 16rem">{{ jobCandidate.businessEntityID }}</td>
+            <td style="min-width: 16rem">{{ jobCandidate.resume }}</td>
+            <td style="min-width: 16rem">{{ jobCandidate.modifiedDate }}</td>
+            <td>
+                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editJobCandidate(jobCandidate)" />
+                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteJobCandidate(jobCandidate)" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="jobCandidateDialog" [style]="{ width: '450px' }" header="JobCandidate Details" [modal]="true">
+    <ng-template #content>
+        <div class="flex flex-col gap-6">
+            <!--            <img [src]="'https://primefaces.org/cdn/primeng/images/demo/jobCandidate/' + jobCandidate.image" [alt]="jobCandidate.image" class="block m-auto pb-4" *ngIf="jobCandidate.image" />-->
+            <div>
+                <label for="name" class="block font-bold mb-3">Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="jobCandidate.resume" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !jobCandidate.resume">Name is required.</small>
+            </div>
+<!--            <div>-->
+<!--                <label for="name" class="block font-bold mb-3">Group Name</label>-->
+<!--                <input type="text" pInputText id="GroupName" [(ngModel)]="jobCandidate.GroupName" required autofocus fluid />-->
+<!--                <small class="text-red-500" *ngIf="submitted && !jobCandidate.GroupName">Group name is required.</small>-->
+<!--            </div>-->
+            <div>
+                <label for="name" class="block font-bold mb-3">Modified Date</label>
+                <input type="text" pInputText id="GroupName" [(ngModel)]="jobCandidate.modifiedDate" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !jobCandidate.modifiedDate">ModifiedDate is required.</small>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveJobCandidate()" />
+    </ng-template>
+</p-dialog>
+
+<p-confirmdialog [style]="{ width: '450px' }" />
