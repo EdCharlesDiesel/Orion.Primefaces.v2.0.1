@@ -1,103 +1,259 @@
-// Add this property and method to your existing AuthService
-
-import { Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { tap, catchError, map } from 'rxjs/operators';
 import { AuthResponse } from '../../models/auth-response.model';
-//import { Result } from '../../../pages/departments/departments.service';
 
-
-
-class LoginRequest {
+interface LoginRequest {
+    email: string;
+    password: string;
 }
 
+interface RegisterRequest {
+    email: string;
+    password: string;
+    firstName?: string;
+    lastName?: string;
+}
+
+interface User {
+    id: string;
+    email: string;
+    roles: string[];
+    [key: string]: any;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
 export class AuthService {
-    // ... existing code ...
+    private readonly TOKEN_KEY = 'auth_token';
+    private readonly REFRESH_TOKEN_KEY = 'refresh_token';
+    private readonly USER_KEY = 'current_user';
+    private readonly API_URL = '/api/auth'; // Update with your API URL
 
-    // Add this property for storing redirect URL
+    private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasValidToken());
+    public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+
+    private currentUserSubject = new BehaviorSubject<User | null>(this.getStoredUser());
+    public currentUser$ = this.currentUserSubject.asObservable();
+
     public redirectUrl: string | null = null;
-
-    // ... existing methods ...
-
-    // Update the handleAuthSuccess method to handle redirect
-    private isAuthenticatedSubject: any;
-    isAuthenticated$: any;
-    private currentUserSubject: any;
     token: any;
-    private router: any;
-    private handleAuthSuccess(response: AuthResponse): void {
-        this.storeToken(response.token);
-        if (response.refreshToken) {
-            this.storeRefreshToken(response.refreshToken);
-        }
-        this.storeUser(response.user);
-        this.currentUserSubject.next(response.user);
-        this.isAuthenticatedSubject.next(true);
 
-        // Handle redirect after successful authentication
-        if (this.redirectUrl) {
-            this.router.navigate([this.redirectUrl]);
-            this.redirectUrl = null;
-        }
+    constructor(
+        private http: HttpClient,
+        private router: Router
+    ) {}
+
+    /**
+     * Login user with credentials
+     */
+    login(loginData: LoginRequest): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(`${this.API_URL}/login`, loginData).pipe(
+            tap((response) => this.handleAuthSuccess(response)),
+            catchError((error) => {
+                console.error('Login failed:', error);
+                return throwError(() => error);
+            })
+        );
     }
 
-    // Add method to get redirect URL and clear it
+    /**
+     * Register new user
+     */
+    register(registerData: RegisterRequest): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(`${this.API_URL}/register`, registerData).pipe(
+            tap((response) => this.handleAuthSuccess(response)),
+            catchError((error) => {
+                console.error('Registration failed:', error);
+                return throwError(() => error);
+            })
+        );
+    }
+
+    /**
+     * Logout user and clear stored data
+     */
+    logout(): void {
+        this.clearAuthData();
+        this.isAuthenticatedSubject.next(false);
+        this.currentUserSubject.next(null);
+        this.router.navigate(['/login']);
+    }
+
+    /**
+     * Request password reset
+     */
+    requestPasswordReset(email: string): Observable<void> {
+        return this.http.post<void>(`${this.API_URL}/password-reset/request`, { email }).pipe(
+            catchError((error) => {
+                console.error('Password reset request failed:', error);
+                return throwError(() => error);
+            })
+        );
+    }
+
+    /**
+     * Change user password
+     */
+    changePassword(currentPassword: string, newPassword: string): Observable<void> {
+        return this.http
+            .post<void>(`${this.API_URL}/password/change`, {
+                currentPassword,
+                newPassword
+            })
+            .pipe(
+                catchError((error) => {
+                    console.error('Password change failed:', error);
+                    return throwError(() => error);
+                })
+            );
+    }
+
+    /**
+     * Get current authenticated user
+     */
+    getCurrentUser(): User | null {
+        return this.currentUserSubject.value;
+    }
+
+    /**
+     * Check if user is authenticated
+     */
+    isAuthenticated(): boolean {
+        return this.isAuthenticatedSubject.value;
+    }
+
+    /**
+     * Get stored authentication token
+     */
+    getToken(): string | null {
+        return localStorage.getItem(this.TOKEN_KEY);
+    }
+
+    /**
+     * Check if user has specific role
+     */
+    hasRole(role: string): boolean {
+        const user = this.getCurrentUser();
+        return user?.roles?.includes(role) ?? false;
+    }
+
+    /**
+     * Check if user has any of the required roles
+     */
+    hasAnyRole(requiredRoles: string[]): boolean {
+        const user = this.getCurrentUser();
+        if (!user?.roles) return false;
+        return requiredRoles.some((role) => user.roles.includes(role));
+    }
+
+    /**
+     * Get and clear redirect URL
+     */
     getAndClearRedirectUrl(): string | null {
         const url = this.redirectUrl;
         this.redirectUrl = null;
         return url;
     }
 
-    // ... rest of existing code ...
-    private storeToken(token: any) {
-
+    /**
+     * Update user profile
+     */
+    updateProfile(userData: Partial<User>): Observable<User> {
+        return this.http.put<User>(`${this.API_URL}/profile`, userData).pipe(
+            tap((updatedUser) => {
+                this.storeUser(updatedUser);
+                this.currentUserSubject.next(updatedUser);
+            }),
+            catchError((error) => {
+                console.error('Profile update failed:', error);
+                return throwError(() => error);
+            })
+        );
     }
 
-    private storeRefreshToken(refreshToken: boolean) {
+    /**
+     * Handle successful authentication
+     */
+    private handleAuthSuccess(response: AuthResponse): void {
+        this.storeToken(response.token);
 
+        if (response.refreshToken) {
+            this.storeRefreshToken(response.refreshToken);
+        }
+
+        this.storeUser(response.user);
+        this.currentUserSubject.next(response.user);
+        this.isAuthenticatedSubject.next(true);
+
+        // Handle redirect after successful authentication
+        const redirectPath = this.getAndClearRedirectUrl() || '/dashboard';
+        this.router.navigate([redirectPath]);
     }
 
-    public hasAnyRole(requiredRoles: string[]): string {
-        const roles = requiredRoles.join(',');
-        return roles;
+    /**
+     * Store authentication token
+     */
+    private storeToken(token: string): void {
+        localStorage.setItem(this.TOKEN_KEY, token);
     }
 
-    hasRole(admin: string) {
-
+    /**
+     * Store refresh token
+     */
+    private storeRefreshToken(refreshToken: boolean): void {
+        localStorage.setItem(this.REFRESH_TOKEN_KEY, String(refreshToken));
     }
 
-    isAuthenticated() {
-        return false;
+    /**
+     * Store user data
+     */
+    private storeUser(user: User): void {
+        localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     }
 
-    private storeUser(user: any) {
-
+    /**
+     * Get stored user from localStorage
+     */
+    private getStoredUser(): User | null {
+        const userJson = localStorage.getItem(this.USER_KEY);
+        if (userJson) {
+            try {
+                return JSON.parse(userJson);
+            } catch (e) {
+                console.error('Failed to parse stored user:', e);
+                return null;
+            }
+        }
+        return null;
     }
 
-    login(loginData: LoginRequest) {
+    /**
+     * Check if valid token exists
+     */
+    private hasValidToken(): boolean {
+        const token = this.getToken();
+        if (!token) return false;
 
+        // Optional: Add JWT expiration check here
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            const expiry = payload.exp * 1000;
+            return Date.now() < expiry;
+        } catch (e) {
+            return false;
+        }
     }
 
-    getCurrentUser() {
-
+    /**
+     * Clear all authentication data
+     */
+    private clearAuthData(): void {
+        localStorage.removeItem(this.TOKEN_KEY);
+        localStorage.removeItem(this.REFRESH_TOKEN_KEY);
+        localStorage.removeItem(this.USER_KEY);
     }
-
-    logout() {
-
-    }
-
-    // @ts-ignore
-    public register(registerData: any): Observable<void> {
-
-    }
-
-    // requestPasswordReset(email: any): Observable<void> {
-    //
-    //     return of(any)
-    // }
-    requestPasswordReset(email: any) {
-
-    }
-
-    changePassword = (currentPassword: any, newPassword: any) => {
-
-    };
 }

@@ -1,11 +1,21 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { User } from '../models/user';
-import { AuthService } from './services/auth.service';
+import { User } from '../../models/user';
+import { AuthService } from '../services/auth.service';
+import { FileUpload } from 'primeng/fileupload';
+import { Tag } from 'primeng/tag';
+import { DatePipe } from '@angular/common';
+import { TabPanel, TabView } from 'primeng/tabview';
+import { Button } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { Password } from 'primeng/password';
+import { InputSwitch } from 'primeng/inputswitch';
+import { ConfirmDialog } from 'primeng/confirmdialog';
+import { Toast } from 'primeng/toast';
 
 interface ProfileStats {
     loginCount: number;
@@ -17,7 +27,9 @@ interface ProfileStats {
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.scss']
+    styleUrls: ['./profile.component.scss'],
+    standalone: true,
+    imports: [FileUpload, Tag, DatePipe, TabView, TabPanel, ReactiveFormsModule, Button, DropdownModule, Password, InputSwitch, ConfirmDialog, Toast]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
     user: any | null = null;
@@ -165,77 +177,98 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }
     }
 
-    // onSaveProfile(): void {
-    //     if (!this.profileForm.invalid) {
-    //         this.loading = true;
-    //         const formData = this.profileForm.value;
-    //         const userData: Partial<User> = {
-    //             name: formData.name,
-    //             email: formData.email
-    //         };
-    //         this.authService
-    //             .updateProfile(userData)
-    //             .pipe(takeUntil(this.destroy$))
-    //             .subscribe({
-    //                 next: (updatedUser: any) => {
-    //                     this.user = updatedUser;
-    //                     this.editMode = false;
-    //                     this.messageService.add({
-    //                         severity: 'success',
-    //                         summary: 'Profile Updated',
-    //                         detail: 'Your profile has been updated successfully'
-    //                     });
-    //                 },
-    //                 error: (error: any) => {
-    //                     this.messageService.add({
-    //                         severity: 'error',
-    //                         summary: 'Update Failed',
-    //                         detail: error || 'Failed to update profile'
-    //                     });
-    //                 },
-    //                 complete: () => {
-    //                     this.loading = false;
-    //                 }
-    //             });
-    //     } else {
-    //         this.markFormGroupTouched(this.profileForm);
-    //         return;
-    //     }
-    // }
-    //
-    // onChangePassword(): void {
-    //     if (this.passwordForm.invalid) {
-    //         this.markFormGroupTouched(this.passwordForm);
-    //         return;
-    //     }
-    //
-    //     this.passwordLoading = true;
-    //     const { currentPassword, newPassword } = this.passwordForm.value;
-    //
-    //     this.authService
-    //         .changePassword(currentPassword, newPassword)
-    //         .pipe(takeUntil(this.destroy$))
-    //         .subscribe({
-    //             next: () => {
-    //                 this.passwordForm.reset();
-    //                 this.messageService.add({
-    //                     severity: 'success',
-    //                     summary: 'Password Changed',
-    //                     detail: 'Your password has been changed successfully'
-    //                 });
-    //             },
-    //             error: (error:any) => {
-    //                 this.messageService.add({
-    //                     severity: 'error',
-    //                     summary: 'Password Change Failed',
-    //                     detail: error || 'Failed to change password'
-    //                 });
-    //             },
-    //             complete: () => {
-    //                 this.passwordLoading = false;
-    //             }
-    //         });
-    // }
+    onSaveProfile(): void {
+        // Check if form is VALID (not invalid)
+        if (this.profileForm.valid) {
+            this.loading = true;
+            const formData = this.profileForm.value;
+
+            const userData: Partial<User> = {
+                name: formData.name,
+                emailAddress: formData.email,
+                // Add other fields as needed based on your User model
+                phoneNumber: formData.phone,
+                bio: formData.bio,
+                company: formData.company,
+                position: formData.position,
+                location: formData.location,
+                website: formData.website
+            };
+
+            this.authService
+                .updateProfile(userData)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe({
+                    next: (updatedUser) => {
+                        this.user = updatedUser;
+                        this.editMode = false;
+                        this.loading = false;
+
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Profile Updated',
+                            detail: 'Your profile has been updated successfully'
+                        });
+                    },
+                    error: (error) => {
+                        this.loading = false;
+
+                        const errorMessage = error?.error?.message
+                            || error?.message
+                            || 'Failed to update profile';
+
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Update Failed',
+                            detail: errorMessage
+                        });
+                    }
+                });
+        } else {
+            // Mark all fields as touched to show validation errors
+            this.markFormGroupTouched(this.profileForm);
+
+            this.messageService.add({
+                severity: 'warn',
+                summary: 'Validation Error',
+                detail: 'Please fill in all required fields correctly'
+            });
+        }
+    }
+
+    onChangePassword(): void {
+        if (this.passwordForm.invalid) {
+            this.markFormGroupTouched(this.passwordForm);
+            return;
+        }
+
+        this.passwordLoading = true;
+        const { currentPassword, newPassword } = this.passwordForm.value;
+
+        this.authService
+            .changePassword(currentPassword, newPassword)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: () => {
+                    this.passwordForm.reset();
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Password Changed',
+                        detail: 'Your password has been changed successfully'
+                    });
+                },
+                error: (error: any) => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Password Change Failed',
+                        detail: error || 'Failed to change password'
+                    });
+                },
+                complete: () => {
+                    this.passwordLoading = false;
+                }
+            });
+    }
 
     // Avatar handling
     onAvatarSelect(event: any): void {
@@ -368,21 +401,4 @@ export class ProfileComponent implements OnInit, OnDestroy {
         };
         return displayNames[fieldName] || fieldName;
     }
-
-    // Getters for template
-    // get profileFormControls() {
-    //     return this.profileForm.controls;
-    // }
-    //
-    // get passwordFormControls() {
-    //     return this.passwordForm.controls;
-    // }
-    //
-    // get notificationControls() {
-    //     return (this.profileForm.get('notifications') as FormGroup).controls;
-    // }
-    //
-    // get privacyControls() {
-    //     return (this.profileForm.get('privacy') as FormGroup).controls;
-    // }
 }

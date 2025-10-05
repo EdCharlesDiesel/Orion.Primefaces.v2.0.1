@@ -1,32 +1,132 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
-import { RippleModule } from 'primeng/ripple';
-import { AppFloatingConfigurator } from '../../../layout/component/app.floatingconfigurator';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
-    selector: 'app-access',
-    standalone: true,
-    imports: [ButtonModule, RouterModule, RippleModule, AppFloatingConfigurator, ButtonModule],
-    template: ` <app-floating-configurator />
-        <div class="bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
-            <div class="flex flex-col items-center justify-center">
-                <div style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, rgba(247, 149, 48, 0.4) 10%, rgba(247, 149, 48, 0) 30%)">
-                    <div class="w-full bg-surface-0 dark:bg-surface-900 py-20 px-8 sm:px-20 flex flex-col items-center" style="border-radius: 53px">
-                        <div class="gap-4 flex flex-col items-center">
-                            <div class="flex justify-center items-center border-2 border-orange-500 rounded-full" style="width: 3.2rem; height: 3.2rem">
-                                <i class="text-orange-500 pi pi-fw pi-lock !text-2xl"></i>
-                            </div>
-                            <h1 class="text-surface-900 dark:text-surface-0 font-bold text-4xl lg:text-5xl mb-2">Access Denied</h1>
-                            <span class="text-muted-color mb-8">You do not have the necessary permisions. Please contact admins.</span>
-                            <img src="https://primefaces.org/cdn/templates/sakai/auth/asset-access.svg" alt="Access denied" class="mb-8" width="80%" />
-                            <div class="col-span-12 mt-8 text-center">
-                                <p-button label="Go to Dashboard" routerLink="/" severity="warn" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`
+    selector: 'app-access-denied',
+    templateUrl: './access-denied.html',
+    styles: [
+        `
+            .access-denied-container {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem;
+                background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            }
+
+            .access-denied-card {
+                max-width: 500px;
+                width: 100%;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                border-radius: 16px;
+                border: none;
+            }
+
+            ::ng-deep .p-card-header {
+                background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+                color: white;
+                padding: 2rem;
+                border-radius: 16px 16px 0 0;
+            }
+
+            .card-header {
+                text-align: center;
+            }
+
+            .warning-icon {
+                font-size: 4rem;
+                margin-bottom: 1rem;
+                display: block;
+            }
+
+            .card-header h2 {
+                margin: 0;
+                font-size: 2rem;
+                font-weight: 600;
+            }
+
+            .content {
+                padding: 2rem;
+                text-align: center;
+            }
+
+            .message {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+                color: #374151;
+            }
+
+            .sub-message {
+                color: #6b7280;
+                margin-bottom: 2rem;
+                line-height: 1.5;
+            }
+
+            .user-info {
+                background: #f9fafb;
+                padding: 1rem;
+                border-radius: 8px;
+                margin-bottom: 2rem;
+                text-align: left;
+            }
+
+            .user-info p {
+                margin: 0.5rem 0;
+                color: #374151;
+            }
+
+            .actions {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            ::ng-deep .actions .p-button {
+                width: 100%;
+                padding: 0.75rem;
+                border-radius: 8px;
+            }
+
+            @media (min-width: 640px) {
+                .actions {
+                    flex-direction: row;
+                    justify-content: center;
+                }
+
+                ::ng-deep .actions .p-button {
+                    width: auto;
+                    min-width: 120px;
+                }
+            }
+        `
+    ]
 })
-export class AccessDenied {}
+export class AccessDeniedComponent implements OnInit {
+    currentUser: any = null;
+
+    constructor(
+        private router: Router,
+        private authService: AuthService
+    ) {}
+
+    ngOnInit(): void {
+        this.currentUser = this.authService.getCurrentUser();
+    }
+
+    goBack(): void {
+        window.history.back();
+    }
+
+    goToDashboard(): void {
+        this.router.navigate(['/dashboard']);
+    }
+
+    logout(): void {
+        // this.authService.logout().subscribe(() => {
+        //     // Logout will automatically redirect to login page
+        // });
+    }
+}
