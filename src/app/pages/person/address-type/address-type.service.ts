@@ -34,7 +34,7 @@ export class AddressTypeService {
     public loadAddresss() {
         this.loadingSignal.set(true);
         this.http
-            .get<AddressType[]>(this.AddresssUrl)
+            .get<AddressType[]>(this.apiUrl)
             .pipe(
                 tap({
                     next: (data) => {
@@ -49,12 +49,12 @@ export class AddressTypeService {
     }
 
     public getAddresss(): Observable<AddressType[]> {
-        return this.http.get<AddressType[]>(this.AddresssUrl)
+        return this.http.get<AddressType[]>(this.apiUrl)
     }
 
     public addAddresss(address: AddressType) {
         this.http
-            .post<AddressType>(this.AddresssUrl, address)
+            .post<AddressType>(this.apiUrl, address)
             .pipe(tap((data) => console.log(data)))
             .subscribe({
                 next: (newAddress) => {
@@ -67,7 +67,7 @@ export class AddressTypeService {
     }
 
     public updateAddresss(address: AddressType) {
-        this.http.put<AddressType>(this.AddresssUrl, address).subscribe({
+        this.http.put<AddressType>(this.apiUrl, address).subscribe({
             next: (updatedAddress) => {
                 this.addresssSignal.update((address) => address.map((x) => (x.addressTypeId === updatedAddress.addressTypeId ? updatedAddress : x)));
             },
@@ -79,7 +79,7 @@ export class AddressTypeService {
 
     deleteAddresss(addressTypeId: number) {
         this.loadingSignal.set(true);
-        this.http.delete<Address>(`${this.AddresssUrl}/${addressTypeId}`).subscribe({
+        this.http.delete<Address>(`${this.apiUrl}/${addressTypeId}`).subscribe({
             next: () => {
                 this.addresssSignal.update((addresss) => addresss.filter((x) => x.addressTypeId !== addressTypeId));
             },
