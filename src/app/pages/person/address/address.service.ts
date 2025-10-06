@@ -10,7 +10,7 @@ import { Address } from '../../../core/models/address.model';
     providedIn: 'root'
 })
 export class AddressService {
-    private AddresssUrl = environment.personBaseURL + 'address';
+    private apiUrl = environment.personBaseURL + 'address';
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
 
