@@ -29,4 +29,4 @@ import { AppFloatingConfigurator } from '../../../layout/component/app.floatingc
             </div>
         </div>`
 })
-export class Error {}
+export class ErrorComponent {}
