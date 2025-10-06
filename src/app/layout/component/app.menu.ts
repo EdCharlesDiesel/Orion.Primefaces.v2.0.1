@@ -31,12 +31,12 @@ export class AppMenu {
                 items: [
                     {
                         label: 'Products',
-                        icon: 'pi pi-fw pi-',
-                        routerLink: ['/human-resources/departments']
+                        icon: 'pi pi-fw pi-save',
+                        routerLink: ['/store/product-list']
                     },
                     {
                         label: 'Today Special',
-                        icon: 'pi pi-fw pi-bookmark',
+                        icon: 'pi pi-fw pi-sparkles',
                         routerLink: ['/human-resources/departments']
                     }
                 ]
@@ -100,6 +100,11 @@ export class AppMenu {
                                 label: 'Address Type',
                                 icon: 'pi pi-fw pi-bookmark',
                                 routerLink: ['/person/address-type']
+                            },
+                            {
+                                label: 'Business-Entity',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/business-entity']
                             }
                         ]
                     }

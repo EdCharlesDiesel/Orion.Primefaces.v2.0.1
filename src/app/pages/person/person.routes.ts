@@ -6,7 +6,6 @@ import { AddressTypeComponent } from './address-type/address-type.component';
 export default [
     { path: 'addresses', data: { breadcrumb: 'Button' }, component: AddressComponent },
     { path: 'address-type', data: { breadcrumb: 'Button' }, component: AddressTypeComponent },
-    // { path: 'business-entity', data: { breadcrumb: 'Button' }, component: BusinessEntityComponent },
     // { path: 'business-entity-address', data: { breadcrumb: 'Button' }, component: BusinessEntityAddressComponent },
     // { path: 'business-entity-contact', data: { breadcrumb: 'Button' }, component: BusinessEntityContactComponent },
     // { path: 'contact-type', data: { breadcrumb: 'Button' }, component: ContactTypeComponent },

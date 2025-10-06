@@ -10,7 +10,7 @@ import { Address } from '../../../core/models/address.model';
     providedIn: 'root'
 })
 export class AddressService {
-    private AddresssUrl = environment.personBaseURL + 'address';
+    private apiUrl = environment.personBaseURL + 'address';
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
 
@@ -33,7 +33,7 @@ export class AddressService {
     public loadAddresss() {
         this.loadingSignal.set(true);
         this.http
-            .get<Address[]>(this.AddresssUrl)
+            .get<Address[]>(this.apiUrl)
             .pipe(
                 tap({
                     next: (data) => {
@@ -48,12 +48,12 @@ export class AddressService {
     }
 
     public getAddresss(): Observable<Address[]> {
-        return this.http.get<Address[]>(this.AddresssUrl)
+        return this.http.get<Address[]>(this.apiUrl)
     }
 
     public addAddresss(address: Address) {
         this.http
-            .post<Address>(this.AddresssUrl, address)
+            .post<Address>(this.apiUrl, address)
             .pipe(tap((data) => console.log(data)))
             .subscribe({
                 next: (newAddress) => {
@@ -66,7 +66,7 @@ export class AddressService {
     }
 
     public updateAddresss(address: Address) {
-        this.http.put<Address>(this.AddresssUrl, address).subscribe({
+        this.http.put<Address>(this.apiUrl, address).subscribe({
             next: (updatedAddress) => {
                 this.addresssSignal.update((address) => address.map((x) => (x.addressID === updatedAddress.addressID ? updatedAddress : x)));
             },
@@ -78,7 +78,7 @@ export class AddressService {
 
     deleteAddresss(addressID: number) {
         this.loadingSignal.set(true);
-        this.http.delete<Address>(`${this.AddresssUrl}/${addressID}`).subscribe({
+        this.http.delete<Address>(`${this.apiUrl}/${addressID}`).subscribe({
             next: () => {
                 this.addresssSignal.update((addresss) => addresss.filter((x) => x.addressID !== addressID));
             },
