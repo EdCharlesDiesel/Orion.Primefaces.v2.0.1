@@ -10,7 +10,7 @@ import { AppFloatingConfigurator } from '../../../layout/component/app.floatingc
 import { Subject } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { takeUntil } from 'rxjs/operators';
-import { AuthService } from '../../authentication/services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Toast } from 'primeng/toast';
 import { Card } from 'primeng/card';
 import { Divider } from 'primeng/divider';

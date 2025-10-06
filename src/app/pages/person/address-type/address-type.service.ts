@@ -11,7 +11,7 @@ import { AddressType } from '../../../core/models/address-type.model';
     providedIn: 'root'
 })
 export class AddressTypeService {
-    private AddresssUrl = environment.personBaseURL + 'AddressTypes';
+    private apiUrl = environment.personBaseURL + 'AddressTypes';
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
 
