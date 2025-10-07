@@ -10,9 +10,9 @@ import { NgIf } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Address } from '../../../core/models/address.model';
-import { BusinessEntityService } from './business-entity.service';
+import { BusinessEntityContactService } from './business-entity-contact.service';
 import { tap } from 'rxjs';
+import { BusinessEntityContact } from '../../../core/models/business-entity-contact.model';
 
 
 interface Column {
@@ -27,7 +27,7 @@ interface ExportColumn {
 }
 
 @Component({
-    selector: 'app-addresss',
+    selector: 'app-business-entity-contact',
     standalone: true,
     imports: [
         Button,
@@ -41,17 +41,17 @@ interface ExportColumn {
         TableModule,
         Toolbar
     ],
-    templateUrl: 'address.component.html',
-    providers: [MessageService, BusinessEntityService, ConfirmationService]
+    templateUrl: 'business-entity-contact.component.html',
+    providers: [MessageService, BusinessEntityContactService, ConfirmationService]
 })
-export class BusinessEntityComponent implements OnInit {
-    addressDialog: boolean = false;
+export class BusinessEntityContactComponent implements OnInit {
+    businessEntityContactDialog: boolean = false;
 
-    addresss = signal<Address[]>([]);
+    businessEntityContacts = signal<BusinessEntityContact[]>([]);
 
-    address!: Address;
+    businessEntityContact!: BusinessEntityContact;
 
-    selectedAddresss!: Address[] | null;
+    selectedBusinessEntityContacts!: BusinessEntityContact[] | null;
 
     submitted: boolean = false;
 
@@ -64,7 +64,7 @@ export class BusinessEntityComponent implements OnInit {
     cols!: Column[];
 
     constructor(
-        private addressService: BusinessEntityService,
+        private businessEntityContactService: BusinessEntityContactService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -78,14 +78,14 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     loadDemoData() {
-        this.addressService.getAddresss().pipe(
+        this.businessEntityContactService.getBusinessEntityContact().pipe(
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data) => {
-            this.addresss.set(data);
+            this.businessEntityContacts.set(data);
             });
 
         this.cols = [
-            { field: 'Address ID', header: 'Code', customExportHeader: 'Address Code' },
+            { field: 'BusinessEntityContact ID', header: 'Code', customExportHeader: 'BusinessEntityContact Code' },
             { field: 'Name', header: 'Name' },
             { field: 'GroupName', header: 'Group Name' },
             { field: 'ModifiedDate', header: 'Modified Date' },
@@ -99,38 +99,34 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public openNew() {
-        this.address = {
-            addressID : 0,
-            addressLine1 : "",
-            addressLine2 :"",
-            city :"",
-            stateProvinceID :0,
-            postalCode :"",
-            spatialLocation: "",
+        this.businessEntityContact = {
+            businessEntityID : 0,
+            contactTypeID: 0,
             rowguid: "",
+            personID: 0,
             modifiedDate: new Date(),
         };
         this.submitted = false;
-        this.addressDialog = true;
+        this.businessEntityContactDialog = true;
     }
 
-    public editAddress(address: Address) {
-        this.address = { ...address };
-        this.addressDialog = true;
+    public editBusinessEntityContact(businessEntityContact: BusinessEntityContact) {
+        this.businessEntityContact = { ...businessEntityContact };
+        this.businessEntityContactDialog = true;
     }
 
-    public deleteSelectedAddresss() {
+    public deleteSelectedBusinessEntityContacts() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected addresss?',
+            message: 'Are you sure you want to delete the selected businessEntityContacts?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => !this.selectedAddresss?.includes(val)));
-                this.selectedAddresss = null;
+                this.businessEntityContacts.set(this.businessEntityContacts().filter((val) => !this.selectedBusinessEntityContacts?.includes(val)));
+                this.selectedBusinessEntityContacts = null;
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Addresss Deleted',
+                    detail: 'BusinessEntityContacts Deleted',
                     life: 3000
                 });
             }
@@ -138,21 +134,21 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public hideDialog() {
-        this.addressDialog = false;
+        this.businessEntityContactDialog = false;
         this.submitted = false;
     }
 
-    public deleteAddress(address: Address) {
+    public deleteBusinessEntityContact(businessEntityContact: BusinessEntityContact) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + address.addressID + '?',
+            message: 'Are you sure you want to delete ' + businessEntityContact.businessEntityID + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => val.addressID !== address.addressID));
+                this.businessEntityContacts.set(this.businessEntityContacts().filter((val) => val.businessEntityID !== businessEntityContact.businessEntityID));
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Deleted',
+                    detail: 'BusinessEntityContact Deleted',
                     life: 3000
                 });
             }
@@ -161,8 +157,8 @@ export class BusinessEntityComponent implements OnInit {
 
     private findIndexById(id: number): number {
         let index = -1;
-        for (let i = 0; i < this.addresss().length; i++) {
-            if (this.addresss()[i].addressID === id) {
+        for (let i = 0; i < this.businessEntityContacts().length; i++) {
+            if (this.businessEntityContacts()[i].businessEntityID === id) {
                 index = i;
                 break;
             }
@@ -189,32 +185,32 @@ export class BusinessEntityComponent implements OnInit {
         }
     }
 
-    public saveAddress() {
+    public saveBusinessEntityContact() {
         this.submitted = true;
-        let _addresss = this.addresss();
-        if (this.address.addressLine1?.trim()) {
-            if (this.address.addressID) {
-                _addresss[this.findIndexById(this.address.addressID)] = this.address;
-                this.addresss.set([..._addresss]);
+        let _businessEntityContacts = this.businessEntityContacts();
+        if (this.businessEntityContact.contactTypeID) {
+            if (this.businessEntityContact.businessEntityID) {
+                _businessEntityContacts[this.findIndexById(this.businessEntityContact.businessEntityID)] = this.businessEntityContact;
+                this.businessEntityContacts.set([..._businessEntityContacts]);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Updated',
+                    detail: 'BusinessEntityContact Updated',
                     life: 3000
                 });
             } else {
-                this.address.addressID = this.createId();
-                this.addressService.addAddresss(this.address);
+                this.businessEntityContact.businessEntityID = this.createId();
+                this.businessEntityContactService.addBusinessEntityContact(this.businessEntityContact);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Created',
+                    detail: 'BusinessEntityContact Created',
                     life: 3000
                 });
-                this.addresss.set([..._addresss, this.address]);
+                this.businessEntityContacts.set([..._businessEntityContacts, this.businessEntityContact]);
             }
 
-            this.addressDialog = false;
+            this.businessEntityContactDialog = false;
         }
     }
 }

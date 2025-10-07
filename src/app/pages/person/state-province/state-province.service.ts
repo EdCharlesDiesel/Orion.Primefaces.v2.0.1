@@ -2,41 +2,41 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorService } from '../../../shared/http-error.service';
-import { BusinessEntity } from '../../../core/models/business-entity.model';
 import { Observable, tap } from 'rxjs';
+import { StateProvince } from '../../../core/models/state-province.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class BusinessEntityService {
-    private apiUrl = environment.personBaseURL + 'businessEntity';
+export class StateProvinceService {
+    private apiUrl = environment.personBaseURL + 'stateProvince';
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
 
     //Signal state
-    private businessEntitysSignal = signal<BusinessEntity[]>([]);
+    private stateProvincesSignal = signal<StateProvince[]>([]);
     private loadingSignal = signal<boolean>(false);
     private errorSignal = signal<string | null>(null);
 
     //public computed signals
-    businessEntitysComputed = computed(() => this.businessEntitysSignal);
+    stateProvincesComputed = computed(() => this.stateProvincesSignal);
     isLoadingComputed = computed(() => this.loadingSignal);
     errorComputed = computed(() => this.errorSignal);
 
     // constructor() {
     //   effect(() => {
-    //     console.log('BusinessEntity changes: ', this.businessEntitysComputed)
+    //     console.log('StateProvince changes: ', this.stateProvincesComputed)
     //   });
     // }
 
-    public loadBusinessEntity() {
+    public loadStateProvince() {
         this.loadingSignal.set(true);
         this.http
-            .get<BusinessEntity[]>(this.BusinessEntityUrl)
+            .get<StateProvince[]>(this.apiUrl)
             .pipe(
                 tap({
                     next: (data) => {
-                        this.businessEntitysSignal.set(data);
+                        this.stateProvincesSignal.set(data);
                         this.errorSignal.set(null);
                     },
                     error: (err) => this.errorSignal.set(err.message),
@@ -46,17 +46,17 @@ export class BusinessEntityService {
             ).subscribe();
     }
 
-    public getBusinessEntity(): Observable<BusinessEntity[]> {
-        return this.http.get<BusinessEntity[]>(this.BusinessEntityUrl)
+    public getStateProvince(): Observable<StateProvince[]> {
+        return this.http.get<StateProvince[]>(this.apiUrl)
     }
 
-    public addBusinessEntity(businessEntity: BusinessEntity) {
+    public addStateProvince(stateProvince: StateProvince) {
         this.http
-            .post<BusinessEntity>(this.BusinessEntityUrl, businessEntity)
+            .post<StateProvince>(this.apiUrl, stateProvince)
             .pipe(tap((data) => console.log(data)))
             .subscribe({
-                next: (newBusinessEntity) => {
-                    this.businessEntitysSignal.update((businessEntitysComputed) => [...businessEntitysComputed, newBusinessEntity]);
+                next: (newStateProvince) => {
+                    this.stateProvincesSignal.update((stateProvincesComputed) => [...stateProvincesComputed, newStateProvince]);
                 },
                 error: (err: any) => {
                     this.errorSignal.set(err.message);
@@ -64,10 +64,10 @@ export class BusinessEntityService {
             });
     }
 
-    public updateBusinessEntity(businessEntity: BusinessEntity) {
-        this.http.put<BusinessEntity>(this.BusinessEntityUrl, businessEntity).subscribe({
-            next: (updatedBusinessEntity) => {
-                this.businessEntitysSignal.update((businessEntity) => businessEntity.map((x) => (x.businessEntityID === updatedBusinessEntity.businessEntityID ? updatedBusinessEntity : x)));
+    public updateStateProvince(stateProvince: StateProvince) {
+        this.http.put<StateProvince>(this.apiUrl, stateProvince).subscribe({
+            next: (updatedStateProvince) => {
+                this.stateProvincesSignal.update((stateProvince) => stateProvince.map((x) => (x.stateProvinceID === updatedStateProvince.stateProvinceID ? updatedStateProvince : x)));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);
@@ -75,11 +75,11 @@ export class BusinessEntityService {
         });
     }
 
-    deleteBusinessEntity(businessEntityID: number) {
+    deleteStateProvince(stateProvinceID: number) {
         this.loadingSignal.set(true);
-        this.http.delete<BusinessEntity>(`${this.BusinessEntityUrl}/${businessEntityID}`).subscribe({
+        this.http.delete<StateProvince>(`${this.apiUrl}/${stateProvinceID}`).subscribe({
             next: () => {
-                this.businessEntitysSignal.update((businessEntitys) => businessEntitys.filter((x) => x.businessEntityID !== businessEntityID));
+                this.stateProvincesSignal.update((stateProvinces) => stateProvinces.filter((x) => x.stateProvinceID !== stateProvinceID));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);

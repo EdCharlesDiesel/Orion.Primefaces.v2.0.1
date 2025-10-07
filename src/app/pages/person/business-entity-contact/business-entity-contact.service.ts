@@ -4,11 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { HttpErrorService } from '../../../shared/http-error.service';
 import { BusinessEntity } from '../../../core/models/business-entity.model';
 import { Observable, tap } from 'rxjs';
+import { BusinessEntityContact } from '../../../core/models/business-entity-contact.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class BusinessEntityService {
+export class BusinessEntityContactService {
     private apiUrl = environment.personBaseURL + 'businessEntity';
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
@@ -32,7 +33,7 @@ export class BusinessEntityService {
     public loadBusinessEntity() {
         this.loadingSignal.set(true);
         this.http
-            .get<BusinessEntity[]>(this.BusinessEntityUrl)
+            .get<BusinessEntity[]>(this.apiUrl)
             .pipe(
                 tap({
                     next: (data) => {
@@ -46,13 +47,13 @@ export class BusinessEntityService {
             ).subscribe();
     }
 
-    public getBusinessEntity(): Observable<BusinessEntity[]> {
-        return this.http.get<BusinessEntity[]>(this.BusinessEntityUrl)
+    public getBusinessEntityContact(): Observable<BusinessEntityContact[]> {
+        return this.http.get<BusinessEntityContact[]>(this.apiUrl)
     }
 
-    public addBusinessEntity(businessEntity: BusinessEntity) {
+    public addBusinessEntityContact(businessEntity: BusinessEntityContact) {
         this.http
-            .post<BusinessEntity>(this.BusinessEntityUrl, businessEntity)
+            .post<BusinessEntityContact>(this.apiUrl, businessEntity)
             .pipe(tap((data) => console.log(data)))
             .subscribe({
                 next: (newBusinessEntity) => {
@@ -64,8 +65,8 @@ export class BusinessEntityService {
             });
     }
 
-    public updateBusinessEntity(businessEntity: BusinessEntity) {
-        this.http.put<BusinessEntity>(this.BusinessEntityUrl, businessEntity).subscribe({
+    public updateBusinessEntityContact(businessEntity: BusinessEntityContact) {
+        this.http.put<BusinessEntityContact>(this.apiUrl, businessEntity).subscribe({
             next: (updatedBusinessEntity) => {
                 this.businessEntitysSignal.update((businessEntity) => businessEntity.map((x) => (x.businessEntityID === updatedBusinessEntity.businessEntityID ? updatedBusinessEntity : x)));
             },
@@ -75,9 +76,9 @@ export class BusinessEntityService {
         });
     }
 
-    deleteBusinessEntity(businessEntityID: number) {
+    deleteBusinessEntityContact(businessEntityID: number) {
         this.loadingSignal.set(true);
-        this.http.delete<BusinessEntity>(`${this.BusinessEntityUrl}/${businessEntityID}`).subscribe({
+        this.http.delete<BusinessEntity>(`${this.apiUrl}/${businessEntityID}`).subscribe({
             next: () => {
                 this.businessEntitysSignal.update((businessEntitys) => businessEntitys.filter((x) => x.businessEntityID !== businessEntityID));
             },

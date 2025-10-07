@@ -10,10 +10,9 @@ import { NgIf } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Address } from '../../../core/models/address.model';
-import { BusinessEntityService } from './business-entity.service';
+import { ContactTypeService } from './contact-type.service';
+import { ContactType } from '../../../core/models/contact-type.model';
 import { tap } from 'rxjs';
-
 
 interface Column {
     field: string;
@@ -27,7 +26,7 @@ interface ExportColumn {
 }
 
 @Component({
-    selector: 'app-addresss',
+    selector: 'app-contact-type',
     standalone: true,
     imports: [
         Button,
@@ -41,17 +40,17 @@ interface ExportColumn {
         TableModule,
         Toolbar
     ],
-    templateUrl: 'address.component.html',
-    providers: [MessageService, BusinessEntityService, ConfirmationService]
+    templateUrl: 'contact-type.component.html',
+    providers: [MessageService, ContactTypeService, ConfirmationService]
 })
-export class BusinessEntityComponent implements OnInit {
-    addressDialog: boolean = false;
+export class ContactTypeComponent implements OnInit {
+    contactTypeDialog: boolean = false;
 
-    addresss = signal<Address[]>([]);
+    contactTypes = signal<ContactType[]>([]);
 
-    address!: Address;
+    contactType!: ContactType;
 
-    selectedAddresss!: Address[] | null;
+    selectedContactTypes!: ContactType[] | null;
 
     submitted: boolean = false;
 
@@ -64,7 +63,7 @@ export class BusinessEntityComponent implements OnInit {
     cols!: Column[];
 
     constructor(
-        private addressService: BusinessEntityService,
+        private contactTypeService: ContactTypeService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -78,14 +77,14 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     loadDemoData() {
-        this.addressService.getAddresss().pipe(
+        this.contactTypeService.getContactType().pipe(
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data) => {
-            this.addresss.set(data);
+            this.contactTypes.set(data);
             });
 
         this.cols = [
-            { field: 'Address ID', header: 'Code', customExportHeader: 'Address Code' },
+            { field: 'ContactType ID', header: 'Code', customExportHeader: 'ContactType Code' },
             { field: 'Name', header: 'Name' },
             { field: 'GroupName', header: 'Group Name' },
             { field: 'ModifiedDate', header: 'Modified Date' },
@@ -99,38 +98,33 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public openNew() {
-        this.address = {
-            addressID : 0,
-            addressLine1 : "",
-            addressLine2 :"",
-            city :"",
-            stateProvinceID :0,
-            postalCode :"",
-            spatialLocation: "",
-            rowguid: "",
+        this.contactType = {
+            contactTypeID : 0,
+            name:"",
+            businessEntityContact: [],
             modifiedDate: new Date(),
         };
         this.submitted = false;
-        this.addressDialog = true;
+        this.contactTypeDialog = true;
     }
 
-    public editAddress(address: Address) {
-        this.address = { ...address };
-        this.addressDialog = true;
+    public editContactType(contactType: ContactType) {
+        this.contactType = { ...contactType };
+        this.contactTypeDialog = true;
     }
 
-    public deleteSelectedAddresss() {
+    public deleteSelectedContactTypes() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected addresss?',
+            message: 'Are you sure you want to delete the selected contactTypes?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => !this.selectedAddresss?.includes(val)));
-                this.selectedAddresss = null;
+                this.contactTypes.set(this.contactTypes().filter((val) => !this.selectedContactTypes?.includes(val)));
+                this.selectedContactTypes = null;
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Addresss Deleted',
+                    detail: 'ContactTypes Deleted',
                     life: 3000
                 });
             }
@@ -138,21 +132,21 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public hideDialog() {
-        this.addressDialog = false;
+        this.contactTypeDialog = false;
         this.submitted = false;
     }
 
-    public deleteAddress(address: Address) {
+    public deleteContactType(contactType: ContactType) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + address.addressID + '?',
+            message: 'Are you sure you want to delete ' + contactType.contactTypeID + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => val.addressID !== address.addressID));
+                this.contactTypes.set(this.contactTypes().filter((val) => val.contactTypeID !== contactType.contactTypeID));
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Deleted',
+                    detail: 'ContactType Deleted',
                     life: 3000
                 });
             }
@@ -161,8 +155,8 @@ export class BusinessEntityComponent implements OnInit {
 
     private findIndexById(id: number): number {
         let index = -1;
-        for (let i = 0; i < this.addresss().length; i++) {
-            if (this.addresss()[i].addressID === id) {
+        for (let i = 0; i < this.contactTypes().length; i++) {
+            if (this.contactTypes()[i].contactTypeID === id) {
                 index = i;
                 break;
             }
@@ -189,32 +183,32 @@ export class BusinessEntityComponent implements OnInit {
         }
     }
 
-    public saveAddress() {
+    public saveContactType() {
         this.submitted = true;
-        let _addresss = this.addresss();
-        if (this.address.addressLine1?.trim()) {
-            if (this.address.addressID) {
-                _addresss[this.findIndexById(this.address.addressID)] = this.address;
-                this.addresss.set([..._addresss]);
+        let _contactTypes = this.contactTypes();
+        if (this.contactType.name?.trim()) {
+            if (this.contactType.contactTypeID) {
+                _contactTypes[this.findIndexById(this.contactType.contactTypeID)] = this.contactType;
+                this.contactTypes.set([..._contactTypes]);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Updated',
+                    detail: 'ContactType Updated',
                     life: 3000
                 });
             } else {
-                this.address.addressID = this.createId();
-                this.addressService.addAddresss(this.address);
+                this.contactType.contactTypeID = this.createId();
+                this.contactTypeService.addContactType(this.contactType);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Created',
+                    detail: 'ContactType Created',
                     life: 3000
                 });
-                this.addresss.set([..._addresss, this.address]);
+                this.contactTypes.set([..._contactTypes, this.contactType]);
             }
 
-            this.addressDialog = false;
+            this.contactTypeDialog = false;
         }
     }
 }

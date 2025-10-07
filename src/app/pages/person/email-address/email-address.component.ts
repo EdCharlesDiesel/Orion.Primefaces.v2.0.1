@@ -11,8 +11,9 @@ import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Address } from '../../../core/models/address.model';
-import { BusinessEntityService } from './business-entity.service';
+import { EmailAddressService } from './email-address.service';
 import { tap } from 'rxjs';
+import { EmailAddress } from '../../../core/models/email-address.model';
 
 
 interface Column {
@@ -27,7 +28,7 @@ interface ExportColumn {
 }
 
 @Component({
-    selector: 'app-addresss',
+    selector: 'app-email-address',
     standalone: true,
     imports: [
         Button,
@@ -41,17 +42,17 @@ interface ExportColumn {
         TableModule,
         Toolbar
     ],
-    templateUrl: 'address.component.html',
-    providers: [MessageService, BusinessEntityService, ConfirmationService]
+    templateUrl: 'email-address.component.html',
+    providers: [MessageService, EmailAddressService, ConfirmationService]
 })
-export class BusinessEntityComponent implements OnInit {
-    addressDialog: boolean = false;
+export class EmailAddressComponent implements OnInit {
+    emailAddressDialog: boolean = false;
 
-    addresss = signal<Address[]>([]);
+    emailAddresses = signal<EmailAddress[]>([]);
 
-    address!: Address;
+    emailAddress!: EmailAddress;
 
-    selectedAddresss!: Address[] | null;
+    selectedEmailAddresses!: EmailAddress[] | null;
 
     submitted: boolean = false;
 
@@ -64,7 +65,7 @@ export class BusinessEntityComponent implements OnInit {
     cols!: Column[];
 
     constructor(
-        private addressService: BusinessEntityService,
+        private emailAddressService: EmailAddressService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -78,10 +79,10 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     loadDemoData() {
-        this.addressService.getAddresss().pipe(
+        this.emailAddressService.getEmailAddress().pipe(
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data) => {
-            this.addresss.set(data);
+            this.emailAddresses.set(data);
             });
 
         this.cols = [
@@ -99,34 +100,30 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public openNew() {
-        this.address = {
-            addressID : 0,
-            addressLine1 : "",
-            addressLine2 :"",
-            city :"",
-            stateProvinceID :0,
-            postalCode :"",
-            spatialLocation: "",
-            rowguid: "",
-            modifiedDate: new Date(),
+        this.emailAddress = {
+            rowguid: '',
+            emailAddressID: 0,
+            personalEmailAddress: "",
+            businessEntityID: 0,
+            modifiedDate: new Date()
         };
         this.submitted = false;
-        this.addressDialog = true;
+        this.emailAddressDialog = true;
     }
 
-    public editAddress(address: Address) {
-        this.address = { ...address };
-        this.addressDialog = true;
+    public editEmailAddress(emailAddress: EmailAddress) {
+        this.emailAddress = { ...emailAddress };
+        this.emailAddressDialog = true;
     }
 
-    public deleteSelectedAddresss() {
+    public deleteSelectedEmailAddress() {
         this.confirmationService.confirm({
             message: 'Are you sure you want to delete the selected addresss?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => !this.selectedAddresss?.includes(val)));
-                this.selectedAddresss = null;
+                this.emailAddresses.set(this.emailAddresses().filter((val) => !this.selectedEmailAddresses?.includes(val)));
+                this.selectedEmailAddresses = null;
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -138,17 +135,17 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public hideDialog() {
-        this.addressDialog = false;
+        this.emailAddressDialog = false;
         this.submitted = false;
     }
 
-    public deleteAddress(address: Address) {
+    public deleteEmailAddress(emailAddress: EmailAddress) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + address.addressID + '?',
+            message: 'Are you sure you want to delete ' + emailAddress.personalEmailAddress + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => val.addressID !== address.addressID));
+                this.emailAddresses.set(this.emailAddresses().filter((val) => val.emailAddressID !== emailAddress.emailAddressID));
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -161,8 +158,8 @@ export class BusinessEntityComponent implements OnInit {
 
     private findIndexById(id: number): number {
         let index = -1;
-        for (let i = 0; i < this.addresss().length; i++) {
-            if (this.addresss()[i].addressID === id) {
+        for (let i = 0; i < this.emailAddresses().length; i++) {
+            if (this.emailAddresses()[i].emailAddressID === id) {
                 index = i;
                 break;
             }
@@ -189,13 +186,13 @@ export class BusinessEntityComponent implements OnInit {
         }
     }
 
-    public saveAddress() {
+    public saveEmailAddress() {
         this.submitted = true;
-        let _addresss = this.addresss();
-        if (this.address.addressLine1?.trim()) {
-            if (this.address.addressID) {
-                _addresss[this.findIndexById(this.address.addressID)] = this.address;
-                this.addresss.set([..._addresss]);
+        let _emailAddress = this.emailAddresses();
+        if (this.emailAddress.personalEmailAddress?.trim()) {
+            if (this.emailAddress.emailAddressID) {
+                _emailAddress[this.findIndexById(this.emailAddress.emailAddressID)] = this.emailAddress;
+                this.emailAddresses.set([..._emailAddress]);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -203,18 +200,18 @@ export class BusinessEntityComponent implements OnInit {
                     life: 3000
                 });
             } else {
-                this.address.addressID = this.createId();
-                this.addressService.addAddresss(this.address);
+                this.emailAddress.emailAddressID = this.createId();
+                this.emailAddressService.addEmailAddress(this.emailAddress);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
                     detail: 'Address Created',
                     life: 3000
                 });
-                this.addresss.set([..._addresss, this.address]);
+                this.emailAddresses.set([..._emailAddress, this.emailAddress]);
             }
 
-            this.addressDialog = false;
+            this.emailAddressDialog = false;
         }
     }
 }

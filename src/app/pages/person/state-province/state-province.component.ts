@@ -10,9 +10,9 @@ import { NgIf } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Address } from '../../../core/models/address.model';
-import { BusinessEntityService } from './business-entity.service';
+import { StateProvinceService } from './state-province.service';
 import { tap } from 'rxjs';
+import { StateProvince } from '../../../core/models/state-province.model';
 
 
 interface Column {
@@ -27,7 +27,7 @@ interface ExportColumn {
 }
 
 @Component({
-    selector: 'app-addresss',
+    selector: 'app-state-province',
     standalone: true,
     imports: [
         Button,
@@ -41,17 +41,17 @@ interface ExportColumn {
         TableModule,
         Toolbar
     ],
-    templateUrl: 'address.component.html',
-    providers: [MessageService, BusinessEntityService, ConfirmationService]
+    templateUrl: 'state-province.component.html',
+    providers: [MessageService, StateProvinceService, ConfirmationService]
 })
-export class BusinessEntityComponent implements OnInit {
-    addressDialog: boolean = false;
+export class StateProvinceComponent implements OnInit {
+    stateProvinceDialog: boolean = false;
 
-    addresss = signal<Address[]>([]);
+    stateProvinces = signal<StateProvince[]>([]);
 
-    address!: Address;
+    stateProvince!: StateProvince;
 
-    selectedAddresss!: Address[] | null;
+    selectedStateProvinces!: StateProvince[] | null;
 
     submitted: boolean = false;
 
@@ -64,7 +64,7 @@ export class BusinessEntityComponent implements OnInit {
     cols!: Column[];
 
     constructor(
-        private addressService: BusinessEntityService,
+        private stateProvinceService: StateProvinceService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -78,14 +78,14 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     loadDemoData() {
-        this.addressService.getAddresss().pipe(
+        this.stateProvinceService.getStateProvince().pipe(
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data) => {
-            this.addresss.set(data);
+            this.stateProvinces.set(data);
             });
 
         this.cols = [
-            { field: 'Address ID', header: 'Code', customExportHeader: 'Address Code' },
+            { field: 'StateProvince ID', header: 'Code', customExportHeader: 'StateProvince Code' },
             { field: 'Name', header: 'Name' },
             { field: 'GroupName', header: 'Group Name' },
             { field: 'ModifiedDate', header: 'Modified Date' },
@@ -99,38 +99,37 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public openNew() {
-        this.address = {
-            addressID : 0,
-            addressLine1 : "",
-            addressLine2 :"",
-            city :"",
-            stateProvinceID :0,
-            postalCode :"",
-            spatialLocation: "",
+        this.stateProvince = {
+            stateProvinceID : 0,
+            stateProvinceCode: "",
+            countryRegionCode: "",
+            isOnlyStateProvinceFlag:false,
+            name: "",
+            territoryID: 0,
             rowguid: "",
             modifiedDate: new Date(),
         };
         this.submitted = false;
-        this.addressDialog = true;
+        this.stateProvinceDialog = true;
     }
 
-    public editAddress(address: Address) {
-        this.address = { ...address };
-        this.addressDialog = true;
+    public editStateProvince(stateProvince: StateProvince) {
+        this.stateProvince = { ...stateProvince };
+        this.stateProvinceDialog = true;
     }
 
-    public deleteSelectedAddresss() {
+    public deleteSelectedStateProvinces() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected addresss?',
+            message: 'Are you sure you want to delete the selected stateProvinces?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => !this.selectedAddresss?.includes(val)));
-                this.selectedAddresss = null;
+                this.stateProvinces.set(this.stateProvinces().filter((val) => !this.selectedStateProvinces?.includes(val)));
+                this.selectedStateProvinces = null;
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Addresss Deleted',
+                    detail: 'StateProvinces Deleted',
                     life: 3000
                 });
             }
@@ -138,21 +137,21 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public hideDialog() {
-        this.addressDialog = false;
+        this.stateProvinceDialog = false;
         this.submitted = false;
     }
 
-    public deleteAddress(address: Address) {
+    public deleteStateProvince(stateProvince: StateProvince) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + address.addressID + '?',
+            message: 'Are you sure you want to delete ' + stateProvince.stateProvinceID + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => val.addressID !== address.addressID));
+                this.stateProvinces.set(this.stateProvinces().filter((val) => val.stateProvinceID !== stateProvince.stateProvinceID));
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Deleted',
+                    detail: 'StateProvince Deleted',
                     life: 3000
                 });
             }
@@ -161,8 +160,8 @@ export class BusinessEntityComponent implements OnInit {
 
     private findIndexById(id: number): number {
         let index = -1;
-        for (let i = 0; i < this.addresss().length; i++) {
-            if (this.addresss()[i].addressID === id) {
+        for (let i = 0; i < this.stateProvinces().length; i++) {
+            if (this.stateProvinces()[i].stateProvinceID === id) {
                 index = i;
                 break;
             }
@@ -189,32 +188,32 @@ export class BusinessEntityComponent implements OnInit {
         }
     }
 
-    public saveAddress() {
+    public saveStateProvince() {
         this.submitted = true;
-        let _addresss = this.addresss();
-        if (this.address.addressLine1?.trim()) {
-            if (this.address.addressID) {
-                _addresss[this.findIndexById(this.address.addressID)] = this.address;
-                this.addresss.set([..._addresss]);
+        let _stateProvinces = this.stateProvinces();
+        if (this.stateProvince.name?.trim()) {
+            if (this.stateProvince.stateProvinceID) {
+                _stateProvinces[this.findIndexById(this.stateProvince.stateProvinceID)] = this.stateProvince;
+                this.stateProvinces.set([..._stateProvinces]);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Updated',
+                    detail: 'StateProvince Updated',
                     life: 3000
                 });
             } else {
-                this.address.addressID = this.createId();
-                this.addressService.addAddresss(this.address);
+                this.stateProvince.stateProvinceID = this.createId();
+                this.stateProvinceService.addStateProvince(this.stateProvince);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Created',
+                    detail: 'StateProvince Created',
                     life: 3000
                 });
-                this.addresss.set([..._addresss, this.address]);
+                this.stateProvinces.set([..._stateProvinces, this.stateProvince]);
             }
 
-            this.addressDialog = false;
+            this.stateProvinceDialog = false;
         }
     }
 }

@@ -10,8 +10,8 @@ import { NgIf } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Address } from '../../../core/models/address.model';
-import { BusinessEntityService } from './business-entity.service';
+import { Person } from '../../../core/models/person.model';
+import { PersonService } from './person.service';
 import { tap } from 'rxjs';
 
 
@@ -27,7 +27,7 @@ interface ExportColumn {
 }
 
 @Component({
-    selector: 'app-addresss',
+    selector: 'app-person',
     standalone: true,
     imports: [
         Button,
@@ -41,17 +41,17 @@ interface ExportColumn {
         TableModule,
         Toolbar
     ],
-    templateUrl: 'address.component.html',
-    providers: [MessageService, BusinessEntityService, ConfirmationService]
+    templateUrl: 'person.component.html',
+    providers: [MessageService, PersonService, ConfirmationService]
 })
-export class BusinessEntityComponent implements OnInit {
-    addressDialog: boolean = false;
+export class PersonComponent implements OnInit {
+    personDialog: boolean = false;
 
-    addresss = signal<Address[]>([]);
+    persons = signal<Person[]>([]);
 
-    address!: Address;
+    person!: Person;
 
-    selectedAddresss!: Address[] | null;
+    selectedPersons!: Person[] | null;
 
     submitted: boolean = false;
 
@@ -64,7 +64,7 @@ export class BusinessEntityComponent implements OnInit {
     cols!: Column[];
 
     constructor(
-        private addressService: BusinessEntityService,
+        private personService: PersonService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -78,14 +78,14 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     loadDemoData() {
-        this.addressService.getAddresss().pipe(
+        this.personService.getPersons().pipe(
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data) => {
-            this.addresss.set(data);
+            this.persons.set(data);
             });
 
         this.cols = [
-            { field: 'Address ID', header: 'Code', customExportHeader: 'Address Code' },
+            { field: 'Person ID', header: 'Code', customExportHeader: 'Person Code' },
             { field: 'Name', header: 'Name' },
             { field: 'GroupName', header: 'Group Name' },
             { field: 'ModifiedDate', header: 'Modified Date' },
@@ -99,38 +99,44 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public openNew() {
-        this.address = {
-            addressID : 0,
-            addressLine1 : "",
-            addressLine2 :"",
-            city :"",
-            stateProvinceID :0,
-            postalCode :"",
-            spatialLocation: "",
+        this.person = {
+            businessEntityID : 0,
+            firstName: "",
+            lastName: "",
+            title: "",
+            middleName: "",
+            emailPromotion: 1,
             rowguid: "",
+            personType: "",
+            nameStyle: false,
+            suffix: "",
+            demographics: "",
+            additionalContactInfo: "",
+
+
             modifiedDate: new Date(),
         };
         this.submitted = false;
-        this.addressDialog = true;
+        this.personDialog = true;
     }
 
-    public editAddress(address: Address) {
-        this.address = { ...address };
-        this.addressDialog = true;
+    public editPerson(person: Person) {
+        this.person = { ...person };
+        this.personDialog = true;
     }
 
-    public deleteSelectedAddresss() {
+    public deleteSelectedPersons() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected addresss?',
+            message: 'Are you sure you want to delete the selected person?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => !this.selectedAddresss?.includes(val)));
-                this.selectedAddresss = null;
+                this.persons.set(this.persons().filter((val) => !this.selectedPersons?.includes(val)));
+                this.selectedPersons = null;
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Addresss Deleted',
+                    detail: 'Persons Deleted',
                     life: 3000
                 });
             }
@@ -138,21 +144,21 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public hideDialog() {
-        this.addressDialog = false;
+        this.personDialog = false;
         this.submitted = false;
     }
 
-    public deleteAddress(address: Address) {
+    public deletePerson(person: Person) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + address.addressID + '?',
+            message: 'Are you sure you want to delete ' + person.businessEntityID + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => val.addressID !== address.addressID));
+                this.persons.set(this.persons().filter((val) => val.businessEntityID !== person.businessEntityID));
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Deleted',
+                    detail: 'Person Deleted',
                     life: 3000
                 });
             }
@@ -161,8 +167,8 @@ export class BusinessEntityComponent implements OnInit {
 
     private findIndexById(id: number): number {
         let index = -1;
-        for (let i = 0; i < this.addresss().length; i++) {
-            if (this.addresss()[i].addressID === id) {
+        for (let i = 0; i < this.persons().length; i++) {
+            if (this.persons()[i].businessEntityID === id) {
                 index = i;
                 break;
             }
@@ -189,32 +195,32 @@ export class BusinessEntityComponent implements OnInit {
         }
     }
 
-    public saveAddress() {
+    public savePerson() {
         this.submitted = true;
-        let _addresss = this.addresss();
-        if (this.address.addressLine1?.trim()) {
-            if (this.address.addressID) {
-                _addresss[this.findIndexById(this.address.addressID)] = this.address;
-                this.addresss.set([..._addresss]);
+        let _person = this.persons();
+        if (this.person.firstName?.trim()) {
+            if (this.person.businessEntityID) {
+                _person[this.findIndexById(this.person.businessEntityID)] = this.person;
+                this.persons.set([..._person]);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Updated',
+                    detail: 'Person Updated',
                     life: 3000
                 });
             } else {
-                this.address.addressID = this.createId();
-                this.addressService.addAddresss(this.address);
+                this.person.businessEntityID = this.createId();
+                this.personService.addPerson(this.person);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Created',
+                    detail: 'Person Created',
                     life: 3000
                 });
-                this.addresss.set([..._addresss, this.address]);
+                this.persons.set([..._person, this.person]);
             }
 
-            this.addressDialog = false;
+            this.personDialog = false;
         }
     }
 }

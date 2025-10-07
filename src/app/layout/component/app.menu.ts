@@ -102,9 +102,48 @@ export class AppMenu {
                                 routerLink: ['/person/address-type']
                             },
                             {
-                                label: 'Business-Entity',
+                                label: 'Business-Entity-Address',
                                 icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/person/business-entity']
+                                routerLink: ['/person/business-entity-address']
+                            },         {
+                                label: 'Business-Entity-Contact',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/business-entity-contact']
+                            },
+                            {
+                                label: 'Contact-Type',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/contact-type']
+                            },
+                            {
+                                label: 'Country-Region',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/country-region']
+                            },
+                            {
+                                label: 'Email Address',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/email-address']
+                            },
+                            {
+                                label: 'Person',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/person']
+                            },
+                            {
+                                label: 'Person-Phone',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/person-phone']
+                            },
+                            {
+                                label: 'Phone-Number-Type',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/phone-number-type']
+                            },
+                            {
+                                label: 'State Province',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/state-province']
                             }
                         ]
                     }

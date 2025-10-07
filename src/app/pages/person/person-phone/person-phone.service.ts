@@ -2,41 +2,41 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorService } from '../../../shared/http-error.service';
-import { BusinessEntity } from '../../../core/models/business-entity.model';
 import { Observable, tap } from 'rxjs';
+import { PersonPhone } from '../../../core/models/person-phone.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class BusinessEntityService {
-    private apiUrl = environment.personBaseURL+ 'businessEntity';
+export class PersonPhoneService {
+    private apiUrl = environment.personBaseURL + 'personPhone';
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
 
     //Signal state
-    private businessEntitysSignal = signal<BusinessEntity[]>([]);
+    private personPhonesSignal = signal<PersonPhone[]>([]);
     private loadingSignal = signal<boolean>(false);
     private errorSignal = signal<string | null>(null);
 
     //public computed signals
-    businessEntitysComputed = computed(() => this.businessEntitysSignal);
+    personPhonesComputed = computed(() => this.personPhonesSignal);
     isLoadingComputed = computed(() => this.loadingSignal);
     errorComputed = computed(() => this.errorSignal);
 
     // constructor() {
     //   effect(() => {
-    //     console.log('BusinessEntity changes: ', this.businessEntitysComputed)
+    //     console.log('PersonPhone changes: ', this.personPhonesComputed)
     //   });
     // }
 
-    public loadBusinessEntity() {
+    public loadPersonPhone() {
         this.loadingSignal.set(true);
         this.http
-            .get<BusinessEntity[]>(this.BusinessEntityUrl)
+            .get<PersonPhone[]>(this.apiUrl)
             .pipe(
                 tap({
                     next: (data) => {
-                        this.businessEntitysSignal.set(data);
+                        this.personPhonesSignal.set(data);
                         this.errorSignal.set(null);
                     },
                     error: (err) => this.errorSignal.set(err.message),
@@ -46,17 +46,17 @@ export class BusinessEntityService {
             ).subscribe();
     }
 
-    public getBusinessEntity(): Observable<BusinessEntity[]> {
-        return this.http.get<BusinessEntity[]>(this.BusinessEntityUrl)
+    public getPersonPhones(): Observable<PersonPhone[]> {
+        return this.http.get<PersonPhone[]>(this.apiUrl)
     }
 
-    public addBusinessEntity(businessEntity: BusinessEntity) {
+    public addPersonPhone(personPhone: PersonPhone) {
         this.http
-            .post<BusinessEntity>(this.BusinessEntityUrl, businessEntity)
+            .post<PersonPhone>(this.apiUrl, personPhone)
             .pipe(tap((data) => console.log(data)))
             .subscribe({
-                next: (newBusinessEntity) => {
-                    this.businessEntitysSignal.update((businessEntitysComputed) => [...businessEntitysComputed, newBusinessEntity]);
+                next: (newPersonPhone) => {
+                    this.personPhonesSignal.update((personPhonesComputed) => [...personPhonesComputed, newPersonPhone]);
                 },
                 error: (err: any) => {
                     this.errorSignal.set(err.message);
@@ -64,10 +64,10 @@ export class BusinessEntityService {
             });
     }
 
-    public updateBusinessEntity(businessEntity: BusinessEntity) {
-        this.http.put<BusinessEntity>(this.BusinessEntityUrl, businessEntity).subscribe({
-            next: (updatedBusinessEntity) => {
-                this.businessEntitysSignal.update((businessEntity) => businessEntity.map((x) => (x.businessEntityID === updatedBusinessEntity.businessEntityID ? updatedBusinessEntity : x)));
+    public updatePersonPhone(personPhone: PersonPhone) {
+        this.http.put<PersonPhone>(this.apiUrl, personPhone).subscribe({
+            next: (updatedPersonPhone) => {
+                this.personPhonesSignal.update((personPhone) => personPhone.map((x) => (x.businessEntityID === updatedPersonPhone.businessEntityID ? updatedPersonPhone : x)));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);
@@ -75,11 +75,11 @@ export class BusinessEntityService {
         });
     }
 
-    deleteBusinessEntity(businessEntityID: number) {
+    deletePersonPhone(personPhoneID: number) {
         this.loadingSignal.set(true);
-        this.http.delete<BusinessEntity>(`${this.BusinessEntityUrl}/${businessEntityID}`).subscribe({
+        this.http.delete<PersonPhone>(`${this.apiUrl}/${personPhoneID}`).subscribe({
             next: () => {
-                this.businessEntitysSignal.update((businessEntitys) => businessEntitys.filter((x) => x.businessEntityID !== businessEntityID));
+                this.personPhonesSignal.update((personPhones) => personPhones.filter((x) => x.businessEntityID !== personPhoneID));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);

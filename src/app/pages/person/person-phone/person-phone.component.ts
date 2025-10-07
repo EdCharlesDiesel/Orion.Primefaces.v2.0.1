@@ -10,9 +10,9 @@ import { NgIf } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Address } from '../../../core/models/address.model';
-import { BusinessEntityService } from './business-entity.service';
+import { PersonPhoneService } from './person-phone.service';
 import { tap } from 'rxjs';
+import { PersonPhone } from '../../../core/models/person-phone.model';
 
 
 interface Column {
@@ -27,7 +27,7 @@ interface ExportColumn {
 }
 
 @Component({
-    selector: 'app-addresss',
+    selector: 'app-person-phones',
     standalone: true,
     imports: [
         Button,
@@ -41,17 +41,17 @@ interface ExportColumn {
         TableModule,
         Toolbar
     ],
-    templateUrl: 'address.component.html',
-    providers: [MessageService, BusinessEntityService, ConfirmationService]
+    templateUrl: 'person-phone.component.html',
+    providers: [MessageService, PersonPhoneService, ConfirmationService]
 })
-export class BusinessEntityComponent implements OnInit {
-    addressDialog: boolean = false;
+export class PersonPhoneComponent implements OnInit {
+    personPhoneDialog: boolean = false;
 
-    addresss = signal<Address[]>([]);
+    personPhones = signal<PersonPhone[]>([]);
 
-    address!: Address;
+    personPhone!: PersonPhone;
 
-    selectedAddresss!: Address[] | null;
+    selectedPersonPhones!: PersonPhone[] | null;
 
     submitted: boolean = false;
 
@@ -64,7 +64,7 @@ export class BusinessEntityComponent implements OnInit {
     cols!: Column[];
 
     constructor(
-        private addressService: BusinessEntityService,
+        private personPhoneService: PersonPhoneService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -78,14 +78,14 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     loadDemoData() {
-        this.addressService.getAddresss().pipe(
+        this.personPhoneService.getPersonPhones().pipe(
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data) => {
-            this.addresss.set(data);
+            this.personPhones.set(data);
             });
 
         this.cols = [
-            { field: 'Address ID', header: 'Code', customExportHeader: 'Address Code' },
+            { field: 'PersonPhone ID', header: 'Code', customExportHeader: 'PersonPhone Code' },
             { field: 'Name', header: 'Name' },
             { field: 'GroupName', header: 'Group Name' },
             { field: 'ModifiedDate', header: 'Modified Date' },
@@ -99,38 +99,33 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public openNew() {
-        this.address = {
-            addressID : 0,
-            addressLine1 : "",
-            addressLine2 :"",
-            city :"",
-            stateProvinceID :0,
-            postalCode :"",
-            spatialLocation: "",
-            rowguid: "",
+        this.personPhone = {
+            businessEntityID : 0,
+            phoneNumber :"",
+            phoneNumberTypeID :0,
             modifiedDate: new Date(),
         };
         this.submitted = false;
-        this.addressDialog = true;
+        this.personPhoneDialog = true;
     }
 
-    public editAddress(address: Address) {
-        this.address = { ...address };
-        this.addressDialog = true;
+    public editPersonPhone(personPhone: PersonPhone) {
+        this.personPhone = { ...personPhone };
+        this.personPhoneDialog = true;
     }
 
-    public deleteSelectedAddresss() {
+    public deleteSelectedPersonPhones() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected addresss?',
+            message: 'Are you sure you want to delete the selected personPhones?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => !this.selectedAddresss?.includes(val)));
-                this.selectedAddresss = null;
+                this.personPhones.set(this.personPhones().filter((val) => !this.selectedPersonPhones?.includes(val)));
+                this.selectedPersonPhones = null;
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Addresss Deleted',
+                    detail: 'PersonPhones Deleted',
                     life: 3000
                 });
             }
@@ -138,21 +133,21 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public hideDialog() {
-        this.addressDialog = false;
+        this.personPhoneDialog = false;
         this.submitted = false;
     }
 
-    public deleteAddress(address: Address) {
+    public deletePersonPhone(personPhone: PersonPhone) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + address.addressID + '?',
+            message: 'Are you sure you want to delete ' + personPhone.businessEntityID + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => val.addressID !== address.addressID));
+                this.personPhones.set(this.personPhones().filter((val) => val.businessEntityID !== personPhone.businessEntityID));
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Deleted',
+                    detail: 'PersonPhone Deleted',
                     life: 3000
                 });
             }
@@ -161,8 +156,8 @@ export class BusinessEntityComponent implements OnInit {
 
     private findIndexById(id: number): number {
         let index = -1;
-        for (let i = 0; i < this.addresss().length; i++) {
-            if (this.addresss()[i].addressID === id) {
+        for (let i = 0; i < this.personPhones().length; i++) {
+            if (this.personPhones()[i].businessEntityID === id) {
                 index = i;
                 break;
             }
@@ -189,32 +184,32 @@ export class BusinessEntityComponent implements OnInit {
         }
     }
 
-    public saveAddress() {
+    public savePersonPhone() {
         this.submitted = true;
-        let _addresss = this.addresss();
-        if (this.address.addressLine1?.trim()) {
-            if (this.address.addressID) {
-                _addresss[this.findIndexById(this.address.addressID)] = this.address;
-                this.addresss.set([..._addresss]);
+        let _personPhones = this.personPhones();
+        if (this.personPhone.phoneNumber?.trim()) {
+            if (this.personPhone.businessEntityID) {
+                _personPhones[this.findIndexById(this.personPhone.businessEntityID)] = this.personPhone;
+                this.personPhones.set([..._personPhones]);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Updated',
+                    detail: 'PersonPhone Updated',
                     life: 3000
                 });
             } else {
-                this.address.addressID = this.createId();
-                this.addressService.addAddresss(this.address);
+                this.personPhone.businessEntityID = this.createId();
+                this.personPhoneService.addPersonPhone(this.personPhone);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Created',
+                    detail: 'PersonPhone Created',
                     life: 3000
                 });
-                this.addresss.set([..._addresss, this.address]);
+                this.personPhones.set([..._personPhones, this.personPhone]);
             }
 
-            this.addressDialog = false;
+            this.personPhoneDialog = false;
         }
     }
 }

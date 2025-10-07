@@ -1,11 +1,11 @@
 <div class="card">
-    <div class="font-semibold text-xl mb-4">BusinessEntitys</div>
+    <div class="font-semibold text-xl mb-4">State Provinces</div>
 </div>
 
 <p-toolbar styleClass="mb-6">
     <ng-template #start>
         <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
-        <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedBusinessEntitys()" [disabled]="!selectedBusinessEntitys || !selectedBusinessEntitys.length" />
+        <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedStateProvinces()" [disabled]="!selectedStateProvinces || !selectedStateProvinces.length" />
     </ng-template>
 
     <ng-template #end>
@@ -15,22 +15,22 @@
 
 <p-table
     #dt
-    [value]="businessEntity()"
+    [value]="stateProvinces()"
     [rows]="10"
     [columns]="cols"
     [paginator]="true"
     [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
     [tableStyle]="{ 'min-width': '75rem' }"
-    [(selection)]="selectedBusinessEntity"
+    [(selection)]="selectedStateProvinces"
     [rowHover]="true"
     dataKey="id"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} businessEntitys"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} stateProvinces"
     [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[10, 20, 30]"
 >
     <ng-template #caption>
         <div class="flex items-center justify-between">
-            <h5 class="m-0">Manage BusinessEntityes</h5>
+            <h5 class="m-0">Manage State Provinces</h5>
             <p-iconfield>
                 <p-inputicon styleClass="pi pi-search" />
                 <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
@@ -42,7 +42,7 @@
             <th style="width: 3rem">
                 <p-tableHeaderCheckbox />
             </th>
-            <th style="min-width: 16rem">BusinessEntity ID</th>
+            <th style="min-width: 16rem">StateProvince ID</th>
             <th pSortableColumn="name" style="min-width:16rem">
                 Name
                 <p-sortIcon field="Name" />
@@ -58,38 +58,38 @@
             <th style="min-width: 12rem"></th>
         </tr>
     </ng-template>
-    <ng-template #body let-businessEntity>
+    <ng-template #body let-stateProvince>
         <tr>
            <td style="width: 3rem">
-                <p-tableCheckbox [value]="businessEntity" />
+                <p-tableCheckbox [value]="stateProvince" />
           </td>
-           <td style="min-width: 12rem">{{ businessEntity.businessEntityID }}</td>
-            <td style="min-width: 16rem">{{ businessEntity.name }}</td>
-            <td style="min-width: 16rem">{{ businessEntity.groupName }}</td>
-            <td style="min-width: 16rem">{{ businessEntity.modifiedDate }}</td>
+           <td style="min-width: 12rem">{{ stateProvince.stateProvinceID }}</td>
+            <td style="min-width: 16rem">{{ stateProvince.name }}</td>
+            <td style="min-width: 16rem">{{ stateProvince.groupName }}</td>
+            <td style="min-width: 16rem">{{ stateProvince.modifiedDate }}</td>
             <td>
-                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editBusinessEntity(businessEntity)" />
-                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteBusinessEntity(businessEntity)" />
+                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editStateProvince(stateProvince)" />
+                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteStateProvince(stateProvince)" />
             </td>
         </tr>
     </ng-template>
 </p-table>
 
-<p-dialog [(visible)]="businessEntityDialog" [style]="{ width: '450px' }" header="BusinessEntity Details" [modal]="true">
+<p-dialog [(visible)]="stateProvinceDialog" [style]="{ width: '450px' }" header="StateProvince Details" [modal]="true">
     <ng-template #content>
         <div class="flex flex-col gap-6">
 
             <div>
                 <label for="name" class="block font-bold mb-3">Modified Date</label>
-                <input type="text" pInputText id="GroupName" [(ngModel)]="businessEntity.modifiedDate" required autofocus fluid />
-                <small class="text-red-500" *ngIf="submitted && !businessEntity.modifiedDate">ModifiedDate is required.</small>
+                <input type="text" pInputText id="GroupName" [(ngModel)]="stateProvince.modifiedDate" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !stateProvince.modifiedDate">ModifiedDate is required.</small>
             </div>
         </div>
     </ng-template>
 
     <ng-template #footer>
         <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
-        <p-button label="Save" icon="pi pi-check" (click)="saveBusinessEntity()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveStateProvince()" />
     </ng-template>
 </p-dialog>
 

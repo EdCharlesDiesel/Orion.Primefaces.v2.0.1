@@ -2,41 +2,41 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorService } from '../../../shared/http-error.service';
-import { BusinessEntity } from '../../../core/models/business-entity.model';
 import { Observable, tap } from 'rxjs';
+import { CountryRegion } from '../../../core/models/country-region.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class BusinessEntityService {
-    private apiUrl = environment.personBaseURL + 'businessEntity';
+export class CountryRegionService {
+    private apiUrl = environment.personBaseURL + 'countryRegion';
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
 
     //Signal state
-    private businessEntitysSignal = signal<BusinessEntity[]>([]);
+    private countryRegionsSignal = signal<CountryRegion[]>([]);
     private loadingSignal = signal<boolean>(false);
     private errorSignal = signal<string | null>(null);
 
     //public computed signals
-    businessEntitysComputed = computed(() => this.businessEntitysSignal);
+    countryRegionsComputed = computed(() => this.countryRegionsSignal);
     isLoadingComputed = computed(() => this.loadingSignal);
     errorComputed = computed(() => this.errorSignal);
 
     // constructor() {
     //   effect(() => {
-    //     console.log('BusinessEntity changes: ', this.businessEntitysComputed)
+    //     console.log('CountryRegion changes: ', this.countryRegionsComputed)
     //   });
     // }
 
-    public loadBusinessEntity() {
+    public loadCountryRegion() {
         this.loadingSignal.set(true);
         this.http
-            .get<BusinessEntity[]>(this.BusinessEntityUrl)
+            .get<CountryRegion[]>(this.apiUrl)
             .pipe(
                 tap({
                     next: (data) => {
-                        this.businessEntitysSignal.set(data);
+                        this.countryRegionsSignal.set(data);
                         this.errorSignal.set(null);
                     },
                     error: (err) => this.errorSignal.set(err.message),
@@ -46,17 +46,17 @@ export class BusinessEntityService {
             ).subscribe();
     }
 
-    public getBusinessEntity(): Observable<BusinessEntity[]> {
-        return this.http.get<BusinessEntity[]>(this.BusinessEntityUrl)
+    public getCountryRegion(): Observable<CountryRegion[]> {
+        return this.http.get<CountryRegion[]>(this.apiUrl)
     }
 
-    public addBusinessEntity(businessEntity: BusinessEntity) {
+    public addCountryRegion(countryRegion: CountryRegion) {
         this.http
-            .post<BusinessEntity>(this.BusinessEntityUrl, businessEntity)
+            .post<CountryRegion>(this.apiUrl, countryRegion)
             .pipe(tap((data) => console.log(data)))
             .subscribe({
-                next: (newBusinessEntity) => {
-                    this.businessEntitysSignal.update((businessEntitysComputed) => [...businessEntitysComputed, newBusinessEntity]);
+                next: (newCountryRegion) => {
+                    this.countryRegionsSignal.update((countryRegionsComputed) => [...countryRegionsComputed, newCountryRegion]);
                 },
                 error: (err: any) => {
                     this.errorSignal.set(err.message);
@@ -64,10 +64,10 @@ export class BusinessEntityService {
             });
     }
 
-    public updateBusinessEntity(businessEntity: BusinessEntity) {
-        this.http.put<BusinessEntity>(this.BusinessEntityUrl, businessEntity).subscribe({
-            next: (updatedBusinessEntity) => {
-                this.businessEntitysSignal.update((businessEntity) => businessEntity.map((x) => (x.businessEntityID === updatedBusinessEntity.businessEntityID ? updatedBusinessEntity : x)));
+    public updateCountryRegion(countryRegion: CountryRegion) {
+        this.http.put<CountryRegion>(this.apiUrl, countryRegion).subscribe({
+            next: (updatedCountryRegion) => {
+                this.countryRegionsSignal.update((countryRegion) => countryRegion.map((x) => (x.countryRegionCode === updatedCountryRegion.countryRegionCode ? updatedCountryRegion : x)));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);
@@ -75,11 +75,11 @@ export class BusinessEntityService {
         });
     }
 
-    deleteBusinessEntity(businessEntityID: number) {
+    deleteCountryRegion(countryRegionCode: string) {
         this.loadingSignal.set(true);
-        this.http.delete<BusinessEntity>(`${this.BusinessEntityUrl}/${businessEntityID}`).subscribe({
+        this.http.delete<CountryRegion>(`${this.apiUrl}/${countryRegionCode}`).subscribe({
             next: () => {
-                this.businessEntitysSignal.update((businessEntitys) => businessEntitys.filter((x) => x.businessEntityID !== businessEntityID));
+                this.countryRegionsSignal.update((countryRegions) => countryRegions.filter((x) => x.countryRegionCode !== countryRegionCode));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);

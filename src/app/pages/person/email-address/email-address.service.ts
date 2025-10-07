@@ -2,41 +2,41 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorService } from '../../../shared/http-error.service';
-import { BusinessEntity } from '../../../core/models/business-entity.model';
 import { Observable, tap } from 'rxjs';
+import { EmailAddress } from '../../../core/models/email-address.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class BusinessEntityService {
-    private apiUrl = environment.personBaseURL + 'businessEntity';
+export class EmailAddressService {
+    private apiUrl = environment.personBaseURL + 'emailAddress';
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
 
     //Signal state
-    private businessEntitysSignal = signal<BusinessEntity[]>([]);
+    private emailAddresssSignal = signal<EmailAddress[]>([]);
     private loadingSignal = signal<boolean>(false);
     private errorSignal = signal<string | null>(null);
 
     //public computed signals
-    businessEntitysComputed = computed(() => this.businessEntitysSignal);
+    emailAddresssComputed = computed(() => this.emailAddresssSignal);
     isLoadingComputed = computed(() => this.loadingSignal);
     errorComputed = computed(() => this.errorSignal);
 
     // constructor() {
     //   effect(() => {
-    //     console.log('BusinessEntity changes: ', this.businessEntitysComputed)
+    //     console.log('EmailAddress changes: ', this.emailAddresssComputed)
     //   });
     // }
 
-    public loadBusinessEntity() {
+    public loadEmailAddress() {
         this.loadingSignal.set(true);
         this.http
-            .get<BusinessEntity[]>(this.BusinessEntityUrl)
+            .get<EmailAddress[]>(this.apiUrl)
             .pipe(
                 tap({
                     next: (data) => {
-                        this.businessEntitysSignal.set(data);
+                        this.emailAddresssSignal.set(data);
                         this.errorSignal.set(null);
                     },
                     error: (err) => this.errorSignal.set(err.message),
@@ -46,17 +46,17 @@ export class BusinessEntityService {
             ).subscribe();
     }
 
-    public getBusinessEntity(): Observable<BusinessEntity[]> {
-        return this.http.get<BusinessEntity[]>(this.BusinessEntityUrl)
+    public getEmailAddress(): Observable<EmailAddress[]> {
+        return this.http.get<EmailAddress[]>(this.apiUrl)
     }
 
-    public addBusinessEntity(businessEntity: BusinessEntity) {
+    public addEmailAddress(emailAddress: EmailAddress) {
         this.http
-            .post<BusinessEntity>(this.BusinessEntityUrl, businessEntity)
+            .post<EmailAddress>(this.apiUrl, emailAddress)
             .pipe(tap((data) => console.log(data)))
             .subscribe({
-                next: (newBusinessEntity) => {
-                    this.businessEntitysSignal.update((businessEntitysComputed) => [...businessEntitysComputed, newBusinessEntity]);
+                next: (newEmailAddress) => {
+                    this.emailAddresssSignal.update((emailAddresssComputed) => [...emailAddresssComputed, newEmailAddress]);
                 },
                 error: (err: any) => {
                     this.errorSignal.set(err.message);
@@ -64,10 +64,10 @@ export class BusinessEntityService {
             });
     }
 
-    public updateBusinessEntity(businessEntity: BusinessEntity) {
-        this.http.put<BusinessEntity>(this.BusinessEntityUrl, businessEntity).subscribe({
-            next: (updatedBusinessEntity) => {
-                this.businessEntitysSignal.update((businessEntity) => businessEntity.map((x) => (x.businessEntityID === updatedBusinessEntity.businessEntityID ? updatedBusinessEntity : x)));
+    public updateEmailAddress(emailAddress: EmailAddress) {
+        this.http.put<EmailAddress>(this.apiUrl, emailAddress).subscribe({
+            next: (updatedEmailAddress) => {
+                this.emailAddresssSignal.update((emailAddress) => emailAddress.map((x) => (x.emailAddressID === updatedEmailAddress.emailAddressID ? updatedEmailAddress : x)));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);
@@ -75,11 +75,11 @@ export class BusinessEntityService {
         });
     }
 
-    deleteBusinessEntity(businessEntityID: number) {
+    deleteEmailAddress(emailAddressID: number) {
         this.loadingSignal.set(true);
-        this.http.delete<BusinessEntity>(`${this.BusinessEntityUrl}/${businessEntityID}`).subscribe({
+        this.http.delete<EmailAddress>(`${this.apiUrl}/${emailAddressID}`).subscribe({
             next: () => {
-                this.businessEntitysSignal.update((businessEntitys) => businessEntitys.filter((x) => x.businessEntityID !== businessEntityID));
+                this.emailAddresssSignal.update((emailAddresss) => emailAddresss.filter((x) => x.emailAddressID !== emailAddressID));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);

@@ -10,9 +10,9 @@ import { NgIf } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Address } from '../../../core/models/address.model';
-import { BusinessEntityService } from './business-entity.service';
+import { PhoneNumberTypeService } from './phone-number-type.service';
 import { tap } from 'rxjs';
+import { PhoneNumberType } from '../../../core/models/phone-number-type.model';
 
 
 interface Column {
@@ -27,7 +27,7 @@ interface ExportColumn {
 }
 
 @Component({
-    selector: 'app-addresss',
+    selector: 'app-phone-number-Type',
     standalone: true,
     imports: [
         Button,
@@ -41,17 +41,17 @@ interface ExportColumn {
         TableModule,
         Toolbar
     ],
-    templateUrl: 'address.component.html',
-    providers: [MessageService, BusinessEntityService, ConfirmationService]
+    templateUrl: 'phone-number-type.component.html',
+    providers: [MessageService, PhoneNumberTypeService, ConfirmationService]
 })
-export class BusinessEntityComponent implements OnInit {
-    addressDialog: boolean = false;
+export class PhoneNumberTypeComponent implements OnInit {
+    phoneNumberTypeDialog: boolean = false;
 
-    addresss = signal<Address[]>([]);
+    phoneNumberTypes = signal<PhoneNumberType[]>([]);
 
-    address!: Address;
+    phoneNumberType!: PhoneNumberType;
 
-    selectedAddresss!: Address[] | null;
+    selectedPhoneNumberTypes!: PhoneNumberType[] | null;
 
     submitted: boolean = false;
 
@@ -64,7 +64,7 @@ export class BusinessEntityComponent implements OnInit {
     cols!: Column[];
 
     constructor(
-        private addressService: BusinessEntityService,
+        private phoneNumberTypeService: PhoneNumberTypeService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -78,14 +78,14 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     loadDemoData() {
-        this.addressService.getAddresss().pipe(
+        this.phoneNumberTypeService.getPersonNumberTypes().pipe(
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data) => {
-            this.addresss.set(data);
+            this.phoneNumberTypes.set(data);
             });
 
         this.cols = [
-            { field: 'Address ID', header: 'Code', customExportHeader: 'Address Code' },
+            { field: 'PhoneNumberType ID', header: 'Code', customExportHeader: 'PhoneNumberType Code' },
             { field: 'Name', header: 'Name' },
             { field: 'GroupName', header: 'Group Name' },
             { field: 'ModifiedDate', header: 'Modified Date' },
@@ -99,38 +99,33 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public openNew() {
-        this.address = {
-            addressID : 0,
-            addressLine1 : "",
-            addressLine2 :"",
-            city :"",
-            stateProvinceID :0,
-            postalCode :"",
-            spatialLocation: "",
-            rowguid: "",
+        this.phoneNumberType = {
+            name :"",
+            personPhones: [],
+            phoneNumberTypeID : 0,
             modifiedDate: new Date(),
         };
         this.submitted = false;
-        this.addressDialog = true;
+        this.phoneNumberTypeDialog = true;
     }
 
-    public editAddress(address: Address) {
-        this.address = { ...address };
-        this.addressDialog = true;
+    public editPhoneNumberType(phoneNumberType: PhoneNumberType) {
+        this.phoneNumberType = { ...phoneNumberType };
+        this.phoneNumberTypeDialog = true;
     }
 
-    public deleteSelectedAddresss() {
+    public deleteSelectedPhoneNumberTypes() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected addresss?',
+            message: 'Are you sure you want to delete the selected phoneNumberTypes?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => !this.selectedAddresss?.includes(val)));
-                this.selectedAddresss = null;
+                this.phoneNumberTypes.set(this.phoneNumberTypes().filter((val) => !this.selectedPhoneNumberTypes?.includes(val)));
+                this.selectedPhoneNumberTypes = null;
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Addresss Deleted',
+                    detail: 'PhoneNumberTypes Deleted',
                     life: 3000
                 });
             }
@@ -138,21 +133,21 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public hideDialog() {
-        this.addressDialog = false;
+        this.phoneNumberTypeDialog = false;
         this.submitted = false;
     }
 
-    public deleteAddress(address: Address) {
+    public deletePhoneNumberType(phoneNumberType: PhoneNumberType) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + address.addressID + '?',
+            message: 'Are you sure you want to delete ' + phoneNumberType.phoneNumberTypeID + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => val.addressID !== address.addressID));
+                this.phoneNumberTypes.set(this.phoneNumberTypes().filter((val) => val.phoneNumberTypeID !== phoneNumberType.phoneNumberTypeID));
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Deleted',
+                    detail: 'PhoneNumberType Deleted',
                     life: 3000
                 });
             }
@@ -161,8 +156,8 @@ export class BusinessEntityComponent implements OnInit {
 
     private findIndexById(id: number): number {
         let index = -1;
-        for (let i = 0; i < this.addresss().length; i++) {
-            if (this.addresss()[i].addressID === id) {
+        for (let i = 0; i < this.phoneNumberTypes().length; i++) {
+            if (this.phoneNumberTypes()[i].phoneNumberTypeID === id) {
                 index = i;
                 break;
             }
@@ -189,32 +184,32 @@ export class BusinessEntityComponent implements OnInit {
         }
     }
 
-    public saveAddress() {
+    public savePhoneNumberType() {
         this.submitted = true;
-        let _addresss = this.addresss();
-        if (this.address.addressLine1?.trim()) {
-            if (this.address.addressID) {
-                _addresss[this.findIndexById(this.address.addressID)] = this.address;
-                this.addresss.set([..._addresss]);
+        let _phoneNumberTypes = this.phoneNumberTypes();
+        if (this.phoneNumberType.name?.trim()) {
+            if (this.phoneNumberType.phoneNumberTypeID) {
+                _phoneNumberTypes[this.findIndexById(this.phoneNumberType.phoneNumberTypeID)] = this.phoneNumberType;
+                this.phoneNumberTypes.set([..._phoneNumberTypes]);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Updated',
+                    detail: 'PhoneNumberType Updated',
                     life: 3000
                 });
             } else {
-                this.address.addressID = this.createId();
-                this.addressService.addAddresss(this.address);
+                this.phoneNumberType.phoneNumberTypeID = this.createId();
+                this.phoneNumberTypeService.addPersonNumberType(this.phoneNumberType);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Created',
+                    detail: 'PhoneNumberType Created',
                     life: 3000
                 });
-                this.addresss.set([..._addresss, this.address]);
+                this.phoneNumberTypes.set([..._phoneNumberTypes, this.phoneNumberType]);
             }
 
-            this.addressDialog = false;
+            this.phoneNumberTypeDialog = false;
         }
     }
 }

@@ -2,19 +2,19 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { HttpErrorService } from '../../../shared/http-error.service';
-import { BusinessEntity } from '../../../core/models/business-entity.model';
 import { Observable, tap } from 'rxjs';
+import { PhoneNumberType } from '../../../core/models/phone-number-type.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class BusinessEntityService {
-    private apiUrl = environment.personBaseURL + 'businessEntity';
+export class PhoneNumberTypeService {
+    private apiUrl = environment.personBaseURL+ 'businessEntity';
     private http = inject(HttpClient);
     private errorService = inject(HttpErrorService);
 
     //Signal state
-    private businessEntitysSignal = signal<BusinessEntity[]>([]);
+    private businessEntitysSignal = signal<PhoneNumberType[]>([]);
     private loadingSignal = signal<boolean>(false);
     private errorSignal = signal<string | null>(null);
 
@@ -25,14 +25,14 @@ export class BusinessEntityService {
 
     // constructor() {
     //   effect(() => {
-    //     console.log('BusinessEntity changes: ', this.businessEntitysComputed)
+    //     console.log('PersonNumberType changes: ', this.businessEntitysComputed)
     //   });
     // }
 
-    public loadBusinessEntity() {
+    public loadPersonNumberType() {
         this.loadingSignal.set(true);
         this.http
-            .get<BusinessEntity[]>(this.BusinessEntityUrl)
+            .get<PhoneNumberType[]>(this.apiUrl)
             .pipe(
                 tap({
                     next: (data) => {
@@ -46,17 +46,17 @@ export class BusinessEntityService {
             ).subscribe();
     }
 
-    public getBusinessEntity(): Observable<BusinessEntity[]> {
-        return this.http.get<BusinessEntity[]>(this.BusinessEntityUrl)
+    public getPersonNumberTypes(): Observable<PhoneNumberType[]> {
+        return this.http.get<PhoneNumberType[]>(this.apiUrl)
     }
 
-    public addBusinessEntity(businessEntity: BusinessEntity) {
+    public addPersonNumberType(businessEntity: PhoneNumberType) {
         this.http
-            .post<BusinessEntity>(this.BusinessEntityUrl, businessEntity)
+            .post<PhoneNumberType>(this.apiUrl, businessEntity)
             .pipe(tap((data) => console.log(data)))
             .subscribe({
-                next: (newBusinessEntity) => {
-                    this.businessEntitysSignal.update((businessEntitysComputed) => [...businessEntitysComputed, newBusinessEntity]);
+                next: (newPersonNumberType) => {
+                    this.businessEntitysSignal.update((businessEntitysComputed) => [...businessEntitysComputed, newPersonNumberType]);
                 },
                 error: (err: any) => {
                     this.errorSignal.set(err.message);
@@ -64,10 +64,10 @@ export class BusinessEntityService {
             });
     }
 
-    public updateBusinessEntity(businessEntity: BusinessEntity) {
-        this.http.put<BusinessEntity>(this.BusinessEntityUrl, businessEntity).subscribe({
-            next: (updatedBusinessEntity) => {
-                this.businessEntitysSignal.update((businessEntity) => businessEntity.map((x) => (x.businessEntityID === updatedBusinessEntity.businessEntityID ? updatedBusinessEntity : x)));
+    public updatePersonNumberType(businessEntity: PhoneNumberType) {
+        this.http.put<PhoneNumberType>(this.apiUrl, businessEntity).subscribe({
+            next: (updatedPersonNumberType) => {
+                this.businessEntitysSignal.update((businessEntity) => businessEntity.map((x) => (x.phoneNumberTypeID === updatedPersonNumberType.phoneNumberTypeID ? updatedPersonNumberType : x)));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);
@@ -75,11 +75,11 @@ export class BusinessEntityService {
         });
     }
 
-    deleteBusinessEntity(businessEntityID: number) {
+    deletePersonNumberType(phoneNumberTypeID: number) {
         this.loadingSignal.set(true);
-        this.http.delete<BusinessEntity>(`${this.BusinessEntityUrl}/${businessEntityID}`).subscribe({
+        this.http.delete<PhoneNumberType>(`${this.apiUrl}/${phoneNumberTypeID}`).subscribe({
             next: () => {
-                this.businessEntitysSignal.update((businessEntitys) => businessEntitys.filter((x) => x.businessEntityID !== businessEntityID));
+                this.businessEntitysSignal.update((businessEntitys) => businessEntitys.filter((x) => x.phoneNumberTypeID !== phoneNumberTypeID));
             },
             error: (err: any) => {
                 this.errorSignal.set(err.message);

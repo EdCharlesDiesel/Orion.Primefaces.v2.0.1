@@ -10,9 +10,9 @@ import { NgIf } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Address } from '../../../core/models/address.model';
-import { BusinessEntityService } from './business-entity.service';
+import { CountryRegionService } from './country-region.service';
 import { tap } from 'rxjs';
+import { CountryRegion } from '../../../core/models/country-region.model';
 
 
 interface Column {
@@ -27,7 +27,7 @@ interface ExportColumn {
 }
 
 @Component({
-    selector: 'app-addresss',
+    selector: 'app-country-region',
     standalone: true,
     imports: [
         Button,
@@ -41,17 +41,17 @@ interface ExportColumn {
         TableModule,
         Toolbar
     ],
-    templateUrl: 'address.component.html',
-    providers: [MessageService, BusinessEntityService, ConfirmationService]
+    templateUrl: 'country-region.component.html',
+    providers: [MessageService, CountryRegionService, ConfirmationService]
 })
-export class BusinessEntityComponent implements OnInit {
-    addressDialog: boolean = false;
+export class CountryRegionComponent implements OnInit {
+    countryRegionDialog: boolean = false;
 
-    addresss = signal<Address[]>([]);
+    countryRegions = signal<CountryRegion[]>([]);
 
-    address!: Address;
+    countryRegion!: CountryRegion;
 
-    selectedAddresss!: Address[] | null;
+    selectedCountryRegions!: CountryRegion[] | null;
 
     submitted: boolean = false;
 
@@ -64,7 +64,7 @@ export class BusinessEntityComponent implements OnInit {
     cols!: Column[];
 
     constructor(
-        private addressService: BusinessEntityService,
+        private countryRegionService: CountryRegionService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -78,14 +78,14 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     loadDemoData() {
-        this.addressService.getAddresss().pipe(
+        this.countryRegionService.getCountryRegion().pipe(
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data) => {
-            this.addresss.set(data);
+            this.countryRegions.set(data);
             });
 
         this.cols = [
-            { field: 'Address ID', header: 'Code', customExportHeader: 'Address Code' },
+            { field: 'CountryRegion ID', header: 'Code', customExportHeader: 'CountryRegion Code' },
             { field: 'Name', header: 'Name' },
             { field: 'GroupName', header: 'Group Name' },
             { field: 'ModifiedDate', header: 'Modified Date' },
@@ -99,38 +99,32 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public openNew() {
-        this.address = {
-            addressID : 0,
-            addressLine1 : "",
-            addressLine2 :"",
-            city :"",
-            stateProvinceID :0,
-            postalCode :"",
-            spatialLocation: "",
-            rowguid: "",
+        this.countryRegion = {
+            countryRegionCode : "0",
+            name:"",
             modifiedDate: new Date(),
         };
         this.submitted = false;
-        this.addressDialog = true;
+        this.countryRegionDialog = true;
     }
 
-    public editAddress(address: Address) {
-        this.address = { ...address };
-        this.addressDialog = true;
+    public editCountryRegion(countryRegion: CountryRegion) {
+        this.countryRegion = { ...countryRegion };
+        this.countryRegionDialog = true;
     }
 
-    public deleteSelectedAddresss() {
+    public deleteSelectedCountryRegions() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected addresss?',
+            message: 'Are you sure you want to delete the selected countryRegions?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => !this.selectedAddresss?.includes(val)));
-                this.selectedAddresss = null;
+                this.countryRegions.set(this.countryRegions().filter((val) => !this.selectedCountryRegions?.includes(val)));
+                this.selectedCountryRegions = null;
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Addresss Deleted',
+                    detail: 'CountryRegions Deleted',
                     life: 3000
                 });
             }
@@ -138,37 +132,37 @@ export class BusinessEntityComponent implements OnInit {
     }
 
     public hideDialog() {
-        this.addressDialog = false;
+        this.countryRegionDialog = false;
         this.submitted = false;
     }
 
-    public deleteAddress(address: Address) {
+    public deleteCountryRegion(countryRegion: CountryRegion) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + address.addressID + '?',
+            message: 'Are you sure you want to delete ' + countryRegion.countryRegionCode + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.addresss.set(this.addresss().filter((val) => val.addressID !== address.addressID));
+                this.countryRegions.set(this.countryRegions().filter((val) => val.countryRegionCode !== countryRegion.countryRegionCode));
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'Address Deleted',
+                    detail: 'CountryRegion Deleted',
                     life: 3000
                 });
             }
         });
     }
 
-    private findIndexById(id: number): number {
+    private findIndexById(id: string): string {
         let index = -1;
-        for (let i = 0; i < this.addresss().length; i++) {
-            if (this.addresss()[i].addressID === id) {
+        for (let i = 0; i < this.countryRegions().length; i++) {
+            if (this.countryRegions()[i].countryRegionCode === id) {
                 index = i;
                 break;
             }
         }
 
-        return index;
+        return String(index);
     }
 
     private createId(): number {
@@ -189,33 +183,33 @@ export class BusinessEntityComponent implements OnInit {
         }
     }
 
-    public saveAddress() {
+    public saveCountryRegion() {
         this.submitted = true;
-        let _addresss = this.addresss();
-        if (this.address.addressLine1?.trim()) {
-            if (this.address.addressID) {
-                _addresss[this.findIndexById(this.address.addressID)] = this.address;
-                this.addresss.set([..._addresss]);
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Address Updated',
-                    life: 3000
-                });
-            } else {
-                this.address.addressID = this.createId();
-                this.addressService.addAddresss(this.address);
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Address Created',
-                    life: 3000
-                });
-                this.addresss.set([..._addresss, this.address]);
-            }
+        let _countryRegions = this.countryRegions();
+        // if (this.countryRegion.name?.trim()) {
+        //     if (this.countryRegion.countryRegionCode) {
+        //         _countryRegions[this.findIndexById(this.countryRegion.countryRegionCode)] = this.countryRegion;
+        //         this.countryRegions.set([..._countryRegions]);
+        //         this.messageService.add({
+        //             severity: 'success',
+        //             summary: 'Successful',
+        //             detail: 'CountryRegion Updated',
+        //             life: 3000
+        //         });
+        //     } else {
+        //         this.countryRegion.countryRegionCode = this.createId();
+        //         this.countryRegionService.addCountryRegion(this.countryRegion);
+        //         this.messageService.add({
+        //             severity: 'success',
+        //             summary: 'Successful',
+        //             detail: 'CountryRegion Created',
+        //             life: 3000
+        //         });
+        //         this.countryRegions.set([..._countryRegions, this.countryRegion]);
+        //     }
 
-            this.addressDialog = false;
-        }
+          //  this.countryRegionDialog = false;
+    //   }
     }
 }
 
