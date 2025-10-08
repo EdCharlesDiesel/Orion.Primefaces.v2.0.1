@@ -10,10 +10,9 @@ import { NgIf } from '@angular/common';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { CountryRegionCurrencyService } from './country-region-currency.service';
+import { CreditCardService } from './credit-card.service';
 import { tap } from 'rxjs';
-import { StateProvince } from '../../../core/models/state-province.model';
-
+import { CreditCard } from '../../../core/models/credit-card.model';
 
 interface Column {
     field: string;
@@ -27,22 +26,31 @@ interface ExportColumn {
 }
 
 @Component({
-    selector: 'app-country-region-currency',
+    selector: 'app-credit-card',
     standalone: true,
     imports: [
-
+        Button,
+        ConfirmDialog,
+        Dialog,
+        FormsModule,
+        IconField,
+        InputIcon,
+        InputText,
+        NgIf,
+        TableModule,
+        Toolbar
     ],
-    templateUrl: 'state-province.component.html',
-    providers: [MessageService, CountryRegionCurrencyService, ConfirmationService]
+    templateUrl: 'credit-card.component.html',
+    providers: [MessageService, CreditCardService, ConfirmationService]
 })
-export class CountryRegionCurrencyComponent implements OnInit {
-    stateProvinceDialog: boolean = false;
+export class CreditCardComponent implements OnInit {
+    creditCardDialog: boolean = false;
 
-    stateProvinces = signal<StateProvince[]>([]);
+    creditCards = signal<CreditCard[]>([]);
 
-    stateProvince!: StateProvince;
+    creditCard!: CreditCard;
 
-    selectedStateProvinces!: StateProvince[] | null;
+    selectedCreditCards!: CreditCard[] | null;
 
     submitted: boolean = false;
 
@@ -55,7 +63,7 @@ export class CountryRegionCurrencyComponent implements OnInit {
     cols!: Column[];
 
     constructor(
-        private stateProvinceService: CountryRegionCurrencyService,
+        private creditCardService: CreditCardService,
         private messageService: MessageService,
         private confirmationService: ConfirmationService
     ) {}
@@ -69,14 +77,14 @@ export class CountryRegionCurrencyComponent implements OnInit {
     }
 
     loadDemoData() {
-        this.stateProvinceService.getStateProvince().pipe(
+        this.creditCardService.getCreditCard().pipe(
             tap((p) => console.log(JSON.stringify(p))),
         ).subscribe((data) => {
-            this.stateProvinces.set(data);
+            this.creditCards.set(data);
             });
 
         this.cols = [
-            { field: 'StateProvince ID', header: 'Code', customExportHeader: 'StateProvince Code' },
+            { field: 'CreditCard ID', header: 'Code', customExportHeader: 'CreditCard Code' },
             { field: 'Name', header: 'Name' },
             { field: 'GroupName', header: 'Group Name' },
             { field: 'ModifiedDate', header: 'Modified Date' },
@@ -90,37 +98,35 @@ export class CountryRegionCurrencyComponent implements OnInit {
     }
 
     public openNew() {
-        this.stateProvince = {
-            stateProvinceID : 0,
-            stateProvinceCode: "",
-            countryRegionCode: "",
-            isOnlyStateProvinceFlag:false,
-            name: "",
-            territoryID: 0,
-            rowguid: "",
+        this.creditCard = {
+            creditCardID : 0,
+            cardNumber: "0",
+            cardType: "",
+            expMonth: 0,
+            expYear: 0,
             modifiedDate: new Date(),
         };
         this.submitted = false;
-        this.stateProvinceDialog = true;
+        this.creditCardDialog = true;
     }
 
-    public editStateProvince(stateProvince: StateProvince) {
-        this.stateProvince = { ...stateProvince };
-        this.stateProvinceDialog = true;
+    public editCreditCard(creditCard: CreditCard) {
+        this.creditCard = { ...creditCard };
+        this.creditCardDialog = true;
     }
 
-    public deleteSelectedStateProvinces() {
+    public deleteSelectedCreditCards() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected stateProvinces?',
+            message: 'Are you sure you want to delete the selected creditCards?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.stateProvinces.set(this.stateProvinces().filter((val) => !this.selectedStateProvinces?.includes(val)));
-                this.selectedStateProvinces = null;
+                this.creditCards.set(this.creditCards().filter((val) => !this.selectedCreditCards?.includes(val)));
+                this.selectedCreditCards = null;
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'StateProvinces Deleted',
+                    detail: 'CreditCards Deleted',
                     life: 3000
                 });
             }
@@ -128,21 +134,21 @@ export class CountryRegionCurrencyComponent implements OnInit {
     }
 
     public hideDialog() {
-        this.stateProvinceDialog = false;
+        this.creditCardDialog = false;
         this.submitted = false;
     }
 
-    public deleteStateProvince(stateProvince: StateProvince) {
+    public deleteCreditCard(creditCard: CreditCard) {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + stateProvince.stateProvinceID + '?',
+            message: 'Are you sure you want to delete ' + creditCard.creditCardID + '?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                this.stateProvinces.set(this.stateProvinces().filter((val) => val.stateProvinceID !== stateProvince.stateProvinceID));
+                this.creditCards.set(this.creditCards().filter((val) => val.creditCardID !== creditCard.creditCardID));
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'StateProvince Deleted',
+                    detail: 'CreditCard Deleted',
                     life: 3000
                 });
             }
@@ -151,8 +157,8 @@ export class CountryRegionCurrencyComponent implements OnInit {
 
     private findIndexById(id: number): number {
         let index = -1;
-        for (let i = 0; i < this.stateProvinces().length; i++) {
-            if (this.stateProvinces()[i].stateProvinceID === id) {
+        for (let i = 0; i < this.creditCards().length; i++) {
+            if (this.creditCards()[i].creditCardID === id) {
                 index = i;
                 break;
             }
@@ -179,32 +185,32 @@ export class CountryRegionCurrencyComponent implements OnInit {
         }
     }
 
-    public saveStateProvince() {
+    public saveCreditCard() {
         this.submitted = true;
-        let _stateProvinces = this.stateProvinces();
-        if (this.stateProvince.name?.trim()) {
-            if (this.stateProvince.stateProvinceID) {
-                _stateProvinces[this.findIndexById(this.stateProvince.stateProvinceID)] = this.stateProvince;
-                this.stateProvinces.set([..._stateProvinces]);
+        let _creditCards = this.creditCards();
+        if (this.creditCard.cardNumber?.trim()) {
+            if (this.creditCard.creditCardID) {
+                _creditCards[this.findIndexById(this.creditCard.creditCardID)] = this.creditCard;
+                this.creditCards.set([..._creditCards]);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'StateProvince Updated',
+                    detail: 'CreditCard Updated',
                     life: 3000
                 });
             } else {
-                this.stateProvince.stateProvinceID = this.createId();
-                this.stateProvinceService.addStateProvince(this.stateProvince);
+                this.creditCard.creditCardID = this.createId();
+                this.creditCardService.addCreditCard(this.creditCard);
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
-                    detail: 'StateProvince Created',
+                    detail: 'CreditCard Created',
                     life: 3000
                 });
-                this.stateProvinces.set([..._stateProvinces, this.stateProvince]);
+                this.creditCards.set([..._creditCards, this.creditCard]);
             }
 
-            this.stateProvinceDialog = false;
+            this.creditCardDialog = false;
         }
     }
 }

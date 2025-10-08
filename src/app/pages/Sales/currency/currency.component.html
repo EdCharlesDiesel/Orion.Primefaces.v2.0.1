@@ -1,0 +1,98 @@
+<p-toolbar styleClass="mb-6">
+    <ng-template #start>
+        <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
+        <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedCurrencys()" [disabled]="!selectedCurrencys || !selectedCurrencys.length" />
+    </ng-template>
+
+    <ng-template #end>
+        <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
+    </ng-template>
+</p-toolbar>
+
+<p-table
+    #dt
+    [value]="currencys()"
+    [rows]="10"
+    [columns]="cols"
+    [paginator]="true"
+    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedCurrencys"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} currencys"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 20, 30]"
+>
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0">Manage Currency's</h5>
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..." />
+            </p-iconfield>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox />
+            </th>
+            <th style="min-width: 16rem">Currency Code</th>
+            <th pSortableColumn="name" style="min-width:16rem">
+                Name
+                <p-sortIcon field="name" />
+            </th>
+            <th pSortableColumn="modifiedDate" style="min-width:16rem">
+                Modified Date
+                <p-sortIcon field="modifiedDate" />
+            </th>
+
+            <th style="min-width: 12rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-currency>
+        <tr>
+            <td style="width: 3rem">
+                <p-tableCheckbox [value]="currency" />
+            </td>
+            <td style="min-width: 12rem">{{ currency.currencyCode }}</td>
+            <td>{{ currency.name }}</td>
+            <td>{{ currency.modifiedDate | date }}</td>
+            <td>
+                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editCurrency(currency)" />
+                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deleteCurrency(currency)" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="currencyDialog" [style]="{ width: '450px',height: '590px' }" header="Currency Details" [modal]="true">
+    <ng-template #content>
+        <div class="flex flex-col gap-6">
+            <div>
+                <label for="name" class="block font-bold mb-3">Currency Code</label>
+                <input type="text" pInputText id="name" [(ngModel)]="currency.currencyCode" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !currency.currencyCode">Currency Code is required.</small>
+            </div>
+
+            <div>
+                <label for="name" class="block font-bold mb-3">Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="currency.name" required autofocus fluid />
+                <small class="text-red-500" *ngIf="submitted && !currency.name">Name is required.</small>
+            </div>
+            <div>
+                <div class="font-semibold text-xl">Modified Date</div>
+                <p-datepicker [showIcon]="true" [showButtonBar]="true" class="p-inputtext-fluid" [(ngModel)]="currency.modifiedDate"></p-datepicker>
+                <small class="text-red-500" *ngIf="submitted && !currency.modifiedDate">Modified Date is required.</small>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #footer>
+        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Save" icon="pi pi-check" (click)="saveCurrency()" />
+    </ng-template>
+</p-dialog>
+
+<p-confirmdialog [style]="{ width: '450px' }" />

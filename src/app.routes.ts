@@ -5,7 +5,6 @@ import { Documentation } from './app/pages/documentation/documentation';
 import { Landing } from './app/pages/landing/landing';
 import { Notfound } from './app/pages/notfound/notfound';
 import { DatabaseLog } from './app/pages/database-log/database-log';
-import { Crud } from './app/pages/crud/crud';
 
 export const appRoutes: Routes = [
     {
@@ -15,6 +14,7 @@ export const appRoutes: Routes = [
             { path: '', component: Dashboard },
             { path: 'human-resources', loadChildren: () => import('./app/pages/human-resources/human-resources.routes') },
             { path: 'person', loadChildren: () => import('./app/pages/person/person.routes') },
+            { path: 'sales', loadChildren: () => import('./app/pages/sales/sales.routes') },
             { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
             { path: 'documentation', component: Documentation },
             { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') },
@@ -22,7 +22,6 @@ export const appRoutes: Routes = [
 
         ]
     },
-    { path: 'crud', component: Crud },
     { path: 'landing', component: Landing },
     { path: 'notfound', component: Notfound },
     // { path: 'auth', loadChildren: () => import('./app/pages/auth/auth.routes') },

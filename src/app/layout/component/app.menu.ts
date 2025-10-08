@@ -146,7 +146,28 @@ export class AppMenu {
                                 routerLink: ['/person/state-province']
                             }
                         ]
-                    }
+                    },
+                    {
+                        label: 'Sales',
+                        icon: 'pi pi-fw pi-bookmark',
+                        items: [
+                            {
+                                label: 'Country Region Currency',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/sales/country-region-currency']
+                            },
+                            {
+                                label: 'Credit Card',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/sales/credit-card']
+                            },
+                            {
+                                label: 'Currencies',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/sales/currency']
+                            }
+                        ]
+                    },
                 ]
             },
             {
@@ -203,7 +224,7 @@ export class AppMenu {
                     {
                         label: 'Crud',
                         icon: 'pi pi-fw pi-pencil',
-                        routerLink: ['/pages/crud']
+                        routerLink: ['/pages/CreateReadUpdateDelete']
                     },
                     {
                         label: 'Not Found',
