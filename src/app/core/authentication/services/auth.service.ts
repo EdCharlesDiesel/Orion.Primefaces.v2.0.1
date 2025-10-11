@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
@@ -34,23 +34,49 @@ export class AuthService {
     private readonly API_URL = '/api/auth'; // Update with your API URL
 
     private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasValidToken());
-    public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-
     private currentUserSubject = new BehaviorSubject<User | null>(this.getStoredUser());
+    public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
     public currentUser$ = this.currentUserSubject.asObservable();
 
     public redirectUrl: string | null = null;
     token: any;
 
+    private loggedInFake = signal<boolean>(false);
+    isLoggedInFake = this.loggedInFake.asReadonly();
+
     constructor(
         private http: HttpClient,
         private router: Router
-    ) {}
+    ) {
+        const stored = localStorage.getItem('isLoggedIn');
+        if (stored === 'true') {
+            this.loggedInFake.set(true);
+        }
+    }
+
+    loginFake(username: string, password: string): boolean {
+        if (username && password) {
+            this.loggedInFake.set(true);
+            localStorage.setItem('isLoggedIn', 'true');
+            return true;
+        }
+        return false;
+    }
+
+    logoutFake(): void {
+        this.loggedInFake.set(false);
+        localStorage.removeItem('isLoggedIn');
+        this.router.navigate(['/login']);
+    }
+
+    getUsernameFake() {
+        return 'guess';
+    }
 
     /**
      * Login user with credentials
      */
-    login(loginData: LoginRequest): Observable<AuthResponse> {
+    public login(loginData: LoginRequest): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(`${this.API_URL}/login`, loginData).pipe(
             tap((response) => this.handleAuthSuccess(response)),
             catchError((error) => {
@@ -256,4 +282,6 @@ export class AuthService {
         localStorage.removeItem(this.REFRESH_TOKEN_KEY);
         localStorage.removeItem(this.USER_KEY);
     }
+
+
 }

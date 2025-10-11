@@ -3,36 +3,27 @@
 
     <div class="login-card-wrapper">
         <p-card class="login-card">
-            <ng-template pTemplate="header">
-                <div class="card-header">
-                    <div class="logo-section">
-                        <i class="pi pi-sign-in logo-icon"></i>
-                        <h2>Welcome Back</h2>
-                    </div>
-                    <p class="subtitle">Sign in to your account</p>
-                </div>
-            </ng-template>
 
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
                 <!-- Email Field -->
+                <br>
                 <div class="form-field">
                     <label for="email" class="field-label">
                         Email Address <span class="required">*</span>
                     </label>
                     <div class="input-wrapper">
-<!--                        <i class="pi pi-envelope input-icon"></i>-->
-<!--                        <p-inputText-->
-<!--                            id="email"-->
-<!--                            formControlName="email"-->
-<!--                            placeholder="Enter your email"-->
-<!--                            class="w-full"-->
-<!--                            [class.ng-invalid]="isFieldInvalid('email')"-->
-<!--                            [class.ng-dirty]="f['email'].dirty">-->
-<!--                        </p-inputText>-->
+                        <i class="pi pi-envelope input-icon"></i>
+                        <p-inputText
+                            id="email"
+                            formControlName="email"
+                            placeholder="Enter your email"
+                            class="w-full"
+                            [class.ng-invalid]="isFieldInvalid('email')"
+                            [class.ng-dirty]="loginFormControls['email'].dirty">
+                        </p-inputText>
 
                         <p-iconfield>
-                            <p-inputicon class="pi pi-user" />
-                            <input pInputText type="text" placeholder="Username" />
+                            <input pInputText type="text" placeholder="Email Address" />
                         </p-iconfield>
                     </div>
                     <small
@@ -56,7 +47,7 @@
                             [feedback]="false"
                             class="w-full"
                             [class.ng-invalid]="isFieldInvalid('password')"
-                            [class.ng-dirty]="f['password'].dirty">
+                            [class.ng-dirty]="loginFormControls['password'].dirty">
                         </p-password>
                     </div>
                     <small
@@ -93,29 +84,6 @@
                         [disabled]="loading"
                         class="w-full login-button">
                     </p-button>
-                </div>
-
-                <!-- Demo Login Buttons (remove in production) -->
-                <div class="demo-section" *ngIf="true"> <!-- Set to false in production -->
-                    <p-divider align="center">
-                        <span class="divider-text">Demo Accounts</span>
-                    </p-divider>
-                    <div class="demo-buttons">
-                        <p-button
-                            type="button"
-                            label="Demo User"
-                            icon="pi pi-user"
-                            class="p-button-outlined demo-button"
-                            (click)="onDemoLogin('user')">
-                        </p-button>
-                        <p-button
-                            type="button"
-                            label="Demo Admin"
-                            icon="pi pi-shield"
-                            class="p-button-outlined demo-button"
-                            (click)="onDemoLogin('admin')">
-                        </p-button>
-                    </div>
                 </div>
 
                 <!-- Divider -->
