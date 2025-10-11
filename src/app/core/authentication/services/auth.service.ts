@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { AuthResponse } from '../../models/auth-response.model';
+import { environment } from '../../../../environments/environment';
 
 interface LoginRequest {
     email: string;
@@ -31,7 +32,7 @@ export class AuthService {
     private readonly TOKEN_KEY = 'auth_token';
     private readonly REFRESH_TOKEN_KEY = 'refresh_token';
     private readonly USER_KEY = 'current_user';
-    private readonly API_URL = '/api/auth'; // Update with your API URL
+    private readonly API_URL = environment.userProfileUrl;
 
     private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasValidToken());
     private currentUserSubject = new BehaviorSubject<User | null>(this.getStoredUser());
@@ -52,25 +53,6 @@ export class AuthService {
         if (stored === 'true') {
             this.loggedInFake.set(true);
         }
-    }
-
-    loginFake(username: string, password: string): boolean {
-        if (username && password) {
-            this.loggedInFake.set(true);
-            localStorage.setItem('isLoggedIn', 'true');
-            return true;
-        }
-        return false;
-    }
-
-    logoutFake(): void {
-        this.loggedInFake.set(false);
-        localStorage.removeItem('isLoggedIn');
-        this.router.navigate(['/login']);
-    }
-
-    getUsernameFake() {
-        return 'guess';
     }
 
     /**

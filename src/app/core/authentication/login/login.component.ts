@@ -85,10 +85,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     onSubmit(): void {
         this.submitted = true;
 
-        if (this.loginForm.invalid) {
-            this.markFormGroupTouched();
-            return;
-        }
+        // if (this.loginForm.invalid) {
+        //     this.markFormGroupTouched();
+        //     return;
+        // }
 
         this.loading = true;
 
