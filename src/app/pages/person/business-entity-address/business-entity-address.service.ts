@@ -33,7 +33,7 @@ export class BusinessEntityAddressService {
     public loadBusinessEntityAddress() {
         this.loadingSignal.set(true);
         this.http
-            .get<BusinessEntityAddress[]>(this.BusinessEntityAddressUrl)
+            .get<BusinessEntityAddress[]>(this.apiUrl)
             .pipe(
                 tap({
                     next: (data) => {
@@ -48,12 +48,12 @@ export class BusinessEntityAddressService {
     }
 
     public getBusinessEntityAddress(): Observable<BusinessEntityAddress[]> {
-        return this.http.get<BusinessEntityAddress[]>(this.BusinessEntityAddressUrl)
+        return this.http.get<BusinessEntityAddress[]>(this.apiUrl)
     }
 
     public addBusinessEntityAddress(businessEntity: BusinessEntityAddress) {
         this.http
-            .post<BusinessEntityAddress>(this.BusinessEntityAddressUrl, businessEntity)
+            .post<BusinessEntityAddress>(this.apiUrl, businessEntity)
             .pipe(tap((data) => console.log(data)))
             .subscribe({
                 next: (newBusinessEntityAddress) => {
@@ -66,7 +66,7 @@ export class BusinessEntityAddressService {
     }
 
     public updateBusinessEntityAddress(businessEntity: BusinessEntityAddress) {
-        this.http.put<BusinessEntityAddress>(this.BusinessEntityAddressUrl, businessEntity).subscribe({
+        this.http.put<BusinessEntityAddress>(this.apiUrl, businessEntity).subscribe({
             next: (updatedBusinessEntityAddress) => {
                 this.businessEntitysSignal.update((businessEntity) => businessEntity.map((x) => (x.businessEntityID === updatedBusinessEntityAddress.businessEntityID ? updatedBusinessEntityAddress : x)));
             },
@@ -78,7 +78,7 @@ export class BusinessEntityAddressService {
 
     deleteBusinessEntityAddress(businessEntityID: number) {
         this.loadingSignal.set(true);
-        this.http.delete<BusinessEntityAddress>(`${this.BusinessEntityAddressUrl}/${businessEntityID}`).subscribe({
+        this.http.delete<BusinessEntityAddress>(`${this.apiUrl}/${businessEntityID}`).subscribe({
             next: () => {
                 this.businessEntitysSignal.update((businessEntitys) => businessEntitys.filter((x) => x.businessEntityID !== businessEntityID));
             },

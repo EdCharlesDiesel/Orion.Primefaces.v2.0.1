@@ -11,17 +11,15 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputText } from 'primeng/inputtext';
 import { AuthService } from '../services/auth.service';
-import { MessageService } from 'primeng/api';
+import { MessageService, PrimeTemplate } from 'primeng/api';
 import { Router } from '@angular/router';
 
-
-class RegisterRequest {}
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
     standalone: true,
-    imports: [Toast, Card, ReactiveFormsModule, Password, Checkbox, Button, Divider, NgIf, IconField, InputIcon, InputText],
+    imports: [Toast, Card, ReactiveFormsModule, Password, Checkbox, Button, Divider, NgIf, IconField, InputText],
     styleUrls: ['./register.component.scss'],
     providers: [AuthService, MessageService]
 })
@@ -134,7 +132,7 @@ export class RegisterComponent implements OnInit {
     }
 
     navigateToLogin(): void {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/auth/login']);
     }
 
     private markFormGroupTouched(): void {
@@ -172,7 +170,5 @@ export class RegisterComponent implements OnInit {
         return displayNames[fieldName] || fieldName;
     }
 
-    onSubmit() {
-
-    }
+    onSubmit() {}
 }

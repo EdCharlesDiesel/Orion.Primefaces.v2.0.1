@@ -3,18 +3,7 @@
 
     <div class="register-card-wrapper">
         <p-card class="register-card">
-            <ng-template pTemplate="header">
-                <div class="card-header">
-                    <div class="logo-section">
-                        <i class="pi pi-user-plus logo-icon"></i>
-                        <h2>Create Account</h2>
-                    </div>
-                    <p class="subtitle">Join us today and get started</p>
-                </div>
-            </ng-template>
-
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
-                Name Field
                 <div class="form-field">
                     <label for="name" class="field-label">
                         Full Name <span class="required">*</span>
@@ -29,7 +18,6 @@
                    </p-inputText>
 
                     <p-iconfield>
-                       <p-inputicon class="pi pi-user" />
                         <input pInputText type="text" placeholder="Full Name " />
                     </p-iconfield>
                     <small
@@ -39,7 +27,6 @@
                     </small>
                 </div>
 
-                Email Field
                 <div class="form-field">
                     <label for="email" class="field-label">
                         Email Address <span class="required">*</span>
@@ -53,7 +40,6 @@
                         [class.ng-dirty]="f['email'].dirty">
                     </p-inputText>
                     <p-iconfield>
-                       <p-inputicon class="pi pi-user" />
                         <input pInputText type="text" placeholder="Email Address" />
                     </p-iconfield>
                     <small
@@ -62,8 +48,6 @@
                         {{ getFieldError('email') }}
                     </small>
                 </div>
-
-                Password Field
                 <div class="form-field">
                     <label for="password" class="field-label">
                         Password <span class="required">*</span>
@@ -91,8 +75,6 @@
                         Password must contain at least 8 characters with uppercase, lowercase, number, and special character
                     </small>
                 </div>
-
-                Confirm Password Field
                 <div class="form-field">
                     <label for="confirmPassword" class="field-label">
                         Confirm Password <span class="required">*</span>
@@ -114,7 +96,6 @@
                     </small>
                 </div>
 
-                Terms and Conditions
                 <div class="form-field">
                     <p-checkbox
                         formControlName="acceptTerms"
@@ -136,7 +117,6 @@
                     </small>
                 </div>
 
-                Submit Button
                 <div class="form-actions">
                     <p-button
                         type="submit"
@@ -147,13 +127,10 @@
                         class="w-full register-button">
                     </p-button>
                 </div>
-
-                Divider
                 <p-divider align="center">
                     <span class="divider-text">or</span>
                 </p-divider>
 
-                Social Registration (Optional)
                 <div class="social-buttons">
                     <p-button
                         type="button"
@@ -163,8 +140,6 @@
                         >
                     </p-button>
                 </div>
-
-                Login Link
                 <div class="login-link">
                     <span>Already have an account? </span>
                     <a (click)="navigateToLogin()" class="link">Sign in here</a>

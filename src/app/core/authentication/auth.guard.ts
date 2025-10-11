@@ -23,30 +23,18 @@
 //         private authService: AuthService,
 //         private router: Router
 //     ) {}
-//
-//     /**
-//      * Guards route activation
-//      */
 //     canActivate(
 //         route: ActivatedRouteSnapshot,
 //         state: RouterStateSnapshot
 //     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 //         return this.checkAuth(state.url, route);
 //     }
-//
-//     /**
-//      * Guards child route activation
-//      */
 //     canActivateChild(
 //         childRoute: ActivatedRouteSnapshot,
 //         state: RouterStateSnapshot
 //     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 //         return this.checkAuth(state.url, childRoute);
 //     }
-//
-//     /**
-//      * Guards lazy-loaded modules
-//      */
 //     canLoad(
 //         route: Route,
 //         segments: UrlSegment[]
@@ -90,10 +78,6 @@
 //             })
 //         );
 //     }
-//
-//     /**
-//      * Extract required roles from route data
-//      */
 //     private getRequiredRoles(
 //         routeSnapshot?: ActivatedRouteSnapshot | null,
 //         route?: Route
@@ -113,10 +97,6 @@
 //         return roles;
 //     }
 // }
-//
-// /**
-//  * Role-based guard for specific role requirements
-//  */
 // @Injectable({
 //     providedIn: 'root'
 // })
@@ -256,10 +236,6 @@
 //         );
 //     }
 // }
-//
-// /**
-//  * Guard that checks if user owns the resource
-//  */
 // @Injectable({
 //     providedIn: 'root'
 // })
@@ -304,3 +280,21 @@
 //         );
 //     }
 // }
+
+
+import { CanActivateFn, Router } from '@angular/router';
+import { inject } from '@angular/core';
+import { AuthService } from './services/auth.service';
+
+export const authGuard: CanActivateFn = (route, state) => {
+    const authService = inject(AuthService);
+    const router = inject(Router);
+
+    if (authService.isLoggedInFake()) {
+        return true;
+    }
+
+    router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    return false;
+};
+
