@@ -21,6 +21,7 @@ interface RegisterRequest {
 interface User {
     id: string;
     email: string;
+    username: string;
     roles: string[];
     [key: string]: any;
 }
@@ -88,7 +89,7 @@ export class AuthService {
         this.clearAuthData();
         this.isAuthenticatedSubject.next(false);
         this.currentUserSubject.next(null);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/auth/login']);
     }
 
     /**

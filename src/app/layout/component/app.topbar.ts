@@ -45,9 +45,11 @@ import { AuthService } from '../../core/authentication/services/auth.service';
             <div class="layout-topbar-actions">
                 <div class="layout-config-menu">
                     @if (authService.isAuthenticated$) {
-                        <p>Welcome, {{ authService.getCurrentUser()?.email }}!</p>
+                        <span style="margin-top: 10px">Welcome, {{ authService.getCurrentUser()?.email }}!</span>
                         <button type="button" class="layout-topbar-action" (click)="authService.logout()">
-                            Logout
+                            <i class="pi pi-lock-open"></i>
+                            <span>Logout</span>
+
                         </button>
                     }
                     <button type="button" class="layout-topbar-action" (click)="toggleDarkMode()">
