@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     loading = false;
     submitted = false;
     passwordVisible = false;
-    returnUrl: string = './Dashboard';
+    returnUrl: string = 'admin/dashboard';
 
     private destroy$ = new Subject<void>();
 
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         // Redirect if already authenticated
         if (!this.authService.isAuthenticated()) {
-            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || './admin/dashboard';
             const navigation = this.router.getCurrentNavigation();
             if (navigation?.extras?.state?.['message']) {
                 this.messageService.add({
@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             }
             this.loadSavedCredentials();
         } else {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['./admin/dashboard']);
             return;
         }
     }
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         return this.loginForm.controls;
     }
 
-    onSubmit(): void {
+    public onSubmit(): void {
         this.submitted = true;
 
         // if (this.loginForm.invalid) {
@@ -128,9 +128,9 @@ export class LoginComponent implements OnInit, OnDestroy {
                     });
 
                     // Redirect to return URL or dashboard
-                    setTimeout(() => {
+
                         this.router.navigate([this.returnUrl]);
-                    }, 1000);
+
                 },
                 error: (error: any) => {
                     this.loading = false;
@@ -174,7 +174,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
     }
 
-    onSocialLogin(provider: string): void {
+    public onSocialLogin(provider: string): void {
         // Placeholder for social login implementation
         this.messageService.add({
             severity: 'info',

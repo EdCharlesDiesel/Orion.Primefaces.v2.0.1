@@ -10,11 +10,11 @@ import { authGuard } from './app/core/authentication/auth.guard';
 export const appRoutes: Routes = [
     { path: '', component: Landing },
     { path: 'auth', loadChildren: () => import('./app/core/authentication/auth.routes') },
-    { path: 'notfound', component: Notfound },
+    // { path: 'notfound', component: Notfound },
     {
-        path: 'Admin',
+        path: 'admin',
         component: AppLayout,
-        canActivate: [authGuard],
+        // canActivate: [authGuard],
         children: [
             { path: 'dashboard', component: Dashboard },
             { path: 'human-resources', loadChildren: () => import('./app/pages/human-resources/human-resources.routes') },
@@ -26,5 +26,5 @@ export const appRoutes: Routes = [
             { path: 'database-log', component: DatabaseLog }
         ]
     },
-    { path: '**', redirectTo: '/notfound' }
+    // { path: '**', redirectTo: '/notfound' }
 ];
