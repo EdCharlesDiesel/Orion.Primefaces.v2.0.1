@@ -14,9 +14,9 @@ export const appRoutes: Routes = [
     {
         path: 'Admin',
         component: AppLayout,
-      //  canActivate: [authGuard],
+        canActivate: [authGuard],
         children: [
-            { path: '', component: Dashboard },
+            { path: 'dashboard', component: Dashboard },
             { path: 'human-resources', loadChildren: () => import('./app/pages/human-resources/human-resources.routes') },
             { path: 'person', loadChildren: () => import('./app/pages/person/person.routes') },
             { path: 'sales', loadChildren: () => import('./app/pages/sales/sales.routes') },

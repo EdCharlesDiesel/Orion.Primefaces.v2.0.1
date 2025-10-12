@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
+
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -16,6 +17,7 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { CommonModule } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';
+import { InputGroup } from 'primeng/inputgroup';
 
 class LoginRequest {
     email: string | undefined;
@@ -27,7 +29,17 @@ class LoginRequest {
     standalone: true,
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
-    imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, Toast, Card, Divider, ReactiveFormsModule, IconField, CommonModule],
+    imports: [ButtonModule,
+        CheckboxModule,
+        InputTextModule,
+        PasswordModule,
+        FormsModule,
+        RouterModule,
+        RippleModule,
+        Toast,
+        Card,
+        Divider,
+        ReactiveFormsModule, IconField, CommonModule],
     providers: [AuthService, MessageService]
 })
 export class LoginComponent implements OnInit, OnDestroy {
@@ -35,7 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     loading = false;
     submitted = false;
     passwordVisible = false;
-    returnUrl: string = '';
+    returnUrl: string = './Dashboard';
 
     private destroy$ = new Subject<void>();
 
@@ -93,7 +105,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loading = true;
 
         const loginData: any = {
-            email: this.loginFormControls['email'].value.trim().toLowerCase(),
+            email: this.loginFormControls['email'].value,
             password: this.loginFormControls['password'].value
         };
 

@@ -13,17 +13,18 @@
                     </label>
                     <div class="input-wrapper">
                         <i class="pi pi-envelope input-icon"></i>
-                        <p-inputText
-                            id="email"
-                            formControlName="email"
-                            placeholder="Enter your email"
-                            class="w-full"
-                            [class.ng-invalid]="isFieldInvalid('email')"
-                            [class.ng-dirty]="loginFormControls['email'].dirty">
-                        </p-inputText>
+<!--                        <input-->
+<!--                            id="email"-->
+<!--                            pInputText-->
+<!--                            formControlName="email"-->
+<!--                            placeholder="Enter your email"-->
+<!--                            class="w-full"-->
+<!--                            [class.ng-invalid]="isFieldInvalid('email')"-->
+<!--                            [class.ng-dirty]="loginFormControls['email'].dirty">-->
+<!--                        </input>-->
 
                         <p-iconfield>
-                            <input pInputText type="text" placeholder="Email Address" />
+                            <input pInputText type="text" formControlName="email" placeholder="Email Address....." />
                         </p-iconfield>
                     </div>
                     <small
