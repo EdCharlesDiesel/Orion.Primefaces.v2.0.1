@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StyleClassModule } from 'primeng/styleclass';
 import { AppConfigurator } from './app.configurator';
@@ -47,7 +47,7 @@ import { AuthService } from '../../core/authentication/services/auth.service';
                     @if (authService.isAuthenticated$) {
                         <span style="margin-top: 10px">Welcome, {{ authService.getCurrentUser()?.email }}!</span>
                         <button type="button" class="layout-topbar-action" (click)="authService.logout()">
-                            <i class="pi pi-lock-open"></i>
+                            <i class="pi pi-lock"></i>
                             <span>Logout</span>
 
                         </button>
@@ -88,7 +88,7 @@ import { AuthService } from '../../core/authentication/services/auth.service';
                             <i class="pi pi-inbox"></i>
                             <span>Messages</span>
                         </button>
-                        <button type="button" class="layout-topbar-action">
+                        <button type="button" class="layout-topbar-action" (click)="getUserProfile()">
                             <i class="pi pi-user"></i>
                             <span>Profile</span>
                         </button>
@@ -100,9 +100,13 @@ import { AuthService } from '../../core/authentication/services/auth.service';
 export class AppTopbar {
     items!: MenuItem[];
     public authService = inject(AuthService);
-    constructor(public layoutService: LayoutService) {}
+    constructor(public layoutService: LayoutService, private router: Router) {}
 
     toggleDarkMode() {
         this.layoutService.layoutConfig.update((state) => ({ ...state, darkTheme: !state.darkTheme }));
+    }
+
+    public getUserProfile() {
+        this.router.navigate(['admin/profile']);
     }
 }

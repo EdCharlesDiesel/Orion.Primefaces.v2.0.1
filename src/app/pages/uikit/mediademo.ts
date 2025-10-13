@@ -5,8 +5,9 @@ import { CarouselModule } from 'primeng/carousel';
 import { GalleriaModule } from 'primeng/galleria';
 import { ImageModule } from 'primeng/image';
 import { TagModule } from 'primeng/tag';
-import { PhotoService } from '../service/photo.service';
-import { Product, ProductService } from '../service/product.service';
+import { PhotoService } from '../../service/photo.service';
+import { Product } from '../../core/models/product';
+import { ProductService } from '../../service/product.service';
 
 @Component({
     selector: 'app-media-demo',
@@ -104,9 +105,9 @@ export class MediaDemo implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.productService.getProductsSmall().then((products) => {
-            this.products = products;
-        });
+        // this.productService.getProductsSmall().then((products) => {
+        //     this.products = products;
+        // });
 
         this.photoService.getImages().then((images) => {
             this.images = images;
