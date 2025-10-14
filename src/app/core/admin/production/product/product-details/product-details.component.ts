@@ -23,7 +23,7 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private subscriptionService: SubscriptionService) {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.userId = JSON.parse(localStorage.getItem('userId') || '{}');
+    // this.userId = JSON.parse(localStorage.getItem('userId') || '{}');
     this.id = JSON.parse(this.route.snapshot.paramMap.get('id') || '{}')
   }
 

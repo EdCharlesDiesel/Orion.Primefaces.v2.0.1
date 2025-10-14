@@ -10,8 +10,6 @@ import { NotificationsWidget } from '../dashboard/components/notificationswidget
 @Component({
     selector: 'app-dashboard',
     imports: [StatsWidget, RecentSalesWidget, BestSellingWidget, RevenueStreamWidget, NotificationsWidget],
-    template: `
-
-    `
+    template: ``
 })
 export class AdminSettingsComponent {}

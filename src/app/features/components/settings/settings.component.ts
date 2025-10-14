@@ -18,7 +18,11 @@ export interface SettingsForm {
     password: FormControl<string>;
 }
 
-class UserManagementService {}
+class UserManagementService {
+    getCurrentUser() {
+        return undefined;
+    }
+}
 
 @Component({
     selector: 'app-settings-page',

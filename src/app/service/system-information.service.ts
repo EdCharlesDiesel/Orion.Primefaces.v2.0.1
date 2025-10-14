@@ -2,7 +2,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {SystemInformation} from "../../core/models/system-information.model";
+import { SystemInformation } from '../core/models/system-information.model';
 
 
 @Injectable({

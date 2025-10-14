@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { EmployeeDepartmentHistory } from '../../../core/models/employee-department-history.model ';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
+import { EmployeeDepartmentHistory } from '../../../models/employee-department-history.model ';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,6 @@ export class EmployeeDepartmentHistoryService {
    private apiUrl = environment.humanResourcesBaseURL +'EmployeeDepartmentHistory';
 
   constructor(private http: HttpClient) {}
-  //TODO: Need to fix Not recommnded hence I need to start using Guid to begin with.
   private tempId = 55;
   createEmployeeDepartmentHistory(data: EmployeeDepartmentHistory): Observable<EmployeeDepartmentHistory> {
     data.businessEntityID = ++this.tempId; // negative IDs as temp placeholders
