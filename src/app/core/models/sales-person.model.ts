@@ -1,4 +1,4 @@
-import {Store} from "./store";
+import {StoreModel} from "./store.model";
 import {SalesTerritoryHistory} from "./sales-territory-history.model";
 import {SalesPersonQuotaHistory} from "./sales-person-quota-history.model";
 import {SalesTerritory} from "./sales-territory.model";
@@ -29,7 +29,7 @@ export class SalesPerson implements ISalesPerson {
   salesOrderHeaders?: SalesOrderHeader[] | undefined;
   salesPersonQuotaHistories?: SalesPersonQuotaHistory[] | undefined;
   salesTerritoryHistories?: SalesTerritoryHistory[] | undefined;
-  stores?: Store[] | undefined;
+  stores?: StoreModel[] | undefined;
 
 }
 
@@ -57,5 +57,5 @@ export interface ISalesPerson {
   salesOrderHeaders?: SalesOrderHeader[] | undefined;
   salesPersonQuotaHistories?: SalesPersonQuotaHistory[] | undefined;
   salesTerritoryHistories?: SalesTerritoryHistory[] | undefined;
-  stores?: Store[] | undefined;
+  stores?: StoreModel[] | undefined;
 }

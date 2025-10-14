@@ -18,9 +18,9 @@ import { ProductCostHistory } from "./product-cost-history.model"
 export class Product {
     productID!: number | undefined;
     title: string | undefined;
+    name: string | undefined;
     description: string | undefined;
     category: string | undefined;
-    name: string | undefined;
     price: number = 0;
     productNumber: string | undefined;
     makeFlag: boolean | undefined;
@@ -47,13 +47,11 @@ export class Product {
     image: string | undefined;
     code: number | undefined;
     modifiedDate: Date | undefined;
-    rating:
-        | {
+    quantityInStock?: number; // Add this field
+    rating: {
               rate: number;
               count: number;
-          }
-        | undefined;
-
+          }| undefined;
     unitMeasure?: UnitMeasure | undefined;
     unitMeasure1?: UnitMeasure | undefined;
     productSubcategory?: ProductSubcategory | undefined;
@@ -72,7 +70,7 @@ export class Product {
     purchaseOrderDetails?: PurchaseOrderDetail[] | undefined;
     shoppingCartItems?: ShoppingCartItem[] | undefined;
     specialOfferProducts?: SpecialOfferProduct[] | undefined;
-    quantityInStock?: number; // Add this field
+
 }
 
 export interface IProduct {

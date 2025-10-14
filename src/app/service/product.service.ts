@@ -14,6 +14,7 @@ export class ProductService {
 
   // Signal to store products
   products = signal<Product[]>([]);
+    categories$: any;
 
   /**
    * Fetch all products from the API

@@ -33,7 +33,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   templateUrl: 'products-all.component.html',
   styleUrl: 'products-all.component.scss'
 })
-export class ProductsAllComponent implements OnInit {
+export class ProductsComponent implements OnInit {
   private readonly store = inject(Store);
   private cartService = inject(CartService);
   private readonly router = inject(Router);

@@ -2,7 +2,7 @@ import {Customer} from "./customer";
 import {SalesPerson} from "./sales-person.model";
 import {BusinessEntity} from "./business-entity.model";
 
-export class Store {
+export class StoreModel {
   /** Primary key. Foreign key to Customer.BusinessEntityID. */
   businessEntityID!: number;
   /** Name of the store. */

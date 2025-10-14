@@ -1,0 +1,28 @@
+<p-card header="Tasks">
+  <p-button label="Add Task" icon="pi pi-plus" (onClick)="openDialog()"></p-button>
+  <p-table [value]="tasks" [paginator]="true" [rows]="10" selectionMode="single" [(selection)]="selectedTask">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Title</th>
+        <th>Priority</th>
+        <th>Due Date</th>
+        <th>Completed</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-task>
+      <tr>
+        <td>{{ task.title }}</td>
+        <td>{{ task.priority }}</td>
+        <td>{{ task.dueDate | date:'shortDate' }}</td>
+        <td>
+          <p-checkbox [(ngModel)]="task.completed"></p-checkbox>
+        </td>
+        <td>
+          <p-button icon="pi pi-pencil" (onClick)="openDialog(task)"></p-button>
+          <p-button icon="pi pi-trash" (onClick)="deleteTask(task)" class="p-button-danger"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>

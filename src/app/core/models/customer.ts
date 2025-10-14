@@ -1,6 +1,6 @@
 import {SalesTerritory} from "./sales-territory.model";
 import {SalesOrderHeader} from "./sale-order-header.model";
-import {Store} from "./store";
+import {StoreModel} from "./store.model";
 import { Person } from './person.model';
 
 export class Customer {
@@ -19,7 +19,7 @@ export class Customer {
   /** Date and time the record was last updated. */
   modifiedDate!: Date;
   person?: Person;
-  store?: Store;
+  store?: StoreModel;
   salesTerritory?: SalesTerritory;
   salesOrderHeaders?: SalesOrderHeader[] | undefined;
 
@@ -41,7 +41,7 @@ export interface ICustomer {
   /** Date and time the record was last updated. */
   modifiedDate: Date;
   person?: Person;
-  store?: Store;
+  store?: StoreModel;
   salesTerritory?: SalesTerritory;
   salesOrderHeaders?: SalesOrderHeader[] | undefined;
 }
