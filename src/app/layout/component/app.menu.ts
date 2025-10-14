@@ -102,12 +102,72 @@ export class AppMenu {
                                 routerLink: ['/person/address-type']
                             },
                             {
-                                label: 'Business-Entity',
+                                label: 'Business-Entity-Address',
                                 icon: 'pi pi-fw pi-bookmark',
-                                routerLink: ['/person/business-entity']
+                                routerLink: ['/person/business-entity-address']
+                            },         {
+                                label: 'Business-Entity-Contact',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/business-entity-contact']
+                            },
+                            {
+                                label: 'Contact-Type',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/contact-type']
+                            },
+                            {
+                                label: 'Country-Region',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/country-region']
+                            },
+                            {
+                                label: 'Email Address',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/email-address']
+                            },
+                            {
+                                label: 'Person',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/person']
+                            },
+                            {
+                                label: 'Person-Phone',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/person-phone']
+                            },
+                            {
+                                label: 'Phone-Number-Type',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/phone-number-type']
+                            },
+                            {
+                                label: 'State Province',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/person/state-province']
                             }
                         ]
-                    }
+                    },
+                    {
+                        label: 'Sales',
+                        icon: 'pi pi-fw pi-bookmark',
+                        items: [
+                            {
+                                label: 'Country Region Currency',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/sales/country-region-currency']
+                            },
+                            {
+                                label: 'Credit Card',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/sales/credit-card']
+                            },
+                            {
+                                label: 'Currencies',
+                                icon: 'pi pi-fw pi-bookmark',
+                                routerLink: ['/sales/currency']
+                            }
+                        ]
+                    },
                 ]
             },
             {
@@ -164,7 +224,7 @@ export class AppMenu {
                     {
                         label: 'Crud',
                         icon: 'pi pi-fw pi-pencil',
-                        routerLink: ['/pages/crud']
+                        routerLink: ['/pages/CreateReadUpdateDelete']
                     },
                     {
                         label: 'Not Found',

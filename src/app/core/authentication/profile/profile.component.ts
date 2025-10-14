@@ -8,7 +8,7 @@ import { User } from '../../models/user';
 import { AuthService } from '../services/auth.service';
 import { FileUpload } from 'primeng/fileupload';
 import { Tag } from 'primeng/tag';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TabPanel, TabView } from 'primeng/tabview';
 import { Button } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
@@ -16,6 +16,7 @@ import { Password } from 'primeng/password';
 import { InputSwitch } from 'primeng/inputswitch';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { Toast } from 'primeng/toast';
+import { CommandModule } from '@angular/cli/src/command-builder/command-module';
 
 interface ProfileStats {
     loginCount: number;
@@ -29,7 +30,19 @@ interface ProfileStats {
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.scss'],
     standalone: true,
-    imports: [FileUpload, Tag, DatePipe, TabView, TabPanel, ReactiveFormsModule, Button, DropdownModule, Password, InputSwitch, ConfirmDialog, Toast]
+    imports: [FileUpload,
+        Tag,
+        DatePipe,
+        TabView,
+        TabPanel,
+        ReactiveFormsModule,
+        Button,
+        DropdownModule,
+        Password,
+        InputSwitch,
+        ConfirmDialog,
+        Toast,
+        CommonModule]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
     user: any | null = null;

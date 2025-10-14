@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { AuthResponse } from '../../models/auth-response.model';
+import { environment } from '../../../../environments/environment';
 
 interface LoginRequest {
     email: string;
@@ -20,6 +21,7 @@ interface RegisterRequest {
 interface User {
     id: string;
     email: string;
+    username: string;
     roles: string[];
     [key: string]: any;
 }
@@ -31,26 +33,33 @@ export class AuthService {
     private readonly TOKEN_KEY = 'auth_token';
     private readonly REFRESH_TOKEN_KEY = 'refresh_token';
     private readonly USER_KEY = 'current_user';
-    private readonly API_URL = '/api/auth'; // Update with your API URL
+    private readonly API_URL = environment.userProfileUrl;
 
     private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasValidToken());
-    public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
-
     private currentUserSubject = new BehaviorSubject<User | null>(this.getStoredUser());
+    public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
     public currentUser$ = this.currentUserSubject.asObservable();
 
     public redirectUrl: string | null = null;
     token: any;
 
+    private loggedInFake = signal<boolean>(false);
+    isLoggedInFake = this.loggedInFake.asReadonly();
+
     constructor(
         private http: HttpClient,
         private router: Router
-    ) {}
+    ) {
+        const stored = localStorage.getItem('isLoggedIn');
+        if (stored === 'true') {
+            this.loggedInFake.set(true);
+        }
+    }
 
     /**
      * Login user with credentials
      */
-    login(loginData: LoginRequest): Observable<AuthResponse> {
+    public login(loginData: any): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(`${this.API_URL}/login`, loginData).pipe(
             tap((response) => this.handleAuthSuccess(response)),
             catchError((error) => {
@@ -80,7 +89,7 @@ export class AuthService {
         this.clearAuthData();
         this.isAuthenticatedSubject.next(false);
         this.currentUserSubject.next(null);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/auth/login']);
     }
 
     /**
@@ -256,4 +265,6 @@ export class AuthService {
         localStorage.removeItem(this.REFRESH_TOKEN_KEY);
         localStorage.removeItem(this.USER_KEY);
     }
+
+
 }

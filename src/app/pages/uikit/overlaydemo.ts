@@ -10,7 +10,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
-import { Product, ProductService } from '../service/product.service';
+import { ProductService } from '../../service/product.service';
+import { Product } from '../../core/models/product';
 
 @Component({
     selector: 'app-overlay-demo',
@@ -163,7 +164,7 @@ export class OverlayDemo implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.productService.getProductsSmall().then((products) => (this.products = products));
+        // this.productService.getProductsSmall().then((products) => (this.products = products));
 
         this.images = [];
         this.images.push({

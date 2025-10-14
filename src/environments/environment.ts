@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  humanResourcesBaseURL: "http://localhost:9100/api/",
-  personBaseURL: "http://localhost:9200/api/",
+  userProfileUrl: "http://localhost:9003/api/Auth",
+  humanResourcesBaseURL: "http://localhost:9008/api/",
+  personBaseURL: "http://localhost:9010/api/",
+  salesBaseURL: "http://localhost:9006/api/",
   baseURL: "http://localhost:8080/",
 
 };

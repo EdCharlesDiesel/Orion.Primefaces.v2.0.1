@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
-import { Signup } from './signup';
-
 import { LoginComponent } from './login/login.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export default [
     { path: 'access', component: AccessDeniedComponent },
     { path: 'error', component: ErrorComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'signup', component: Signup }
+    { path: 'register', component: RegisterComponent },
+    { path: 'profile', component: ProfileComponent }
 ] as Routes;

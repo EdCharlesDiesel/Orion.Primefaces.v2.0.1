@@ -1,21 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
+
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { RippleModule } from 'primeng/ripple';
-import { AppFloatingConfigurator } from '../../../layout/component/app.floatingconfigurator';
 import { Subject } from 'rxjs';
 import { MessageService } from 'primeng/api';
-import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { Toast } from 'primeng/toast';
 import { Card } from 'primeng/card';
 import { Divider } from 'primeng/divider';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
+import { CommonModule } from '@angular/common';
+import { takeUntil } from 'rxjs/operators';
+import { InputGroup } from 'primeng/inputgroup';
 
 class LoginRequest {
     email: string | undefined;
@@ -25,9 +27,19 @@ class LoginRequest {
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, Toast, Card, Divider, ReactiveFormsModule, IconField, InputIcon],
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
+    imports: [ButtonModule,
+        CheckboxModule,
+        InputTextModule,
+        PasswordModule,
+        FormsModule,
+        RouterModule,
+        RippleModule,
+        Toast,
+        Card,
+        Divider,
+        ReactiveFormsModule, IconField, CommonModule],
     providers: [AuthService, MessageService]
 })
 export class LoginComponent implements OnInit, OnDestroy {
@@ -35,8 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     loading = false;
     submitted = false;
     passwordVisible = false;
-    rememberMe = false;
-    returnUrl: string = '';
+    returnUrl: string = 'admin/dashboard';
 
     private destroy$ = new Subject<void>();
 
@@ -56,26 +67,21 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // Redirect if already authenticated
-        if (this.authService.isAuthenticated()) {
-            this.router.navigate(['/dashboard']);
+        if (!this.authService.isAuthenticated()) {
+            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || './admin/dashboard';
+            const navigation = this.router.getCurrentNavigation();
+            if (navigation?.extras?.state?.['message']) {
+                this.messageService.add({
+                    severity: 'info',
+                    summary: 'Info',
+                    detail: navigation.extras.state['message']
+                });
+            }
+            this.loadSavedCredentials();
+        } else {
+            this.router.navigate(['./admin/dashboard']);
             return;
         }
-
-        // Get return URL from route parameters or default to dashboard
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
-
-        // Check for any messages from route state
-        const navigation = this.router.getCurrentNavigation();
-        if (navigation?.extras?.state?.['message']) {
-            this.messageService.add({
-                severity: 'info',
-                summary: 'Info',
-                detail: navigation.extras.state['message']
-            });
-        }
-
-        // Load saved credentials if remember me was used
-        this.loadSavedCredentials();
     }
 
     ngOnDestroy(): void {
@@ -84,91 +90,91 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     // Getter for easy access to form fields
-    get f() {
+    get loginFormControls() {
         return this.loginForm.controls;
     }
 
-    onSubmit(): void {
+    public onSubmit(): void {
         this.submitted = true;
 
-        if (this.loginForm.invalid) {
-            this.markFormGroupTouched();
-            return;
-        }
+        // if (this.loginForm.invalid) {
+        //     this.markFormGroupTouched();
+        //     return;
+        // }
 
         this.loading = true;
 
-        const loginData: LoginRequest = {
-            email: this.f['email'].value.trim().toLowerCase(),
-            password: this.f['password'].value
+        const loginData: any = {
+            email: this.loginFormControls['email'].value,
+            password: this.loginFormControls['password'].value
         };
 
         // Handle remember me functionality
-        if (this.f['rememberMe'].value) {
-            //  this.saveCredentials(loginData.email, loginData.password);
+        if (this.loginFormControls['rememberMe'].value) {
+            this.saveCredentials(loginData.email, loginData.password);
         } else {
             this.clearSavedCredentials();
         }
 
-        // this.authService
-        //     .login(loginData)
-        //     .pipe(takeUntil(this.destroy$))
-        //     .subscribe({
-        //         next: (response: any) => {
-        //             this.messageService.add({
-        //                 severity: 'success',
-        //                 summary: 'Login Successful',
-        //                 detail: `Welcome back, ${response.user.name}!`
-        //             });
-        //
-        //             // Redirect to return URL or dashboard
-        //             setTimeout(() => {
-        //                 this.router.navigate([this.returnUrl]);
-        //             }, 1000);
-        //         },
-        //         error: (error: any) => {
-        //             this.loading = false;
-        //             this.handleLoginError(error);
-        //         },
-        //         complete: () => {
-        //             this.loading = false;
-        //         }
-        //     });
+        this.authService
+            .login(loginData)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (response: any) => {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Login Successful',
+                        detail: `Welcome back, ${response.user.name}!`
+                    });
+
+                    // Redirect to return URL or dashboard
+
+                        this.router.navigate([this.returnUrl]);
+
+                },
+                error: (error: any) => {
+                    this.loading = false;
+                    this.handleLoginError(error);
+                },
+                complete: () => {
+                    this.loading = false;
+                }
+            });
     }
 
     public onForgotPassword(): void {
-        if (this.f['email'].valid) {
-            const email = this.f['email'].value;
-            // this.authService
-            //     .requestPasswordReset(email)
-            //     .pipe(takeUntil(this.destroy$))
-            //     .subscribe({
-            //         next: () => {
-            //             this.messageService.add({
-            //                 severity: 'success',
-            //                 summary: 'Password Reset Sent',
-            //                 detail: 'Please check your email for password reset instructions'
-            //             });
-            //         },
-            //         error: (error: any) => {
-            //             this.messageService.add({
-            //                 severity: 'error',
-            //                 summary: 'Reset Failed',
-            //                 detail: error || 'Failed to send password reset email'
-            //             });
-            //         }
-            //     });
+        if (this.loginFormControls['email'].valid) {
+            const email = this.loginFormControls['email'].value;
+            this.authService
+                .requestPasswordReset(email)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe({
+                    next: () => {
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Password Reset Sent',
+                            detail: 'Please check your email for password reset instructions'
+                        });
+                    },
+                    error: (error: any) => {
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Reset Failed',
+                            detail: error || 'Failed to send password reset email'
+                        });
+                    }
+                });
         } else {
             this.messageService.add({
                 severity: 'warn',
                 summary: 'Email Required',
                 detail: 'Please enter a valid email address first'
             });
-            this.f['email'].markAsTouched();
+            this.loginFormControls['email'].markAsTouched();
         }
     }
 
-    onSocialLogin(provider: string): void {
+    public onSocialLogin(provider: string): void {
         // Placeholder for social login implementation
         this.messageService.add({
             severity: 'info',
@@ -180,23 +186,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         // this.authService.socialLogin(provider).subscribe({...});
     }
 
-    togglePasswordVisibility(): void {
-        this.passwordVisible = !this.passwordVisible;
-    }
-
-    navigateToRegister(): void {
-        this.router.navigate(['/register']);
-    }
-
-    // Demo login functionality for testing
-    onDemoLogin(role: 'user' | 'admin' = 'user'): void {
-        const demoCredentials = {
-            user: { email: 'demo@user.com', password: 'password123' },
-            admin: { email: 'admin@demo.com', password: 'admin123' }
-        };
-
-        this.loginForm.patchValue(demoCredentials[role]);
-        this.onSubmit();
+    public navigateToRegister(): void {
+        this.router.navigate(['/auth/register']);
     }
 
     private handleLoginError(error: string): void {
@@ -247,12 +238,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     // Helper methods for template
-    isFieldInvalid(fieldName: string): boolean {
+    public isFieldInvalid(fieldName: string): boolean {
         const field = this.loginForm.get(fieldName);
         return !!(field && field.invalid && (field.dirty || field.touched || this.submitted));
     }
 
-    getFieldError(fieldName: string): string {
+    public getFieldError(fieldName: string): string {
         const field = this.loginForm.get(fieldName);
         if (field?.errors && (field.dirty || field.touched || this.submitted)) {
             if (field.errors['required']) return `${this.getFieldDisplayName(fieldName)} is required`;
@@ -268,5 +259,9 @@ export class LoginComponent implements OnInit, OnDestroy {
             password: 'Password'
         };
         return displayNames[fieldName] || fieldName;
+    }
+
+    private togglePasswordVisibility(): void {
+        this.passwordVisible = !this.passwordVisible;
     }
 }

@@ -46,8 +46,8 @@
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "4kb",
-                                    "maximumError": "4kb"
+                                    "maximumWarning": "4mb",
+                                    "maximumError": "5mb"
                                 }
                             ],
                             "outputHashing": "all"
@@ -70,7 +70,10 @@
                             "buildTarget": "orion-primefaces-ng:build:development"
                         }
                     },
-                    "defaultConfiguration": "development"
+                    "defaultConfiguration": "development",
+                    "options": {
+                        "proxyConfig": "src/proxy.conf.json"
+                    }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n"

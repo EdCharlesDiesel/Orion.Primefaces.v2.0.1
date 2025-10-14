@@ -42,6 +42,9 @@ export class Person implements IPerson {
     personPhones?: PersonPhone[] | undefined;
     customers?: Customer[] | undefined;
     personCreditCards?: PersonCreditCard[] | undefined;
+    isLoggedIn: boolean | undefined;
+    userTypeId: number | undefined;
+    username: any;
 
 }
 
