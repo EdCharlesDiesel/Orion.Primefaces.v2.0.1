@@ -21,7 +21,7 @@ export const selectProductsError = createSelector(
 // New selectors for inventory
 export const selectProductById = (id: number) => createSelector(
   selectAllProducts,
-  (products) => products.find(product => product.id === id)
+  (products) => products.find(product => product.productID === id)
 );
 
 export const selectProductQuantity = (id: number) => createSelector(

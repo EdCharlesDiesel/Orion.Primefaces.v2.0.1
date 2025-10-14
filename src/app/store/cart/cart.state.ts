@@ -1,5 +1,4 @@
-import {Product} from '../../components/products/product.model';
-
+import { Product } from '../../core/models/product';
 
 export interface CartItem {
   product: Product;

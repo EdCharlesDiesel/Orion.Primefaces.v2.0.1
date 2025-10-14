@@ -1,118 +1,237 @@
-import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {FormsModule} from '@angular/forms';
-import {Component, inject} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {User} from '../user.model';
-
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { User } from '../user.model';
 
 @Component({
-  selector: 'app-user-dialog',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule
-  ],
-  template: `
-    <h2 mat-dialog-title>{{ data ? 'Edit User' : 'Add User' }}</h2>
-    <mat-dialog-content>
-      <form #userForm="ngForm">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Username</mat-label>
-          <input matInput [(ngModel)]="formData.username" name="username" required>
-        </mat-form-field>
+    selector: 'app-user-dialog',
+    standalone: true,
+    imports: [
+        CommonModule,
+        FormsModule,
+        InputTextModule,
+        ButtonModule,
+        FloatLabelModule
+    ],
+    template: `
+        <form #userForm="ngForm" class="user-form">
+            <div class="form-grid">
+                <div class="field">
+                    <label for="username">Username</label>
+                    <input
+                        pInputText
+                        id="username"
+                        [(ngModel)]="formData.username"
+                        name="username"
+                        required
+                        class="w-full">
+                </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" [(ngModel)]="formData.email" name="email" required>
-        </mat-form-field>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input
+                        pInputText
+                        id="email"
+                        type="email"
+                        [(ngModel)]="formData.email"
+                        name="email"
+                        required
+                        class="w-full">
+                </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>First Name</mat-label>
-          <input matInput [(ngModel)]="formData.name.firstname" name="firstname" required>
-        </mat-form-field>
+                <div class="field">
+                    <label for="firstname">First Name</label>
+                    <input
+                        pInputText
+                        id="firstname"
+                        [(ngModel)]="formData.name.firstname"
+                        name="firstname"
+                        required
+                        class="w-full">
+                </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Last Name</mat-label>
-          <input matInput [(ngModel)]="formData.name.lastname" name="lastname" required>
-        </mat-form-field>
+                <div class="field">
+                    <label for="lastname">Last Name</label>
+                    <input
+                        pInputText
+                        id="lastname"
+                        [(ngModel)]="formData.name.lastname"
+                        name="lastname"
+                        required
+                        class="w-full">
+                </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Phone</mat-label>
-          <input matInput [(ngModel)]="formData.phone" name="phone" required>
-        </mat-form-field>
+                <div class="field">
+                    <label for="phone">Phone</label>
+                    <input
+                        pInputText
+                        id="phone"
+                        [(ngModel)]="formData.phone"
+                        name="phone"
+                        required
+                        class="w-full">
+                </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>City</mat-label>
-          <input matInput [(ngModel)]="formData.address.city" name="city" required>
-        </mat-form-field>
+                <div class="field">
+                    <label for="city">City</label>
+                    <input
+                        pInputText
+                        id="city"
+                        [(ngModel)]="formData.address.city"
+                        name="city"
+                        required
+                        class="w-full">
+                </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Street</mat-label>
-          <input matInput [(ngModel)]="formData.address.street" name="street" required>
-        </mat-form-field>
+                <div class="field">
+                    <label for="street">Street</label>
+                    <input
+                        pInputText
+                        id="street"
+                        [(ngModel)]="formData.address.street"
+                        name="street"
+                        required
+                        class="w-full">
+                </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Zipcode</mat-label>
-          <input matInput [(ngModel)]="formData.address.zipcode" name="zipcode" required>
-        </mat-form-field>
-      </form>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button (click)="onCancel()">Cancel</button>
-      <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!userForm.valid">
-        Save
-      </button>
-    </mat-dialog-actions>
-  `,
-  styles: [`
-    mat-dialog-content {
-      min-width: 500px;
-    }
+                <div class="field">
+                    <label for="zipcode">Zipcode</label>
+                    <input
+                        pInputText
+                        id="zipcode"
+                        [(ngModel)]="formData.address.zipcode"
+                        name="zipcode"
+                        required
+                        class="w-full">
+                </div>
+            </div>
 
-    .full-width {
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-  `]
+            <div class="dialog-actions">
+                <p-button
+                    label="Cancel"
+                    icon="pi pi-times"
+                    severity="secondary"
+                    [outlined]="true"
+                    (onClick)="onCancel()">
+                </p-button>
+                <p-button
+                    label="Save"
+                    icon="pi pi-check"
+                    severity="success"
+                    (onClick)="onSave()"
+                    [disabled]="!userForm.valid">
+                </p-button>
+            </div>
+        </form>
+    `,
+    styles: [`
+        .user-form {
+            padding: 1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .field label {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.875rem;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        :host ::ng-deep .p-inputtext {
+            width: 100%;
+        }
+
+        .dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--surface-border);
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    `]
 })
-export class UserDialogComponent {
-  dialogRef = inject(MatDialogRef<UserDialogComponent>);
-  data: User | null = inject(MAT_DIALOG_DATA);
+export class UserDialogComponent implements OnInit {
+    @Input() user: User | null = null;
+    @Output() save = new EventEmitter<any>();
+    @Output() cancel = new EventEmitter<void>();
 
-  formData: any = {
-    id: this.data?.id || null,
-    username: this.data?.username || '',
-    email: this.data?.email || '',
-    password: this.data?.password || 'password123',
-    name: {
-      firstname: this.data?.name?.firstname || '',
-      lastname: this.data?.name?.lastname || ''
-    },
-    address: {
-      city: this.data?.address?.city || '',
-      street: this.data?.address?.street || '',
-      number: this.data?.address?.number || 0,
-      zipcode: this.data?.address?.zipcode || '',
-      geolocation: {
-        lat: this.data?.address?.geolocation?.lat || '-37.3159',
-        long: this.data?.address?.geolocation?.long || '81.1496'
-      }
-    },
-    phone: this.data?.phone || ''
-  };
+    formData: any = {
+        id: null,
+        username: '',
+        email: '',
+        password: 'password123',
+        name: {
+            firstname: '',
+            lastname: ''
+        },
+        address: {
+            city: '',
+            street: '',
+            number: 0,
+            zipcode: '',
+            geolocation: {
+                lat: '-37.3159',
+                long: '81.1496'
+            }
+        },
+        phone: ''
+    };
 
-  onCancel(): void {
-    this.dialogRef.close();
-  }
+    ngOnInit(): void {
+        if (this.user) {
+            this.formData = {
+                id: this.user.id,
+                username: this.user.username || '',
+                email: this.user.email || '',
+                password: this.user.password || 'password123',
+                name: {
+                    firstname: this.user.name?.firstname || '',
+                    lastname: this.user.name?.lastname || ''
+                },
+                address: {
+                    city: this.user.address?.city || '',
+                    street: this.user.address?.street || '',
+                    number: this.user.address?.number || 0,
+                    zipcode: this.user.address?.zipcode || '',
+                    geolocation: {
+                        lat: this.user.address?.geolocation?.lat || '-37.3159',
+                        long: this.user.address?.geolocation?.long || '81.1496'
+                    }
+                },
+                phone: this.user.phone || ''
+            };
+        }
+    }
 
-  onSave(): void {
-    this.dialogRef.close(this.formData);
-  }
+    onCancel(): void {
+        this.cancel.emit();
+    }
+
+    onSave(): void {
+        this.save.emit(this.formData);
+    }
 }

@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import {CartItem} from './cart.state';
-import {Product} from '../../components/products/product.model';
+import { Product } from '../../core/models/product';
 
 export const addToCart = createAction(
   '[Cart] Add Item',

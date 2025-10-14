@@ -37,7 +37,7 @@ export const productReducer = createReducer(
 
   on(ProductActions.deleteProductSuccess, (state, { id }) => ({
     ...state,
-    products: state.products.filter(product => product.id !== id),
+    products: state.products.filter(product => product.productID !== id),
     isLoading: false,
     error: null
   })),
@@ -52,7 +52,7 @@ export const productReducer = createReducer(
   on(ProductActions.updateProductQuantity, (state, { id, quantity }) => ({
     ...state,
     products: state.products.map(product =>
-      product.id === id
+      product.productID === id
         ? { ...product, quantityInStock: Math.max(0, quantity) }
         : product
     )
@@ -61,7 +61,7 @@ export const productReducer = createReducer(
   on(ProductActions.decrementProductQuantity, (state, { id, amount = 1 }) => ({
     ...state,
     products: state.products.map(product =>
-      product.id === id
+      product.productID === id
         ? {
           ...product,
           quantityInStock: Math.max(0, (product.quantityInStock ?? 0) - amount)
@@ -73,7 +73,7 @@ export const productReducer = createReducer(
   on(ProductActions.incrementProductQuantity, (state, { id, amount = 1 }) => ({
     ...state,
     products: state.products.map(product =>
-      product.id === id
+      product.productID === id
         ? {
           ...product,
           quantityInStock: (product.quantityInStock ?? 0) + amount
@@ -86,7 +86,7 @@ export const productReducer = createReducer(
     ...state,
     products: state.products.map(product => ({
       ...product,
-      quantityInStock: quantities[product.id] ?? product.quantityInStock ?? 0
+      quantityInStock: quantities[product.productID] ?? product.quantityInStock ?? 0
     }))
   }))
 );
