@@ -1,73 +1,106 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Product } from '../../../core/models/product';
-import { Observable, startWith } from 'rxjs';
-import { ProductService } from '../../../service/product.service';
-import { Router } from '@angular/router';
-import { SubscriptionService } from '../../../service/subscription.service';
-import { map } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @Component({
-    selector: 'app-search',
-    templateUrl: './search.component.html',
-    imports: [ReactiveFormsModule],
-    styleUrls: ['./search.component.scss']
-})
-export class SearchComponent implements OnInit {
-    public products: Product[] = [];
-    searchControl = new FormControl();
-    filteredProducts: Observable<Product[]> = new Observable<Product[]>();
+    selector: 'app-product-search',
+    standalone: true,
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AutoCompleteModule
+    ],
+    template: `
+    <form>
+      <p-autoComplete
+        [formControl]="searchControl"
+        [suggestions]="filteredProducts"
+        (completeMethod)="filterProducts($event)"
+        (onSelect)="searchStore($event)"
+        (onKeyDown)="onKeyDown($event)"
+        field="title"
+        placeholder="Search products or authors"
+        [dropdown]="true"
+        styleClass="searchbox"
+        inputStyleClass="search-input">
 
-    constructor(
-        private productService: ProductService,
-        private router: Router,
-        private subscriptionService: SubscriptionService
-    ) {}
-
-    ngOnInit(): void {
-        this.loadProductData();
-        this.setSearchControlValue();
-        this.filterProductData();
+        <ng-template let-product pTemplate="item">
+          <div class="product-item">
+            <span>{{ product.title }}</span>
+          </div>
+        </ng-template>
+      </p-autoComplete>
+    </form>
+  `,
+    styles: [`
+    form {
+      width: 100%;
     }
 
-    public searchStore(event: any) {
-        const searchItem = this.searchControl.value;
-        if (searchItem !== '') {
-            this.router.navigate(['/search'], {
-                queryParams: {
-                    item: searchItem.toLowerCase()
-                }
-            });
+    :host ::ng-deep .searchbox {
+      width: 100%;
+    }
+
+    :host ::ng-deep .search-input {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 4px;
+      border: 1px solid var(--surface-border);
+    }
+
+    :host ::ng-deep .search-input:focus {
+      outline: 0 none;
+      outline-offset: 0;
+      box-shadow: 0 0 0 0.2rem var(--primary-color-alpha);
+      border-color: var(--primary-color);
+    }
+
+    .product-item {
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    .product-item:hover {
+      background-color: var(--surface-hover);
+    }
+  `]
+})
+export class ProductSearchComponent implements OnInit {
+    searchControl = new FormControl('');
+    products: any[] = []; // Your full product list
+    filteredProducts: any[] = [];
+
+    ngOnInit(): void {
+        // Load your products here
+        // this.products = [...];
+    }
+
+    filterProducts(event: any): void {
+        const query = event.query.toLowerCase();
+
+        if (!query) {
+            this.filteredProducts = [...this.products];
+        } else {
+            this.filteredProducts = this.products.filter(product =>
+                product.title.toLowerCase().includes(query)
+            );
         }
     }
 
-    private loadProductData() {
-        this.productService.products.subscribe((data: Product[]) => {
-            this.products = data;
-        });
+    searchStore(event: any): void {
+        // Handle the search/selection
+        console.log('Selected:', event);
+
+        // If you want to search on selection
+        const selectedValue = event.value || event;
+        // Perform your search logic here
     }
 
-    private setSearchControlValue() {
-        this.subscriptionService.searchItemValue$.subscribe((data) => {
-            if (data) {
-                this.searchControl.setValue(data);
-            } else {
-                this.searchControl.setValue('');
-            }
-        });
-    }
-
-    private filterProductData() {
-        this.filteredProducts = this.searchControl.valueChanges.pipe(
-            startWith(''),
-            map((value) => (value.length >= 1 ? this._filter(value) : []))
-        );
-    }
-
-    private _filter(value: string) {
-        const filterValue = value.toLowerCase();
-        return this.products?.filter((option) => option?.title?.toLowerCase().includes(filterValue));
-        //FIXME fix authors from the back end and come back.
-        //|| option.author.toLowerCase().includes(filterValue));
+    onKeyDown(event: KeyboardEvent): void {
+        if (event.key === 'Enter') {
+            this.searchStore(this.searchControl.value);
+        }
     }
 }

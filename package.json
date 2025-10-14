@@ -19,6 +19,8 @@
         "@angular/platform-browser": "^19.0.0",
         "@angular/platform-browser-dynamic": "^19.0.0",
         "@angular/router": "^19.0.0",
+        "@ngrx/effects": "^20.0.1",
+        "@ngrx/store": "^20.0.1",
         "@primeng/themes": "^19.0.5",
         "chart.js": "4.4.2",
         "primeclt": "^0.1.5",

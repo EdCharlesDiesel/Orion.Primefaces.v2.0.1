@@ -7,13 +7,13 @@ export const cartReducer = createReducer(
 
   // Add to cart
   on(CartActions.addToCart, (state, { product, quantity = 1 }) => {
-    const existingItem = state.items.find(item => item.product.id === product.id);
+    const existingItem = state.items.find(item => item.product.productID === product.productID);
     let updatedItems: CartItem[];
 
     if (existingItem) {
       // Update quantity if item exists
       updatedItems = state.items.map(item =>
-        item.product.id === product.id
+        item.product.productID === product.productID
           ? { ...item, quantity: item.quantity + quantity }
           : item
       );
