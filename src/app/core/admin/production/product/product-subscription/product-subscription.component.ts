@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { SnackbarService } from '../../../../../service/snackbar.service';
 import { Product } from '../../../../models/product';
 import { SubscriptionService } from '../../../../../service/subscription.service';

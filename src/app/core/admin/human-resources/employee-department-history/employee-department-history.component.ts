@@ -1,7 +1,6 @@
 
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { Component, OnInit, signal, ViewChild } from '@angular/core';
-import { Card } from 'primeng/card';
 import { Button } from 'primeng/button';
 import { Dialog } from 'primeng/dialog';
 import { IconField } from 'primeng/iconfield';

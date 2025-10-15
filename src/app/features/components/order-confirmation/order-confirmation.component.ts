@@ -1,8 +1,5 @@
-import { MessageService } from 'primeng/api';
-import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CartService } from '../../../service/cart.service';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 
 @Component({

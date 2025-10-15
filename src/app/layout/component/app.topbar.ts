@@ -97,7 +97,7 @@ import { AuthService } from '../../core/authentication/services/auth.service';
             </div>
         </div>`
 })
-export class AppTopbar {
+class AppTopbar {
     items!: MenuItem[];
     public authService = inject(AuthService);
     constructor(public layoutService: LayoutService, private router: Router) {}
@@ -110,3 +110,5 @@ export class AppTopbar {
         this.router.navigate(['admin/profile']);
     }
 }
+
+export default AppTopbar;

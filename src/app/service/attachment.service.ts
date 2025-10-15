@@ -28,16 +28,16 @@ export class AttachmentService {
     );
   }
 
-  downloadAttachment(attachment: AttachmentModel): Observable<Blob> {
-    const payload = new HttpParams().set('fileId', attachment.fileId);
-
-    return this.http.post(this.urlFactory.getDownloadUrl(), payload, {
-      observe: 'response',
-      responseType: 'blob'
-    }).pipe(
-      tap(response => this.redirectBlobToBrowser(response, attachment.name, attachment.type))
-    );
-  }
+  // downloadAttachment(attachment: AttachmentModel): Observable<Blob> {
+  //   const payload = new HttpParams().set('fileId', attachment.fileId);
+  //
+  //   return this.http.post(this.urlFactory.getDownloadUrl(), payload, {
+  //     observe: 'response',
+  //     responseType: 'blob'
+  //   }).pipe(
+  //     tap(response => this.redirectBlobToBrowser(response, attachment.name, attachment.type))
+  //   );
+  // }
 
   private redirectBlobToBrowser(response: HttpResponse<Blob>, fileName: string, fileType: string): void {
     const blob = new Blob([response.body!], { type: fileType });

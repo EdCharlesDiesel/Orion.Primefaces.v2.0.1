@@ -51,15 +51,15 @@ export class AddtoProductSubscriptionComponentComponent implements OnChanges {
     this.toggle = !this.toggle;
     this.setButtonText();
 
-    this.productSubscriptionService.toggleProductSubscriptionItem(this.userId, this.productId).subscribe(
-      () => {
-        if (this.toggle) {
-          this.snackBarService.showSnackBar('Item added to your Productsubscription');
-        } else {
-          this.snackBarService.showSnackBar('Item removed from your Productsubscription');
-        }
-      }, error => {
-        console.log('Error ocurred while adding to wish-list : ', error);
-      });
+    // this.productSubscriptionService.toggleProductSubscriptionItem(this.userId, this.productId).subscribe(
+    //   () => {
+    //     if (this.toggle) {
+    //       this.snackBarService.showSnackBar('Item added to your Productsubscription');
+    //     } else {
+    //       this.snackBarService.showSnackBar('Item removed from your Productsubscription');
+    //     }
+    //   }, error => {
+    //     console.log('Error ocurred while adding to wish-list : ', error);
+    //   });
   }
 }

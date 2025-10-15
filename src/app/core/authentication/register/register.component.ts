@@ -8,10 +8,9 @@ import { Button } from 'primeng/button';
 import { Divider } from 'primeng/divider';
 import { NgIf } from '@angular/common';
 import { IconField } from 'primeng/iconfield';
-import { InputIcon } from 'primeng/inputicon';
 import { InputText } from 'primeng/inputtext';
 import { AuthService } from '../services/auth.service';
-import { MessageService, PrimeTemplate } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 
 

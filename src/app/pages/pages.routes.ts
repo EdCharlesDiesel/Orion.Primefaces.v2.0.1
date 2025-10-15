@@ -1,9 +1,9 @@
-import { Routes } from '@angular/router';
-import { Documentation } from './documentation/documentation';
+import { Documentation } from '../core/admin/documentation/documentation';
 import { Empty } from './empty/empty';
-import { Departments } from './human-resources/departments/departments';
+import { Departments } from '../core/admin/human-resources/departments/departments';
 import { EmployeePayHistory } from '../core/models/employee-pay-history.model';
-import { CreateReadUpdateDeleteComponent } from './CreateReadUpdateDelete/CreateReadUpdateDelete.component';
+import { Routes } from '@angular/router';
+
 
 export default [
     { path: 'documentation', component: Documentation },

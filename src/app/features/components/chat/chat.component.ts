@@ -1,10 +1,9 @@
 import {ChangeDetectorRef, Component, ElementRef, EventEmitter, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MenuItem, MessageService} from 'primeng/api';
-import {combineLatest, EMPTY, from, Observable, Subject, zip} from 'rxjs';
+import {combineLatest, from, Observable, Subject, zip} from 'rxjs';
 import {
   bufferTime,
-  catchError,
   debounceTime,
   distinctUntilChanged,
   exhaustMap,
@@ -38,12 +37,14 @@ import { UrlFactoryService } from '../../../service/url-factory.service';
 import { HttpService } from '../../../service/http.service';
 import { UserModel } from '../../../core/models/user.model';
 import { AttachmentModel } from '../../../core/models/rich-message.model';
+import { Toast } from 'primeng/toast';
+import { Menu } from 'primeng/menu';
 
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
     styleUrls: ['./chat.component.css'],
-    imports: [NgClass, MessageEntryComponent, ProgressBar, MessageInputComponent, FormsModule, ButtonDirective, Ripple, Tooltip],
+    imports: [NgClass, MessageEntryComponent, ProgressBar, MessageInputComponent, FormsModule, ButtonDirective, Ripple, Tooltip, Toast, Menu],
     providers: [MessageService]
 })
 export class ChatComponent implements OnInit, OnDestroy {

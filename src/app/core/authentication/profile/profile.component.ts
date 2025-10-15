@@ -16,7 +16,6 @@ import { Password } from 'primeng/password';
 import { InputSwitch } from 'primeng/inputswitch';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { Toast } from 'primeng/toast';
-import { CommandModule } from '@angular/cli/src/command-builder/command-module';
 
 interface ProfileStats {
     loginCount: number;
