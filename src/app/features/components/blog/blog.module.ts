@@ -6,11 +6,7 @@ import { BlogRoutingModule } from './blog-routing.module';
 import { BlogComponent } from './blog.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        BlogRoutingModule,
-        ButtonModule
-    ],
-    declarations: [BlogComponent]
+    imports: [CommonModule, BlogRoutingModule, ButtonModule, BlogComponent],
+    declarations: []
 })
-export class BlogModule { }
+export class BlogModule {}

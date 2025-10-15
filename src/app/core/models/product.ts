@@ -26,7 +26,7 @@ export class Product {
     makeFlag: boolean | undefined;
     finishedGoodsFlag: boolean | undefined;
     color?: string | undefined;
-    safetyStockLevel: number | undefined;
+    safetyStockLevel: number = 10;
     reorderPoint: number | undefined;
     standardCost: number | undefined;
     listPrice: number | undefined;

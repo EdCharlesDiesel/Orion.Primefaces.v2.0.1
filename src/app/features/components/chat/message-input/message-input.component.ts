@@ -7,6 +7,7 @@ import { Tooltip } from 'primeng/tooltip';
 import { Menu } from 'primeng/menu';
 import { ButtonDirective } from 'primeng/button';
 import { Ripple } from 'primeng/ripple';
+import { InputText } from 'primeng/inputtext';
 
 export interface MessageWithAttachment {
   message: string;
@@ -16,7 +17,7 @@ export interface MessageWithAttachment {
 @Component({
     selector: 'app-message-input',
     templateUrl: './message-input.component.html',
-    imports: [FormsModule, Tooltip, Menu, ButtonDirective, Ripple],
+    imports: [FormsModule, Tooltip, Menu, ButtonDirective, Ripple, InputText],
     styleUrls: ['./message-input.component.scss']
 })
 export class MessageInputComponent implements OnInit {

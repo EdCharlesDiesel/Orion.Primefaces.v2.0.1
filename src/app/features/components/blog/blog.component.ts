@@ -89,7 +89,7 @@ interface BlogPost {
 
                                 <div class="flex align-items-center justify-content-between pt-3 border-top-1 surface-border">
                                     <div class="flex align-items-center gap-2">
-                                        <p-avatar [label]="post.author.charAt(0)" size="small" shape="circle"> </p-avatar>
+                                        <p-avatar [label]="post.author.charAt(0)" shape="circle"> </p-avatar>
                                         <span class="text-sm text-600">{{ post.author }}</span>
                                     </div>
                                     <div class="text-sm text-600">

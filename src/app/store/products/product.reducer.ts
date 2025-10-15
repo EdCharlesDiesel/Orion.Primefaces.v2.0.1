@@ -86,7 +86,7 @@ export const productReducer = createReducer(
     ...state,
     products: state.products.map(product => ({
       ...product,
-      quantityInStock: quantities[product.productID] ?? product.quantityInStock ?? 0
+      quantityInStock: quantities[product.safetyStockLevel] ?? product.quantityInStock ?? 0
     }))
   }))
 );

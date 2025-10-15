@@ -7,13 +7,7 @@ import { MailComponent } from './mail.component';
 import {RippleModule} from "primeng/ripple";
 
 @NgModule({
-    imports: [
-        CommonModule,
-        MailRoutingModule,
-        ButtonModule,
-        NgOptimizedImage,
-        RippleModule
-    ],
-    declarations: [MailComponent]
+    imports: [CommonModule, MailRoutingModule, ButtonModule, NgOptimizedImage, RippleModule, MailComponent],
+    declarations: []
 })
-export class MailModule { }
+export class MailModule {}
