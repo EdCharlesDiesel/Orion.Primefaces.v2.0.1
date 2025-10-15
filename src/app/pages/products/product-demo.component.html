@@ -1,0 +1,29 @@
+<p-galleria
+    [value]="images()"
+    [responsiveOptions]="galleriaResponsiveOptions"
+    [showThumbnails]="true"
+    [showIndicators]="false"
+    containerStyleClass="w-full"
+    styleClass="mb-4">
+    <ng-template pTemplate="item" let-image>
+        <img [src]="image.itemImageSrc" [alt]="image.itemImageSrc" style="width: 100%; border-radius: 8px;">
+    </ng-template>
+    <ng-template pTemplate="thumbnail" let-image>
+        <img [src]="image.thumbnailImageSrc" [alt]="image.thumbnailImageSrc" style="width: 60px; border-radius: 6px;">
+    </ng-template>
+</p-galleria>
+
+<p-carousel
+    [value]="products()"
+    [responsiveOptions]="carouselResponsiveOptions"
+
+    circular="true">
+    <ng-template pTemplate="item" let-product>
+        <div class="text-center p-3 border-round shadow-1">
+            <img [src]="'assets/images/' + product.image" [alt]="product.name" style="width: 100px;">
+            <div class="font-bold mt-2">{{ product.name }}</div>
+            <div class="text-sm text-secondary">R{{ product.price }}</div>
+            <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>
+        </div>
+    </ng-template>
+</p-carousel>

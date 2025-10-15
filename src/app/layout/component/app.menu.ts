@@ -32,7 +32,7 @@ export class AppMenu {
                     {
                         label: 'Products',
                         icon: 'pi pi-fw pi-save',
-                        routerLink: ['/store/product-list']
+                        routerLink: ['./pages/product-demo']
                     },
                     {
                         label: 'Today Special',
