@@ -12,10 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Table, TableModule } from 'primeng/table';
 import { Toolbar } from 'primeng/toolbar';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { EmployeeDepartmentHistory } from '../../../core/models/employee-department-history.model ';
+import { EmployeeDepartmentHistory } from '../../../models/employee-department-history.model ';
 import { EmployeeDepartmentHistoryService } from './employee-department-history.service';
-import { tap } from 'rxjs';
-import { Shift } from '../../../core/models/shift.model';
+import { tap } from 'rxjs/operators';
+import { Shift } from '../../../models/shift.model';
+
 
 interface Column {
     field: string;

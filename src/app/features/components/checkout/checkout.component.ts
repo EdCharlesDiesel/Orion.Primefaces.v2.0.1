@@ -1,37 +1,20 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
-import {MatIcon} from '@angular/material/icon';
-import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
-import {MatDivider} from '@angular/material/divider';
-import {CurrencyPipe} from '@angular/common';
-import {MatFormField} from '@angular/material/form-field';
-import {MatLabel} from '@angular/material/form-field';
-import {MatInput} from '@angular/material/input';
-import {MatButton} from '@angular/material/button';
-import {CartService} from '../../services/cart.service';
-import {CartState} from '../../store/cart/cart.state';
-import {selectCartState} from '../../store/cart/cart.selectors';
+
 import {Observable} from 'rxjs';
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import { CartService } from '../../../service/cart.service';
+import { CartState } from '../../../store/cart/cart.state';
+import { selectCartState } from '../../../store/cart/cart.selectors';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   imports: [
-    MatIcon,
-    MatCardActions,
-    MatDivider,
     CurrencyPipe,
-    MatCard,
-    MatCardHeader,
-    MatCardContent,
     ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatCardTitle,
-    MatInput,
-    MatButton,
     RouterLink
   ],
   styleUrls: ['./checkout.component.scss']

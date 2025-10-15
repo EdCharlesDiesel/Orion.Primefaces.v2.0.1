@@ -32,7 +32,7 @@ export const cartReducer = createReducer(
 
   // Remove from cart
   on(CartActions.removeFromCart, (state, { productId }) => {
-    const updatedItems = state.items.filter(item => item.product.id !== productId);
+    const updatedItems = state.items.filter(item => item.product.productID !== productId);
 
     return {
       ...state,
@@ -48,10 +48,10 @@ export const cartReducer = createReducer(
 
     if (quantity <= 0) {
       // Remove item if quantity is zero
-      updatedItems = state.items.filter(item => item.product.id !== productId);
+      updatedItems = state.items.filter(item => item.product.productID !== productId);
     } else {
       updatedItems = state.items.map(item =>
-        item.product.id === productId ? { ...item, quantity } : item
+        item.product.productID === productId ? { ...item, quantity } : item
       );
     }
 

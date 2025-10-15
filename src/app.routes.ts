@@ -8,6 +8,7 @@ import { Notfound } from './app/pages/notfound/notfound';
 import { AuthGuard } from './app/core/authentication/auth.guard';
 import { RoleGuard } from './app/core/authentication/role.guard';
 import { AdminGuard } from './app/core/authentication/admin.guard';
+import { AdminLayout } from './app/layout/component/admin.layout';
 
 
 export const appRoutes: Routes = [
@@ -16,6 +17,21 @@ export const appRoutes: Routes = [
     { path: 'notfound', component: Notfound },
     {
         path: 'admin',
+        component: AdminLayout,
+        canActivate: [AdminGuard],
+        children: [
+            { path: 'dashboard', component: Dashboard },
+            // { path: 'human-resources', loadChildren: () => import('./app/core/admin/human-resources/human-resources.routes') },
+            // { path: 'person', loadChildren: () => import('./app/core/admin/person/person.routes') },
+            // { path: 'sales', loadChildren: () => import('./app/core/admin/sales/sales.routes') },
+            // { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
+            // { path: 'documentation', component: Documentation },
+            // { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') },
+            { path: 'database-log', component: DatabaseLog }
+        ]
+    },
+    {
+        path: 'admin-super-user',
         component: AppLayout,
         canActivate: [AdminGuard],
         children: [

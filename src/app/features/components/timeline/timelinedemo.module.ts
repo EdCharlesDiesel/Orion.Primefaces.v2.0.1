@@ -7,13 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        TimelineModule,
-        ButtonModule,
-        CardModule,
-        TimelineDemoRoutingModule
-    ],
-    declarations: [TimelineDemoComponent]
+    imports: [CommonModule, TimelineModule, ButtonModule, CardModule, TimelineDemoRoutingModule, TimelineDemoComponent],
+    declarations: []
 })
-export class TimelineDemoModule { }
+export class TimelineDemoModule {}

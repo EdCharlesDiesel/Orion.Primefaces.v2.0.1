@@ -35,15 +35,15 @@ export class ProductSubscriptionComponent implements OnInit {
   }
 
    clearProductSubscription() {
-      this.productSubscriptionService.clearProductSubscription(this.userId)
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe(
-          result => {
-            this.subscriptionService.productSubscriptionItemcount$.next(result);
-            this.snackBarService.showSnackBar('Productsubscription cleared!!!');
-            this.getShoppingCartItems();
-          }, error => {
-            console.log('Error ocurred while deleting productSubscription item : ', error);
-          });
-  }
+  //     this.productSubscriptionService.clearProductSubscription(this.userId)
+  //       .pipe(takeUntil(this.unsubscribe$))
+  //       .subscribe(
+  //         result => {
+  //           this.subscriptionService.productSubscriptionItemcount$.next(result);
+  //           this.snackBarService.showSnackBar('Productsubscription cleared!!!');
+  //           this.getShoppingCartItems();
+  //         }, error => {
+  //           console.log('Error ocurred while deleting productSubscription item : ', error);
+  //         });
+   }
 }

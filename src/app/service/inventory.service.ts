@@ -9,7 +9,7 @@ export class InventoryService {
     // Generate random initial quantities
     public generateInitialQuantities(productIds: (number | undefined)[]): { [p: number]: number } {
         const quantities: { [productId: number]: number } = {};
-        productIds.forEach((id) => {
+        productIds.forEach((id: any) => {
             quantities[id] = Math.floor(Math.random() * 50) + 10; // Random between 10-59
         });
         return quantities;

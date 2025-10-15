@@ -1,9 +1,10 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { HttpErrorService } from '../../../shared/http-error.service';
-import { Observable, tap } from 'rxjs';
-import { Currency } from '../../../core/models/currency.model';
+import { HttpErrorService } from '../../../../shared/http-error.service';
+import { Currency } from '../../../models/currency.model';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 @Injectable({

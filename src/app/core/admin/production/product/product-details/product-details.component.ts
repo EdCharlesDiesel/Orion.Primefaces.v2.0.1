@@ -38,8 +38,8 @@ export class ProductDetailsComponent implements OnInit {
       this.productDetails$ = this.subscriptionService.productDetails$;
   }
 
-  public async getProductDetails(id: string) {
-      debugger
+  public async getProductDetails(id: number) {
+      // debugger
      await this.productService.getProductById(id)
       .pipe(tap((x)=>console.log('This is the value of product',x)),
        catchError(error => {

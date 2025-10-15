@@ -1,17 +1,11 @@
 import { Component, Input, OnInit, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartItem } from '../../../../store/cart/cart.state';
 import { Store } from '@ngrx/store';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import {CartItem} from '../../../store/cart/cart.state';
-import * as CartActions from '../../../store/cart/cart.actions';
-import * as ProductActions from '../../../store/products/product.actions';
-import {selectProductById} from '../../../store/products/product.selectors';
-
+import { selectProductById } from '../../../../store/products/product.selectors';
+import *  as CartActions from '../../../../store/cart/cart.actions';
+import *  as ProductActions from '../../../../store/products/product.actions';
 
 @Component({
   selector: 'app-cart-item',
@@ -19,11 +13,7 @@ import {selectProductById} from '../../../store/products/product.selectors';
   imports: [
     CommonModule,
     FormsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSelectModule,
-    MatFormFieldModule
+
   ],
   templateUrl: './cart-item.component.html',
   styleUrls: ['./cart-item.component.scss']
@@ -52,7 +42,7 @@ export class CartItemComponent implements OnInit {
 
   ngOnInit(): void {
     // Subscribe to product updates to get current stock
-    this.store.select(selectProductById(this.cartItem.product.id))
+    this.store.select(selectProductById(this.cartItem.product.productID))
       .subscribe(product => {
         if (product) {
           this.availableStock.set(product.quantityInStock ?? 0);
@@ -79,7 +69,7 @@ export class CartItemComponent implements OnInit {
   private updateQuantity(newQuantity: number, quantityDiff: number): void {
     // Update cart
     this.store.dispatch(CartActions.updateCartItemQuantity({
-      productId: this.cartItem.product.id,
+      productId: this.cartItem.product.productID,
       quantity: newQuantity
     }));
 
@@ -87,13 +77,13 @@ export class CartItemComponent implements OnInit {
     if (quantityDiff > 0) {
       // Decrement stock (adding more to cart)
       this.store.dispatch(ProductActions.decrementProductQuantity({
-        id: this.cartItem.product.id,
+        id: this.cartItem.product.productID,
         amount: quantityDiff
       }));
     } else {
       // Increment stock (removing from cart)
       this.store.dispatch(ProductActions.incrementProductQuantity({
-        id: this.cartItem.product.id,
+        id: this.cartItem.product.productID,
         amount: Math.abs(quantityDiff)
       }));
     }
@@ -103,13 +93,13 @@ export class CartItemComponent implements OnInit {
     if (confirm('Are you sure you want to remove this item from cart?')) {
       // Return items to stock
       this.store.dispatch(ProductActions.incrementProductQuantity({
-        id: this.cartItem.product.id,
+        id: this.cartItem.product.productID,
         amount: this.cartItem.quantity
       }));
 
       // Remove from cart
       this.store.dispatch(CartActions.removeFromCart({
-        productId: this.cartItem.product.id
+        productId: this.cartItem.product.productID
       }));
     }
   }

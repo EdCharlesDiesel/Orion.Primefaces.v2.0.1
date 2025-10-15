@@ -1,7 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import * as Plyr from 'plyr';
+// import * as Plyr from 'plyr';
 import {concat, Observable} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
+import { AttachmentModel } from '../../../../../core/models/rich-message.model';
+import { VideoService } from '../../../../../service/video.service';
+import { VideoSourceUpdateModel } from '../../../../../core/models/video-source-update.model';
+import { UrlFactoryService } from '../../../../../service/url-factory.service';
 
 
 
